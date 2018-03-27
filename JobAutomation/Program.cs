@@ -15,7 +15,11 @@ namespace JobAutomation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            GlobalFunc.loginStatus = 0;
+            GlobalFunc.passwordForm = new PasswordForm();
             Application.Run(new Form1());
+            
         }
     }
 }
