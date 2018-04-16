@@ -4,25 +4,40 @@ using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
+using System.Web.Script.Serialization;
+using System.IO;
 namespace JobAutomation
 {
     public static class GlobalFunc
     {
         public static int loginStatus;
         public static PasswordForm passwordForm;
+        public static Form1 mainForm;
+        public static Setup setup;
         static bool useHashing = true;
         static string securityKey = "ficom2018";
+        public static string passwordFormToggle = "";
+        public static CountingSequenceIndex countingSequenceIndex;
+
+        public static void LoadSetup()
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
+            {
+                setup = new Setup();
+                JavaScriptSerializer js = new JavaScriptSerializer();
+
+                string setupText = File.ReadAllText( AppDomain.CurrentDomain.BaseDirectory + "setup.json");
+                setup = (Setup)js.Deserialize<Setup>(setupText);
+            }
+        }
+
 
         public static string Encrypt(string toEncrypt)
         {
             byte[] keyArray;
             byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
 
-            System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
-            // Get the key from config file
-
-            string key = (string)settingsReader.GetValue(securityKey, typeof(String));
+            string key = securityKey;
             if (useHashing)
             {
                 MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
@@ -51,8 +66,7 @@ namespace JobAutomation
             byte[] keyArray;
             byte[] toEncryptArray = Convert.FromBase64String(cipherString);
 
-            System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
-            string key = (string)settingsReader.GetValue(securityKey, typeof(String));
+            string key = securityKey;
 
             if (useHashing)
             {

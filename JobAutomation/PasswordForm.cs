@@ -15,6 +15,7 @@ namespace JobAutomation
         public PasswordForm()
         {
             InitializeComponent();
+            
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.txt"))
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.txt", GlobalFunc.Encrypt("admin"));
@@ -23,12 +24,39 @@ namespace JobAutomation
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            string originText = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.txt");
+            CheckLogin();
+        }
+
+        private void CheckLogin()
+        {
+            string originText = GlobalFunc.setup.password;
             string encrypt = GlobalFunc.Encrypt(password.Text);
             if (originText == encrypt)
             {
                 GlobalFunc.loginStatus = 1;
+                if (GlobalFunc.passwordFormToggle == "ParameterSetup")
+                {
+                    GlobalFunc.mainForm.DisplayParameterSetupPanel();
+                }
+                else if(GlobalFunc.passwordFormToggle == "CountingSequence")
+                {
+                    GlobalFunc.mainForm.DisplayCountingSequencePanel();
+                }
+                this.Close();
+            }
+            else {
+                errorMsg.Text = "* Wrong Password";
             }
         }
+
+        private void password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CheckLogin();
+            }
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
 
 namespace JobAutomation
 {
@@ -17,8 +18,18 @@ namespace JobAutomation
             Application.SetCompatibleTextRenderingDefault(false);
 
             GlobalFunc.loginStatus = 0;
+            GlobalFunc.mainForm = new Form1();
             GlobalFunc.passwordForm = new PasswordForm();
-            Application.Run(new Form1());
+           
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
+            {
+                GlobalFunc.mainForm.ShowMessage("setup.json not existed");
+            }
+            else
+            {
+                GlobalFunc.LoadSetup();
+            }
+            Application.Run(GlobalFunc.mainForm);
             
         }
     }

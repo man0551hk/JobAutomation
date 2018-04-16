@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
+            this.errorMsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -50,6 +51,8 @@
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(363, 20);
             this.password.TabIndex = 1;
+           
+            this.password.KeyDown += password_KeyDown;
             // 
             // loginBtn
             // 
@@ -61,11 +64,21 @@
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
+            // errorMsg
+            // 
+            this.errorMsg.AutoSize = true;
+            this.errorMsg.ForeColor = System.Drawing.Color.Red;
+            this.errorMsg.Location = new System.Drawing.Point(14, 72);
+            this.errorMsg.Name = "errorMsg";
+            this.errorMsg.Size = new System.Drawing.Size(0, 13);
+            this.errorMsg.TabIndex = 3;
+            // 
             // PasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 79);
+            this.ClientSize = new System.Drawing.Size(487, 94);
+            this.Controls.Add(this.errorMsg);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.password);
             this.Controls.Add(this.label1);
@@ -81,5 +94,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.Label errorMsg;
     }
 }
