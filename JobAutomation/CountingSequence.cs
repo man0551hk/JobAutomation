@@ -45,7 +45,7 @@ namespace JobAutomation
         public string collectionStopDate { set; get; }
         public bool allowCollectionStopDate { set; get; }
 
-        public bool decayCollectionStopDateTime { set; get; }
+        public bool decayCorrectionStopDateTime { set; get; }
 
         public string decayCorrectionDate { set; get; }
         public bool allowDecayCorrectionDate { set; get; }

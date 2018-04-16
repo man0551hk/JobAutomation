@@ -59,7 +59,12 @@
             this.updateSDFFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.analysisSettingsPanel = new System.Windows.Forms.GroupBox();
-            this.sampleDefafultFilePathTxt = new System.Windows.Forms.TextBox();
+            this.sampleDefaultFilePathBtn = new System.Windows.Forms.Button();
+            this.jobTemplatePathBtn = new System.Windows.Forms.Button();
+            this.spectrumFilePathBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.sampleDefaultFilePathTxt = new System.Windows.Forms.TextBox();
             this.jobTemplatePathTxt = new System.Windows.Forms.TextBox();
             this.spectrumFilePathTxt = new System.Windows.Forms.TextBox();
             this.sampleDescriptionTxt = new System.Windows.Forms.TextBox();
@@ -68,46 +73,42 @@
             this.spectrumFilePatbCB = new System.Windows.Forms.CheckBox();
             this.sampleDescriptionCB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkBox22 = new System.Windows.Forms.CheckBox();
-            this.checkBox21 = new System.Windows.Forms.CheckBox();
-            this.checkBox20 = new System.Windows.Forms.CheckBox();
+            this.libraryFilePathBtn = new System.Windows.Forms.Button();
+            this.calibrationFilePathBtn = new System.Windows.Forms.Button();
+            this.attenuationSizeTxt = new System.Windows.Forms.TextBox();
+            this.systematicErrorTxt = new System.Windows.Forms.TextBox();
+            this.randomErrorTxt = new System.Windows.Forms.TextBox();
+            this.unitsTxt = new System.Windows.Forms.TextBox();
+            this.randomSummingFactorTxt = new System.Windows.Forms.TextBox();
+            this.activityDivisorTxt = new System.Windows.Forms.TextBox();
+            this.activityMultiperTxt = new System.Windows.Forms.TextBox();
+            this.realTimePresetTxt = new System.Windows.Forms.TextBox();
+            this.liveTimePresetTxt = new System.Windows.Forms.TextBox();
+            this.activityUnitsTxt = new System.Windows.Forms.TextBox();
+            this.sampleQuantityTxt = new System.Windows.Forms.TextBox();
+            this.decayCorrectionDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.collectionStopDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.collectionStartDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.libraryFilePathTxt = new System.Windows.Forms.TextBox();
+            this.calibrationFilePathTxt = new System.Windows.Forms.TextBox();
+            this.attenuationSizeCB = new System.Windows.Forms.CheckBox();
+            this.systematicErrorCB = new System.Windows.Forms.CheckBox();
+            this.randomErrorCB = new System.Windows.Forms.CheckBox();
             this.unitsCB = new System.Windows.Forms.CheckBox();
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
-            this.checkBox16 = new System.Windows.Forms.CheckBox();
-            this.checkBox15 = new System.Windows.Forms.CheckBox();
-            this.checkBox14 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.randomSummingFactorCB = new System.Windows.Forms.CheckBox();
+            this.activityDivisorCB = new System.Windows.Forms.CheckBox();
+            this.activityMultiperCB = new System.Windows.Forms.CheckBox();
+            this.realTimePresetCB = new System.Windows.Forms.CheckBox();
+            this.liveTimePresetCB = new System.Windows.Forms.CheckBox();
+            this.activityUnitsCB = new System.Windows.Forms.CheckBox();
             this.sampleQuantityCB = new System.Windows.Forms.CheckBox();
             this.decayCorrectionDateCB = new System.Windows.Forms.CheckBox();
-            this.decayCorrectStopDateTimeCB = new System.Windows.Forms.CheckBox();
+            this.decayCorrectionStopDateTimeCB = new System.Windows.Forms.CheckBox();
             this.collectionStopDateCB = new System.Windows.Forms.CheckBox();
             this.collectionStartDateCB = new System.Windows.Forms.CheckBox();
             this.libraryFilePathCB = new System.Windows.Forms.CheckBox();
-            this.calibrationbFilePathCB = new System.Windows.Forms.CheckBox();
-            this.calibrationFilePathTxt = new System.Windows.Forms.TextBox();
-            this.libraryFilePathTxt = new System.Windows.Forms.TextBox();
-            this.collectionStartDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.collectionStopDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.decayCorrectionDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.sampleQuantityTxt = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.unitsTxt = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.spectrumFilePathBtn = new System.Windows.Forms.Button();
-            this.jobTemplatePathBtn = new System.Windows.Forms.Button();
-            this.sampleDefaultFilePathBtn = new System.Windows.Forms.Button();
-            this.calibrationFilePathBtn = new System.Windows.Forms.Button();
-            this.libraryFilePathBtn = new System.Windows.Forms.Button();
+            this.calibrationFilePathCB = new System.Windows.Forms.CheckBox();
+            this.saveSettingBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -416,7 +417,7 @@
             this.analysisSettingsPanel.Controls.Add(this.spectrumFilePathBtn);
             this.analysisSettingsPanel.Controls.Add(this.button2);
             this.analysisSettingsPanel.Controls.Add(this.button1);
-            this.analysisSettingsPanel.Controls.Add(this.sampleDefafultFilePathTxt);
+            this.analysisSettingsPanel.Controls.Add(this.sampleDefaultFilePathTxt);
             this.analysisSettingsPanel.Controls.Add(this.jobTemplatePathTxt);
             this.analysisSettingsPanel.Controls.Add(this.spectrumFilePathTxt);
             this.analysisSettingsPanel.Controls.Add(this.sampleDescriptionTxt);
@@ -433,32 +434,89 @@
             this.analysisSettingsPanel.TabStop = false;
             this.analysisSettingsPanel.Text = "Analysis Settings";
             // 
-            // sampleDefafultFilePathTxt
+            // sampleDefaultFilePathBtn
             // 
-            this.sampleDefafultFilePathTxt.Location = new System.Drawing.Point(160, 102);
-            this.sampleDefafultFilePathTxt.Name = "sampleDefafultFilePathTxt";
-            this.sampleDefafultFilePathTxt.Size = new System.Drawing.Size(540, 22);
-            this.sampleDefafultFilePathTxt.TabIndex = 12;
+            this.sampleDefaultFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sampleDefaultFilePathBtn.Location = new System.Drawing.Point(706, 101);
+            this.sampleDefaultFilePathBtn.Name = "sampleDefaultFilePathBtn";
+            this.sampleDefaultFilePathBtn.Size = new System.Drawing.Size(40, 22);
+            this.sampleDefaultFilePathBtn.TabIndex = 17;
+            this.sampleDefaultFilePathBtn.Text = "...";
+            this.sampleDefaultFilePathBtn.UseVisualStyleBackColor = true;
+            this.sampleDefaultFilePathBtn.Click += new System.EventHandler(this.sampleDefaultFilePathBtn_Click);
+            // 
+            // jobTemplatePathBtn
+            // 
+            this.jobTemplatePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.jobTemplatePathBtn.Location = new System.Drawing.Point(706, 73);
+            this.jobTemplatePathBtn.Name = "jobTemplatePathBtn";
+            this.jobTemplatePathBtn.Size = new System.Drawing.Size(40, 22);
+            this.jobTemplatePathBtn.TabIndex = 16;
+            this.jobTemplatePathBtn.Text = "...";
+            this.jobTemplatePathBtn.UseVisualStyleBackColor = true;
+            this.jobTemplatePathBtn.Click += new System.EventHandler(this.jobTemplatePathBtn_Click);
+            // 
+            // spectrumFilePathBtn
+            // 
+            this.spectrumFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.spectrumFilePathBtn.Location = new System.Drawing.Point(706, 46);
+            this.spectrumFilePathBtn.Name = "spectrumFilePathBtn";
+            this.spectrumFilePathBtn.Size = new System.Drawing.Size(40, 22);
+            this.spectrumFilePathBtn.TabIndex = 15;
+            this.spectrumFilePathBtn.Text = "...";
+            this.spectrumFilePathBtn.UseVisualStyleBackColor = true;
+            this.spectrumFilePathBtn.Click += new System.EventHandler(this.spectrumFilePathBtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(237, 502);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(225, 23);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Save Analysis Setting Template";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 502);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(225, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Load Analysis Setting Template";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // sampleDefaultFilePathTxt
+            // 
+            this.sampleDefaultFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sampleDefaultFilePathTxt.Location = new System.Drawing.Point(160, 102);
+            this.sampleDefaultFilePathTxt.Name = "sampleDefaultFilePathTxt";
+            this.sampleDefaultFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.sampleDefaultFilePathTxt.TabIndex = 12;
             // 
             // jobTemplatePathTxt
             // 
+            this.jobTemplatePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jobTemplatePathTxt.Location = new System.Drawing.Point(160, 74);
             this.jobTemplatePathTxt.Name = "jobTemplatePathTxt";
-            this.jobTemplatePathTxt.Size = new System.Drawing.Size(540, 22);
+            this.jobTemplatePathTxt.Size = new System.Drawing.Size(540, 20);
             this.jobTemplatePathTxt.TabIndex = 11;
             // 
             // spectrumFilePathTxt
             // 
+            this.spectrumFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spectrumFilePathTxt.Location = new System.Drawing.Point(160, 46);
             this.spectrumFilePathTxt.Name = "spectrumFilePathTxt";
-            this.spectrumFilePathTxt.Size = new System.Drawing.Size(540, 22);
+            this.spectrumFilePathTxt.Size = new System.Drawing.Size(540, 20);
             this.spectrumFilePathTxt.TabIndex = 10;
             // 
             // sampleDescriptionTxt
             // 
+            this.sampleDescriptionTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleDescriptionTxt.Location = new System.Drawing.Point(160, 18);
             this.sampleDescriptionTxt.Name = "sampleDescriptionTxt";
-            this.sampleDescriptionTxt.Size = new System.Drawing.Size(540, 22);
+            this.sampleDescriptionTxt.Size = new System.Drawing.Size(540, 20);
             this.sampleDescriptionTxt.TabIndex = 9;
             // 
             // sampleDefaultFilePathCB
@@ -507,41 +565,42 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.saveSettingBtn);
             this.groupBox3.Controls.Add(this.libraryFilePathBtn);
             this.groupBox3.Controls.Add(this.calibrationFilePathBtn);
-            this.groupBox3.Controls.Add(this.textBox14);
-            this.groupBox3.Controls.Add(this.textBox15);
-            this.groupBox3.Controls.Add(this.textBox16);
+            this.groupBox3.Controls.Add(this.attenuationSizeTxt);
+            this.groupBox3.Controls.Add(this.systematicErrorTxt);
+            this.groupBox3.Controls.Add(this.randomErrorTxt);
             this.groupBox3.Controls.Add(this.unitsTxt);
-            this.groupBox3.Controls.Add(this.textBox13);
-            this.groupBox3.Controls.Add(this.textBox12);
-            this.groupBox3.Controls.Add(this.textBox11);
-            this.groupBox3.Controls.Add(this.textBox10);
-            this.groupBox3.Controls.Add(this.textBox9);
-            this.groupBox3.Controls.Add(this.textBox8);
+            this.groupBox3.Controls.Add(this.randomSummingFactorTxt);
+            this.groupBox3.Controls.Add(this.activityDivisorTxt);
+            this.groupBox3.Controls.Add(this.activityMultiperTxt);
+            this.groupBox3.Controls.Add(this.realTimePresetTxt);
+            this.groupBox3.Controls.Add(this.liveTimePresetTxt);
+            this.groupBox3.Controls.Add(this.activityUnitsTxt);
             this.groupBox3.Controls.Add(this.sampleQuantityTxt);
             this.groupBox3.Controls.Add(this.decayCorrectionDatePicker);
             this.groupBox3.Controls.Add(this.collectionStopDatePicker);
             this.groupBox3.Controls.Add(this.collectionStartDatePicker);
             this.groupBox3.Controls.Add(this.libraryFilePathTxt);
             this.groupBox3.Controls.Add(this.calibrationFilePathTxt);
-            this.groupBox3.Controls.Add(this.checkBox22);
-            this.groupBox3.Controls.Add(this.checkBox21);
-            this.groupBox3.Controls.Add(this.checkBox20);
+            this.groupBox3.Controls.Add(this.attenuationSizeCB);
+            this.groupBox3.Controls.Add(this.systematicErrorCB);
+            this.groupBox3.Controls.Add(this.randomErrorCB);
             this.groupBox3.Controls.Add(this.unitsCB);
-            this.groupBox3.Controls.Add(this.checkBox17);
-            this.groupBox3.Controls.Add(this.checkBox16);
-            this.groupBox3.Controls.Add(this.checkBox15);
-            this.groupBox3.Controls.Add(this.checkBox14);
-            this.groupBox3.Controls.Add(this.checkBox13);
-            this.groupBox3.Controls.Add(this.checkBox12);
+            this.groupBox3.Controls.Add(this.randomSummingFactorCB);
+            this.groupBox3.Controls.Add(this.activityDivisorCB);
+            this.groupBox3.Controls.Add(this.activityMultiperCB);
+            this.groupBox3.Controls.Add(this.realTimePresetCB);
+            this.groupBox3.Controls.Add(this.liveTimePresetCB);
+            this.groupBox3.Controls.Add(this.activityUnitsCB);
             this.groupBox3.Controls.Add(this.sampleQuantityCB);
             this.groupBox3.Controls.Add(this.decayCorrectionDateCB);
-            this.groupBox3.Controls.Add(this.decayCorrectStopDateTimeCB);
+            this.groupBox3.Controls.Add(this.decayCorrectionStopDateTimeCB);
             this.groupBox3.Controls.Add(this.collectionStopDateCB);
             this.groupBox3.Controls.Add(this.collectionStartDateCB);
             this.groupBox3.Controls.Add(this.libraryFilePathCB);
-            this.groupBox3.Controls.Add(this.calibrationbFilePathCB);
+            this.groupBox3.Controls.Add(this.calibrationFilePathCB);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(6, 132);
             this.groupBox3.Name = "groupBox3";
@@ -550,38 +609,191 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sample Default File Modifications";
             // 
-            // checkBox22
+            // libraryFilePathBtn
             // 
-            this.checkBox22.AutoSize = true;
-            this.checkBox22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox22.Location = new System.Drawing.Point(305, 248);
-            this.checkBox22.Name = "checkBox22";
-            this.checkBox22.Size = new System.Drawing.Size(141, 17);
-            this.checkBox22.TabIndex = 38;
-            this.checkBox22.Text = "Attenuation Size/Length";
-            this.checkBox22.UseVisualStyleBackColor = true;
+            this.libraryFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.libraryFilePathBtn.Location = new System.Drawing.Point(681, 45);
+            this.libraryFilePathBtn.Name = "libraryFilePathBtn";
+            this.libraryFilePathBtn.Size = new System.Drawing.Size(40, 22);
+            this.libraryFilePathBtn.TabIndex = 56;
+            this.libraryFilePathBtn.Text = "...";
+            this.libraryFilePathBtn.UseVisualStyleBackColor = true;
+            this.libraryFilePathBtn.Click += new System.EventHandler(this.libraryFilePathBtn_Click);
             // 
-            // checkBox21
+            // calibrationFilePathBtn
             // 
-            this.checkBox21.AutoSize = true;
-            this.checkBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox21.Location = new System.Drawing.Point(305, 222);
-            this.checkBox21.Name = "checkBox21";
-            this.checkBox21.Size = new System.Drawing.Size(105, 17);
-            this.checkBox21.TabIndex = 37;
-            this.checkBox21.Text = "Systematic Error:";
-            this.checkBox21.UseVisualStyleBackColor = true;
+            this.calibrationFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calibrationFilePathBtn.Location = new System.Drawing.Point(681, 21);
+            this.calibrationFilePathBtn.Name = "calibrationFilePathBtn";
+            this.calibrationFilePathBtn.Size = new System.Drawing.Size(40, 22);
+            this.calibrationFilePathBtn.TabIndex = 55;
+            this.calibrationFilePathBtn.Text = "...";
+            this.calibrationFilePathBtn.UseVisualStyleBackColor = true;
+            this.calibrationFilePathBtn.Click += new System.EventHandler(this.calibrationFilePathBtn_Click);
             // 
-            // checkBox20
+            // attenuationSizeTxt
             // 
-            this.checkBox20.AutoSize = true;
-            this.checkBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox20.Location = new System.Drawing.Point(305, 196);
-            this.checkBox20.Name = "checkBox20";
-            this.checkBox20.Size = new System.Drawing.Size(94, 17);
-            this.checkBox20.TabIndex = 36;
-            this.checkBox20.Text = "Random Error:";
-            this.checkBox20.UseVisualStyleBackColor = true;
+            this.attenuationSizeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attenuationSizeTxt.Location = new System.Drawing.Point(453, 246);
+            this.attenuationSizeTxt.Name = "attenuationSizeTxt";
+            this.attenuationSizeTxt.Size = new System.Drawing.Size(86, 20);
+            this.attenuationSizeTxt.TabIndex = 54;
+            // 
+            // systematicErrorTxt
+            // 
+            this.systematicErrorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.systematicErrorTxt.Location = new System.Drawing.Point(453, 220);
+            this.systematicErrorTxt.Name = "systematicErrorTxt";
+            this.systematicErrorTxt.Size = new System.Drawing.Size(86, 20);
+            this.systematicErrorTxt.TabIndex = 53;
+            // 
+            // randomErrorTxt
+            // 
+            this.randomErrorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.randomErrorTxt.Location = new System.Drawing.Point(453, 194);
+            this.randomErrorTxt.Name = "randomErrorTxt";
+            this.randomErrorTxt.Size = new System.Drawing.Size(86, 20);
+            this.randomErrorTxt.TabIndex = 52;
+            // 
+            // unitsTxt
+            // 
+            this.unitsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitsTxt.Location = new System.Drawing.Point(453, 168);
+            this.unitsTxt.Name = "unitsTxt";
+            this.unitsTxt.Size = new System.Drawing.Size(86, 20);
+            this.unitsTxt.TabIndex = 51;
+            // 
+            // randomSummingFactorTxt
+            // 
+            this.randomSummingFactorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.randomSummingFactorTxt.Location = new System.Drawing.Point(160, 327);
+            this.randomSummingFactorTxt.Name = "randomSummingFactorTxt";
+            this.randomSummingFactorTxt.Size = new System.Drawing.Size(86, 20);
+            this.randomSummingFactorTxt.TabIndex = 50;
+            // 
+            // activityDivisorTxt
+            // 
+            this.activityDivisorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityDivisorTxt.Location = new System.Drawing.Point(160, 301);
+            this.activityDivisorTxt.Name = "activityDivisorTxt";
+            this.activityDivisorTxt.Size = new System.Drawing.Size(86, 20);
+            this.activityDivisorTxt.TabIndex = 49;
+            // 
+            // activityMultiperTxt
+            // 
+            this.activityMultiperTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityMultiperTxt.Location = new System.Drawing.Point(160, 275);
+            this.activityMultiperTxt.Name = "activityMultiperTxt";
+            this.activityMultiperTxt.Size = new System.Drawing.Size(86, 20);
+            this.activityMultiperTxt.TabIndex = 48;
+            // 
+            // realTimePresetTxt
+            // 
+            this.realTimePresetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realTimePresetTxt.Location = new System.Drawing.Point(160, 249);
+            this.realTimePresetTxt.Name = "realTimePresetTxt";
+            this.realTimePresetTxt.Size = new System.Drawing.Size(86, 20);
+            this.realTimePresetTxt.TabIndex = 47;
+            // 
+            // liveTimePresetTxt
+            // 
+            this.liveTimePresetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.liveTimePresetTxt.Location = new System.Drawing.Point(160, 223);
+            this.liveTimePresetTxt.Name = "liveTimePresetTxt";
+            this.liveTimePresetTxt.Size = new System.Drawing.Size(86, 20);
+            this.liveTimePresetTxt.TabIndex = 46;
+            // 
+            // activityUnitsTxt
+            // 
+            this.activityUnitsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityUnitsTxt.Location = new System.Drawing.Point(160, 197);
+            this.activityUnitsTxt.Name = "activityUnitsTxt";
+            this.activityUnitsTxt.Size = new System.Drawing.Size(86, 20);
+            this.activityUnitsTxt.TabIndex = 45;
+            // 
+            // sampleQuantityTxt
+            // 
+            this.sampleQuantityTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sampleQuantityTxt.Location = new System.Drawing.Point(160, 171);
+            this.sampleQuantityTxt.Name = "sampleQuantityTxt";
+            this.sampleQuantityTxt.Size = new System.Drawing.Size(86, 20);
+            this.sampleQuantityTxt.TabIndex = 44;
+            // 
+            // decayCorrectionDatePicker
+            // 
+            this.decayCorrectionDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.decayCorrectionDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.decayCorrectionDatePicker.Location = new System.Drawing.Point(148, 145);
+            this.decayCorrectionDatePicker.Name = "decayCorrectionDatePicker";
+            this.decayCorrectionDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.decayCorrectionDatePicker.TabIndex = 43;
+            // 
+            // collectionStopDatePicker
+            // 
+            this.collectionStopDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collectionStopDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.collectionStopDatePicker.Location = new System.Drawing.Point(135, 99);
+            this.collectionStopDatePicker.Name = "collectionStopDatePicker";
+            this.collectionStopDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.collectionStopDatePicker.TabIndex = 42;
+            // 
+            // collectionStartDatePicker
+            // 
+            this.collectionStartDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collectionStartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.collectionStartDatePicker.Location = new System.Drawing.Point(135, 73);
+            this.collectionStartDatePicker.Name = "collectionStartDatePicker";
+            this.collectionStartDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.collectionStartDatePicker.TabIndex = 41;
+            // 
+            // libraryFilePathTxt
+            // 
+            this.libraryFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.libraryFilePathTxt.Location = new System.Drawing.Point(135, 47);
+            this.libraryFilePathTxt.Name = "libraryFilePathTxt";
+            this.libraryFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.libraryFilePathTxt.TabIndex = 40;
+            // 
+            // calibrationFilePathTxt
+            // 
+            this.calibrationFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calibrationFilePathTxt.Location = new System.Drawing.Point(135, 21);
+            this.calibrationFilePathTxt.Name = "calibrationFilePathTxt";
+            this.calibrationFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.calibrationFilePathTxt.TabIndex = 39;
+            // 
+            // attenuationSizeCB
+            // 
+            this.attenuationSizeCB.AutoSize = true;
+            this.attenuationSizeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attenuationSizeCB.Location = new System.Drawing.Point(305, 248);
+            this.attenuationSizeCB.Name = "attenuationSizeCB";
+            this.attenuationSizeCB.Size = new System.Drawing.Size(141, 17);
+            this.attenuationSizeCB.TabIndex = 38;
+            this.attenuationSizeCB.Text = "Attenuation Size/Length";
+            this.attenuationSizeCB.UseVisualStyleBackColor = true;
+            // 
+            // systematicErrorCB
+            // 
+            this.systematicErrorCB.AutoSize = true;
+            this.systematicErrorCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.systematicErrorCB.Location = new System.Drawing.Point(305, 222);
+            this.systematicErrorCB.Name = "systematicErrorCB";
+            this.systematicErrorCB.Size = new System.Drawing.Size(105, 17);
+            this.systematicErrorCB.TabIndex = 37;
+            this.systematicErrorCB.Text = "Systematic Error:";
+            this.systematicErrorCB.UseVisualStyleBackColor = true;
+            // 
+            // randomErrorCB
+            // 
+            this.randomErrorCB.AutoSize = true;
+            this.randomErrorCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.randomErrorCB.Location = new System.Drawing.Point(305, 196);
+            this.randomErrorCB.Name = "randomErrorCB";
+            this.randomErrorCB.Size = new System.Drawing.Size(94, 17);
+            this.randomErrorCB.TabIndex = 36;
+            this.randomErrorCB.Text = "Random Error:";
+            this.randomErrorCB.UseVisualStyleBackColor = true;
             // 
             // unitsCB
             // 
@@ -594,71 +806,71 @@
             this.unitsCB.Text = "Units:";
             this.unitsCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox17
+            // randomSummingFactorCB
             // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox17.Location = new System.Drawing.Point(3, 329);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(148, 17);
-            this.checkBox17.TabIndex = 33;
-            this.checkBox17.Text = "Random Summing Factor:";
-            this.checkBox17.UseVisualStyleBackColor = true;
+            this.randomSummingFactorCB.AutoSize = true;
+            this.randomSummingFactorCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.randomSummingFactorCB.Location = new System.Drawing.Point(3, 329);
+            this.randomSummingFactorCB.Name = "randomSummingFactorCB";
+            this.randomSummingFactorCB.Size = new System.Drawing.Size(148, 17);
+            this.randomSummingFactorCB.TabIndex = 33;
+            this.randomSummingFactorCB.Text = "Random Summing Factor:";
+            this.randomSummingFactorCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox16
+            // activityDivisorCB
             // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox16.Location = new System.Drawing.Point(3, 303);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(98, 17);
-            this.checkBox16.TabIndex = 32;
-            this.checkBox16.Text = "Activity Divisor:";
-            this.checkBox16.UseVisualStyleBackColor = true;
+            this.activityDivisorCB.AutoSize = true;
+            this.activityDivisorCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityDivisorCB.Location = new System.Drawing.Point(3, 303);
+            this.activityDivisorCB.Name = "activityDivisorCB";
+            this.activityDivisorCB.Size = new System.Drawing.Size(98, 17);
+            this.activityDivisorCB.TabIndex = 32;
+            this.activityDivisorCB.Text = "Activity Divisor:";
+            this.activityDivisorCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox15
+            // activityMultiperCB
             // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox15.Location = new System.Drawing.Point(5, 277);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(103, 17);
-            this.checkBox15.TabIndex = 31;
-            this.checkBox15.Text = "Activity Multiper:";
-            this.checkBox15.UseVisualStyleBackColor = true;
+            this.activityMultiperCB.AutoSize = true;
+            this.activityMultiperCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityMultiperCB.Location = new System.Drawing.Point(5, 277);
+            this.activityMultiperCB.Name = "activityMultiperCB";
+            this.activityMultiperCB.Size = new System.Drawing.Size(103, 17);
+            this.activityMultiperCB.TabIndex = 31;
+            this.activityMultiperCB.Text = "Activity Multiper:";
+            this.activityMultiperCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox14
+            // realTimePresetCB
             // 
-            this.checkBox14.AutoSize = true;
-            this.checkBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox14.Location = new System.Drawing.Point(5, 251);
-            this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(110, 17);
-            this.checkBox14.TabIndex = 30;
-            this.checkBox14.Text = "Real Time Preset:";
-            this.checkBox14.UseVisualStyleBackColor = true;
+            this.realTimePresetCB.AutoSize = true;
+            this.realTimePresetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realTimePresetCB.Location = new System.Drawing.Point(5, 251);
+            this.realTimePresetCB.Name = "realTimePresetCB";
+            this.realTimePresetCB.Size = new System.Drawing.Size(110, 17);
+            this.realTimePresetCB.TabIndex = 30;
+            this.realTimePresetCB.Text = "Real Time Preset:";
+            this.realTimePresetCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox13
+            // liveTimePresetCB
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox13.Location = new System.Drawing.Point(5, 225);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(108, 17);
-            this.checkBox13.TabIndex = 29;
-            this.checkBox13.Text = "Live Time Preset:";
-            this.checkBox13.UseVisualStyleBackColor = true;
+            this.liveTimePresetCB.AutoSize = true;
+            this.liveTimePresetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.liveTimePresetCB.Location = new System.Drawing.Point(5, 225);
+            this.liveTimePresetCB.Name = "liveTimePresetCB";
+            this.liveTimePresetCB.Size = new System.Drawing.Size(108, 17);
+            this.liveTimePresetCB.TabIndex = 29;
+            this.liveTimePresetCB.Text = "Live Time Preset:";
+            this.liveTimePresetCB.UseVisualStyleBackColor = true;
             // 
-            // checkBox12
+            // activityUnitsCB
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox12.Location = new System.Drawing.Point(5, 199);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(90, 17);
-            this.checkBox12.TabIndex = 28;
-            this.checkBox12.Text = "Activity Units:";
-            this.checkBox12.UseVisualStyleBackColor = true;
+            this.activityUnitsCB.AutoSize = true;
+            this.activityUnitsCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityUnitsCB.Location = new System.Drawing.Point(5, 199);
+            this.activityUnitsCB.Name = "activityUnitsCB";
+            this.activityUnitsCB.Size = new System.Drawing.Size(90, 17);
+            this.activityUnitsCB.TabIndex = 28;
+            this.activityUnitsCB.Text = "Activity Units:";
+            this.activityUnitsCB.UseVisualStyleBackColor = true;
             // 
             // sampleQuantityCB
             // 
@@ -682,16 +894,16 @@
             this.decayCorrectionDateCB.Text = "Decay Correction Date:";
             this.decayCorrectionDateCB.UseVisualStyleBackColor = true;
             // 
-            // decayCorrectStopDateTimeCB
+            // decayCorrectionStopDateTimeCB
             // 
-            this.decayCorrectStopDateTimeCB.AutoSize = true;
-            this.decayCorrectStopDateTimeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectStopDateTimeCB.Location = new System.Drawing.Point(82, 125);
-            this.decayCorrectStopDateTimeCB.Name = "decayCorrectStopDateTimeCB";
-            this.decayCorrectStopDateTimeCB.Size = new System.Drawing.Size(234, 17);
-            this.decayCorrectStopDateTimeCB.TabIndex = 25;
-            this.decayCorrectStopDateTimeCB.Text = "Decay Correct to Collection Stop Date/Time";
-            this.decayCorrectStopDateTimeCB.UseVisualStyleBackColor = true;
+            this.decayCorrectionStopDateTimeCB.AutoSize = true;
+            this.decayCorrectionStopDateTimeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.decayCorrectionStopDateTimeCB.Location = new System.Drawing.Point(82, 125);
+            this.decayCorrectionStopDateTimeCB.Name = "decayCorrectionStopDateTimeCB";
+            this.decayCorrectionStopDateTimeCB.Size = new System.Drawing.Size(234, 17);
+            this.decayCorrectionStopDateTimeCB.TabIndex = 25;
+            this.decayCorrectionStopDateTimeCB.Text = "Decay Correct to Collection Stop Date/Time";
+            this.decayCorrectionStopDateTimeCB.UseVisualStyleBackColor = true;
             // 
             // collectionStopDateCB
             // 
@@ -726,204 +938,26 @@
             this.libraryFilePathCB.Text = "Library File Path:";
             this.libraryFilePathCB.UseVisualStyleBackColor = true;
             // 
-            // calibrationbFilePathCB
+            // calibrationFilePathCB
             // 
-            this.calibrationbFilePathCB.AutoSize = true;
-            this.calibrationbFilePathCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrationbFilePathCB.Location = new System.Drawing.Point(7, 23);
-            this.calibrationbFilePathCB.Name = "calibrationbFilePathCB";
-            this.calibrationbFilePathCB.Size = new System.Drawing.Size(122, 17);
-            this.calibrationbFilePathCB.TabIndex = 21;
-            this.calibrationbFilePathCB.Text = "Calibration File Path:";
-            this.calibrationbFilePathCB.UseVisualStyleBackColor = true;
+            this.calibrationFilePathCB.AutoSize = true;
+            this.calibrationFilePathCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calibrationFilePathCB.Location = new System.Drawing.Point(7, 23);
+            this.calibrationFilePathCB.Name = "calibrationFilePathCB";
+            this.calibrationFilePathCB.Size = new System.Drawing.Size(122, 17);
+            this.calibrationFilePathCB.TabIndex = 21;
+            this.calibrationFilePathCB.Text = "Calibration File Path:";
+            this.calibrationFilePathCB.UseVisualStyleBackColor = true;
             // 
-            // calibrationFilePathTxt
+            // saveSettingBtn
             // 
-            this.calibrationFilePathTxt.Location = new System.Drawing.Point(135, 21);
-            this.calibrationFilePathTxt.Name = "calibrationFilePathTxt";
-            this.calibrationFilePathTxt.Size = new System.Drawing.Size(540, 20);
-            this.calibrationFilePathTxt.TabIndex = 39;
-            // 
-            // libraryFilePathTxt
-            // 
-            this.libraryFilePathTxt.Location = new System.Drawing.Point(135, 47);
-            this.libraryFilePathTxt.Name = "libraryFilePathTxt";
-            this.libraryFilePathTxt.Size = new System.Drawing.Size(540, 20);
-            this.libraryFilePathTxt.TabIndex = 40;
-            // 
-            // collectionStartDatePicker
-            // 
-            this.collectionStartDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collectionStartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.collectionStartDatePicker.Location = new System.Drawing.Point(135, 73);
-            this.collectionStartDatePicker.Name = "collectionStartDatePicker";
-            this.collectionStartDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.collectionStartDatePicker.TabIndex = 41;
-            // 
-            // collectionStopDatePicker
-            // 
-            this.collectionStopDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collectionStopDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.collectionStopDatePicker.Location = new System.Drawing.Point(135, 99);
-            this.collectionStopDatePicker.Name = "collectionStopDatePicker";
-            this.collectionStopDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.collectionStopDatePicker.TabIndex = 42;
-            // 
-            // decayCorrectionDatePicker
-            // 
-            this.decayCorrectionDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectionDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.decayCorrectionDatePicker.Location = new System.Drawing.Point(148, 145);
-            this.decayCorrectionDatePicker.Name = "decayCorrectionDatePicker";
-            this.decayCorrectionDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.decayCorrectionDatePicker.TabIndex = 43;
-            // 
-            // sampleQuantityTxt
-            // 
-            this.sampleQuantityTxt.Location = new System.Drawing.Point(160, 171);
-            this.sampleQuantityTxt.Name = "sampleQuantityTxt";
-            this.sampleQuantityTxt.Size = new System.Drawing.Size(86, 20);
-            this.sampleQuantityTxt.TabIndex = 44;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(160, 197);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(86, 20);
-            this.textBox8.TabIndex = 45;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(160, 223);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(86, 20);
-            this.textBox9.TabIndex = 46;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(160, 249);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(86, 20);
-            this.textBox10.TabIndex = 47;
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(160, 275);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(86, 20);
-            this.textBox11.TabIndex = 48;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(160, 301);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(86, 20);
-            this.textBox12.TabIndex = 49;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(160, 327);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(86, 20);
-            this.textBox13.TabIndex = 50;
-            // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(453, 246);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(86, 20);
-            this.textBox14.TabIndex = 54;
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(453, 220);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(86, 20);
-            this.textBox15.TabIndex = 53;
-            // 
-            // textBox16
-            // 
-            this.textBox16.Location = new System.Drawing.Point(453, 194);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(86, 20);
-            this.textBox16.TabIndex = 52;
-            // 
-            // unitsTxt
-            // 
-            this.unitsTxt.Location = new System.Drawing.Point(453, 168);
-            this.unitsTxt.Name = "unitsTxt";
-            this.unitsTxt.Size = new System.Drawing.Size(86, 20);
-            this.unitsTxt.TabIndex = 51;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(6, 502);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(225, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Load Analysis Setting Template";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(237, 502);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(225, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Save Analysis Setting Template";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // spectrumFilePathBtn
-            // 
-            this.spectrumFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spectrumFilePathBtn.Location = new System.Drawing.Point(706, 46);
-            this.spectrumFilePathBtn.Name = "spectrumFilePathBtn";
-            this.spectrumFilePathBtn.Size = new System.Drawing.Size(40, 22);
-            this.spectrumFilePathBtn.TabIndex = 15;
-            this.spectrumFilePathBtn.Text = "...";
-            this.spectrumFilePathBtn.UseVisualStyleBackColor = true;
-            // 
-            // jobTemplatePathBtn
-            // 
-            this.jobTemplatePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jobTemplatePathBtn.Location = new System.Drawing.Point(706, 73);
-            this.jobTemplatePathBtn.Name = "jobTemplatePathBtn";
-            this.jobTemplatePathBtn.Size = new System.Drawing.Size(40, 22);
-            this.jobTemplatePathBtn.TabIndex = 16;
-            this.jobTemplatePathBtn.Text = "...";
-            this.jobTemplatePathBtn.UseVisualStyleBackColor = true;
-            // 
-            // sampleDefaultFilePathBtn
-            // 
-            this.sampleDefaultFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDefaultFilePathBtn.Location = new System.Drawing.Point(706, 101);
-            this.sampleDefaultFilePathBtn.Name = "sampleDefaultFilePathBtn";
-            this.sampleDefaultFilePathBtn.Size = new System.Drawing.Size(40, 22);
-            this.sampleDefaultFilePathBtn.TabIndex = 17;
-            this.sampleDefaultFilePathBtn.Text = "...";
-            this.sampleDefaultFilePathBtn.UseVisualStyleBackColor = true;
-            // 
-            // calibrationFilePathBtn
-            // 
-            this.calibrationFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrationFilePathBtn.Location = new System.Drawing.Point(681, 21);
-            this.calibrationFilePathBtn.Name = "calibrationFilePathBtn";
-            this.calibrationFilePathBtn.Size = new System.Drawing.Size(40, 22);
-            this.calibrationFilePathBtn.TabIndex = 55;
-            this.calibrationFilePathBtn.Text = "...";
-            this.calibrationFilePathBtn.UseVisualStyleBackColor = true;
-            // 
-            // libraryFilePathBtn
-            // 
-            this.libraryFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.libraryFilePathBtn.Location = new System.Drawing.Point(681, 45);
-            this.libraryFilePathBtn.Name = "libraryFilePathBtn";
-            this.libraryFilePathBtn.Size = new System.Drawing.Size(40, 22);
-            this.libraryFilePathBtn.TabIndex = 56;
-            this.libraryFilePathBtn.Text = "...";
-            this.libraryFilePathBtn.UseVisualStyleBackColor = true;
+            this.saveSettingBtn.Location = new System.Drawing.Point(617, 311);
+            this.saveSettingBtn.Name = "saveSettingBtn";
+            this.saveSettingBtn.Size = new System.Drawing.Size(140, 35);
+            this.saveSettingBtn.TabIndex = 57;
+            this.saveSettingBtn.Text = "Save Settings";
+            this.saveSettingBtn.UseVisualStyleBackColor = true;
+            this.saveSettingBtn.Click += new System.EventHandler(this.saveSettingBtn_Click);
             // 
             // Form1
             // 
@@ -990,42 +1024,42 @@
         private System.Windows.Forms.Button exitSetupBtn;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox sampleDescriptionCB;
-        private System.Windows.Forms.TextBox sampleDefafultFilePathTxt;
+        private System.Windows.Forms.TextBox sampleDefaultFilePathTxt;
         private System.Windows.Forms.TextBox jobTemplatePathTxt;
         private System.Windows.Forms.TextBox spectrumFilePathTxt;
         private System.Windows.Forms.TextBox sampleDescriptionTxt;
         private System.Windows.Forms.CheckBox sampleDefaultFilePathCB;
         private System.Windows.Forms.CheckBox jobTemplatePathCB;
         private System.Windows.Forms.CheckBox spectrumFilePatbCB;
-        private System.Windows.Forms.CheckBox checkBox22;
-        private System.Windows.Forms.CheckBox checkBox21;
-        private System.Windows.Forms.CheckBox checkBox20;
+        private System.Windows.Forms.CheckBox attenuationSizeCB;
+        private System.Windows.Forms.CheckBox systematicErrorCB;
+        private System.Windows.Forms.CheckBox randomErrorCB;
         private System.Windows.Forms.CheckBox unitsCB;
-        private System.Windows.Forms.CheckBox checkBox17;
-        private System.Windows.Forms.CheckBox checkBox16;
-        private System.Windows.Forms.CheckBox checkBox15;
-        private System.Windows.Forms.CheckBox checkBox14;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox randomSummingFactorCB;
+        private System.Windows.Forms.CheckBox activityDivisorCB;
+        private System.Windows.Forms.CheckBox activityMultiperCB;
+        private System.Windows.Forms.CheckBox realTimePresetCB;
+        private System.Windows.Forms.CheckBox liveTimePresetCB;
+        private System.Windows.Forms.CheckBox activityUnitsCB;
         private System.Windows.Forms.CheckBox sampleQuantityCB;
         private System.Windows.Forms.CheckBox decayCorrectionDateCB;
-        private System.Windows.Forms.CheckBox decayCorrectStopDateTimeCB;
+        private System.Windows.Forms.CheckBox decayCorrectionStopDateTimeCB;
         private System.Windows.Forms.CheckBox collectionStopDateCB;
         private System.Windows.Forms.CheckBox collectionStartDateCB;
         private System.Windows.Forms.CheckBox libraryFilePathCB;
-        private System.Windows.Forms.CheckBox calibrationbFilePathCB;
+        private System.Windows.Forms.CheckBox calibrationFilePathCB;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox attenuationSizeTxt;
+        private System.Windows.Forms.TextBox systematicErrorTxt;
+        private System.Windows.Forms.TextBox randomErrorTxt;
         private System.Windows.Forms.TextBox unitsTxt;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox randomSummingFactorTxt;
+        private System.Windows.Forms.TextBox activityDivisorTxt;
+        private System.Windows.Forms.TextBox activityMultiperTxt;
+        private System.Windows.Forms.TextBox realTimePresetTxt;
+        private System.Windows.Forms.TextBox liveTimePresetTxt;
+        private System.Windows.Forms.TextBox activityUnitsTxt;
         private System.Windows.Forms.TextBox sampleQuantityTxt;
         private System.Windows.Forms.DateTimePicker decayCorrectionDatePicker;
         private System.Windows.Forms.DateTimePicker collectionStopDatePicker;
@@ -1037,6 +1071,7 @@
         private System.Windows.Forms.Button spectrumFilePathBtn;
         private System.Windows.Forms.Button libraryFilePathBtn;
         private System.Windows.Forms.Button calibrationFilePathBtn;
+        private System.Windows.Forms.Button saveSettingBtn;
     }
 }
 

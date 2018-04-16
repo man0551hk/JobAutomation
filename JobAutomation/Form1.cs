@@ -20,8 +20,9 @@ namespace JobAutomation
         public Form1()
         {
             InitializeComponent();
-            this.FormClosing += Form1_Closing;
             DefaultFormSetup();
+            this.FormClosing += Form1_Closing;
+           
             LoadCountSequenceIndex();
         }
 
@@ -33,6 +34,78 @@ namespace JobAutomation
         private void DefaultFormSetup()
         {
             csListComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //sampleDefaultFilePathTxt.TextChanged += TextBox_TextChanged;
+            //sampleDefaultFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //spectrumFilePathTxt.TextChanged += TextBox_TextChanged;
+            //spectrumFilePatbCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //jobTemplatePathTxt.TextChanged += TextBox_TextChanged;
+            //jobTemplatePathCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //sampleDefaultFilePathTxt.TextChanged += TextBox_TextChanged;
+            //sampleDefaultFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //calibrationFilePathTxt.TextChanged += TextBox_TextChanged;
+            //calibrationFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //libraryFilePathTxt.TextChanged += TextBox_TextChanged;
+            //libraryFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //collectionStartDatePicker.TextChanged += TextBox_TextChanged;
+            //collectionStartDateCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //collectionStopDatePicker.TextChanged += TextBox_TextChanged;
+            //collectionStopDateCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //decayCorrectionStopDateTimeCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //decayCorrectionDatePicker.TextChanged += TextBox_TextChanged;
+            //decayCorrectionDateCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            sampleQuantityTxt.KeyPress += CheckISNumber_KeyPress;
+            //sampleQuantityTxt.TextChanged += TextBox_TextChanged;
+            //sampleQuantityCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //unitsTxt.TextChanged += TextBox_TextChanged;
+            //unitsCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            //activityUnitsTxt.TextChanged += TextBox_TextChanged;
+            //activityUnitsCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            liveTimePresetTxt.KeyPress += CheckISNumber_KeyPress;
+            //liveTimePresetTxt.TextChanged += TextBox_TextChanged;
+            //liveTimePresetCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            realTimePresetTxt.KeyPress += CheckISNumber_KeyPress;
+            //realTimePresetTxt.TextChanged += TextBox_TextChanged;
+            //realTimePresetCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            activityMultiperTxt.KeyPress += CheckISNumber_KeyPress;
+            //activityMultiperTxt.TextChanged += TextBox_TextChanged;
+            //activityMultiperCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            activityDivisorTxt.KeyPress += CheckISNumber_KeyPress;
+            //activityDivisorTxt.TextChanged += TextBox_TextChanged;
+            //activityDivisorCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            randomSummingFactorTxt.KeyPress += CheckISNumber_KeyPress;
+            //randomSummingFactorTxt.TextChanged += TextBox_TextChanged;
+            //randomSummingFactorCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            randomErrorTxt.KeyPress += CheckISNumber_KeyPress;
+            //randomErrorTxt.TextChanged += TextBox_TextChanged;
+            //randomErrorCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            systematicErrorTxt.KeyPress += CheckISNumber_KeyPress;
+            //systematicErrorTxt.TextChanged += TextBox_TextChanged;
+            //systematicErrorCB.CheckedChanged += CheckBox_CheckedChanged;
+
+            attenuationSizeTxt.KeyPress += CheckISNumber_KeyPress;
+            //attenuationSizeTxt.TextChanged += TextBox_TextChanged;
+            //attenuationSizeCB.CheckedChanged += CheckBox_CheckedChanged;
+
             this.parameterSetupPanel.Visible = false;
             this.analysisSettingsPanel.Visible = false;
         }
@@ -260,10 +333,7 @@ namespace JobAutomation
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence");
             }
 
-            string operationName = csListComboBox.Text;
-            string json = js.Serialize(toggleAnalysis);
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
-            LoadAnalysisList(operationName);
+            SaveAnalysisToFile();
         }
 
         private void analysisListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -272,6 +342,7 @@ namespace JobAutomation
             if (analysisSettingsPanel.Visible) //setup operation
             {
                 analysisSettingsPanel.Enabled = true;
+                LoadAnalysisSettingItem(settingName);
             }
             else //normal opertation
             { }
@@ -283,12 +354,214 @@ namespace JobAutomation
             {
                 if (name == toggleAnalysis.analysisList[i].name)
                 {
+                    sampleDefaultFilePathTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
+                    sampleDefaultFilePathCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
+
+                    spectrumFilePathTxt.Text = toggleAnalysis.analysisList[i].spectrumFilePath;
+                    spectrumFilePatbCB.Checked = toggleAnalysis.analysisList[i].allowSpectrumFilePath;
+
+                    jobTemplatePathTxt.Text = toggleAnalysis.analysisList[i].jobTemplatePath;
+                    jobTemplatePathCB.Checked = toggleAnalysis.analysisList[i].allowJobTemplatePath;
+
+                    sampleDefaultFilePathTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
+                    sampleDefaultFilePathCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
+
+                    calibrationFilePathTxt.Text = toggleAnalysis.analysisList[i].calibrationFilePath;
+                    calibrationFilePathCB.Checked = toggleAnalysis.analysisList[i].allowCalibrationFilePath;
+
+                    libraryFilePathTxt.Text = toggleAnalysis.analysisList[i].libraryFilePath;
+                    libraryFilePathCB.Checked = toggleAnalysis.analysisList[i].allowLibraryFilePath;
+
+                    collectionStartDatePicker.Text = toggleAnalysis.analysisList[i].collectionStartDate;
+                    collectionStartDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStartDate;
+
+                    collectionStopDatePicker.Text = toggleAnalysis.analysisList[i].collectionStopDate;
+                    collectionStopDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStopDate;
+
+                    decayCorrectionStopDateTimeCB.Checked = toggleAnalysis.analysisList[i].decayCorrectionStopDateTime;
+
+                    decayCorrectionDatePicker.Text = toggleAnalysis.analysisList[i].decayCorrectionDate;
+                    decayCorrectionDateCB.Checked = toggleAnalysis.analysisList[i].allowDecayCorrectionDate;
+
+                    sampleQuantityTxt.Text = toggleAnalysis.analysisList[i].sampleQuantity != 0 ? toggleAnalysis.analysisList[i].sampleQuantity.ToString() : "";
+                    sampleQuantityCB.Checked = toggleAnalysis.analysisList[i].allowSampleQuantity;
+
+                    unitsTxt.Text = toggleAnalysis.analysisList[i].units;
+                    unitsCB.Checked = toggleAnalysis.analysisList[i].allowUnits;
+
+                    activityUnitsTxt.Text = toggleAnalysis.analysisList[i].activityUnits;
+                    activityUnitsCB.Checked = toggleAnalysis.analysisList[i].allowActivityUnits;
+
+                    liveTimePresetTxt.Text = toggleAnalysis.analysisList[i].liveTimePreset != 0 ? toggleAnalysis.analysisList[i].liveTimePreset.ToString() : "";
+                    liveTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowLiveTimePreset;
+
+                    realTimePresetTxt.Text = toggleAnalysis.analysisList[i].realTimePreset != 0 ? toggleAnalysis.analysisList[i].realTimePreset.ToString() : "";
+                    realTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowRealTimePreset;
+
+                    activityMultiperTxt.Text = toggleAnalysis.analysisList[i].activityMultiper != 0 ? toggleAnalysis.analysisList[i].activityMultiper.ToString() : "";
+                    activityMultiperCB.Checked = toggleAnalysis.analysisList[i].allowActivityMultiper;
+
+                    activityDivisorTxt.Text = toggleAnalysis.analysisList[i].activityDivisor != 0 ? toggleAnalysis.analysisList[i].activityDivisor.ToString() : "";
+                    activityDivisorCB.Checked = toggleAnalysis.analysisList[i].allowActivityDivisor;
+
+                    randomSummingFactorTxt.Text = toggleAnalysis.analysisList[i].randomSummingFactor != 0 ? toggleAnalysis.analysisList[i].randomSummingFactor.ToString() : "";
+                    randomSummingFactorCB.Checked = toggleAnalysis.analysisList[i].allowRandomSummingFactor;
+
+                    randomErrorTxt.Text = toggleAnalysis.analysisList[i].randomError != 0 ? toggleAnalysis.analysisList[i].randomError.ToString() : "";
+                    randomErrorCB.Checked = toggleAnalysis.analysisList[i].allowRandomError;
+
+                    systematicErrorTxt.Text = toggleAnalysis.analysisList[i].systematicError != 0 ? toggleAnalysis.analysisList[i].systematicError.ToString() : "";
+                    systematicErrorCB.Checked = toggleAnalysis.analysisList[i].allowSystematicError;
+
+                    attenuationSizeTxt.Text = toggleAnalysis.analysisList[i].attenuationSize != 0 ? toggleAnalysis.analysisList[i].attenuationSize.ToString() : "";
+                    attenuationSizeCB.Checked = toggleAnalysis.analysisList[i].allowAttenuationSize;
+
 
                     break;
                 }
             }
         }
 
+        private void spectrumFilePathBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                spectrumFilePathTxt.Text = sdfOFD.FileName;
+            }
+        }
 
+        private void jobTemplatePathBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                jobTemplatePathTxt.Text = sdfOFD.FileName;
+            }
+        }
+
+        private void sampleDefaultFilePathBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                sampleDefaultFilePathTxt.Text = sdfOFD.FileName;
+            }
+        }
+
+        private void calibrationFilePathBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                calibrationFilePathTxt.Text = sdfOFD.FileName;
+            }
+        }
+
+        private void libraryFilePathBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                libraryFilePathTxt.Text = sdfOFD.FileName;
+            }
+        }
+
+        public void SaveAnalysisToFile()
+        {
+            string operationName = csListComboBox.Text;
+            string json = js.Serialize(toggleAnalysis);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
+            LoadAnalysisList(operationName);
+        }
+
+        public void AutoSaveSetting()
+        {
+            string settingName = analysisListBox.SelectedItem.ToString();
+            for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            {
+                if (settingName == toggleAnalysis.analysisList[i].name)
+                {
+                    toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
+
+                    toggleAnalysis.analysisList[i].spectrumFilePath = spectrumFilePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowSpectrumFilePath = spectrumFilePatbCB.Checked;
+
+                    toggleAnalysis.analysisList[i].jobTemplatePath = jobTemplatePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowJobTemplatePath = jobTemplatePathCB.Checked;
+
+                    toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
+
+                    toggleAnalysis.analysisList[i].calibrationFilePath = calibrationFilePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowCalibrationFilePath = calibrationFilePathCB.Checked;
+
+                    toggleAnalysis.analysisList[i].libraryFilePath = libraryFilePathTxt.Text;
+                    toggleAnalysis.analysisList[i].allowLibraryFilePath = libraryFilePathCB.Checked;
+
+                    toggleAnalysis.analysisList[i].collectionStartDate = collectionStartDatePicker.Text;
+                    toggleAnalysis.analysisList[i].allowCollectionStartDate = collectionStartDateCB.Checked;
+
+                    toggleAnalysis.analysisList[i].collectionStopDate = collectionStopDatePicker.Text;
+                    toggleAnalysis.analysisList[i].allowCollectionStopDate = collectionStopDateCB.Checked;
+
+                    toggleAnalysis.analysisList[i].decayCorrectionStopDateTime = decayCorrectionStopDateTimeCB.Checked;
+
+                    toggleAnalysis.analysisList[i].decayCorrectionDate = decayCorrectionDatePicker.Text;
+                    toggleAnalysis.analysisList[i].allowDecayCorrectionDate = decayCorrectionDateCB.Checked;
+
+                    toggleAnalysis.analysisList[i].sampleQuantity = Convert.ToInt32(sampleQuantityTxt.Text);
+                    toggleAnalysis.analysisList[i].allowSampleQuantity = sampleQuantityCB.Checked;
+
+                    toggleAnalysis.analysisList[i].units = unitsTxt.Text;
+                    toggleAnalysis.analysisList[i].allowUnits = unitsCB.Checked;
+
+                    toggleAnalysis.analysisList[i].activityUnits = activityUnitsTxt.Text;
+                    toggleAnalysis.analysisList[i].allowActivityUnits = activityUnitsCB.Checked;
+
+                    toggleAnalysis.analysisList[i].liveTimePreset = Convert.ToInt32(liveTimePresetTxt.Text);
+                    toggleAnalysis.analysisList[i].allowLiveTimePreset = liveTimePresetCB.Checked;
+
+                    toggleAnalysis.analysisList[i].realTimePreset = Convert.ToInt32(realTimePresetTxt.Text);
+                    toggleAnalysis.analysisList[i].allowRealTimePreset = realTimePresetCB.Checked;
+
+                    toggleAnalysis.analysisList[i].activityMultiper = Convert.ToInt32(activityMultiperTxt.Text);
+                    toggleAnalysis.analysisList[i].allowActivityMultiper = activityMultiperCB.Checked;
+
+                    toggleAnalysis.analysisList[i].activityDivisor = Convert.ToInt32(activityDivisorTxt.Text);
+                    toggleAnalysis.analysisList[i].allowActivityDivisor = activityDivisorCB.Checked;
+
+                    toggleAnalysis.analysisList[i].randomSummingFactor = Convert.ToInt32(randomSummingFactorTxt.Text);
+                    toggleAnalysis.analysisList[i].allowRandomSummingFactor = randomSummingFactorCB.Checked;
+
+                    toggleAnalysis.analysisList[i].randomError = Convert.ToInt32(randomErrorTxt.Text);
+                    toggleAnalysis.analysisList[i].allowRandomError = randomErrorCB.Checked;
+
+                    toggleAnalysis.analysisList[i].systematicError = Convert.ToInt32(systematicErrorTxt.Text);
+                    toggleAnalysis.analysisList[i].allowSystematicError = systematicErrorCB.Checked;
+
+                    toggleAnalysis.analysisList[i].attenuationSize = Convert.ToInt32(attenuationSizeTxt.Text);
+                    toggleAnalysis.analysisList[i].allowAttenuationSize = attenuationSizeCB.Checked;
+                    break;
+                }
+            }
+            SaveAnalysisToFile();
+        }
+
+        private void CheckISNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+    
+        //private void TextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    AutoSaveSetting();
+        //}
+
+        //private void CheckBox_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    AutoSaveSetting();
+        //}
+
+        private void saveSettingBtn_Click(object sender, EventArgs e)
+        {
+            AutoSaveSetting();
+        }
     }
 }
