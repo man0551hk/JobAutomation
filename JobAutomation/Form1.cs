@@ -103,6 +103,7 @@ namespace JobAutomation
             this.analysisSettingsPanel.Visible = true;
             csListComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             CtrlCSElement(true);
+            analysisSettingsPanel.Enabled = false;
         }
 
         public void CtrlCSElement(bool display)
@@ -269,8 +270,8 @@ namespace JobAutomation
         {
             string settingName = analysisListBox.SelectedItem.ToString();
             if (analysisSettingsPanel.Visible) //setup operation
-            { 
-                
+            {
+                analysisSettingsPanel.Enabled = true;
             }
             else //normal opertation
             { }

@@ -46,7 +46,6 @@ namespace JobAutomation
         public bool allowCollectionStopDate { set; get; }
 
         public bool decayCollectionStopDateTime { set; get; }
-        public bool allowDecayCollectionStopDateTime { set; get; }
 
         public string decayCorrectionDate { set; get; }
         public bool allowDecayCorrectionDate { set; get; }
@@ -75,10 +74,10 @@ namespace JobAutomation
         public int randomSummingFactor { set; get; }
         public bool allowRandomSummingFactor { set; get; }
 
-        public string randomError { set; get; }
+        public int randomError { set; get; }
         public bool allowRandomError { set; get; }
 
-        public string systematicError { set; get; }
+        public int systematicError { set; get; }
         public bool allowSystematicError { set; get; }
 
         public int attenuationSize { set; get; }
