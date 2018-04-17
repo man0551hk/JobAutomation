@@ -36,11 +36,19 @@ namespace JobAutomation
                 GlobalFunc.loginStatus = 1;
                 if (GlobalFunc.passwordFormToggle == "ParameterSetup")
                 {
-                    GlobalFunc.mainForm.DisplayParameterSetupPanel();
+                    if (GlobalFunc.parameterSetupForm == null || GlobalFunc.parameterSetupForm.IsDisposed)
+                    {
+                        GlobalFunc.parameterSetupForm = new ParameterSetupForm();
+                    }
+                    GlobalFunc.parameterSetupForm.Show();
                 }
-                else if(GlobalFunc.passwordFormToggle == "CountingSequence")
+                else if(GlobalFunc.passwordFormToggle == "SetupCountingSequence")
                 {
-                    GlobalFunc.mainForm.DisplayCountingSequencePanel();
+                    if (GlobalFunc.setupCountingSequenceForm == null || GlobalFunc.setupCountingSequenceForm.IsDisposed)
+                    {
+                        GlobalFunc.setupCountingSequenceForm = new SetupCountingSequenceForm();
+                    }
+                    GlobalFunc.setupCountingSequenceForm.Show();
                 }
                 this.Close();
             }
@@ -56,7 +64,5 @@ namespace JobAutomation
                 CheckLogin();
             }
         }
-
-
     }
 }

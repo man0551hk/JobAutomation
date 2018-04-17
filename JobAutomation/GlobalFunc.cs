@@ -6,13 +6,23 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Script.Serialization;
 using System.IO;
+using System.Windows.Forms;
 namespace JobAutomation
 {
     public static class GlobalFunc
     {
         public static int loginStatus;
+        public static MainForm mainForm;
         public static PasswordForm passwordForm;
-        public static Form1 mainForm;
+        public static ParameterSetupForm parameterSetupForm;
+        public static SetupCountingSequenceForm setupCountingSequenceForm;
+        public static StartCountingSequenceForm startCountingSequenceForm;
+
+        public static int w = Screen.PrimaryScreen.Bounds.Width;
+        public static int h = Screen.PrimaryScreen.Bounds.Height;
+        public static int mainFormHeight;
+
+
         public static Setup setup;
         static bool useHashing = true;
         static string securityKey = "ficom2018";

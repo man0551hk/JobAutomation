@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 using System.IO;
 namespace JobAutomation
 {
-    public partial class Form1 : Form
+    public partial class SetupCountingSequenceForm : Form
     {
         OpenFileDialog sdfOFD = new OpenFileDialog();
         OpenFileDialog gammaOFD = new OpenFileDialog();
@@ -18,180 +18,47 @@ namespace JobAutomation
         JavaScriptSerializer js = new JavaScriptSerializer();
         SaveFileDialog saveTemplateDialog = new SaveFileDialog();
 
-        public Form1()
+        public SetupCountingSequenceForm()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(150 + 250, GlobalFunc.mainFormHeight);
             DefaultFormSetup();
-            this.FormClosing += Form1_Closing;
-           
             LoadCountSequenceIndex();
-        }
-
-        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void DefaultFormSetup()
         {
             csListComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            exitSetupBtn.Visible = false;
             saveTemplateDialog.Filter = "GV Automation Files (*.gva)|*.gva";
             saveTemplateDialog.DefaultExt = "gva";
             saveTemplateDialog.AddExtension = true;
             saveTemplateDialog.FileOk += saveTemplateDialog_FileOk;
-            //sampleDefaultFilePathTxt.TextChanged += TextBox_TextChanged;
-            //sampleDefaultFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //spectrumFilePathTxt.TextChanged += TextBox_TextChanged;
-            //spectrumFilePatbCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //jobTemplatePathTxt.TextChanged += TextBox_TextChanged;
-            //jobTemplatePathCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //sampleDefaultFilePathTxt.TextChanged += TextBox_TextChanged;
-            //sampleDefaultFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //calibrationFilePathTxt.TextChanged += TextBox_TextChanged;
-            //calibrationFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //libraryFilePathTxt.TextChanged += TextBox_TextChanged;
-            //libraryFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //collectionStartDatePicker.TextChanged += TextBox_TextChanged;
-            //collectionStartDateCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //collectionStopDatePicker.TextChanged += TextBox_TextChanged;
-            //collectionStopDateCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //decayCorrectionStopDateTimeCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //decayCorrectionDatePicker.TextChanged += TextBox_TextChanged;
-            //decayCorrectionDateCB.CheckedChanged += CheckBox_CheckedChanged;
+            analysisSettingsPanel.Enabled = false;
+            loadAnalysisSettingTemplateBtn.Enabled = false;
+            saveAnalysisSettingTemplateBtn.Enabled = false;
 
             sampleQuantityTxt.KeyPress += CheckISNumber_KeyPress;
-            //sampleQuantityTxt.TextChanged += TextBox_TextChanged;
-            //sampleQuantityCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //unitsTxt.TextChanged += TextBox_TextChanged;
-            //unitsCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            //activityUnitsTxt.TextChanged += TextBox_TextChanged;
-            //activityUnitsCB.CheckedChanged += CheckBox_CheckedChanged;
-
             liveTimePresetTxt.KeyPress += CheckISNumber_KeyPress;
-            //liveTimePresetTxt.TextChanged += TextBox_TextChanged;
-            //liveTimePresetCB.CheckedChanged += CheckBox_CheckedChanged;
-
             realTimePresetTxt.KeyPress += CheckISNumber_KeyPress;
-            //realTimePresetTxt.TextChanged += TextBox_TextChanged;
-            //realTimePresetCB.CheckedChanged += CheckBox_CheckedChanged;
-
             activityMultiperTxt.KeyPress += CheckISNumber_KeyPress;
-            //activityMultiperTxt.TextChanged += TextBox_TextChanged;
-            //activityMultiperCB.CheckedChanged += CheckBox_CheckedChanged;
-
             activityDivisorTxt.KeyPress += CheckISNumber_KeyPress;
-            //activityDivisorTxt.TextChanged += TextBox_TextChanged;
-            //activityDivisorCB.CheckedChanged += CheckBox_CheckedChanged;
-
             randomSummingFactorTxt.KeyPress += CheckISNumber_KeyPress;
-            //randomSummingFactorTxt.TextChanged += TextBox_TextChanged;
-            //randomSummingFactorCB.CheckedChanged += CheckBox_CheckedChanged;
-
             randomErrorTxt.KeyPress += CheckISNumber_KeyPress;
-            //randomErrorTxt.TextChanged += TextBox_TextChanged;
-            //randomErrorCB.CheckedChanged += CheckBox_CheckedChanged;
-
             systematicErrorTxt.KeyPress += CheckISNumber_KeyPress;
-            //systematicErrorTxt.TextChanged += TextBox_TextChanged;
-            //systematicErrorCB.CheckedChanged += CheckBox_CheckedChanged;
-
             attenuationSizeTxt.KeyPress += CheckISNumber_KeyPress;
-            //attenuationSizeTxt.TextChanged += TextBox_TextChanged;
-            //attenuationSizeCB.CheckedChanged += CheckBox_CheckedChanged;
-
-            this.parameterSetupPanel.Visible = false;
-            this.analysisSettingsPanel.Visible = false;
         }
 
-        private void openLoopFileBtn_Click(object sender, EventArgs e)
-        {
-            //openLoopJobFileDialog.InitialDirectory = "c:\\";
-            //openLoopJobFileDialog.Filter = "job files (*.job)|*.job";
-            //openLoopJobFileDialog.FilterIndex = 2;
-            //openLoopJobFileDialog.Title = "Select Job File";
-
-            //openLoopJobFileDialog.RestoreDirectory = true;
-
-            //if (openLoopJobFileDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    try
-            //    {
-            //        loopJobFilePath.Text = openLoopJobFileDialog.FileName;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-            //    }
-            //}
-        }
-        
-        private void parameterSetupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GlobalFunc.passwordFormToggle = "ParameterSetup";
-            if (CheckLoginStatus())
-            {
-                DisplayParameterSetupPanel();
-            }
-        }
-
-        private void setupCountingSequenceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GlobalFunc.passwordFormToggle = "CountingSequence";
-            if (CheckLoginStatus())
-            {
-                DisplayCountingSequencePanel();
-            }
-        }
 
         public void ShowMessage(string msg)
         { 
             MessageBox.Show(msg);
         }
 
-        public void DisplayParameterSetupPanel()
-        {
-            this.parameterSetupPanel.Visible = true;
-            this.analysisSettingsPanel.Visible = false;
-            CtrlCSElement(false);
-            if (GlobalFunc.setup != null)
-            {
-                updateSDFFilePath.Text = GlobalFunc.setup.sdfFilePath;
-                gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
-                analysisListPrefix.Text = GlobalFunc.setup.analysisListPrefix;
-                password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
-                verifyPassword.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
-            }
-        }
-
-        public void DisplayCountingSequencePanel()
-        {
-            this.parameterSetupPanel.Visible = false;
-            this.analysisSettingsPanel.Visible = true;
-            csListComboBox.DropDownStyle = ComboBoxStyle.DropDown;
-            CtrlCSElement(true);
-           
-            analysisSettingsPanel.Enabled = false;
-        }
-
         public void CtrlCSElement(bool display)
         {
             groupBox1.Visible = display;
-            addCsBtn.Visible = display;
-            exitSetupBtn.Visible = display;
             removeCsBtn.Visible = display;
-            exitSetupBtn.Visible = display;
         }
 
         private bool CheckLoginStatus()
@@ -209,43 +76,10 @@ namespace JobAutomation
             }
         }
 
-        private void updateSDFFilePathBtn_Click(object sender, EventArgs e)
-        {
-            if (sdfOFD.ShowDialog() == DialogResult.OK)
-            { 
-                updateSDFFilePath.Text = sdfOFD.FileName;
-            }
-        }
 
-        private void gammaVisionPathBtn_Click(object sender, EventArgs e)
-        {
-            if (gammaOFD.ShowDialog() == DialogResult.OK)
-            {
-                gammaVisionPath.Text = sdfOFD.FileName;
-            }
-        }
 
-        private void saveSetupBtn_Click(object sender, EventArgs e)
-        {
-            if (password.Text != verifyPassword.Text)
-            {
-                ShowMessage("Verify Password not matched");
-            }
-            else
-            {
-                Setup setup = new Setup();
-                setup.sdfFilePath = updateSDFFilePath.Text;
-                setup.gammamVisionPath = gammaVisionPath.Text;
-                setup.analysisListPrefix = analysisListPrefix.Text;
-                setup.password = GlobalFunc.Encrypt(password.Text);
 
-                string json = js.Serialize(setup);
-              
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
-                GlobalFunc.LoadSetup();
-                ShowMessage("Save setup parameter successful");
-            }
-        }
+
 
         public void LoadCountSequenceIndex()
         {
@@ -347,15 +181,10 @@ namespace JobAutomation
         private void analysisListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string settingName = analysisListBox.SelectedItem.ToString();
-            if (analysisSettingsPanel.Visible) //setup operation
-            {
-                analysisSettingsPanel.Enabled = true;
-                LoadAnalysisSettingItem(settingName);
-            }
-            else //normal opertation
-            {
-                
-            }
+            analysisSettingsPanel.Enabled = true;
+            loadAnalysisSettingTemplateBtn.Enabled = true;
+            saveAnalysisSettingTemplateBtn.Enabled = true;
+            LoadAnalysisSettingItem(settingName);
         }
 
         public void LoadNomalOpertationItem(string name)
@@ -583,14 +412,6 @@ namespace JobAutomation
         private void saveSettingBtn_Click(object sender, EventArgs e)
         {
             AutoSaveSetting();
-        }
-
-        private void exitSetupBtn_Click(object sender, EventArgs e)
-        {
-            CtrlCSElement(false);
-            groupBox1.Visible = true;
-            this.parameterSetupPanel.Visible = false;
-            this.analysisSettingsPanel.Visible = false;
         }
 
         private void saveAnalysisSettingTemplateBtn_Click(object sender, EventArgs e)

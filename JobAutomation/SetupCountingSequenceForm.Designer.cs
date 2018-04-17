@@ -1,6 +1,6 @@
 ﻿namespace JobAutomation
 {
-    partial class Form1
+    partial class SetupCountingSequenceForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,6 @@
         {
             this.openLoopJobFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.exitSetupBtn = new System.Windows.Forms.Button();
-            this.maxSample = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
             this.removeCsBtn = new System.Windows.Forms.Button();
             this.addCsBtn = new System.Windows.Forms.Button();
             this.csListComboBox = new System.Windows.Forms.ComboBox();
@@ -41,23 +37,6 @@
             this.removeAnalysisBtn = new System.Windows.Forms.Button();
             this.addAnalysisBtn = new System.Windows.Forms.Button();
             this.analysisListBox = new System.Windows.Forms.ListBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.setupCountingSequenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.parameterSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.parameterSetupPanel = new System.Windows.Forms.GroupBox();
-            this.gammaVisionPathBtn = new System.Windows.Forms.Button();
-            this.updateSDFFilePathBtn = new System.Windows.Forms.Button();
-            this.saveSetupBtn = new System.Windows.Forms.Button();
-            this.verifyPassword = new System.Windows.Forms.TextBox();
-            this.password = new System.Windows.Forms.TextBox();
-            this.analysisListPrefix = new System.Windows.Forms.TextBox();
-            this.gammaVisionPath = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.updateSDFFilePath = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.analysisSettingsPanel = new System.Windows.Forms.GroupBox();
             this.sampleDefaultFilePathBtn = new System.Windows.Forms.Button();
             this.jobTemplatePathBtn = new System.Windows.Forms.Button();
@@ -109,10 +88,9 @@
             this.collectionStartDateCB = new System.Windows.Forms.CheckBox();
             this.libraryFilePathCB = new System.Windows.Forms.CheckBox();
             this.calibrationFilePathCB = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.parameterSetupPanel.SuspendLayout();
             this.analysisSettingsPanel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -123,82 +101,42 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.exitSetupBtn);
-            this.groupBox1.Controls.Add(this.maxSample);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.removeCsBtn);
             this.groupBox1.Controls.Add(this.addCsBtn);
             this.groupBox1.Controls.Add(this.csListComboBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 34);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1028, 58);
+            this.groupBox1.Size = new System.Drawing.Size(666, 58);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Counting Sequence";
             // 
-            // exitSetupBtn
-            // 
-            this.exitSetupBtn.Location = new System.Drawing.Point(807, 16);
-            this.exitSetupBtn.Name = "exitSetupBtn";
-            this.exitSetupBtn.Size = new System.Drawing.Size(97, 23);
-            this.exitSetupBtn.TabIndex = 8;
-            this.exitSetupBtn.Text = "Exit Setup";
-            this.exitSetupBtn.UseVisualStyleBackColor = true;
-            this.exitSetupBtn.Click += new System.EventHandler(this.exitSetupBtn_Click);
-            // 
-            // maxSample
-            // 
-            this.maxSample.Location = new System.Drawing.Point(393, 19);
-            this.maxSample.Name = "maxSample";
-            this.maxSample.Size = new System.Drawing.Size(91, 20);
-            this.maxSample.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(314, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Max Samples:";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(490, 17);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(149, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "Start Counting Sequence";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
             // removeCsBtn
             // 
-            this.removeCsBtn.Location = new System.Drawing.Point(726, 16);
+            this.removeCsBtn.Location = new System.Drawing.Point(573, 19);
             this.removeCsBtn.Name = "removeCsBtn";
             this.removeCsBtn.Size = new System.Drawing.Size(75, 23);
             this.removeCsBtn.TabIndex = 2;
             this.removeCsBtn.Text = "Remove";
             this.removeCsBtn.UseVisualStyleBackColor = true;
-            this.removeCsBtn.Visible = false;
             // 
             // addCsBtn
             // 
-            this.addCsBtn.Location = new System.Drawing.Point(645, 17);
+            this.addCsBtn.Location = new System.Drawing.Point(249, 19);
             this.addCsBtn.Name = "addCsBtn";
             this.addCsBtn.Size = new System.Drawing.Size(75, 23);
             this.addCsBtn.TabIndex = 1;
             this.addCsBtn.Text = "Add";
             this.addCsBtn.UseVisualStyleBackColor = true;
-            this.addCsBtn.Visible = false;
             this.addCsBtn.Click += new System.EventHandler(this.addCsBtn_Click);
             // 
             // csListComboBox
             // 
             this.csListComboBox.FormattingEnabled = true;
-            this.csListComboBox.Location = new System.Drawing.Point(6, 19);
+            this.csListComboBox.Location = new System.Drawing.Point(330, 21);
             this.csListComboBox.Name = "csListComboBox";
-            this.csListComboBox.Size = new System.Drawing.Size(302, 21);
+            this.csListComboBox.Size = new System.Drawing.Size(237, 21);
             this.csListComboBox.TabIndex = 0;
             this.csListComboBox.SelectedIndexChanged += new System.EventHandler(this.csListComboBox_SelectedIndexChanged);
             // 
@@ -207,9 +145,9 @@
             this.groupBox2.Controls.Add(this.removeAnalysisBtn);
             this.groupBox2.Controls.Add(this.addAnalysisBtn);
             this.groupBox2.Controls.Add(this.analysisListBox);
-            this.groupBox2.Location = new System.Drawing.Point(12, 98);
+            this.groupBox2.Location = new System.Drawing.Point(12, 76);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(243, 545);
+            this.groupBox2.Size = new System.Drawing.Size(243, 530);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sequence Analysis List";
@@ -217,7 +155,7 @@
             // removeAnalysisBtn
             // 
             this.removeAnalysisBtn.Enabled = false;
-            this.removeAnalysisBtn.Location = new System.Drawing.Point(123, 516);
+            this.removeAnalysisBtn.Location = new System.Drawing.Point(124, 490);
             this.removeAnalysisBtn.Name = "removeAnalysisBtn";
             this.removeAnalysisBtn.Size = new System.Drawing.Size(113, 23);
             this.removeAnalysisBtn.TabIndex = 2;
@@ -227,7 +165,7 @@
             // addAnalysisBtn
             // 
             this.addAnalysisBtn.Enabled = false;
-            this.addAnalysisBtn.Location = new System.Drawing.Point(6, 516);
+            this.addAnalysisBtn.Location = new System.Drawing.Point(6, 490);
             this.addAnalysisBtn.Name = "addAnalysisBtn";
             this.addAnalysisBtn.Size = new System.Drawing.Size(111, 23);
             this.addAnalysisBtn.TabIndex = 1;
@@ -240,189 +178,16 @@
             this.analysisListBox.FormattingEnabled = true;
             this.analysisListBox.Location = new System.Drawing.Point(6, 19);
             this.analysisListBox.Name = "analysisListBox";
-            this.analysisListBox.Size = new System.Drawing.Size(231, 485);
+            this.analysisListBox.Size = new System.Drawing.Size(231, 459);
             this.analysisListBox.TabIndex = 0;
             this.analysisListBox.SelectedIndexChanged += new System.EventHandler(this.analysisListBox_SelectedIndexChanged);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setupCountingSequenceToolStripMenuItem,
-            this.parameterSetupToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1048, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // setupCountingSequenceToolStripMenuItem
-            // 
-            this.setupCountingSequenceToolStripMenuItem.Name = "setupCountingSequenceToolStripMenuItem";
-            this.setupCountingSequenceToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
-            this.setupCountingSequenceToolStripMenuItem.Text = "Setup Counting Sequence ";
-            this.setupCountingSequenceToolStripMenuItem.Click += new System.EventHandler(this.setupCountingSequenceToolStripMenuItem_Click);
-            // 
-            // parameterSetupToolStripMenuItem
-            // 
-            this.parameterSetupToolStripMenuItem.Name = "parameterSetupToolStripMenuItem";
-            this.parameterSetupToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
-            this.parameterSetupToolStripMenuItem.Text = "Parameter Setup";
-            this.parameterSetupToolStripMenuItem.Click += new System.EventHandler(this.parameterSetupToolStripMenuItem_Click);
-            // 
-            // parameterSetupPanel
-            // 
-            this.parameterSetupPanel.Controls.Add(this.gammaVisionPathBtn);
-            this.parameterSetupPanel.Controls.Add(this.updateSDFFilePathBtn);
-            this.parameterSetupPanel.Controls.Add(this.saveSetupBtn);
-            this.parameterSetupPanel.Controls.Add(this.verifyPassword);
-            this.parameterSetupPanel.Controls.Add(this.password);
-            this.parameterSetupPanel.Controls.Add(this.analysisListPrefix);
-            this.parameterSetupPanel.Controls.Add(this.gammaVisionPath);
-            this.parameterSetupPanel.Controls.Add(this.label5);
-            this.parameterSetupPanel.Controls.Add(this.label4);
-            this.parameterSetupPanel.Controls.Add(this.label3);
-            this.parameterSetupPanel.Controls.Add(this.label2);
-            this.parameterSetupPanel.Controls.Add(this.updateSDFFilePath);
-            this.parameterSetupPanel.Controls.Add(this.label1);
-            this.parameterSetupPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parameterSetupPanel.Location = new System.Drawing.Point(262, 99);
-            this.parameterSetupPanel.Name = "parameterSetupPanel";
-            this.parameterSetupPanel.Size = new System.Drawing.Size(731, 209);
-            this.parameterSetupPanel.TabIndex = 7;
-            this.parameterSetupPanel.TabStop = false;
-            this.parameterSetupPanel.Text = "Parameter Setup";
-            this.parameterSetupPanel.Visible = false;
-            // 
-            // gammaVisionPathBtn
-            // 
-            this.gammaVisionPathBtn.Location = new System.Drawing.Point(623, 48);
-            this.gammaVisionPathBtn.Name = "gammaVisionPathBtn";
-            this.gammaVisionPathBtn.Size = new System.Drawing.Size(31, 23);
-            this.gammaVisionPathBtn.TabIndex = 12;
-            this.gammaVisionPathBtn.Text = "...";
-            this.gammaVisionPathBtn.UseVisualStyleBackColor = true;
-            this.gammaVisionPathBtn.Click += new System.EventHandler(this.gammaVisionPathBtn_Click);
-            // 
-            // updateSDFFilePathBtn
-            // 
-            this.updateSDFFilePathBtn.Location = new System.Drawing.Point(623, 22);
-            this.updateSDFFilePathBtn.Name = "updateSDFFilePathBtn";
-            this.updateSDFFilePathBtn.Size = new System.Drawing.Size(31, 23);
-            this.updateSDFFilePathBtn.TabIndex = 11;
-            this.updateSDFFilePathBtn.Text = "...";
-            this.updateSDFFilePathBtn.UseVisualStyleBackColor = true;
-            this.updateSDFFilePathBtn.Click += new System.EventHandler(this.updateSDFFilePathBtn_Click);
-            // 
-            // saveSetupBtn
-            // 
-            this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveSetupBtn.Location = new System.Drawing.Point(9, 169);
-            this.saveSetupBtn.Name = "saveSetupBtn";
-            this.saveSetupBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveSetupBtn.TabIndex = 10;
-            this.saveSetupBtn.Text = "Save";
-            this.saveSetupBtn.UseVisualStyleBackColor = true;
-            this.saveSetupBtn.Click += new System.EventHandler(this.saveSetupBtn_Click);
-            // 
-            // verifyPassword
-            // 
-            this.verifyPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.verifyPassword.Location = new System.Drawing.Point(122, 129);
-            this.verifyPassword.Name = "verifyPassword";
-            this.verifyPassword.PasswordChar = '*';
-            this.verifyPassword.Size = new System.Drawing.Size(145, 20);
-            this.verifyPassword.TabIndex = 9;
-            // 
-            // password
-            // 
-            this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(122, 103);
-            this.password.Name = "password";
-            this.password.PasswordChar = '*';
-            this.password.Size = new System.Drawing.Size(145, 20);
-            this.password.TabIndex = 8;
-            // 
-            // analysisListPrefix
-            // 
-            this.analysisListPrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analysisListPrefix.Location = new System.Drawing.Point(122, 77);
-            this.analysisListPrefix.Name = "analysisListPrefix";
-            this.analysisListPrefix.Size = new System.Drawing.Size(145, 20);
-            this.analysisListPrefix.TabIndex = 7;
-            // 
-            // gammaVisionPath
-            // 
-            this.gammaVisionPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gammaVisionPath.Location = new System.Drawing.Point(122, 51);
-            this.gammaVisionPath.Name = "gammaVisionPath";
-            this.gammaVisionPath.Size = new System.Drawing.Size(495, 20);
-            this.gammaVisionPath.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 132);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Verify Password:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 106);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Password:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Analysis List Prefix:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 54);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "GammaVision Path:";
-            // 
-            // updateSDFFilePath
-            // 
-            this.updateSDFFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateSDFFilePath.Location = new System.Drawing.Point(122, 25);
-            this.updateSDFFilePath.Name = "updateSDFFilePath";
-            this.updateSDFFilePath.Size = new System.Drawing.Size(495, 20);
-            this.updateSDFFilePath.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "UpdateSDF File Path:";
-            // 
             // analysisSettingsPanel
             // 
+            this.analysisSettingsPanel.Controls.Add(this.saveSettingBtn);
             this.analysisSettingsPanel.Controls.Add(this.sampleDefaultFilePathBtn);
             this.analysisSettingsPanel.Controls.Add(this.jobTemplatePathBtn);
             this.analysisSettingsPanel.Controls.Add(this.spectrumFilePathBtn);
-            this.analysisSettingsPanel.Controls.Add(this.saveAnalysisSettingTemplateBtn);
-            this.analysisSettingsPanel.Controls.Add(this.loadAnalysisSettingTemplateBtn);
             this.analysisSettingsPanel.Controls.Add(this.sampleDefaultFilePathTxt);
             this.analysisSettingsPanel.Controls.Add(this.jobTemplatePathTxt);
             this.analysisSettingsPanel.Controls.Add(this.spectrumFilePathTxt);
@@ -433,9 +198,9 @@
             this.analysisSettingsPanel.Controls.Add(this.sampleDescriptionCB);
             this.analysisSettingsPanel.Controls.Add(this.groupBox3);
             this.analysisSettingsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analysisSettingsPanel.Location = new System.Drawing.Point(262, 99);
+            this.analysisSettingsPanel.Location = new System.Drawing.Point(262, 76);
             this.analysisSettingsPanel.Name = "analysisSettingsPanel";
-            this.analysisSettingsPanel.Size = new System.Drawing.Size(778, 544);
+            this.analysisSettingsPanel.Size = new System.Drawing.Size(674, 530);
             this.analysisSettingsPanel.TabIndex = 13;
             this.analysisSettingsPanel.TabStop = false;
             this.analysisSettingsPanel.Text = "Analysis Settings";
@@ -443,7 +208,7 @@
             // sampleDefaultFilePathBtn
             // 
             this.sampleDefaultFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDefaultFilePathBtn.Location = new System.Drawing.Point(706, 101);
+            this.sampleDefaultFilePathBtn.Location = new System.Drawing.Point(607, 100);
             this.sampleDefaultFilePathBtn.Name = "sampleDefaultFilePathBtn";
             this.sampleDefaultFilePathBtn.Size = new System.Drawing.Size(40, 22);
             this.sampleDefaultFilePathBtn.TabIndex = 17;
@@ -454,7 +219,7 @@
             // jobTemplatePathBtn
             // 
             this.jobTemplatePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jobTemplatePathBtn.Location = new System.Drawing.Point(706, 73);
+            this.jobTemplatePathBtn.Location = new System.Drawing.Point(607, 72);
             this.jobTemplatePathBtn.Name = "jobTemplatePathBtn";
             this.jobTemplatePathBtn.Size = new System.Drawing.Size(40, 22);
             this.jobTemplatePathBtn.TabIndex = 16;
@@ -465,7 +230,7 @@
             // spectrumFilePathBtn
             // 
             this.spectrumFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.spectrumFilePathBtn.Location = new System.Drawing.Point(706, 46);
+            this.spectrumFilePathBtn.Location = new System.Drawing.Point(607, 44);
             this.spectrumFilePathBtn.Name = "spectrumFilePathBtn";
             this.spectrumFilePathBtn.Size = new System.Drawing.Size(40, 22);
             this.spectrumFilePathBtn.TabIndex = 15;
@@ -476,7 +241,7 @@
             // saveAnalysisSettingTemplateBtn
             // 
             this.saveAnalysisSettingTemplateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveAnalysisSettingTemplateBtn.Location = new System.Drawing.Point(237, 502);
+            this.saveAnalysisSettingTemplateBtn.Location = new System.Drawing.Point(684, 47);
             this.saveAnalysisSettingTemplateBtn.Name = "saveAnalysisSettingTemplateBtn";
             this.saveAnalysisSettingTemplateBtn.Size = new System.Drawing.Size(225, 23);
             this.saveAnalysisSettingTemplateBtn.TabIndex = 14;
@@ -487,7 +252,7 @@
             // loadAnalysisSettingTemplateBtn
             // 
             this.loadAnalysisSettingTemplateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadAnalysisSettingTemplateBtn.Location = new System.Drawing.Point(6, 502);
+            this.loadAnalysisSettingTemplateBtn.Location = new System.Drawing.Point(684, 18);
             this.loadAnalysisSettingTemplateBtn.Name = "loadAnalysisSettingTemplateBtn";
             this.loadAnalysisSettingTemplateBtn.Size = new System.Drawing.Size(225, 23);
             this.loadAnalysisSettingTemplateBtn.TabIndex = 13;
@@ -500,7 +265,7 @@
             this.sampleDefaultFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleDefaultFilePathTxt.Location = new System.Drawing.Point(160, 102);
             this.sampleDefaultFilePathTxt.Name = "sampleDefaultFilePathTxt";
-            this.sampleDefaultFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.sampleDefaultFilePathTxt.Size = new System.Drawing.Size(441, 20);
             this.sampleDefaultFilePathTxt.TabIndex = 12;
             // 
             // jobTemplatePathTxt
@@ -508,7 +273,7 @@
             this.jobTemplatePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jobTemplatePathTxt.Location = new System.Drawing.Point(160, 74);
             this.jobTemplatePathTxt.Name = "jobTemplatePathTxt";
-            this.jobTemplatePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.jobTemplatePathTxt.Size = new System.Drawing.Size(441, 20);
             this.jobTemplatePathTxt.TabIndex = 11;
             // 
             // spectrumFilePathTxt
@@ -516,7 +281,7 @@
             this.spectrumFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spectrumFilePathTxt.Location = new System.Drawing.Point(160, 46);
             this.spectrumFilePathTxt.Name = "spectrumFilePathTxt";
-            this.spectrumFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.spectrumFilePathTxt.Size = new System.Drawing.Size(441, 20);
             this.spectrumFilePathTxt.TabIndex = 10;
             // 
             // sampleDescriptionTxt
@@ -524,7 +289,7 @@
             this.sampleDescriptionTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleDescriptionTxt.Location = new System.Drawing.Point(160, 18);
             this.sampleDescriptionTxt.Name = "sampleDescriptionTxt";
-            this.sampleDescriptionTxt.Size = new System.Drawing.Size(540, 20);
+            this.sampleDescriptionTxt.Size = new System.Drawing.Size(441, 20);
             this.sampleDescriptionTxt.TabIndex = 9;
             // 
             // sampleDefaultFilePathCB
@@ -573,7 +338,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.saveSettingBtn);
             this.groupBox3.Controls.Add(this.libraryFilePathBtn);
             this.groupBox3.Controls.Add(this.calibrationFilePathBtn);
             this.groupBox3.Controls.Add(this.attenuationSizeTxt);
@@ -612,14 +376,14 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(6, 132);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(763, 352);
+            this.groupBox3.Size = new System.Drawing.Size(654, 352);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sample Default File Modifications";
             // 
             // saveSettingBtn
             // 
-            this.saveSettingBtn.Location = new System.Drawing.Point(617, 311);
+            this.saveSettingBtn.Location = new System.Drawing.Point(520, 490);
             this.saveSettingBtn.Name = "saveSettingBtn";
             this.saveSettingBtn.Size = new System.Drawing.Size(140, 35);
             this.saveSettingBtn.TabIndex = 57;
@@ -630,7 +394,7 @@
             // libraryFilePathBtn
             // 
             this.libraryFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.libraryFilePathBtn.Location = new System.Drawing.Point(681, 45);
+            this.libraryFilePathBtn.Location = new System.Drawing.Point(601, 47);
             this.libraryFilePathBtn.Name = "libraryFilePathBtn";
             this.libraryFilePathBtn.Size = new System.Drawing.Size(40, 22);
             this.libraryFilePathBtn.TabIndex = 56;
@@ -641,7 +405,7 @@
             // calibrationFilePathBtn
             // 
             this.calibrationFilePathBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrationFilePathBtn.Location = new System.Drawing.Point(681, 21);
+            this.calibrationFilePathBtn.Location = new System.Drawing.Point(601, 21);
             this.calibrationFilePathBtn.Name = "calibrationFilePathBtn";
             this.calibrationFilePathBtn.Size = new System.Drawing.Size(40, 22);
             this.calibrationFilePathBtn.TabIndex = 55;
@@ -769,7 +533,7 @@
             this.libraryFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.libraryFilePathTxt.Location = new System.Drawing.Point(135, 47);
             this.libraryFilePathTxt.Name = "libraryFilePathTxt";
-            this.libraryFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.libraryFilePathTxt.Size = new System.Drawing.Size(460, 20);
             this.libraryFilePathTxt.TabIndex = 40;
             // 
             // calibrationFilePathTxt
@@ -777,7 +541,7 @@
             this.calibrationFilePathTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calibrationFilePathTxt.Location = new System.Drawing.Point(135, 21);
             this.calibrationFilePathTxt.Name = "calibrationFilePathTxt";
-            this.calibrationFilePathTxt.Size = new System.Drawing.Size(540, 20);
+            this.calibrationFilePathTxt.Size = new System.Drawing.Size(460, 20);
             this.calibrationFilePathTxt.TabIndex = 39;
             // 
             // attenuationSizeCB
@@ -967,33 +731,34 @@
             this.calibrationFilePathCB.Text = "Calibration File Path:";
             this.calibrationFilePathCB.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(237, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // SetupCountingSequenceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1048, 655);
+            this.ClientSize = new System.Drawing.Size(944, 618);
             this.Controls.Add(this.analysisSettingsPanel);
-            this.Controls.Add(this.parameterSetupPanel);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Controls.Add(this.saveAnalysisSettingTemplateBtn);
+            this.Controls.Add(this.loadAnalysisSettingTemplateBtn);
+            this.Name = "SetupCountingSequenceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Job Automation";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.parameterSetupPanel.ResumeLayout(false);
-            this.parameterSetupPanel.PerformLayout();
             this.analysisSettingsPanel.ResumeLayout(false);
             this.analysisSettingsPanel.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1008,28 +773,7 @@
         private System.Windows.Forms.Button removeAnalysisBtn;
         private System.Windows.Forms.Button addAnalysisBtn;
         private System.Windows.Forms.ListBox analysisListBox;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem parameterSetupToolStripMenuItem;
-        private System.Windows.Forms.GroupBox parameterSetupPanel;
-        private System.Windows.Forms.Button gammaVisionPathBtn;
-        private System.Windows.Forms.Button updateSDFFilePathBtn;
-        private System.Windows.Forms.Button saveSetupBtn;
-        private System.Windows.Forms.TextBox verifyPassword;
-        private System.Windows.Forms.TextBox password;
-        private System.Windows.Forms.TextBox analysisListPrefix;
-        private System.Windows.Forms.TextBox gammaVisionPath;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox updateSDFFilePath;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ToolStripMenuItem setupCountingSequenceToolStripMenuItem;
         private System.Windows.Forms.GroupBox analysisSettingsPanel;
-        private System.Windows.Forms.TextBox maxSample;
-        private System.Windows.Forms.Button exitSetupBtn;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox sampleDescriptionCB;
         private System.Windows.Forms.TextBox sampleDefaultFilePathTxt;
@@ -1080,6 +824,7 @@
         private System.Windows.Forms.Button libraryFilePathBtn;
         private System.Windows.Forms.Button calibrationFilePathBtn;
         private System.Windows.Forms.Button saveSettingBtn;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

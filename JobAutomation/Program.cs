@@ -18,8 +18,10 @@ namespace JobAutomation
             Application.SetCompatibleTextRenderingDefault(false);
 
             GlobalFunc.loginStatus = 0;
-            GlobalFunc.mainForm = new Form1();
+
             GlobalFunc.passwordForm = new PasswordForm();
+            GlobalFunc.mainForm = new MainForm();
+
            
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
             {
@@ -30,7 +32,6 @@ namespace JobAutomation
                 GlobalFunc.LoadSetup();
             }
             Application.Run(GlobalFunc.mainForm);
-            
         }
     }
 }
