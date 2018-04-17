@@ -16,7 +16,8 @@ namespace JobAutomation
         OpenFileDialog gammaOFD = new OpenFileDialog();
         Analysis toggleAnalysis = new Analysis();
         JavaScriptSerializer js = new JavaScriptSerializer();
-        
+        SaveFileDialog saveTemplateDialog = new SaveFileDialog();
+
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +35,11 @@ namespace JobAutomation
         private void DefaultFormSetup()
         {
             csListComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
+            exitSetupBtn.Visible = false;
+            saveTemplateDialog.Filter = "GV Automation Files (*.gva)|*.gva";
+            saveTemplateDialog.DefaultExt = "gva";
+            saveTemplateDialog.AddExtension = true;
+            saveTemplateDialog.FileOk += saveTemplateDialog_FileOk;
             //sampleDefaultFilePathTxt.TextChanged += TextBox_TextChanged;
             //sampleDefaultFilePathCB.CheckedChanged += CheckBox_CheckedChanged;
 
@@ -176,6 +181,7 @@ namespace JobAutomation
             this.analysisSettingsPanel.Visible = true;
             csListComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             CtrlCSElement(true);
+           
             analysisSettingsPanel.Enabled = false;
         }
 
@@ -185,7 +191,7 @@ namespace JobAutomation
             addCsBtn.Visible = display;
             exitSetupBtn.Visible = display;
             removeCsBtn.Visible = display;
-
+            exitSetupBtn.Visible = display;
         }
 
         private bool CheckLoginStatus()
@@ -234,6 +240,7 @@ namespace JobAutomation
                 setup.password = GlobalFunc.Encrypt(password.Text);
 
                 string json = js.Serialize(setup);
+              
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
                 ShowMessage("Save setup parameter successful");
@@ -274,6 +281,7 @@ namespace JobAutomation
             {
                 GlobalFunc.countingSequenceIndex.operationName.Add(name);
                 string json = js.Serialize(GlobalFunc.countingSequenceIndex);
+               
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
                 LoadCountSequenceIndex();
             }
@@ -345,7 +353,20 @@ namespace JobAutomation
                 LoadAnalysisSettingItem(settingName);
             }
             else //normal opertation
-            { }
+            {
+                
+            }
+        }
+
+        public void LoadNomalOpertationItem(string name)
+        {
+            for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            {
+                if (name == toggleAnalysis.analysisList[i].name)
+                {
+
+                }
+            }
         }
 
         public void LoadAnalysisSettingItem(string name)
@@ -354,8 +375,8 @@ namespace JobAutomation
             {
                 if (name == toggleAnalysis.analysisList[i].name)
                 {
-                    sampleDefaultFilePathTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
-                    sampleDefaultFilePathCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
+                    sampleDescriptionTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
+                    sampleDescriptionCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
 
                     spectrumFilePathTxt.Text = toggleAnalysis.analysisList[i].spectrumFilePath;
                     spectrumFilePatbCB.Checked = toggleAnalysis.analysisList[i].allowSpectrumFilePath;
@@ -563,5 +584,143 @@ namespace JobAutomation
         {
             AutoSaveSetting();
         }
+
+        private void exitSetupBtn_Click(object sender, EventArgs e)
+        {
+            CtrlCSElement(false);
+            groupBox1.Visible = true;
+            this.parameterSetupPanel.Visible = false;
+            this.analysisSettingsPanel.Visible = false;
+        }
+
+        private void saveAnalysisSettingTemplateBtn_Click(object sender, EventArgs e)
+        {
+            saveTemplateDialog.ShowDialog();
+        }
+
+        private void saveTemplateDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            string name = saveTemplateDialog.FileName;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SampleDescription: " + sampleDescriptionTxt.Text);
+            sb.AppendLine("SJobTemplatePath: " + jobTemplatePathTxt.Text);
+            sb.AppendLine("SDFPath: " + sampleDefaultFilePathTxt.Text);
+            sb.AppendLine("CollectionStart: " + collectionStartDatePicker.Text);
+            sb.AppendLine("CollectionEnd: " + collectionStopDatePicker.Text);
+            sb.AppendLine("DecayDateTime:" + decayCorrectionDatePicker.Text);
+            sb.AppendLine("Weight: " + sampleQuantityTxt.Text);
+            sb.AppendLine("QuantityUnits: " + unitsTxt.Text);
+            sb.AppendLine("ActivityUnits: " + activityUnitsTxt.Text);
+            sb.AppendLine("LiveTime: " + liveTimePresetTxt.Text);
+            sb.AppendLine("RealTime: " + realTimePresetTxt.Text);
+            sb.AppendLine("Multiplier: " + activityMultiperTxt.Text);
+            sb.AppendLine("Divisor:  " + activityDivisorTxt.Text);
+            sb.AppendLine("SpectrumFilePath: " + spectrumFilePathTxt.Text);
+            sb.AppendLine("CalFileName: " + calibrationFilePathTxt.Text);
+            sb.AppendLine("LibFileName: " + libraryFilePathTxt.Text);
+            sb.AppendLine("ABSConfigID: -1");
+            sb.AppendLine("ABSTypeID: -1");
+            sb.AppendLine("ABSMaterialID: -1");
+            sb.AppendLine("ABSLength: " + attenuationSizeTxt.Text);
+            sb.AppendLine("RandomError: " + randomErrorTxt.Text);
+            sb.AppendLine("SystematicError: " + systematicErrorTxt.Text);
+            sb.AppendLine("RandomSummingFactor: " + randomSummingFactorTxt.Text);
+            File.WriteAllText(name, sb.ToString());
+        }
+
+        private void loadAnalysisSettingTemplateBtn_Click(object sender, EventArgs e)
+        {
+            if (sdfOFD.ShowDialog() == DialogResult.OK)
+            {
+                 StreamReader file = new  StreamReader(sdfOFD.FileName);
+                string line = "";
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (line.Contains("SampleDescription: "))
+                    { 
+                        sampleDescriptionTxt.Text = line.Replace("SampleDescription: ", "");
+                    }
+                    else if (line.Contains("SJobTemplatePath: "))
+                    { 
+                        jobTemplatePathTxt.Text = line.Replace("SJobTemplatePath: ", "");
+                    }
+                    else if (line.Contains("SDFPath: "))
+                    {
+                        sampleDefaultFilePathTxt.Text = line.Replace("SDFPath: ", "");
+                    }
+                    else if (line.Contains("CollectionStart: "))
+                    {
+                        collectionStartDatePicker.Text = line.Replace("CollectionStart: ", "");
+                    }
+                    else if (line.Contains("CollectionEnd: "))
+                    {
+                        collectionStopDatePicker.Text = line.Replace("CollectionEnd: ", "");
+                    }
+                    else if (line.Contains("DecayDateTime: "))
+                    {
+                        decayCorrectionDatePicker.Text = line.Replace("DecayDateTime: ", "");
+                    }
+                    else if (line.Contains("Weight: "))
+                    {
+                        sampleQuantityTxt.Text = line.Replace("Weight: ", "");
+                    }
+                    else if (line.Contains("QuantityUnits: "))
+                    {
+                        unitsTxt.Text = line.Replace("QuantityUnits: ", "");
+                    }
+                    else if (line.Contains("ActivityUnits: "))
+                    {
+                        activityUnitsTxt.Text = line.Replace("ActivityUnits: ", "");
+                    }
+                    else if (line.Contains("LiveTime: "))
+                    {
+                        liveTimePresetTxt.Text = line.Replace("LiveTime: ", "");
+                    }
+                    else if (line.Contains("RealTime: "))
+                    {
+                        realTimePresetTxt.Text = line.Replace("RealTime: ", "");
+                    }
+                    else if (line.Contains("Multiplier: "))
+                    {
+                        activityMultiperTxt.Text = line.Replace("Multiplier: ", "");
+                    }
+                    else if (line.Contains("Divisor: "))
+                    {
+                        activityDivisorTxt.Text = line.Replace("Divisor: ", "");
+                    }
+                    else if (line.Contains("SpectrumFilePath: "))
+                    {
+                        spectrumFilePathTxt.Text = line.Replace("SpectrumFilePath: ", "");
+                    }
+                    else if (line.Contains("CalFileName: "))
+                    {
+                        calibrationFilePathTxt.Text = line.Replace("CalFileName: ", "");
+                    }
+                    else if (line.Contains("LibFileName: "))
+                    {
+                        libraryFilePathTxt.Text = line.Replace("LibFileName: ", "");
+                    }
+                    else if (line.Contains("ABSLength: "))
+                    {
+                        attenuationSizeTxt.Text = line.Replace("ABSLength: ", "");
+                    }
+                    else if (line.Contains("RandomError: "))
+                    {
+                        randomErrorTxt.Text = line.Replace("RandomError: ", "");
+                    }
+                    else if (line.Contains("SystematicError: "))
+                    {
+                        systematicErrorTxt.Text = line.Replace("SystematicError: ", "");
+                    }
+                    else if (line.Contains("RandomSummingFactor: "))
+                    {
+                        randomSummingFactorTxt.Text = line.Replace("RandomSummingFactor: ", "");
+                    }
+                }
+                file.Close();  
+              
+            }
+        }
+    
     }
 }
