@@ -88,7 +88,7 @@
             this.collectionStartDateCB = new System.Windows.Forms.CheckBox();
             this.libraryFilePathCB = new System.Windows.Forms.CheckBox();
             this.calibrationFilePathCB = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.newCSNameTxt = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.analysisSettingsPanel.SuspendLayout();
@@ -101,10 +101,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.newCSNameTxt);
             this.groupBox1.Controls.Add(this.removeCsBtn);
             this.groupBox1.Controls.Add(this.addCsBtn);
             this.groupBox1.Controls.Add(this.csListComboBox);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(666, 58);
@@ -114,15 +115,19 @@
             // 
             // removeCsBtn
             // 
+            this.removeCsBtn.Enabled = false;
+            this.removeCsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeCsBtn.Location = new System.Drawing.Point(573, 19);
             this.removeCsBtn.Name = "removeCsBtn";
             this.removeCsBtn.Size = new System.Drawing.Size(75, 23);
             this.removeCsBtn.TabIndex = 2;
             this.removeCsBtn.Text = "Remove";
             this.removeCsBtn.UseVisualStyleBackColor = true;
+            this.removeCsBtn.Click += new System.EventHandler(this.removeCsBtn_Click);
             // 
             // addCsBtn
             // 
+            this.addCsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCsBtn.Location = new System.Drawing.Point(249, 19);
             this.addCsBtn.Name = "addCsBtn";
             this.addCsBtn.Size = new System.Drawing.Size(75, 23);
@@ -133,6 +138,7 @@
             // 
             // csListComboBox
             // 
+            this.csListComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.csListComboBox.FormattingEnabled = true;
             this.csListComboBox.Location = new System.Drawing.Point(330, 21);
             this.csListComboBox.Name = "csListComboBox";
@@ -145,6 +151,7 @@
             this.groupBox2.Controls.Add(this.removeAnalysisBtn);
             this.groupBox2.Controls.Add(this.addAnalysisBtn);
             this.groupBox2.Controls.Add(this.analysisListBox);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 76);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(243, 530);
@@ -155,16 +162,19 @@
             // removeAnalysisBtn
             // 
             this.removeAnalysisBtn.Enabled = false;
+            this.removeAnalysisBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeAnalysisBtn.Location = new System.Drawing.Point(124, 490);
             this.removeAnalysisBtn.Name = "removeAnalysisBtn";
             this.removeAnalysisBtn.Size = new System.Drawing.Size(113, 23);
             this.removeAnalysisBtn.TabIndex = 2;
             this.removeAnalysisBtn.Text = "Remove";
             this.removeAnalysisBtn.UseVisualStyleBackColor = true;
+            this.removeAnalysisBtn.Click += new System.EventHandler(this.removeAnalysisBtn_Click);
             // 
             // addAnalysisBtn
             // 
             this.addAnalysisBtn.Enabled = false;
+            this.addAnalysisBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addAnalysisBtn.Location = new System.Drawing.Point(6, 490);
             this.addAnalysisBtn.Name = "addAnalysisBtn";
             this.addAnalysisBtn.Size = new System.Drawing.Size(111, 23);
@@ -175,6 +185,7 @@
             // 
             // analysisListBox
             // 
+            this.analysisListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisListBox.FormattingEnabled = true;
             this.analysisListBox.Location = new System.Drawing.Point(6, 19);
             this.analysisListBox.Name = "analysisListBox";
@@ -603,7 +614,7 @@
             // 
             this.activityDivisorCB.AutoSize = true;
             this.activityDivisorCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.activityDivisorCB.Location = new System.Drawing.Point(3, 303);
+            this.activityDivisorCB.Location = new System.Drawing.Point(6, 303);
             this.activityDivisorCB.Name = "activityDivisorCB";
             this.activityDivisorCB.Size = new System.Drawing.Size(98, 17);
             this.activityDivisorCB.TabIndex = 32;
@@ -731,12 +742,13 @@
             this.calibrationFilePathCB.Text = "Calibration File Path:";
             this.calibrationFilePathCB.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // newCSNameTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(237, 20);
-            this.textBox1.TabIndex = 3;
+            this.newCSNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newCSNameTxt.Location = new System.Drawing.Point(6, 21);
+            this.newCSNameTxt.Name = "newCSNameTxt";
+            this.newCSNameTxt.Size = new System.Drawing.Size(237, 20);
+            this.newCSNameTxt.TabIndex = 3;
             // 
             // SetupCountingSequenceForm
             // 
@@ -824,7 +836,7 @@
         private System.Windows.Forms.Button libraryFilePathBtn;
         private System.Windows.Forms.Button calibrationFilePathBtn;
         private System.Windows.Forms.Button saveSettingBtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox newCSNameTxt;
     }
 }
 

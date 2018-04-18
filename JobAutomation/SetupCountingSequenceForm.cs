@@ -17,7 +17,8 @@ namespace JobAutomation
         Analysis toggleAnalysis = new Analysis();
         JavaScriptSerializer js = new JavaScriptSerializer();
         SaveFileDialog saveTemplateDialog = new SaveFileDialog();
-
+        string currentOperationName = "";
+        string currentSequenceName = "";
         public SetupCountingSequenceForm()
         {
             InitializeComponent();
@@ -49,7 +50,6 @@ namespace JobAutomation
             attenuationSizeTxt.KeyPress += CheckISNumber_KeyPress;
         }
 
-
         public void ShowMessage(string msg)
         { 
             MessageBox.Show(msg);
@@ -76,11 +76,6 @@ namespace JobAutomation
             }
         }
 
-
-
-
-
-
         public void LoadCountSequenceIndex()
         {
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"))
@@ -101,27 +96,40 @@ namespace JobAutomation
 
         private void addCsBtn_Click(object sender, EventArgs e)
         {
-            string name = csListComboBox.Text;
-            bool allow = true;
-            for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
+            string name = newCSNameTxt.Text;
+            if (name != "")
             {
-                if (name == GlobalFunc.countingSequenceIndex.operationName[i])
+                bool allow = true;
+                for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
                 {
-                    allow = false;
-                    break;
+                    if (name == GlobalFunc.countingSequenceIndex.operationName[i])
+                    {
+                        allow = false;
+                        break;
+                    }
                 }
-            }
-            if (allow)
-            {
-                GlobalFunc.countingSequenceIndex.operationName.Add(name);
-                string json = js.Serialize(GlobalFunc.countingSequenceIndex);
-               
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
-                LoadCountSequenceIndex();
+                if (allow)
+                {
+                    GlobalFunc.countingSequenceIndex.operationName.Add(name);
+                    string json = js.Serialize(GlobalFunc.countingSequenceIndex);
+
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
+                    LoadCountSequenceIndex();
+                    newCSNameTxt.Text = "";
+
+                    csListComboBox.SelectedIndex = csListComboBox.FindString(name);
+                    ShowMessage("Add operation successful");
+                    GlobalFunc.startCountingSequenceForm.RefreshElement();
+                }
+                else
+                {
+                    ShowMessage("The opertaion name existed");
+
+                }
             }
             else
             {
-                ShowMessage("The opertaion name existed");
+                ShowMessage("Operation Name cannot empty");
             }
         }
 
@@ -129,17 +137,21 @@ namespace JobAutomation
         {
             toggleAnalysis = new Analysis();
             string operationName = csListComboBox.Text;
+            currentOperationName = operationName;
             removeAnalysisBtn.Enabled = true;
             addAnalysisBtn.Enabled = true;
+            removeCsBtn.Enabled = true;
+            analysisSettingsPanel.Enabled = false;
             LoadAnalysisList(operationName);
 
         }
 
         public void LoadAnalysisList(string operationName)
         {
+            analysisListBox.Items.Clear();
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"))
             {
-                analysisListBox.Items.Clear();
+               
                 toggleAnalysis = (Analysis)js.Deserialize<Analysis>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"));
                 if (toggleAnalysis.CreateDate == null)
                 {
@@ -148,6 +160,10 @@ namespace JobAutomation
                 for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
                 {
                     analysisListBox.Items.Add(toggleAnalysis.analysisList[i].name);
+                }
+                if (!string.IsNullOrEmpty(currentSequenceName))
+                {
+                    analysisListBox.SelectedIndex = analysisListBox.FindString(currentSequenceName);
                 }
             }
         }
@@ -164,23 +180,33 @@ namespace JobAutomation
                 toggleAnalysis.analysisList = new List<AnalysisSetting>();
             }
             maxIndex += 1;
-            AnalysisSetting analysisSetting = new AnalysisSetting();
-            analysisSetting.index = maxIndex;
-           
-            analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
-            toggleAnalysis.analysisList.Add(analysisSetting);
 
-            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence"))
+            if (toggleAnalysis.analysisList.Count + 1 <= 20)
             {
-                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence");
-            }
+                AnalysisSetting analysisSetting = new AnalysisSetting();
+                analysisSetting.index = maxIndex;
 
-            SaveAnalysisToFile();
+                analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
+                toggleAnalysis.analysisList.Add(analysisSetting);
+
+                if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence"))
+                {
+                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence");
+                }
+
+                SaveAnalysisToFile();
+                GlobalFunc.startCountingSequenceForm.RefreshElement();
+            }
+            else
+            {
+                ShowMessage("Maximum 20 sequences");
+            }
         }
 
         private void analysisListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string settingName = analysisListBox.SelectedItem.ToString();
+            currentSequenceName = settingName;
             analysisSettingsPanel.Enabled = true;
             loadAnalysisSettingTemplateBtn.Enabled = true;
             saveAnalysisSettingTemplateBtn.Enabled = true;
@@ -204,8 +230,8 @@ namespace JobAutomation
             {
                 if (name == toggleAnalysis.analysisList[i].name)
                 {
-                    sampleDescriptionTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
-                    sampleDescriptionCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
+                    sampleDescriptionTxt.Text = toggleAnalysis.analysisList[i].sampleDescription;
+                    sampleDescriptionCB.Checked = toggleAnalysis.analysisList[i].allowSampleDescription;
 
                     spectrumFilePathTxt.Text = toggleAnalysis.analysisList[i].spectrumFilePath;
                     spectrumFilePatbCB.Checked = toggleAnalysis.analysisList[i].allowSpectrumFilePath;
@@ -322,96 +348,95 @@ namespace JobAutomation
 
         public void AutoSaveSetting()
         {
-            string settingName = analysisListBox.SelectedItem.ToString();
-            for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            if (analysisListBox.SelectedItem != null)
             {
-                if (settingName == toggleAnalysis.analysisList[i].name)
+                string settingName = analysisListBox.SelectedItem.ToString();
+                for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
                 {
-                    toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
+                    if (settingName == toggleAnalysis.analysisList[i].name)
+                    {
+                        toggleAnalysis.analysisList[i].sampleDescription = sampleDescriptionTxt.Text;
+                        toggleAnalysis.analysisList[i].allowSampleDescription = sampleDescriptionCB.Checked;
 
-                    toggleAnalysis.analysisList[i].spectrumFilePath = spectrumFilePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowSpectrumFilePath = spectrumFilePatbCB.Checked;
+                        toggleAnalysis.analysisList[i].spectrumFilePath = spectrumFilePathTxt.Text;
+                        toggleAnalysis.analysisList[i].allowSpectrumFilePath = spectrumFilePatbCB.Checked;
 
-                    toggleAnalysis.analysisList[i].jobTemplatePath = jobTemplatePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowJobTemplatePath = jobTemplatePathCB.Checked;
+                        toggleAnalysis.analysisList[i].jobTemplatePath = jobTemplatePathTxt.Text;
+                        toggleAnalysis.analysisList[i].allowJobTemplatePath = jobTemplatePathCB.Checked;
 
-                    toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
+                        toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
+                        toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
 
-                    toggleAnalysis.analysisList[i].calibrationFilePath = calibrationFilePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowCalibrationFilePath = calibrationFilePathCB.Checked;
+                        toggleAnalysis.analysisList[i].calibrationFilePath = calibrationFilePathTxt.Text;
+                        toggleAnalysis.analysisList[i].allowCalibrationFilePath = calibrationFilePathCB.Checked;
 
-                    toggleAnalysis.analysisList[i].libraryFilePath = libraryFilePathTxt.Text;
-                    toggleAnalysis.analysisList[i].allowLibraryFilePath = libraryFilePathCB.Checked;
+                        toggleAnalysis.analysisList[i].libraryFilePath = libraryFilePathTxt.Text;
+                        toggleAnalysis.analysisList[i].allowLibraryFilePath = libraryFilePathCB.Checked;
 
-                    toggleAnalysis.analysisList[i].collectionStartDate = collectionStartDatePicker.Text;
-                    toggleAnalysis.analysisList[i].allowCollectionStartDate = collectionStartDateCB.Checked;
+                        toggleAnalysis.analysisList[i].collectionStartDate = collectionStartDatePicker.Text;
+                        toggleAnalysis.analysisList[i].allowCollectionStartDate = collectionStartDateCB.Checked;
 
-                    toggleAnalysis.analysisList[i].collectionStopDate = collectionStopDatePicker.Text;
-                    toggleAnalysis.analysisList[i].allowCollectionStopDate = collectionStopDateCB.Checked;
+                        toggleAnalysis.analysisList[i].collectionStopDate = collectionStopDatePicker.Text;
+                        toggleAnalysis.analysisList[i].allowCollectionStopDate = collectionStopDateCB.Checked;
 
-                    toggleAnalysis.analysisList[i].decayCorrectionStopDateTime = decayCorrectionStopDateTimeCB.Checked;
+                        toggleAnalysis.analysisList[i].decayCorrectionStopDateTime = decayCorrectionStopDateTimeCB.Checked;
 
-                    toggleAnalysis.analysisList[i].decayCorrectionDate = decayCorrectionDatePicker.Text;
-                    toggleAnalysis.analysisList[i].allowDecayCorrectionDate = decayCorrectionDateCB.Checked;
+                        toggleAnalysis.analysisList[i].decayCorrectionDate = decayCorrectionDatePicker.Text;
+                        toggleAnalysis.analysisList[i].allowDecayCorrectionDate = decayCorrectionDateCB.Checked;
 
-                    toggleAnalysis.analysisList[i].sampleQuantity = Convert.ToInt32(sampleQuantityTxt.Text);
-                    toggleAnalysis.analysisList[i].allowSampleQuantity = sampleQuantityCB.Checked;
+                        toggleAnalysis.analysisList[i].sampleQuantity = sampleQuantityTxt.Text != "" ? Convert.ToInt32(sampleQuantityTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowSampleQuantity = sampleQuantityCB.Checked;
 
-                    toggleAnalysis.analysisList[i].units = unitsTxt.Text;
-                    toggleAnalysis.analysisList[i].allowUnits = unitsCB.Checked;
+                        toggleAnalysis.analysisList[i].units = unitsTxt.Text;
+                        toggleAnalysis.analysisList[i].allowUnits = unitsCB.Checked;
 
-                    toggleAnalysis.analysisList[i].activityUnits = activityUnitsTxt.Text;
-                    toggleAnalysis.analysisList[i].allowActivityUnits = activityUnitsCB.Checked;
+                        toggleAnalysis.analysisList[i].activityUnits = activityUnitsTxt.Text;
+                        toggleAnalysis.analysisList[i].allowActivityUnits = activityUnitsCB.Checked;
 
-                    toggleAnalysis.analysisList[i].liveTimePreset = Convert.ToInt32(liveTimePresetTxt.Text);
-                    toggleAnalysis.analysisList[i].allowLiveTimePreset = liveTimePresetCB.Checked;
+                        toggleAnalysis.analysisList[i].liveTimePreset = liveTimePresetTxt.Text != "" ? Convert.ToInt32(liveTimePresetTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowLiveTimePreset = liveTimePresetCB.Checked;
 
-                    toggleAnalysis.analysisList[i].realTimePreset = Convert.ToInt32(realTimePresetTxt.Text);
-                    toggleAnalysis.analysisList[i].allowRealTimePreset = realTimePresetCB.Checked;
+                        toggleAnalysis.analysisList[i].realTimePreset = realTimePresetTxt.Text != "" ? Convert.ToInt32(realTimePresetTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowRealTimePreset = realTimePresetCB.Checked;
 
-                    toggleAnalysis.analysisList[i].activityMultiper = Convert.ToInt32(activityMultiperTxt.Text);
-                    toggleAnalysis.analysisList[i].allowActivityMultiper = activityMultiperCB.Checked;
+                        toggleAnalysis.analysisList[i].activityMultiper = activityMultiperTxt.Text != "" ? Convert.ToInt32(activityMultiperTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowActivityMultiper = activityMultiperCB.Checked;
 
-                    toggleAnalysis.analysisList[i].activityDivisor = Convert.ToInt32(activityDivisorTxt.Text);
-                    toggleAnalysis.analysisList[i].allowActivityDivisor = activityDivisorCB.Checked;
+                        toggleAnalysis.analysisList[i].activityDivisor = activityDivisorTxt.Text != "" ? Convert.ToInt32(activityDivisorTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowActivityDivisor = activityDivisorCB.Checked;
 
-                    toggleAnalysis.analysisList[i].randomSummingFactor = Convert.ToInt32(randomSummingFactorTxt.Text);
-                    toggleAnalysis.analysisList[i].allowRandomSummingFactor = randomSummingFactorCB.Checked;
+                        toggleAnalysis.analysisList[i].randomSummingFactor = randomSummingFactorTxt.Text != "" ? Convert.ToInt32(randomSummingFactorTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowRandomSummingFactor = randomSummingFactorCB.Checked;
 
-                    toggleAnalysis.analysisList[i].randomError = Convert.ToInt32(randomErrorTxt.Text);
-                    toggleAnalysis.analysisList[i].allowRandomError = randomErrorCB.Checked;
+                        toggleAnalysis.analysisList[i].randomError = randomErrorTxt.Text != "" ? Convert.ToInt32(randomErrorTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowRandomError = randomErrorCB.Checked;
 
-                    toggleAnalysis.analysisList[i].systematicError = Convert.ToInt32(systematicErrorTxt.Text);
-                    toggleAnalysis.analysisList[i].allowSystematicError = systematicErrorCB.Checked;
+                        toggleAnalysis.analysisList[i].systematicError = systematicErrorTxt.Text != "" ? Convert.ToInt32(systematicErrorTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowSystematicError = systematicErrorCB.Checked;
 
-                    toggleAnalysis.analysisList[i].attenuationSize = Convert.ToInt32(attenuationSizeTxt.Text);
-                    toggleAnalysis.analysisList[i].allowAttenuationSize = attenuationSizeCB.Checked;
-                    break;
+                        toggleAnalysis.analysisList[i].attenuationSize = attenuationSizeTxt.Text != "" ? Convert.ToInt32(attenuationSizeTxt.Text) : 0;
+                        toggleAnalysis.analysisList[i].allowAttenuationSize = attenuationSizeCB.Checked;
+                        break;
+                    }
                 }
+                SaveAnalysisToFile();
             }
-            SaveAnalysisToFile();
+            else
+            {
+                ShowMessage("Please select sequence");
+            }
         }
 
         private void CheckISNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-    
-        //private void TextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    AutoSaveSetting();
-        //}
-
-        //private void CheckBox_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    AutoSaveSetting();
-        //}
 
         private void saveSettingBtn_Click(object sender, EventArgs e)
         {
             AutoSaveSetting();
+            GlobalFunc.startCountingSequenceForm.RefreshElement();
+            ShowMessage("Save Settings successful");
         }
 
         private void saveAnalysisSettingTemplateBtn_Click(object sender, EventArgs e)
@@ -542,6 +567,55 @@ namespace JobAutomation
               
             }
         }
-    
+
+        private void removeCsBtn_Click(object sender, EventArgs e)
+        {
+            string operationName = csListComboBox.Text;
+
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"))
+            {
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json");
+            }
+
+            for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
+            {
+                if (operationName == GlobalFunc.countingSequenceIndex.operationName[i])
+                {
+                    GlobalFunc.countingSequenceIndex.operationName.RemoveAt(i);
+                    break;
+                }
+            }
+            analysisListBox.Items.Clear();
+            string json = js.Serialize(GlobalFunc.countingSequenceIndex);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
+            LoadCountSequenceIndex();
+            ShowMessage("Remove operation successful");
+            GlobalFunc.startCountingSequenceForm.RefreshElement();
+        }
+
+        private void removeAnalysisBtn_Click(object sender, EventArgs e)
+        {
+            if (analysisListBox.SelectedItem != null)
+            {
+                string settingName = analysisListBox.SelectedItem.ToString();
+                for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+                {
+                    if (settingName == toggleAnalysis.analysisList[i].name)
+                    {
+                        toggleAnalysis.analysisList.RemoveAt(i);
+                    }
+                }
+                string operationName = csListComboBox.Text;
+                string json = js.Serialize(toggleAnalysis);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
+                analysisSettingsPanel.Enabled = false;
+                LoadAnalysisList(operationName);
+                GlobalFunc.startCountingSequenceForm.RefreshElement();
+            }
+            else
+            {
+                ShowMessage("Please select sequence");
+            }
+        }
     }
 }
