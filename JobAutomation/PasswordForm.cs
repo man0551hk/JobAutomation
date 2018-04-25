@@ -42,13 +42,13 @@ namespace JobAutomation
                     }
                     GlobalFunc.parameterSetupForm.Show();
                 }
-                else if(GlobalFunc.passwordFormToggle == "SetupCountingSequence")
+                else if(GlobalFunc.passwordFormToggle == "MeasurementSetupForm")
                 {
-                    if (GlobalFunc.setupCountingSequenceForm == null || GlobalFunc.setupCountingSequenceForm.IsDisposed)
+                    if (GlobalFunc.measurementSetupForm == null || GlobalFunc.measurementSetupForm.IsDisposed)
                     {
-                        GlobalFunc.setupCountingSequenceForm = new SetupCountingSequenceForm();
+                        GlobalFunc.measurementSetupForm = new MeasurementSetupForm();
                     }
-                    GlobalFunc.setupCountingSequenceForm.Show();
+                    GlobalFunc.measurementSetupForm.Show();
                 }
                 this.Close();
             }

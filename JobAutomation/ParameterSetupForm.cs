@@ -27,7 +27,6 @@ namespace JobAutomation
             {
                 updateSDFFilePath.Text = GlobalFunc.setup.sdfFilePath;
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
-                analysisListPrefix.Text = GlobalFunc.setup.analysisListPrefix;
                 password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
             }
         }
@@ -43,7 +42,6 @@ namespace JobAutomation
             Setup setup = new Setup();
             setup.sdfFilePath = updateSDFFilePath.Text;
             setup.gammamVisionPath = gammaVisionPath.Text;
-            setup.analysisListPrefix = analysisListPrefix.Text;
             setup.password = GlobalFunc.Encrypt(password.Text);
             string json = js.Serialize(setup);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
@@ -58,7 +56,6 @@ namespace JobAutomation
                 Setup setup = new Setup();
                 setup.sdfFilePath = updateSDFFilePath.Text;
                 setup.gammamVisionPath = gammaVisionPath.Text;
-                setup.analysisListPrefix = analysisListPrefix.Text;
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 string json = js.Serialize(setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);

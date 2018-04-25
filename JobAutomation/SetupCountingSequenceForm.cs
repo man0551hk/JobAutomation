@@ -78,59 +78,59 @@ namespace JobAutomation
 
         public void LoadCountSequenceIndex()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "profile.json"))
             {
-                GlobalFunc.countingSequenceIndex = (CountingSequenceIndex)js.Deserialize<CountingSequenceIndex>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"));
+                GlobalFunc.profile = (Profile)js.Deserialize<Profile>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json"));
                 csListComboBox.Items.Clear();
-                for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
+                for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
                 {
-                    csListComboBox.Items.Add(GlobalFunc.countingSequenceIndex.operationName[i]);
+                    csListComboBox.Items.Add(GlobalFunc.profile.operationName[i]);
                 }
             }
             else
             {
-                GlobalFunc.countingSequenceIndex = new CountingSequenceIndex();
-                GlobalFunc.countingSequenceIndex.operationName = new List<string>();
+                GlobalFunc.profile = new Profile();
+                GlobalFunc.profile.operationName = new List<string>();
             }
         }
 
         private void addCsBtn_Click(object sender, EventArgs e)
         {
-            string name = newCSNameTxt.Text;
-            if (name != "")
-            {
-                bool allow = true;
-                for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
-                {
-                    if (name == GlobalFunc.countingSequenceIndex.operationName[i])
-                    {
-                        allow = false;
-                        break;
-                    }
-                }
-                if (allow)
-                {
-                    GlobalFunc.countingSequenceIndex.operationName.Add(name);
-                    string json = js.Serialize(GlobalFunc.countingSequenceIndex);
+            //string name = newCSNameTxt.Text;
+            //if (name != "")
+            //{
+            //    bool allow = true;
+            //    for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+            //    {
+            //        if (name == GlobalFunc.profile.operationName[i])
+            //        {
+            //            allow = false;
+            //            break;
+            //        }
+            //    }
+            //    if (allow)
+            //    {
+            //        GlobalFunc.profile.operationName.Add(name);
+            //        string json = js.Serialize(GlobalFunc.profile);
 
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
-                    LoadCountSequenceIndex();
-                    newCSNameTxt.Text = "";
+            //        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
+            //        LoadCountSequenceIndex();
+            //        newCSNameTxt.Text = "";
 
-                    csListComboBox.SelectedIndex = csListComboBox.FindString(name);
-                    ShowMessage("Add operation successful");
-                    GlobalFunc.startCountingSequenceForm.RefreshElement();
-                }
-                else
-                {
-                    ShowMessage("The opertaion name existed");
+            //        csListComboBox.SelectedIndex = csListComboBox.FindString(name);
+            //        ShowMessage("Add operation successful");
+            //        GlobalFunc.startCountingSequenceForm.RefreshElement();
+            //    }
+            //    else
+            //    {
+            //        ShowMessage("The opertaion name existed");
 
-                }
-            }
-            else
-            {
-                ShowMessage("Operation Name cannot empty");
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    ShowMessage("Operation Name cannot empty");
+            //}
         }
 
         private void csListComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -186,7 +186,7 @@ namespace JobAutomation
                 AnalysisSetting analysisSetting = new AnalysisSetting();
                 analysisSetting.index = maxIndex;
 
-                analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
+                //analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
                 toggleAnalysis.analysisList.Add(analysisSetting);
 
                 if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence"))
@@ -577,17 +577,17 @@ namespace JobAutomation
                 File.Delete(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json");
             }
 
-            for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
+            for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
             {
-                if (operationName == GlobalFunc.countingSequenceIndex.operationName[i])
+                if (operationName == GlobalFunc.profile.operationName[i])
                 {
-                    GlobalFunc.countingSequenceIndex.operationName.RemoveAt(i);
+                    GlobalFunc.profile.operationName.RemoveAt(i);
                     break;
                 }
             }
             analysisListBox.Items.Clear();
-            string json = js.Serialize(GlobalFunc.countingSequenceIndex);
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json", json);
+            string json = js.Serialize(GlobalFunc.profile);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
             LoadCountSequenceIndex();
             ShowMessage("Remove operation successful");
             GlobalFunc.startCountingSequenceForm.RefreshElement();

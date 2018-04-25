@@ -15,7 +15,7 @@ namespace JobAutomation
         public static MainForm mainForm;
         public static PasswordForm passwordForm;
         public static ParameterSetupForm parameterSetupForm;
-        public static SetupCountingSequenceForm setupCountingSequenceForm;
+        public static MeasurementSetupForm measurementSetupForm;
         public static StartCountingSequenceForm startCountingSequenceForm;
 
         public static int w = Screen.PrimaryScreen.Bounds.Width;
@@ -27,7 +27,8 @@ namespace JobAutomation
         static bool useHashing = true;
         static string securityKey = "ficom2018";
         public static string passwordFormToggle = "";
-        public static CountingSequenceIndex countingSequenceIndex;
+        public static Profile profile;
+        public static string toggleProfile = "";
 
         public static void LoadSetup()
         {

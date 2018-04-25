@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -47,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CountingSequence.cs" />
+    <Compile Include="MeasurementSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeasurementSetupForm.Designer.cs">
+      <DependentUpon>MeasurementSetupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetupCountingSequenceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +89,9 @@
     <Compile Include="StartCountingSequenceForm.Designer.cs">
       <DependentUpon>StartCountingSequenceForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MeasurementSetupForm.resx">
+      <DependentUpon>MeasurementSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetupCountingSequenceForm.resx">
       <DependentUpon>SetupCountingSequenceForm.cs</DependentUpon>
     </EmbeddedResource>

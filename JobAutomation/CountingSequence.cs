@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JobAutomation
 {
-    public class CountingSequenceIndex
+    public class Profile
     {
         public List<string> operationName { set; get; }
     }

@@ -33,11 +33,9 @@
             this.saveSetupBtn = new System.Windows.Forms.Button();
             this.verifyPassword = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
-            this.analysisListPrefix = new System.Windows.Forms.TextBox();
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.updateSDFFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +69,7 @@
             // saveSetupBtn
             // 
             this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveSetupBtn.Location = new System.Drawing.Point(11, 106);
+            this.saveSetupBtn.Location = new System.Drawing.Point(11, 74);
             this.saveSetupBtn.Name = "saveSetupBtn";
             this.saveSetupBtn.Size = new System.Drawing.Size(261, 23);
             this.saveSetupBtn.TabIndex = 10;
@@ -96,14 +94,6 @@
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(145, 20);
             this.password.TabIndex = 8;
-            // 
-            // analysisListPrefix
-            // 
-            this.analysisListPrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analysisListPrefix.Location = new System.Drawing.Point(127, 74);
-            this.analysisListPrefix.Name = "analysisListPrefix";
-            this.analysisListPrefix.Size = new System.Drawing.Size(145, 20);
-            this.analysisListPrefix.TabIndex = 7;
             // 
             // gammaVisionPath
             // 
@@ -132,16 +122,6 @@
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Password:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Analysis List Prefix:";
             // 
             // label2
             // 
@@ -177,15 +157,13 @@
             this.groupBox1.Controls.Add(this.saveSetupBtn);
             this.groupBox1.Controls.Add(this.gammaVisionPath);
             this.groupBox1.Controls.Add(this.gammaVisionPathBtn);
-            this.groupBox1.Controls.Add(this.analysisListPrefix);
             this.groupBox1.Controls.Add(this.updateSDFFilePathBtn);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.updateSDFFilePath);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(520, 147);
+            this.groupBox1.Size = new System.Drawing.Size(520, 111);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Setup";
@@ -198,7 +176,7 @@
             this.groupBox2.Controls.Add(this.verifyPassword);
             this.groupBox2.Controls.Add(this.password);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(13, 167);
+            this.groupBox2.Location = new System.Drawing.Point(13, 130);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(520, 126);
             this.groupBox2.TabIndex = 14;
@@ -220,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 300);
+            this.ClientSize = new System.Drawing.Size(541, 263);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ParameterSetupForm";
@@ -240,11 +218,9 @@
         private System.Windows.Forms.Button saveSetupBtn;
         private System.Windows.Forms.TextBox verifyPassword;
         private System.Windows.Forms.TextBox password;
-        private System.Windows.Forms.TextBox analysisListPrefix;
         private System.Windows.Forms.TextBox gammaVisionPath;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox updateSDFFilePath;
         private System.Windows.Forms.Label label1;

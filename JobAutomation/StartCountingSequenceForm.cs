@@ -68,24 +68,24 @@ namespace JobAutomation
 
         public void LoadCountSequenceIndex()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"))
-            {
-                GlobalFunc.countingSequenceIndex = (CountingSequenceIndex)js.Deserialize<CountingSequenceIndex>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"));
-                csListComboBox.Items.Clear();
-                for (int i = 0; i < GlobalFunc.countingSequenceIndex.operationName.Count; i++)
-                {
-                    csListComboBox.Items.Add(GlobalFunc.countingSequenceIndex.operationName[i]);
-                }
-                if (currentOperationName != "")
-                {
-                    csListComboBox.SelectedIndex = csListComboBox.FindString(currentOperationName);
-                }
-            }
-            else
-            {
-                GlobalFunc.countingSequenceIndex = new CountingSequenceIndex();
-                GlobalFunc.countingSequenceIndex.operationName = new List<string>();
-            }
+            //if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"))
+            //{
+            //    GlobalFunc.profile = (CountingSequenceIndex)js.Deserialize<CountingSequenceIndex>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "countingSequenceIndex.json"));
+            //    csListComboBox.Items.Clear();
+            //    for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+            //    {
+            //        csListComboBox.Items.Add(GlobalFunc.profile.operationName[i]);
+            //    }
+            //    if (currentOperationName != "")
+            //    {
+            //        csListComboBox.SelectedIndex = csListComboBox.FindString(currentOperationName);
+            //    }
+            //}
+            //else
+            //{
+            //    GlobalFunc.profile = new CountingSequenceIndex();
+            //    GlobalFunc.profile.operationName = new List<string>();
+            //}
         }
 
         string currentOperationName = "";

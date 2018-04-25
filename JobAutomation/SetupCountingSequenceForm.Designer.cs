@@ -750,7 +750,7 @@
             this.newCSNameTxt.Size = new System.Drawing.Size(237, 20);
             this.newCSNameTxt.TabIndex = 3;
             // 
-            // SetupCountingSequenceForm
+            // measurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -760,7 +760,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.saveAnalysisSettingTemplateBtn);
             this.Controls.Add(this.loadAnalysisSettingTemplateBtn);
-            this.Name = "SetupCountingSequenceForm";
+            this.Name = "measurementSetupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Job Automation";
             this.groupBox1.ResumeLayout(false);
