@@ -10,12 +10,31 @@ namespace JobAutomation
         public List<string> operationName { set; get; }
     }
 
-    public class Analysis
+    public class ProfileDetail
     {
         public string operationName { set; get; }
         public string CreateDate { set; get; }
+        public string dataFoleder { set; get; }
+        public string prefix { set; get; }
+        public int sampleNo { set; get; }
+        public string sampleDefinitionFile { set; get; }
+        public string calibrationFile { set; get; }
+        public bool commonCalibrationFile { set; get; }
+        public string qtyUnit { set; get; }
+        public bool commonQtyUnit { set; get; }
+        public int qty { set; get; }
+        public bool commonQty { set; get; }
+        public int countingTime { set; get; }
+        public bool commonCountingTime { set; get; }
+        public string activityUnit { set; get; }
+        public bool commonActivityUnit { set; get; }
+        public string libraryFile { set; get; }
+        public bool decayCorrection { set; get; }
+        public string decayCorrectionDate { set; get; }
+
         public List<AnalysisSetting> analysisList { set; get; }
     }
+
 
     public class AnalysisSetting
     {

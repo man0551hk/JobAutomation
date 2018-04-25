@@ -24,10 +24,15 @@ namespace JobAutomation
             scsBtn.Enabled = false;
             quitBtn.Enabled = false;
             SetProfile();
+            SetProfileDetail();
         }
 
         public void SetProfile()
         {
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "ProfileDetail"))
+            {
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "ProfileDetail");
+            }
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "profile.json"))
             {
                 GlobalFunc.profile = (Profile)js.Deserialize<Profile>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json"));
@@ -41,6 +46,46 @@ namespace JobAutomation
             {
                 GlobalFunc.profile = new Profile();
                 GlobalFunc.profile.operationName = new List<string>();
+            }
+        }
+
+        public void SetProfileDetail()
+        {
+            GlobalFunc.profileDetailList = new List<ProfileDetail>();
+            for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+            {
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.profile.operationName[i] + ".json"))
+                {
+                    ProfileDetail profileDetail = (ProfileDetail)js.Deserialize<ProfileDetail>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.profile.operationName[i] + ".json"));
+                    GlobalFunc.profileDetailList.Add(profileDetail);
+                }
+                else
+                {
+                    #region default profile
+                    ProfileDetail profileDetail = new ProfileDetail();
+                    profileDetail.operationName = GlobalFunc.profile.operationName[i];
+                    profileDetail.CreateDate = DateTime.Now.ToString();
+                    profileDetail.analysisList = new List<AnalysisSetting>();
+                    profileDetail.dataFoleder = "";
+                    profileDetail.prefix = "";
+                    profileDetail.sampleNo = 0;
+                    profileDetail.sampleDefinitionFile = "";
+                    profileDetail.calibrationFile = "";
+                    profileDetail.commonCalibrationFile = true;
+                    profileDetail.qtyUnit = "";
+                    profileDetail.commonQtyUnit = true;
+                    profileDetail.qty = 0;
+                    profileDetail.commonQty = true;
+                    profileDetail.countingTime = 0;
+                    profileDetail.commonCountingTime = true;
+                    profileDetail.activityUnit = "";
+                    profileDetail.commonActivityUnit = true;
+                    profileDetail.libraryFile = "";
+                    profileDetail.decayCorrection = false;
+                    profileDetail.decayCorrectionDate = DateTime.Now.ToString();
+                    GlobalFunc.profileDetailList.Add(profileDetail);
+                    #endregion
+                }
             }
         }
 

@@ -14,7 +14,7 @@ namespace JobAutomation
     {
         OpenFileDialog sdfOFD = new OpenFileDialog();
         OpenFileDialog gammaOFD = new OpenFileDialog();
-        Analysis toggleAnalysis = new Analysis();
+
         JavaScriptSerializer js = new JavaScriptSerializer();
         SaveFileDialog saveTemplateDialog = new SaveFileDialog();
         string currentOperationName = "";
@@ -135,7 +135,7 @@ namespace JobAutomation
 
         private void csListComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            toggleAnalysis = new Analysis();
+            //toggleAnalysis = new Analysis();
             string operationName = csListComboBox.Text;
             currentOperationName = operationName;
             removeAnalysisBtn.Enabled = true;
@@ -149,58 +149,58 @@ namespace JobAutomation
         public void LoadAnalysisList(string operationName)
         {
             analysisListBox.Items.Clear();
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"))
-            {
+            //if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"))
+            //{
                
-                toggleAnalysis = (Analysis)js.Deserialize<Analysis>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"));
-                if (toggleAnalysis.CreateDate == null)
-                {
-                    toggleAnalysis.CreateDate = DateTime.Now.ToString();
-                }
-                for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
-                {
-                    analysisListBox.Items.Add(toggleAnalysis.analysisList[i].name);
-                }
-                if (!string.IsNullOrEmpty(currentSequenceName))
-                {
-                    analysisListBox.SelectedIndex = analysisListBox.FindString(currentSequenceName);
-                }
-            }
+            //    toggleAnalysis = (Analysis)js.Deserialize<Analysis>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json"));
+            //    if (toggleAnalysis.CreateDate == null)
+            //    {
+            //        toggleAnalysis.CreateDate = DateTime.Now.ToString();
+            //    }
+            //    for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            //    {
+            //        analysisListBox.Items.Add(toggleAnalysis.analysisList[i].name);
+            //    }
+            //    if (!string.IsNullOrEmpty(currentSequenceName))
+            //    {
+            //        analysisListBox.SelectedIndex = analysisListBox.FindString(currentSequenceName);
+            //    }
+            //}
         }
 
         private void addAnalysisBtn_Click(object sender, EventArgs e)
         {
-            int maxIndex = 0;
-            if (toggleAnalysis.analysisList != null && toggleAnalysis.analysisList.Count > 0)
-            {
-                maxIndex = toggleAnalysis.analysisList.Max(t => t.index);
-            }
-            else
-            {
-                toggleAnalysis.analysisList = new List<AnalysisSetting>();
-            }
-            maxIndex += 1;
+            //int maxIndex = 0;
+            //if (toggleAnalysis.analysisList != null && toggleAnalysis.analysisList.Count > 0)
+            //{
+            //    maxIndex = toggleAnalysis.analysisList.Max(t => t.index);
+            //}
+            //else
+            //{
+            //    toggleAnalysis.analysisList = new List<AnalysisSetting>();
+            //}
+            //maxIndex += 1;
 
-            if (toggleAnalysis.analysisList.Count + 1 <= 20)
-            {
-                AnalysisSetting analysisSetting = new AnalysisSetting();
-                analysisSetting.index = maxIndex;
+            //if (toggleAnalysis.analysisList.Count + 1 <= 20)
+            //{
+            //    AnalysisSetting analysisSetting = new AnalysisSetting();
+            //    analysisSetting.index = maxIndex;
 
-                //analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
-                toggleAnalysis.analysisList.Add(analysisSetting);
+            //    //analysisSetting.name = GlobalFunc.setup.analysisListPrefix + maxIndex.ToString("000");
+            //    toggleAnalysis.analysisList.Add(analysisSetting);
 
-                if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence"))
-                {
-                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence");
-                }
+            //    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence"))
+            //    {
+            //        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence");
+            //    }
 
-                SaveAnalysisToFile();
-                GlobalFunc.startCountingSequenceForm.RefreshElement();
-            }
-            else
-            {
-                ShowMessage("Maximum 20 sequences");
-            }
+            //    SaveAnalysisToFile();
+            //    GlobalFunc.startCountingSequenceForm.RefreshElement();
+            //}
+            //else
+            //{
+            //    ShowMessage("Maximum 20 sequences");
+            //}
         }
 
         private void analysisListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,87 +215,87 @@ namespace JobAutomation
 
         public void LoadNomalOpertationItem(string name)
         {
-            for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
-            {
-                if (name == toggleAnalysis.analysisList[i].name)
-                {
+            //for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            //{
+            //    if (name == toggleAnalysis.analysisList[i].name)
+            //    {
 
-                }
-            }
+            //    }
+            //}
         }
 
         public void LoadAnalysisSettingItem(string name)
         {
-            for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
-            {
-                if (name == toggleAnalysis.analysisList[i].name)
-                {
-                    sampleDescriptionTxt.Text = toggleAnalysis.analysisList[i].sampleDescription;
-                    sampleDescriptionCB.Checked = toggleAnalysis.analysisList[i].allowSampleDescription;
+            //for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            //{
+            //    if (name == toggleAnalysis.analysisList[i].name)
+            //    {
+            //        sampleDescriptionTxt.Text = toggleAnalysis.analysisList[i].sampleDescription;
+            //        sampleDescriptionCB.Checked = toggleAnalysis.analysisList[i].allowSampleDescription;
 
-                    spectrumFilePathTxt.Text = toggleAnalysis.analysisList[i].spectrumFilePath;
-                    spectrumFilePatbCB.Checked = toggleAnalysis.analysisList[i].allowSpectrumFilePath;
+            //        spectrumFilePathTxt.Text = toggleAnalysis.analysisList[i].spectrumFilePath;
+            //        spectrumFilePatbCB.Checked = toggleAnalysis.analysisList[i].allowSpectrumFilePath;
 
-                    jobTemplatePathTxt.Text = toggleAnalysis.analysisList[i].jobTemplatePath;
-                    jobTemplatePathCB.Checked = toggleAnalysis.analysisList[i].allowJobTemplatePath;
+            //        jobTemplatePathTxt.Text = toggleAnalysis.analysisList[i].jobTemplatePath;
+            //        jobTemplatePathCB.Checked = toggleAnalysis.analysisList[i].allowJobTemplatePath;
 
-                    sampleDefaultFilePathTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
-                    sampleDefaultFilePathCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
+            //        sampleDefaultFilePathTxt.Text = toggleAnalysis.analysisList[i].sampleDefaultFilePath;
+            //        sampleDefaultFilePathCB.Checked = toggleAnalysis.analysisList[i].allowSampleDefaultFilePath;
 
-                    calibrationFilePathTxt.Text = toggleAnalysis.analysisList[i].calibrationFilePath;
-                    calibrationFilePathCB.Checked = toggleAnalysis.analysisList[i].allowCalibrationFilePath;
+            //        calibrationFilePathTxt.Text = toggleAnalysis.analysisList[i].calibrationFilePath;
+            //        calibrationFilePathCB.Checked = toggleAnalysis.analysisList[i].allowCalibrationFilePath;
 
-                    libraryFilePathTxt.Text = toggleAnalysis.analysisList[i].libraryFilePath;
-                    libraryFilePathCB.Checked = toggleAnalysis.analysisList[i].allowLibraryFilePath;
+            //        libraryFilePathTxt.Text = toggleAnalysis.analysisList[i].libraryFilePath;
+            //        libraryFilePathCB.Checked = toggleAnalysis.analysisList[i].allowLibraryFilePath;
 
-                    collectionStartDatePicker.Text = toggleAnalysis.analysisList[i].collectionStartDate;
-                    collectionStartDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStartDate;
+            //        collectionStartDatePicker.Text = toggleAnalysis.analysisList[i].collectionStartDate;
+            //        collectionStartDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStartDate;
 
-                    collectionStopDatePicker.Text = toggleAnalysis.analysisList[i].collectionStopDate;
-                    collectionStopDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStopDate;
+            //        collectionStopDatePicker.Text = toggleAnalysis.analysisList[i].collectionStopDate;
+            //        collectionStopDateCB.Checked = toggleAnalysis.analysisList[i].allowCollectionStopDate;
 
-                    decayCorrectionStopDateTimeCB.Checked = toggleAnalysis.analysisList[i].decayCorrectionStopDateTime;
+            //        decayCorrectionStopDateTimeCB.Checked = toggleAnalysis.analysisList[i].decayCorrectionStopDateTime;
 
-                    decayCorrectionDatePicker.Text = toggleAnalysis.analysisList[i].decayCorrectionDate;
-                    decayCorrectionDateCB.Checked = toggleAnalysis.analysisList[i].allowDecayCorrectionDate;
+            //        decayCorrectionDatePicker.Text = toggleAnalysis.analysisList[i].decayCorrectionDate;
+            //        decayCorrectionDateCB.Checked = toggleAnalysis.analysisList[i].allowDecayCorrectionDate;
 
-                    sampleQuantityTxt.Text = toggleAnalysis.analysisList[i].sampleQuantity != 0 ? toggleAnalysis.analysisList[i].sampleQuantity.ToString() : "";
-                    sampleQuantityCB.Checked = toggleAnalysis.analysisList[i].allowSampleQuantity;
+            //        sampleQuantityTxt.Text = toggleAnalysis.analysisList[i].sampleQuantity != 0 ? toggleAnalysis.analysisList[i].sampleQuantity.ToString() : "";
+            //        sampleQuantityCB.Checked = toggleAnalysis.analysisList[i].allowSampleQuantity;
 
-                    unitsTxt.Text = toggleAnalysis.analysisList[i].units;
-                    unitsCB.Checked = toggleAnalysis.analysisList[i].allowUnits;
+            //        unitsTxt.Text = toggleAnalysis.analysisList[i].units;
+            //        unitsCB.Checked = toggleAnalysis.analysisList[i].allowUnits;
 
-                    activityUnitsTxt.Text = toggleAnalysis.analysisList[i].activityUnits;
-                    activityUnitsCB.Checked = toggleAnalysis.analysisList[i].allowActivityUnits;
+            //        activityUnitsTxt.Text = toggleAnalysis.analysisList[i].activityUnits;
+            //        activityUnitsCB.Checked = toggleAnalysis.analysisList[i].allowActivityUnits;
 
-                    liveTimePresetTxt.Text = toggleAnalysis.analysisList[i].liveTimePreset != 0 ? toggleAnalysis.analysisList[i].liveTimePreset.ToString() : "";
-                    liveTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowLiveTimePreset;
+            //        liveTimePresetTxt.Text = toggleAnalysis.analysisList[i].liveTimePreset != 0 ? toggleAnalysis.analysisList[i].liveTimePreset.ToString() : "";
+            //        liveTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowLiveTimePreset;
 
-                    realTimePresetTxt.Text = toggleAnalysis.analysisList[i].realTimePreset != 0 ? toggleAnalysis.analysisList[i].realTimePreset.ToString() : "";
-                    realTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowRealTimePreset;
+            //        realTimePresetTxt.Text = toggleAnalysis.analysisList[i].realTimePreset != 0 ? toggleAnalysis.analysisList[i].realTimePreset.ToString() : "";
+            //        realTimePresetCB.Checked = toggleAnalysis.analysisList[i].allowRealTimePreset;
 
-                    activityMultiperTxt.Text = toggleAnalysis.analysisList[i].activityMultiper != 0 ? toggleAnalysis.analysisList[i].activityMultiper.ToString() : "";
-                    activityMultiperCB.Checked = toggleAnalysis.analysisList[i].allowActivityMultiper;
+            //        activityMultiperTxt.Text = toggleAnalysis.analysisList[i].activityMultiper != 0 ? toggleAnalysis.analysisList[i].activityMultiper.ToString() : "";
+            //        activityMultiperCB.Checked = toggleAnalysis.analysisList[i].allowActivityMultiper;
 
-                    activityDivisorTxt.Text = toggleAnalysis.analysisList[i].activityDivisor != 0 ? toggleAnalysis.analysisList[i].activityDivisor.ToString() : "";
-                    activityDivisorCB.Checked = toggleAnalysis.analysisList[i].allowActivityDivisor;
+            //        activityDivisorTxt.Text = toggleAnalysis.analysisList[i].activityDivisor != 0 ? toggleAnalysis.analysisList[i].activityDivisor.ToString() : "";
+            //        activityDivisorCB.Checked = toggleAnalysis.analysisList[i].allowActivityDivisor;
 
-                    randomSummingFactorTxt.Text = toggleAnalysis.analysisList[i].randomSummingFactor != 0 ? toggleAnalysis.analysisList[i].randomSummingFactor.ToString() : "";
-                    randomSummingFactorCB.Checked = toggleAnalysis.analysisList[i].allowRandomSummingFactor;
+            //        randomSummingFactorTxt.Text = toggleAnalysis.analysisList[i].randomSummingFactor != 0 ? toggleAnalysis.analysisList[i].randomSummingFactor.ToString() : "";
+            //        randomSummingFactorCB.Checked = toggleAnalysis.analysisList[i].allowRandomSummingFactor;
 
-                    randomErrorTxt.Text = toggleAnalysis.analysisList[i].randomError != 0 ? toggleAnalysis.analysisList[i].randomError.ToString() : "";
-                    randomErrorCB.Checked = toggleAnalysis.analysisList[i].allowRandomError;
+            //        randomErrorTxt.Text = toggleAnalysis.analysisList[i].randomError != 0 ? toggleAnalysis.analysisList[i].randomError.ToString() : "";
+            //        randomErrorCB.Checked = toggleAnalysis.analysisList[i].allowRandomError;
 
-                    systematicErrorTxt.Text = toggleAnalysis.analysisList[i].systematicError != 0 ? toggleAnalysis.analysisList[i].systematicError.ToString() : "";
-                    systematicErrorCB.Checked = toggleAnalysis.analysisList[i].allowSystematicError;
+            //        systematicErrorTxt.Text = toggleAnalysis.analysisList[i].systematicError != 0 ? toggleAnalysis.analysisList[i].systematicError.ToString() : "";
+            //        systematicErrorCB.Checked = toggleAnalysis.analysisList[i].allowSystematicError;
 
-                    attenuationSizeTxt.Text = toggleAnalysis.analysisList[i].attenuationSize != 0 ? toggleAnalysis.analysisList[i].attenuationSize.ToString() : "";
-                    attenuationSizeCB.Checked = toggleAnalysis.analysisList[i].allowAttenuationSize;
+            //        attenuationSizeTxt.Text = toggleAnalysis.analysisList[i].attenuationSize != 0 ? toggleAnalysis.analysisList[i].attenuationSize.ToString() : "";
+            //        attenuationSizeCB.Checked = toggleAnalysis.analysisList[i].allowAttenuationSize;
 
 
-                    break;
-                }
-            }
+            //        break;
+            //    }
+            //}
         }
 
         private void spectrumFilePathBtn_Click(object sender, EventArgs e)
@@ -340,91 +340,91 @@ namespace JobAutomation
 
         public void SaveAnalysisToFile()
         {
-            string operationName = csListComboBox.Text;
-            string json = js.Serialize(toggleAnalysis);
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
-            LoadAnalysisList(operationName);
+            //string operationName = csListComboBox.Text;
+            //string json = js.Serialize(toggleAnalysis);
+            //File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
+            //LoadAnalysisList(operationName);
         }
 
         public void AutoSaveSetting()
         {
-            if (analysisListBox.SelectedItem != null)
-            {
-                string settingName = analysisListBox.SelectedItem.ToString();
-                for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
-                {
-                    if (settingName == toggleAnalysis.analysisList[i].name)
-                    {
-                        toggleAnalysis.analysisList[i].sampleDescription = sampleDescriptionTxt.Text;
-                        toggleAnalysis.analysisList[i].allowSampleDescription = sampleDescriptionCB.Checked;
+            //if (analysisListBox.SelectedItem != null)
+            //{
+            //    string settingName = analysisListBox.SelectedItem.ToString();
+            //    for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            //    {
+            //        if (settingName == toggleAnalysis.analysisList[i].name)
+            //        {
+            //            toggleAnalysis.analysisList[i].sampleDescription = sampleDescriptionTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowSampleDescription = sampleDescriptionCB.Checked;
 
-                        toggleAnalysis.analysisList[i].spectrumFilePath = spectrumFilePathTxt.Text;
-                        toggleAnalysis.analysisList[i].allowSpectrumFilePath = spectrumFilePatbCB.Checked;
+            //            toggleAnalysis.analysisList[i].spectrumFilePath = spectrumFilePathTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowSpectrumFilePath = spectrumFilePatbCB.Checked;
 
-                        toggleAnalysis.analysisList[i].jobTemplatePath = jobTemplatePathTxt.Text;
-                        toggleAnalysis.analysisList[i].allowJobTemplatePath = jobTemplatePathCB.Checked;
+            //            toggleAnalysis.analysisList[i].jobTemplatePath = jobTemplatePathTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowJobTemplatePath = jobTemplatePathCB.Checked;
 
-                        toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
-                        toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
+            //            toggleAnalysis.analysisList[i].sampleDefaultFilePath = sampleDefaultFilePathTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowSampleDefaultFilePath = sampleDefaultFilePathCB.Checked;
 
-                        toggleAnalysis.analysisList[i].calibrationFilePath = calibrationFilePathTxt.Text;
-                        toggleAnalysis.analysisList[i].allowCalibrationFilePath = calibrationFilePathCB.Checked;
+            //            toggleAnalysis.analysisList[i].calibrationFilePath = calibrationFilePathTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowCalibrationFilePath = calibrationFilePathCB.Checked;
 
-                        toggleAnalysis.analysisList[i].libraryFilePath = libraryFilePathTxt.Text;
-                        toggleAnalysis.analysisList[i].allowLibraryFilePath = libraryFilePathCB.Checked;
+            //            toggleAnalysis.analysisList[i].libraryFilePath = libraryFilePathTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowLibraryFilePath = libraryFilePathCB.Checked;
 
-                        toggleAnalysis.analysisList[i].collectionStartDate = collectionStartDatePicker.Text;
-                        toggleAnalysis.analysisList[i].allowCollectionStartDate = collectionStartDateCB.Checked;
+            //            toggleAnalysis.analysisList[i].collectionStartDate = collectionStartDatePicker.Text;
+            //            toggleAnalysis.analysisList[i].allowCollectionStartDate = collectionStartDateCB.Checked;
 
-                        toggleAnalysis.analysisList[i].collectionStopDate = collectionStopDatePicker.Text;
-                        toggleAnalysis.analysisList[i].allowCollectionStopDate = collectionStopDateCB.Checked;
+            //            toggleAnalysis.analysisList[i].collectionStopDate = collectionStopDatePicker.Text;
+            //            toggleAnalysis.analysisList[i].allowCollectionStopDate = collectionStopDateCB.Checked;
 
-                        toggleAnalysis.analysisList[i].decayCorrectionStopDateTime = decayCorrectionStopDateTimeCB.Checked;
+            //            toggleAnalysis.analysisList[i].decayCorrectionStopDateTime = decayCorrectionStopDateTimeCB.Checked;
 
-                        toggleAnalysis.analysisList[i].decayCorrectionDate = decayCorrectionDatePicker.Text;
-                        toggleAnalysis.analysisList[i].allowDecayCorrectionDate = decayCorrectionDateCB.Checked;
+            //            toggleAnalysis.analysisList[i].decayCorrectionDate = decayCorrectionDatePicker.Text;
+            //            toggleAnalysis.analysisList[i].allowDecayCorrectionDate = decayCorrectionDateCB.Checked;
 
-                        toggleAnalysis.analysisList[i].sampleQuantity = sampleQuantityTxt.Text != "" ? Convert.ToInt32(sampleQuantityTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowSampleQuantity = sampleQuantityCB.Checked;
+            //            toggleAnalysis.analysisList[i].sampleQuantity = sampleQuantityTxt.Text != "" ? Convert.ToInt32(sampleQuantityTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowSampleQuantity = sampleQuantityCB.Checked;
 
-                        toggleAnalysis.analysisList[i].units = unitsTxt.Text;
-                        toggleAnalysis.analysisList[i].allowUnits = unitsCB.Checked;
+            //            toggleAnalysis.analysisList[i].units = unitsTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowUnits = unitsCB.Checked;
 
-                        toggleAnalysis.analysisList[i].activityUnits = activityUnitsTxt.Text;
-                        toggleAnalysis.analysisList[i].allowActivityUnits = activityUnitsCB.Checked;
+            //            toggleAnalysis.analysisList[i].activityUnits = activityUnitsTxt.Text;
+            //            toggleAnalysis.analysisList[i].allowActivityUnits = activityUnitsCB.Checked;
 
-                        toggleAnalysis.analysisList[i].liveTimePreset = liveTimePresetTxt.Text != "" ? Convert.ToInt32(liveTimePresetTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowLiveTimePreset = liveTimePresetCB.Checked;
+            //            toggleAnalysis.analysisList[i].liveTimePreset = liveTimePresetTxt.Text != "" ? Convert.ToInt32(liveTimePresetTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowLiveTimePreset = liveTimePresetCB.Checked;
 
-                        toggleAnalysis.analysisList[i].realTimePreset = realTimePresetTxt.Text != "" ? Convert.ToInt32(realTimePresetTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowRealTimePreset = realTimePresetCB.Checked;
+            //            toggleAnalysis.analysisList[i].realTimePreset = realTimePresetTxt.Text != "" ? Convert.ToInt32(realTimePresetTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowRealTimePreset = realTimePresetCB.Checked;
 
-                        toggleAnalysis.analysisList[i].activityMultiper = activityMultiperTxt.Text != "" ? Convert.ToInt32(activityMultiperTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowActivityMultiper = activityMultiperCB.Checked;
+            //            toggleAnalysis.analysisList[i].activityMultiper = activityMultiperTxt.Text != "" ? Convert.ToInt32(activityMultiperTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowActivityMultiper = activityMultiperCB.Checked;
 
-                        toggleAnalysis.analysisList[i].activityDivisor = activityDivisorTxt.Text != "" ? Convert.ToInt32(activityDivisorTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowActivityDivisor = activityDivisorCB.Checked;
+            //            toggleAnalysis.analysisList[i].activityDivisor = activityDivisorTxt.Text != "" ? Convert.ToInt32(activityDivisorTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowActivityDivisor = activityDivisorCB.Checked;
 
-                        toggleAnalysis.analysisList[i].randomSummingFactor = randomSummingFactorTxt.Text != "" ? Convert.ToInt32(randomSummingFactorTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowRandomSummingFactor = randomSummingFactorCB.Checked;
+            //            toggleAnalysis.analysisList[i].randomSummingFactor = randomSummingFactorTxt.Text != "" ? Convert.ToInt32(randomSummingFactorTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowRandomSummingFactor = randomSummingFactorCB.Checked;
 
-                        toggleAnalysis.analysisList[i].randomError = randomErrorTxt.Text != "" ? Convert.ToInt32(randomErrorTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowRandomError = randomErrorCB.Checked;
+            //            toggleAnalysis.analysisList[i].randomError = randomErrorTxt.Text != "" ? Convert.ToInt32(randomErrorTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowRandomError = randomErrorCB.Checked;
 
-                        toggleAnalysis.analysisList[i].systematicError = systematicErrorTxt.Text != "" ? Convert.ToInt32(systematicErrorTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowSystematicError = systematicErrorCB.Checked;
+            //            toggleAnalysis.analysisList[i].systematicError = systematicErrorTxt.Text != "" ? Convert.ToInt32(systematicErrorTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowSystematicError = systematicErrorCB.Checked;
 
-                        toggleAnalysis.analysisList[i].attenuationSize = attenuationSizeTxt.Text != "" ? Convert.ToInt32(attenuationSizeTxt.Text) : 0;
-                        toggleAnalysis.analysisList[i].allowAttenuationSize = attenuationSizeCB.Checked;
-                        break;
-                    }
-                }
-                SaveAnalysisToFile();
-            }
-            else
-            {
-                ShowMessage("Please select sequence");
-            }
+            //            toggleAnalysis.analysisList[i].attenuationSize = attenuationSizeTxt.Text != "" ? Convert.ToInt32(attenuationSizeTxt.Text) : 0;
+            //            toggleAnalysis.analysisList[i].allowAttenuationSize = attenuationSizeCB.Checked;
+            //            break;
+            //        }
+            //    }
+            //    SaveAnalysisToFile();
+            //}
+            //else
+            //{
+            //    ShowMessage("Please select sequence");
+            //}
         }
 
         private void CheckISNumber_KeyPress(object sender, KeyPressEventArgs e)
@@ -435,7 +435,7 @@ namespace JobAutomation
         private void saveSettingBtn_Click(object sender, EventArgs e)
         {
             AutoSaveSetting();
-            GlobalFunc.startCountingSequenceForm.RefreshElement();
+            //GlobalFunc.startCountingSequenceForm.RefreshElement();
             ShowMessage("Save Settings successful");
         }
 
@@ -590,32 +590,32 @@ namespace JobAutomation
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
             LoadCountSequenceIndex();
             ShowMessage("Remove operation successful");
-            GlobalFunc.startCountingSequenceForm.RefreshElement();
+            //GlobalFunc.startCountingSequenceForm.RefreshElement();
         }
 
         private void removeAnalysisBtn_Click(object sender, EventArgs e)
         {
-            if (analysisListBox.SelectedItem != null)
-            {
-                string settingName = analysisListBox.SelectedItem.ToString();
-                for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
-                {
-                    if (settingName == toggleAnalysis.analysisList[i].name)
-                    {
-                        toggleAnalysis.analysisList.RemoveAt(i);
-                    }
-                }
-                string operationName = csListComboBox.Text;
-                string json = js.Serialize(toggleAnalysis);
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
-                analysisSettingsPanel.Enabled = false;
-                LoadAnalysisList(operationName);
-                GlobalFunc.startCountingSequenceForm.RefreshElement();
-            }
-            else
-            {
-                ShowMessage("Please select sequence");
-            }
+            //if (analysisListBox.SelectedItem != null)
+            //{
+            //    string settingName = analysisListBox.SelectedItem.ToString();
+            //    for (int i = 0; i < toggleAnalysis.analysisList.Count; i++)
+            //    {
+            //        if (settingName == toggleAnalysis.analysisList[i].name)
+            //        {
+            //            toggleAnalysis.analysisList.RemoveAt(i);
+            //        }
+            //    }
+            //    string operationName = csListComboBox.Text;
+            //    string json = js.Serialize(toggleAnalysis);
+            //    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CountingSequence/" + operationName + ".json", json);
+            //    analysisSettingsPanel.Enabled = false;
+            //    LoadAnalysisList(operationName);
+            //    GlobalFunc.startCountingSequenceForm.RefreshElement();
+            //}
+            //else
+            //{
+            //    ShowMessage("Please select sequence");
+            //}
         }
     }
 }

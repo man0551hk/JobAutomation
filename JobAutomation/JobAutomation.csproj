@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountingSequence.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="MeasurementSetupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +83,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="StartCountingSequenceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartCountingSequenceForm.Designer.cs">
-      <DependentUpon>StartCountingSequenceForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="MeasurementSetupForm.resx">
       <DependentUpon>MeasurementSetupForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,9 +107,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StartCountingSequenceForm.resx">
-      <DependentUpon>StartCountingSequenceForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

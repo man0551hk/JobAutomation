@@ -16,19 +16,19 @@ namespace JobAutomation
         public static PasswordForm passwordForm;
         public static ParameterSetupForm parameterSetupForm;
         public static MeasurementSetupForm measurementSetupForm;
-        public static StartCountingSequenceForm startCountingSequenceForm;
 
         public static int w = Screen.PrimaryScreen.Bounds.Width;
         public static int h = Screen.PrimaryScreen.Bounds.Height;
         public static int mainFormHeight;
-
 
         public static Setup setup;
         static bool useHashing = true;
         static string securityKey = "ficom2018";
         public static string passwordFormToggle = "";
         public static Profile profile;
+        public static List<ProfileDetail> profileDetailList;
         public static string toggleProfile = "";
+        public static bool finishEditSample = false;
 
         public static void LoadSetup()
         {
@@ -41,7 +41,6 @@ namespace JobAutomation
                 setup = (Setup)js.Deserialize<Setup>(setupText);
             }
         }
-
 
         public static string Encrypt(string toEncrypt)
         {

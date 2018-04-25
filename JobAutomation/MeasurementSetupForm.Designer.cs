@@ -51,7 +51,7 @@
             this.sampleQtyTxt = new System.Windows.Forms.TextBox();
             this.countingTime = new System.Windows.Forms.TextBox();
             this.activityUnitCB = new System.Windows.Forms.ComboBox();
-            this.libraryFile = new System.Windows.Forms.TextBox();
+            this.libraryFileTxt = new System.Windows.Forms.TextBox();
             this.decayCorrectionCB = new System.Windows.Forms.CheckBox();
             this.decayCorrectionDTPicker = new System.Windows.Forms.DateTimePicker();
             this.calibrarionCommonCB = new System.Windows.Forms.CheckBox();
@@ -68,6 +68,7 @@
             this.profileCB = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.removeBtn = new System.Windows.Forms.Button();
+            this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -294,7 +295,7 @@
             this.sampleQtyTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleQtyTxt.Location = new System.Drawing.Point(200, 246);
             this.sampleQtyTxt.Name = "sampleQtyTxt";
-            this.sampleQtyTxt.Size = new System.Drawing.Size(331, 20);
+            this.sampleQtyTxt.Size = new System.Drawing.Size(78, 20);
             this.sampleQtyTxt.TabIndex = 19;
             // 
             // countingTime
@@ -302,7 +303,7 @@
             this.countingTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countingTime.Location = new System.Drawing.Point(200, 272);
             this.countingTime.Name = "countingTime";
-            this.countingTime.Size = new System.Drawing.Size(331, 20);
+            this.countingTime.Size = new System.Drawing.Size(78, 20);
             this.countingTime.TabIndex = 20;
             // 
             // activityUnitCB
@@ -318,13 +319,13 @@
             this.activityUnitCB.Size = new System.Drawing.Size(140, 21);
             this.activityUnitCB.TabIndex = 21;
             // 
-            // libraryFile
+            // libraryFileTxt
             // 
-            this.libraryFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.libraryFile.Location = new System.Drawing.Point(200, 325);
-            this.libraryFile.Name = "libraryFile";
-            this.libraryFile.Size = new System.Drawing.Size(331, 20);
-            this.libraryFile.TabIndex = 22;
+            this.libraryFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.libraryFileTxt.Location = new System.Drawing.Point(200, 325);
+            this.libraryFileTxt.Name = "libraryFileTxt";
+            this.libraryFileTxt.Size = new System.Drawing.Size(331, 20);
+            this.libraryFileTxt.TabIndex = 22;
             // 
             // decayCorrectionCB
             // 
@@ -339,6 +340,7 @@
             // 
             this.decayCorrectionDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.decayCorrectionDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.decayCorrectionDTPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.decayCorrectionDTPicker.Location = new System.Drawing.Point(200, 372);
             this.decayCorrectionDTPicker.Name = "decayCorrectionDTPicker";
             this.decayCorrectionDTPicker.Size = new System.Drawing.Size(233, 20);
@@ -354,6 +356,7 @@
             this.calibrarionCommonCB.Size = new System.Drawing.Size(15, 14);
             this.calibrarionCommonCB.TabIndex = 26;
             this.calibrarionCommonCB.UseVisualStyleBackColor = true;
+            this.calibrarionCommonCB.CheckedChanged += new System.EventHandler(this.calibrarionCommonCB_CheckedChanged);
             // 
             // sampleQtyUnitCommonCB
             // 
@@ -365,6 +368,7 @@
             this.sampleQtyUnitCommonCB.Size = new System.Drawing.Size(15, 14);
             this.sampleQtyUnitCommonCB.TabIndex = 27;
             this.sampleQtyUnitCommonCB.UseVisualStyleBackColor = true;
+            this.sampleQtyUnitCommonCB.CheckedChanged += new System.EventHandler(this.sampleQtyUnitCommonCB_CheckedChanged);
             // 
             // sampleQtyCommonCB
             // 
@@ -376,6 +380,7 @@
             this.sampleQtyCommonCB.Size = new System.Drawing.Size(15, 14);
             this.sampleQtyCommonCB.TabIndex = 28;
             this.sampleQtyCommonCB.UseVisualStyleBackColor = true;
+            this.sampleQtyCommonCB.CheckedChanged += new System.EventHandler(this.sampleQtyCommonCB_CheckedChanged);
             // 
             // countingTimeCommonCB
             // 
@@ -387,6 +392,7 @@
             this.countingTimeCommonCB.Size = new System.Drawing.Size(15, 14);
             this.countingTimeCommonCB.TabIndex = 29;
             this.countingTimeCommonCB.UseVisualStyleBackColor = true;
+            this.countingTimeCommonCB.CheckedChanged += new System.EventHandler(this.countingTimeCommonCB_CheckedChanged);
             // 
             // activityUnitCommonCB
             // 
@@ -398,6 +404,7 @@
             this.activityUnitCommonCB.Size = new System.Drawing.Size(15, 14);
             this.activityUnitCommonCB.TabIndex = 30;
             this.activityUnitCommonCB.UseVisualStyleBackColor = true;
+            this.activityUnitCommonCB.CheckedChanged += new System.EventHandler(this.activityUnitCommonCB_CheckedChanged);
             // 
             // commonAllCB
             // 
@@ -411,6 +418,7 @@
             this.commonAllCB.TabIndex = 31;
             this.commonAllCB.Text = "Common To All";
             this.commonAllCB.UseVisualStyleBackColor = true;
+            this.commonAllCB.CheckedChanged += new System.EventHandler(this.commonAllCB_CheckedChanged);
             // 
             // editSampleBtn
             // 
@@ -420,14 +428,15 @@
             this.editSampleBtn.TabIndex = 32;
             this.editSampleBtn.Text = "Edit Sample";
             this.editSampleBtn.UseVisualStyleBackColor = true;
+            this.editSampleBtn.Click += new System.EventHandler(this.editSampleBtn_Click);
             // 
             // doneBtn
             // 
-            this.doneBtn.Location = new System.Drawing.Point(459, 417);
+            this.doneBtn.Location = new System.Drawing.Point(441, 417);
             this.doneBtn.Name = "doneBtn";
-            this.doneBtn.Size = new System.Drawing.Size(114, 37);
+            this.doneBtn.Size = new System.Drawing.Size(132, 37);
             this.doneBtn.TabIndex = 33;
-            this.doneBtn.Text = "Done";
+            this.doneBtn.Text = "Save and Done";
             this.doneBtn.UseVisualStyleBackColor = true;
             this.doneBtn.Click += new System.EventHandler(this.doneBtn_Click);
             // 
@@ -439,6 +448,7 @@
             this.dataFolderSelBtn.TabIndex = 34;
             this.dataFolderSelBtn.Text = "...";
             this.dataFolderSelBtn.UseVisualStyleBackColor = true;
+            this.dataFolderSelBtn.Click += new System.EventHandler(this.dataFolderSelBtn_Click);
             // 
             // sampleDefinitionFileSelBtn
             // 
@@ -448,6 +458,7 @@
             this.sampleDefinitionFileSelBtn.TabIndex = 35;
             this.sampleDefinitionFileSelBtn.Text = "...";
             this.sampleDefinitionFileSelBtn.UseVisualStyleBackColor = true;
+            this.sampleDefinitionFileSelBtn.Click += new System.EventHandler(this.sampleDefinitionFileSelBtn_Click);
             // 
             // calibrationFileSelBtn
             // 
@@ -457,6 +468,7 @@
             this.calibrationFileSelBtn.TabIndex = 36;
             this.calibrationFileSelBtn.Text = "...";
             this.calibrationFileSelBtn.UseVisualStyleBackColor = true;
+            this.calibrationFileSelBtn.Click += new System.EventHandler(this.calibrationFileSelBtn_Click);
             // 
             // profileCB
             // 
@@ -488,11 +500,22 @@
             this.removeBtn.Text = "Remove";
             this.removeBtn.UseVisualStyleBackColor = true;
             // 
+            // libraryFileSelBtn
+            // 
+            this.libraryFileSelBtn.Location = new System.Drawing.Point(537, 322);
+            this.libraryFileSelBtn.Name = "libraryFileSelBtn";
+            this.libraryFileSelBtn.Size = new System.Drawing.Size(35, 23);
+            this.libraryFileSelBtn.TabIndex = 40;
+            this.libraryFileSelBtn.Text = "...";
+            this.libraryFileSelBtn.UseVisualStyleBackColor = true;
+            this.libraryFileSelBtn.Click += new System.EventHandler(this.libraryFileSelBtn_Click);
+            // 
             // MeasurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 469);
+            this.Controls.Add(this.libraryFileSelBtn);
             this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.profileCB);
@@ -509,7 +532,7 @@
             this.Controls.Add(this.calibrarionCommonCB);
             this.Controls.Add(this.decayCorrectionDTPicker);
             this.Controls.Add(this.decayCorrectionCB);
-            this.Controls.Add(this.libraryFile);
+            this.Controls.Add(this.libraryFileTxt);
             this.Controls.Add(this.activityUnitCB);
             this.Controls.Add(this.countingTime);
             this.Controls.Add(this.sampleQtyTxt);
@@ -565,7 +588,7 @@
         private System.Windows.Forms.TextBox sampleQtyTxt;
         private System.Windows.Forms.TextBox countingTime;
         private System.Windows.Forms.ComboBox activityUnitCB;
-        private System.Windows.Forms.TextBox libraryFile;
+        private System.Windows.Forms.TextBox libraryFileTxt;
         private System.Windows.Forms.CheckBox decayCorrectionCB;
         private System.Windows.Forms.DateTimePicker decayCorrectionDTPicker;
         private System.Windows.Forms.CheckBox calibrarionCommonCB;
@@ -582,5 +605,6 @@
         private System.Windows.Forms.ComboBox profileCB;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button removeBtn;
+        private System.Windows.Forms.Button libraryFileSelBtn;
     }
 }
