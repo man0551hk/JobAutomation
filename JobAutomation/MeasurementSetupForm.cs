@@ -21,6 +21,8 @@ namespace JobAutomation
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
             editSampleBtn.Enabled = false;
+            sampleQtyTxt.KeyPress += CheckISNumber_KeyPress;
+            countingTime.KeyPress += CheckISNumber_KeyPress;
             SetProfile();
         }
 
@@ -87,8 +89,7 @@ namespace JobAutomation
         private void profileCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
-            sampleQtyTxt.KeyPress += CheckISNumber_KeyPress;
-            countingTime.KeyPress += CheckISNumber_KeyPress;
+
             LoadProfileDetail();
         }
 
@@ -155,6 +156,7 @@ namespace JobAutomation
                     dataFolderTxt.Text = GlobalFunc.profileDetailList[i].dataFoleder;
                     prefixTxt.Text = GlobalFunc.profileDetailList[i].prefix;
                     noOfSampleCB.SelectedIndex = noOfSampleCB.FindString(GlobalFunc.profileDetailList[i].sampleNo.ToString());
+                    GlobalFunc.toggleTotalSample = GlobalFunc.profileDetailList[i].sampleNo;
                     sampleDefinitionFileTxt.Text = GlobalFunc.profileDetailList[i].sampleDefinitionFile;
                     calibrationFileTxt.Text = GlobalFunc.profileDetailList[i].calibrationFile;
                     calibrarionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonCalibrationFile;
@@ -236,19 +238,60 @@ namespace JobAutomation
 
         private void editSampleBtn_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(noOfSampleCB.Text))
+            {
+                ShowMessage("Please select no. of sample first");
+            }
+            else if (string.IsNullOrEmpty(profileCB.Text) || profileCB.Text == "")
+            {
+                ShowMessage("Please input or select Profile Name first");
+            }
+            else
+            {
+                SaveProfile();
+                SaveProfileMasterDetail();
+                if (GlobalFunc.editSampleForm == null || !GlobalFunc.editSampleForm.IsDisposed)
+                {
+                    GlobalFunc.editSampleForm = new EditSampleForm();
+                }
+                GlobalFunc.editSampleForm.Show();
+            }
         }
 
         private void doneBtn_Click(object sender, EventArgs e)
         {
-            if (profileCB.Text != "")
+            if (!string.IsNullOrEmpty(profileCB.Text) && profileCB.Text != "")
             {
                 SaveProfile();
                 SaveProfileMasterDetail();
             }
         }
 
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(profileCB.Text) && profileCB.Text != "")
+            {
+                string operationName = profileCB.Text;
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + operationName + ".json"))
+                {
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"CountingSequence\" + operationName + ".json");
+                }
 
+                for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+                {
+                    if (operationName == GlobalFunc.profile.operationName[i])
+                    {
+                        GlobalFunc.profile.operationName.RemoveAt(i);
+                        break;
+                    }
+                }
+
+                string json = js.Serialize(GlobalFunc.profile);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
+                SetProfile();
+                ShowMessage("Remove Profile successful");
+            }
+        }
 
         #endregion
 
@@ -297,6 +340,13 @@ namespace JobAutomation
                 editSampleBtn.Enabled = true;
             }
         }
+
+        private void noOfSampleCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GlobalFunc.toggleTotalSample = Convert.ToInt32(noOfSampleCB.Text);
+        }
+
+
 
     }
 }

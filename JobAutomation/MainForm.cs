@@ -197,6 +197,7 @@ namespace JobAutomation
                     break;
                 }
             }
+            GlobalFunc.toggleProfile = profileName;
             profileCB.SelectedIndex = selectIndex;
         }
     }

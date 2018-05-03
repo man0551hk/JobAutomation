@@ -16,6 +16,7 @@ namespace JobAutomation
         public static PasswordForm passwordForm;
         public static ParameterSetupForm parameterSetupForm;
         public static MeasurementSetupForm measurementSetupForm;
+        public static EditSampleForm editSampleForm;
 
         public static int w = Screen.PrimaryScreen.Bounds.Width;
         public static int h = Screen.PrimaryScreen.Bounds.Height;
@@ -29,6 +30,7 @@ namespace JobAutomation
         public static List<ProfileDetail> profileDetailList;
         public static string toggleProfile = "";
         public static bool finishEditSample = false;
+        public static int toggleTotalSample = 0;
 
         public static void LoadSetup()
         {

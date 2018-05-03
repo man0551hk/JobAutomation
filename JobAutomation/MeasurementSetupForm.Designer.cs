@@ -34,10 +34,6 @@
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -131,55 +127,14 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Sample Definition File";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(35, 196);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Calibration File";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(35, 222);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Sample Quantity Unit";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(35, 249);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Sample Quantity";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(35, 275);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(124, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Counting Time (sec.)";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(35, 301);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 9;
-            this.label9.Text = "Activity Unit";
             // 
             // label10
             // 
@@ -266,6 +221,7 @@
             this.noOfSampleCB.Name = "noOfSampleCB";
             this.noOfSampleCB.Size = new System.Drawing.Size(140, 21);
             this.noOfSampleCB.TabIndex = 16;
+            this.noOfSampleCB.SelectedIndexChanged += new System.EventHandler(this.noOfSampleCB_SelectedIndexChanged);
             // 
             // calibrationFileTxt
             // 
@@ -353,8 +309,9 @@
             this.calibrarionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.calibrarionCommonCB.Location = new System.Drawing.Point(18, 196);
             this.calibrarionCommonCB.Name = "calibrarionCommonCB";
-            this.calibrarionCommonCB.Size = new System.Drawing.Size(15, 14);
+            this.calibrarionCommonCB.Size = new System.Drawing.Size(110, 17);
             this.calibrarionCommonCB.TabIndex = 26;
+            this.calibrarionCommonCB.Text = "Calibration File";
             this.calibrarionCommonCB.UseVisualStyleBackColor = true;
             this.calibrarionCommonCB.CheckedChanged += new System.EventHandler(this.calibrarionCommonCB_CheckedChanged);
             // 
@@ -365,8 +322,9 @@
             this.sampleQtyUnitCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sampleQtyUnitCommonCB.Location = new System.Drawing.Point(18, 221);
             this.sampleQtyUnitCommonCB.Name = "sampleQtyUnitCommonCB";
-            this.sampleQtyUnitCommonCB.Size = new System.Drawing.Size(15, 14);
+            this.sampleQtyUnitCommonCB.Size = new System.Drawing.Size(145, 17);
             this.sampleQtyUnitCommonCB.TabIndex = 27;
+            this.sampleQtyUnitCommonCB.Text = "Sample Quantity Unit";
             this.sampleQtyUnitCommonCB.UseVisualStyleBackColor = true;
             this.sampleQtyUnitCommonCB.CheckedChanged += new System.EventHandler(this.sampleQtyUnitCommonCB_CheckedChanged);
             // 
@@ -377,8 +335,9 @@
             this.sampleQtyCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sampleQtyCommonCB.Location = new System.Drawing.Point(18, 248);
             this.sampleQtyCommonCB.Name = "sampleQtyCommonCB";
-            this.sampleQtyCommonCB.Size = new System.Drawing.Size(15, 14);
+            this.sampleQtyCommonCB.Size = new System.Drawing.Size(118, 17);
             this.sampleQtyCommonCB.TabIndex = 28;
+            this.sampleQtyCommonCB.Text = "Sample Quantity";
             this.sampleQtyCommonCB.UseVisualStyleBackColor = true;
             this.sampleQtyCommonCB.CheckedChanged += new System.EventHandler(this.sampleQtyCommonCB_CheckedChanged);
             // 
@@ -389,8 +348,9 @@
             this.countingTimeCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.countingTimeCommonCB.Location = new System.Drawing.Point(18, 274);
             this.countingTimeCommonCB.Name = "countingTimeCommonCB";
-            this.countingTimeCommonCB.Size = new System.Drawing.Size(15, 14);
+            this.countingTimeCommonCB.Size = new System.Drawing.Size(143, 17);
             this.countingTimeCommonCB.TabIndex = 29;
+            this.countingTimeCommonCB.Text = "Counting Time (sec.)";
             this.countingTimeCommonCB.UseVisualStyleBackColor = true;
             this.countingTimeCommonCB.CheckedChanged += new System.EventHandler(this.countingTimeCommonCB_CheckedChanged);
             // 
@@ -401,8 +361,9 @@
             this.activityUnitCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.activityUnitCommonCB.Location = new System.Drawing.Point(18, 301);
             this.activityUnitCommonCB.Name = "activityUnitCommonCB";
-            this.activityUnitCommonCB.Size = new System.Drawing.Size(15, 14);
+            this.activityUnitCommonCB.Size = new System.Drawing.Size(95, 17);
             this.activityUnitCommonCB.TabIndex = 30;
+            this.activityUnitCommonCB.Text = "Activity Unit";
             this.activityUnitCommonCB.UseVisualStyleBackColor = true;
             this.activityUnitCommonCB.CheckedChanged += new System.EventHandler(this.activityUnitCommonCB_CheckedChanged);
             // 
@@ -499,6 +460,7 @@
             this.removeBtn.TabIndex = 39;
             this.removeBtn.Text = "Remove";
             this.removeBtn.UseVisualStyleBackColor = true;
+            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // libraryFileSelBtn
             // 
@@ -546,10 +508,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -571,10 +529,6 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;

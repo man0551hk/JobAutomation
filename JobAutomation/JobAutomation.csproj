@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditSampleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditSampleForm.Designer.cs">
+      <DependentUpon>EditSampleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs" />
     <Compile Include="MeasurementSetupForm.cs">
       <SubType>Form</SubType>
@@ -83,6 +89,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
+    <EmbeddedResource Include="EditSampleForm.resx">
+      <DependentUpon>EditSampleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MeasurementSetupForm.resx">
       <DependentUpon>MeasurementSetupForm.cs</DependentUpon>
     </EmbeddedResource>

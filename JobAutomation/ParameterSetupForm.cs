@@ -20,7 +20,7 @@ namespace JobAutomation
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(150 + 250,GlobalFunc.mainFormHeight);
+            this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
 
             this.FormClosing += ParameterSetupForm_FormClosing;
             if (GlobalFunc.setup != null)
