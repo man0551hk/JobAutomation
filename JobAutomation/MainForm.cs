@@ -65,7 +65,7 @@ namespace JobAutomation
                     ProfileDetail profileDetail = new ProfileDetail();
                     profileDetail.operationName = GlobalFunc.profile.operationName[i];
                     profileDetail.CreateDate = DateTime.Now.ToString();
-                    profileDetail.analysisList = new List<AnalysisSetting>();
+                    profileDetail.sampleDetailList = new List<SampleDetail>();
                     profileDetail.dataFoleder = "";
                     profileDetail.prefix = "";
                     profileDetail.sampleNo = 0;

@@ -199,13 +199,66 @@ namespace JobAutomation
                     GlobalFunc.profileDetailList[i].libraryFile = libraryFileTxt.Text;
                     GlobalFunc.profileDetailList[i].decayCorrection = decayCorrectionCB.Checked;
                     GlobalFunc.profileDetailList[i].decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-
+                    GlobalFunc.profileDetailList[i].sampleDetailList = SaveProfileSamplesDetail();
                     string json = js.Serialize(GlobalFunc.profileDetailList[i]);
                     File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.profileDetailList[i].operationName + ".json", json);
                     MessageBox.Show("Save " + profileCB.Text + " successful");
                     break;
                 }
             }
+        }
+
+        private List<SampleDetail> SaveProfileSamplesDetail()
+        {
+            List<SampleDetail> sampleDetailList = new List<SampleDetail>();
+            if (noOfSampleCB.Text != "")
+            {
+                for (int i = 1; i <= Convert.ToInt32(noOfSampleCB.Text); i++)
+                {
+                    SampleDetail sampleDetail = new SampleDetail();
+                    sampleDetail.index = i;
+                    sampleDetail.sampleDescription = "";
+                    sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+                    if (calibrarionCommonCB.Checked)
+                    {
+                        sampleDetail.calibrationFilePath = calibrationFileTxt.Text;
+                    }
+                    else {
+                        sampleDetail.calibrationFilePath = "";
+                    }
+                    sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+                    if (sampleQtyCommonCB.Checked)
+                    {
+                        sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
+                    }
+                    else {
+                        sampleDetail.sampleQuantity = 0;
+                    }
+                    if (sampleQtyUnitCommonCB.Checked)
+                    {
+                        sampleDetail.units = sampleQtyUnitCB.Text;
+                    }
+                    else {
+                        sampleDetail.units = "";
+                    }
+                    if (activityUnitCommonCB.Checked)
+                    {
+                        sampleDetail.activityUnits = activityUnitCB.Text;
+                    }
+                    else {
+                        sampleDetail.activityUnits = "";
+                    }
+                    if (countingTimeCommonCB.Checked)
+                    {
+                        sampleDetail.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
+                    }
+                    else {
+                        sampleDetail.countingTime = 0;
+                    }
+                    sampleDetailList.Add(sampleDetail);
+                }
+            }
+            return sampleDetailList;
         }
         #endregion
 
