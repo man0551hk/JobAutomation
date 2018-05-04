@@ -29,6 +29,7 @@ namespace JobAutomation
         public static Profile profile;
         public static List<ProfileDetail> profileDetailList;
         public static string toggleProfile = "";
+        public static ProfileDetail toggleProfileDetail;
         public static bool finishEditSample = false;
         public static int toggleTotalSample = 0;
 

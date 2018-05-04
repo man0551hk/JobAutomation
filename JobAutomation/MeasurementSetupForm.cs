@@ -206,6 +206,7 @@ namespace JobAutomation
                     break;
                 }
             }
+            GlobalFunc.mainForm.SetProfileDetail();
         }
 
         private List<SampleDetail> SaveProfileSamplesDetail()
@@ -216,6 +217,10 @@ namespace JobAutomation
                 for (int i = 1; i <= Convert.ToInt32(noOfSampleCB.Text); i++)
                 {
                     SampleDetail sampleDetail = new SampleDetail();
+                    if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
+                    {
+                        sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                    }
                     sampleDetail.index = i;
                     sampleDetail.sampleDescription = "";
                     sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
@@ -223,7 +228,8 @@ namespace JobAutomation
                     {
                         sampleDetail.calibrationFilePath = calibrationFileTxt.Text;
                     }
-                    else {
+                    else if (string.IsNullOrEmpty(sampleDetail.calibrationFilePath))
+                    {
                         sampleDetail.calibrationFilePath = "";
                     }
                     sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
@@ -231,28 +237,31 @@ namespace JobAutomation
                     {
                         sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
                     }
-                    else {
+                    else if (sampleDetail.sampleQuantity == 0) {
                         sampleDetail.sampleQuantity = 0;
                     }
                     if (sampleQtyUnitCommonCB.Checked)
                     {
                         sampleDetail.units = sampleQtyUnitCB.Text;
                     }
-                    else {
+                    else if (string.IsNullOrEmpty(sampleDetail.units))
+                    {
                         sampleDetail.units = "";
                     }
                     if (activityUnitCommonCB.Checked)
                     {
                         sampleDetail.activityUnits = activityUnitCB.Text;
                     }
-                    else {
+                    else if (string.IsNullOrEmpty(sampleDetail.activityUnits))
+                    {
                         sampleDetail.activityUnits = "";
                     }
                     if (countingTimeCommonCB.Checked)
                     {
                         sampleDetail.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
                     }
-                    else {
+                    else if ( sampleDetail.countingTime == 0)
+                    {
                         sampleDetail.countingTime = 0;
                     }
                     sampleDetailList.Add(sampleDetail);
@@ -303,7 +312,7 @@ namespace JobAutomation
             {
                 SaveProfile();
                 SaveProfileMasterDetail();
-                if (GlobalFunc.editSampleForm == null || !GlobalFunc.editSampleForm.IsDisposed)
+                if (GlobalFunc.editSampleForm == null || GlobalFunc.editSampleForm.IsDisposed)
                 {
                     GlobalFunc.editSampleForm = new EditSampleForm();
                 }
@@ -317,6 +326,7 @@ namespace JobAutomation
             {
                 SaveProfile();
                 SaveProfileMasterDetail();
+                this.Close();
             }
         }
 
@@ -346,19 +356,9 @@ namespace JobAutomation
             }
         }
 
-        #endregion
-
         private void calibrarionCommonCB_CheckedChanged(object sender, EventArgs e)
         {
-            commonAllCB.Checked = false;
-            if (commonAllCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked)
-            {
-                editSampleBtn.Enabled = false;
-            }
-            else 
-            {
-                editSampleBtn.Enabled = true;
-            }
+            CheckboxControl();
         }
 
         private void sampleQtyUnitCommonCB_CheckedChanged(object sender, EventArgs e)
@@ -384,9 +384,11 @@ namespace JobAutomation
         private void CheckboxControl()
         {
             commonAllCB.Checked = false;
-            if (commonAllCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked)
+            if (calibrarionCommonCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked)
             {
                 editSampleBtn.Enabled = false;
+                commonAllCB.Checked = true;
+                doneBtn.Enabled = true;
             }
             else
             {
@@ -399,7 +401,11 @@ namespace JobAutomation
             GlobalFunc.toggleTotalSample = Convert.ToInt32(noOfSampleCB.Text);
         }
 
+        #endregion
 
-
+        public void EnableDoneBtn()
+        {
+            doneBtn.Enabled = true;
+        }
     }
 }

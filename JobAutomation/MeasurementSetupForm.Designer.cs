@@ -269,7 +269,7 @@
             this.activityUnitCB.FormattingEnabled = true;
             this.activityUnitCB.Items.AddRange(new object[] {
             "Bq",
-            "Mc"});
+            "MCi"});
             this.activityUnitCB.Location = new System.Drawing.Point(200, 298);
             this.activityUnitCB.Name = "activityUnitCB";
             this.activityUnitCB.Size = new System.Drawing.Size(140, 21);

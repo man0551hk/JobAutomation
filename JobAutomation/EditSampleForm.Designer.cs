@@ -30,22 +30,22 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.sampleTab = new System.Windows.Forms.TabPage();
+            this.sampleDoneBtn = new System.Windows.Forms.Button();
             this.sampleCB = new System.Windows.Forms.ComboBox();
             this.calibrationTab = new System.Windows.Forms.TabPage();
             this.calibrationDoneBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.quantityUnitTab = new System.Windows.Forms.TabPage();
+            this.quantityDoneBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.countTimeTab = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.quantityDoneBtn = new System.Windows.Forms.Button();
             this.countTimeDoneBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.sampleTab.SuspendLayout();
             this.calibrationTab.SuspendLayout();
@@ -68,7 +68,7 @@
             // 
             // sampleTab
             // 
-            this.sampleTab.Controls.Add(this.button1);
+            this.sampleTab.Controls.Add(this.sampleDoneBtn);
             this.sampleTab.Controls.Add(this.sampleCB);
             this.sampleTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleTab.Location = new System.Drawing.Point(4, 22);
@@ -78,6 +78,17 @@
             this.sampleTab.TabIndex = 0;
             this.sampleTab.Text = "Sample";
             this.sampleTab.UseVisualStyleBackColor = true;
+            // 
+            // sampleDoneBtn
+            // 
+            this.sampleDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sampleDoneBtn.Location = new System.Drawing.Point(657, 587);
+            this.sampleDoneBtn.Name = "sampleDoneBtn";
+            this.sampleDoneBtn.Size = new System.Drawing.Size(88, 28);
+            this.sampleDoneBtn.TabIndex = 3;
+            this.sampleDoneBtn.Text = "Done";
+            this.sampleDoneBtn.UseVisualStyleBackColor = true;
+            this.sampleDoneBtn.Click += new System.EventHandler(this.sampleDoneBtn_Click);
             // 
             // sampleCB
             // 
@@ -112,6 +123,7 @@
             this.calibrationDoneBtn.TabIndex = 2;
             this.calibrationDoneBtn.Text = "Done";
             this.calibrationDoneBtn.UseVisualStyleBackColor = true;
+            this.calibrationDoneBtn.Click += new System.EventHandler(this.calibrationDoneBtn_Click);
             // 
             // label2
             // 
@@ -147,6 +159,17 @@
             this.quantityUnitTab.TabIndex = 2;
             this.quantityUnitTab.Text = "Quantity / Unit";
             this.quantityUnitTab.UseVisualStyleBackColor = true;
+            // 
+            // quantityDoneBtn
+            // 
+            this.quantityDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quantityDoneBtn.Location = new System.Drawing.Point(660, 590);
+            this.quantityDoneBtn.Name = "quantityDoneBtn";
+            this.quantityDoneBtn.Size = new System.Drawing.Size(88, 28);
+            this.quantityDoneBtn.TabIndex = 5;
+            this.quantityDoneBtn.Text = "Done";
+            this.quantityDoneBtn.UseVisualStyleBackColor = true;
+            this.quantityDoneBtn.Click += new System.EventHandler(this.quantityDoneBtn_Click);
             // 
             // label6
             // 
@@ -201,15 +224,16 @@
             this.countTimeTab.Text = "Count Time";
             this.countTimeTab.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // countTimeDoneBtn
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(82, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 16);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Sample";
+            this.countTimeDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countTimeDoneBtn.Location = new System.Drawing.Point(660, 590);
+            this.countTimeDoneBtn.Name = "countTimeDoneBtn";
+            this.countTimeDoneBtn.Size = new System.Drawing.Size(88, 28);
+            this.countTimeDoneBtn.TabIndex = 3;
+            this.countTimeDoneBtn.Text = "Done";
+            this.countTimeDoneBtn.UseVisualStyleBackColor = true;
+            this.countTimeDoneBtn.Click += new System.EventHandler(this.countTimeDoneBtn_Click);
             // 
             // label8
             // 
@@ -221,35 +245,15 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "Count Time (sec)";
             // 
-            // quantityDoneBtn
+            // label7
             // 
-            this.quantityDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantityDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.quantityDoneBtn.Name = "quantityDoneBtn";
-            this.quantityDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.quantityDoneBtn.TabIndex = 5;
-            this.quantityDoneBtn.Text = "Done";
-            this.quantityDoneBtn.UseVisualStyleBackColor = true;
-            // 
-            // countTimeDoneBtn
-            // 
-            this.countTimeDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countTimeDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.countTimeDoneBtn.Name = "countTimeDoneBtn";
-            this.countTimeDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.countTimeDoneBtn.TabIndex = 3;
-            this.countTimeDoneBtn.Text = "Done";
-            this.countTimeDoneBtn.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(657, 587);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 28);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Done";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(82, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 16);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Sample";
             // 
             // EditSampleForm
             // 
@@ -288,7 +292,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sampleDoneBtn;
         private System.Windows.Forms.Button quantityDoneBtn;
         private System.Windows.Forms.Button countTimeDoneBtn;
     }

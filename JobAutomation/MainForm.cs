@@ -176,7 +176,7 @@ namespace JobAutomation
             if (!string.IsNullOrEmpty(profileCB.Text))
             {
                 GlobalFunc.toggleProfile = profileCB.Text;
-                
+                GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileCB.Text);
                 scsBtn.Enabled = true;
                 quitBtn.Enabled = true;
                 if (GlobalFunc.measurementSetupForm != null && !GlobalFunc.measurementSetupForm.IsDisposed)
@@ -199,6 +199,10 @@ namespace JobAutomation
             }
             GlobalFunc.toggleProfile = profileName;
             profileCB.SelectedIndex = selectIndex;
+
+            GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileName);
         }
+
+
     }
 }
