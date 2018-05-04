@@ -21,6 +21,8 @@ namespace JobAutomation
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
+            sampleQty.KeyPress += CheckISNumber_KeyPress;
+            sampleCountTime.KeyPress += CheckISNumber_KeyPress;
             Construct();
             ConstructCalibrationTab();
             ConstructQuantityUnitTab();
@@ -103,8 +105,10 @@ namespace JobAutomation
                     quantityTextBox.Name = "quantity@" + i;
                     Point quantityLocation = new Point(150, textBoxY);
                     quantityTextBox.Location = quantityLocation;
-                    quantityUnitTab.Controls.Add(quantityTextBox);
                     quantityTextBox.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity.ToString();
+                    quantityTextBox.KeyPress += CheckISNumber_KeyPress;
+                    quantityUnitTab.Controls.Add(quantityTextBox);
+                   
 
                     ComboBox unitComboBox = new ComboBox();
                     unitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -123,7 +127,7 @@ namespace JobAutomation
                     activityUnitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                     activityUnitComboBox.Width = 75;
                     activityUnitComboBox.Items.Add("Bq");
-                    activityUnitComboBox.Items.Add("MCi");
+                    activityUnitComboBox.Items.Add("mCi");
                     activityUnitComboBox.Name = "activityUnitComboBox@" + i;
                     activityUnitComboBox.SelectedIndex = activityUnitComboBox.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].activityUnits);
                     Point activityUnitLocation = new Point(425, textBoxY);
@@ -161,6 +165,7 @@ namespace JobAutomation
                     countTimeTextBox.Width = 70;
                     countTimeTextBox.Name = "countTimeTextBox@" + i;
                     countTimeTextBox.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime.ToString();
+                    countTimeTextBox.KeyPress += CheckISNumber_KeyPress;
                     countTimeTab.Controls.Add(countTimeTextBox);
 
                     labelY += 30;
@@ -230,6 +235,11 @@ namespace JobAutomation
             GlobalFunc.mainForm.SetProfileDetail();
             GlobalFunc.measurementSetupForm.EnableDoneBtn();
             this.Close();
+        }
+
+        private void CheckISNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }
