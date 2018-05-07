@@ -241,5 +241,11 @@ namespace JobAutomation
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+
+        private void sampleCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < GlobalFunc.toggleProfileDetail.sampleDetailList.Count; i++)
+            { }
+        }
     }
 }
