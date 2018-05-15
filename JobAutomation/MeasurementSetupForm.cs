@@ -221,7 +221,7 @@ namespace JobAutomation
                     sampleDetail.index = i;
                     sampleDetail.sampleDescription = "";
                     sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
-                    if (calibrarionCommonCB.Checked)
+                    if (calibrarionCommonCB.Checked && sampleDetail.calibrationFilePath == "")
                     {
                         sampleDetail.calibrationFilePath = calibrationFileTxt.Text;
                     }
@@ -230,14 +230,14 @@ namespace JobAutomation
                         sampleDetail.calibrationFilePath = "";
                     }
                     sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-                    if (sampleQtyCommonCB.Checked)
+                    if (sampleQtyCommonCB.Checked && sampleDetail.sampleQuantity == 0)
                     {
                         sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
                     }
                     else if (sampleDetail.sampleQuantity == 0) {
                         sampleDetail.sampleQuantity = 0;
                     }
-                    if (sampleQtyUnitCommonCB.Checked)
+                    if (sampleQtyUnitCommonCB.Checked && sampleDetail.units == "")
                     {
                         sampleDetail.units = sampleQtyUnitCB.Text;
                     }
@@ -245,7 +245,7 @@ namespace JobAutomation
                     {
                         sampleDetail.units = "";
                     }
-                    if (activityUnitCommonCB.Checked)
+                    if (activityUnitCommonCB.Checked && sampleDetail.activityUnits == "")
                     {
                         sampleDetail.activityUnits = activityUnitCB.Text;
                     }
@@ -253,7 +253,7 @@ namespace JobAutomation
                     {
                         sampleDetail.activityUnits = "";
                     }
-                    if (countingTimeCommonCB.Checked)
+                    if (countingTimeCommonCB.Checked && sampleDetail.countingTime == 0)
                     {
                         sampleDetail.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
                     }

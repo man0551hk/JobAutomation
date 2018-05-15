@@ -23,6 +23,8 @@ namespace JobAutomation
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
             sampleQty.KeyPress += CheckISNumber_KeyPress;
             sampleCountTime.KeyPress += CheckISNumber_KeyPress;
+            sampleCB.MouseDown += sampleCB__MouseDown;
+            
             Construct();
             ConstructCalibrationTab();
             ConstructQuantityUnitTab();
@@ -194,7 +196,32 @@ namespace JobAutomation
         #endregion
         private void sampleDoneBtn_Click(object sender, EventArgs e)
         {
-            Save();
+            //Save();
+            UpdateSampleDataOnTemp();
+            string json = js.Serialize(GlobalFunc.toggleProfileDetail);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName + ".json", json);
+            MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
+            GlobalFunc.LoadProfileDetail();
+            GlobalFunc.measurementSetupForm.EnableDoneBtn();
+            this.Close();
+        }
+
+        private void UpdateSampleDataOnTemp()
+        {
+            for (int i = 0; i < GlobalFunc.toggleProfileDetail.sampleDetailList.Count; i++)
+            {
+                if (GlobalFunc.toggleProfileDetail.sampleDetailList[i].index.ToString() == sampleCB.Text)
+                {
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath = sampleCalibrationFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].units = sampleQtyUnitCB.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity = Convert.ToInt32(sampleQty.Text != "" ? sampleQty.Text : "0");
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime = Convert.ToInt32(sampleCountTime.Text != "" ? sampleCountTime.Text : "0");
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription = sampleDescription.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath = sampleDefinationFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate = sampleCorrectionDate.Text;
+                    break;
+                }
+            }
         }
 
         private void calibrationDoneBtn_Click(object sender, EventArgs e)
@@ -242,10 +269,43 @@ namespace JobAutomation
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private void sampleCB__MouseDown(object sender, MouseEventArgs e)
+        {
+            UpdateSampleDataOnTemp();
+        }
+
         private void sampleCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < GlobalFunc.toggleProfileDetail.sampleDetailList.Count; i++)
-            { }
+            {
+                if (GlobalFunc.toggleProfileDetail.sampleDetailList[i].index.ToString() == sampleCB.Text)
+                {
+                    sampleCalibrationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath != null ? GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath : "";
+                    sampleQtyUnitCB.SelectedIndex = sampleQtyUnitCB.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i].units);
+                    sampleQty.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity.ToString();
+                    sampleCountTime.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime.ToString();
+                    sampleDescription.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription;
+                    sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
+                    sampleCorrectionDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate;
+                    break;
+                }
+            }
+        }
+
+        private void sampleCalibrationFileBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                sampleCalibrationFile.Text = ofd.FileName;
+            }
+        }
+
+        private void sampleDefinationFileBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                sampleDefinationFile.Text = ofd.FileName;
+            }
         }
     }
 }
