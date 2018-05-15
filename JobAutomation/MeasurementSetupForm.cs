@@ -34,24 +34,15 @@ namespace JobAutomation
         #region profile
         private void SetProfile()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "profile.json"))
+            profileCB.Items.Clear();
+            for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
             {
-                GlobalFunc.profile = (Profile)js.Deserialize<Profile>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json"));
-                profileCB.Items.Clear();
-                for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
-                {
-                    profileCB.Items.Add(GlobalFunc.profile.operationName[i]);
-                }
-
-                if ( GlobalFunc.toggleProfile != "")
-                {
-                    profileCB.SelectedIndex = profileCB.FindString(GlobalFunc.toggleProfile);
-                }
+                profileCB.Items.Add(GlobalFunc.profile.operationName[i]);
             }
-            else
+
+            if ( GlobalFunc.toggleProfile != "")
             {
-                GlobalFunc.profile = new Profile();
-                GlobalFunc.profile.operationName = new List<string>();
+                profileCB.SelectedIndex = profileCB.FindString(GlobalFunc.toggleProfile);
             }
         }
 
@@ -72,10 +63,13 @@ namespace JobAutomation
                 GlobalFunc.profile.operationName.Add(profileCB.Text);
                 string json = js.Serialize(GlobalFunc.profile);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
-                SetProfile();
                 ShowMessage("Add operation successful");
-                GlobalFunc.mainForm.SetProfile();
-                GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
+                GlobalFunc.toggleProfile = "";
+                GlobalFunc.toggleProfileDetail = null;
+
+                GlobalFunc.LoadProfile(); //reload profile.json
+                GlobalFunc.mainForm.SetProfile(); //set the profile list to main combo
+                this.SetProfile(); //set the profile list to measurement combo
             }
             else
             {
@@ -84,6 +78,11 @@ namespace JobAutomation
                     ShowMessage("The opertaion name existed");
                 }
             }
+
+
+            //reload
+           
+            
         }
 
         private void profileCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,35 +177,30 @@ namespace JobAutomation
 
         private void SaveProfileMasterDetail()
         {
-            for (int i = 0; i < GlobalFunc.profileDetailList.Count; i++)
-            {
-                if (GlobalFunc.profileDetailList[i].operationName == profileCB.Text)
-                {
-                    GlobalFunc.profileDetailList[i].dataFoleder = dataFolderTxt.Text;
-                    GlobalFunc.profileDetailList[i].prefix = prefixTxt.Text;
-                    GlobalFunc.profileDetailList[i].sampleNo = noOfSampleCB.Text != "" ? Convert.ToInt32(noOfSampleCB.Text) : 0;
-                    GlobalFunc.profileDetailList[i].sampleDefinitionFile = sampleDefinitionFileTxt.Text;
-                    GlobalFunc.profileDetailList[i].calibrationFile = calibrationFileTxt.Text;
-                    GlobalFunc.profileDetailList[i].commonCalibrationFile = calibrarionCommonCB.Checked;
-                    GlobalFunc.profileDetailList[i].qtyUnit = sampleQtyUnitCB.Text;
-                    GlobalFunc.profileDetailList[i].commonQtyUnit = sampleQtyUnitCommonCB.Checked;
-                    GlobalFunc.profileDetailList[i].qty = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
-                    GlobalFunc.profileDetailList[i].commonQty = sampleQtyCommonCB.Checked;
-                    GlobalFunc.profileDetailList[i].countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
-                    GlobalFunc.profileDetailList[i].commonCountingTime = countingTimeCommonCB.Checked;
-                    GlobalFunc.profileDetailList[i].activityUnit = activityUnitCB.Text;
-                    GlobalFunc.profileDetailList[i].commonActivityUnit = activityUnitCommonCB.Checked;
-                    GlobalFunc.profileDetailList[i].libraryFile = libraryFileTxt.Text;
-                    GlobalFunc.profileDetailList[i].decayCorrection = decayCorrectionCB.Checked;
-                    GlobalFunc.profileDetailList[i].decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-                    GlobalFunc.profileDetailList[i].sampleDetailList = SaveProfileSamplesDetail();
-                    string json = js.Serialize(GlobalFunc.profileDetailList[i]);
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.profileDetailList[i].operationName + ".json", json);
-                    MessageBox.Show("Save " + profileCB.Text + " successful");
-                    break;
-                }
-            }
-            GlobalFunc.mainForm.SetProfileDetail();
+            ProfileDetail thisPD = new ProfileDetail();
+            thisPD.operationName = profileCB.Text;
+            thisPD.dataFoleder = dataFolderTxt.Text;
+            thisPD.prefix = prefixTxt.Text;
+            thisPD.sampleNo = noOfSampleCB.Text != "" ? Convert.ToInt32(noOfSampleCB.Text) : 0;
+            thisPD.sampleDefinitionFile = sampleDefinitionFileTxt.Text;
+            thisPD.calibrationFile = calibrationFileTxt.Text;
+            thisPD.commonCalibrationFile = calibrarionCommonCB.Checked;
+            thisPD.qtyUnit = sampleQtyUnitCB.Text;
+            thisPD.commonQtyUnit = sampleQtyUnitCommonCB.Checked;
+            thisPD.qty = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
+            thisPD.commonQty = sampleQtyCommonCB.Checked;
+            thisPD.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
+            thisPD.commonCountingTime = countingTimeCommonCB.Checked;
+            thisPD.activityUnit = activityUnitCB.Text;
+            thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
+            thisPD.libraryFile = libraryFileTxt.Text;
+            thisPD.decayCorrection = decayCorrectionCB.Checked;
+            thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+            thisPD.sampleDetailList = SaveProfileSamplesDetail();
+            string json = js.Serialize(thisPD);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + thisPD.operationName + ".json", json);
+            MessageBox.Show("Save " + profileCB.Text + " successful");
+            GlobalFunc.LoadProfileDetail(); //load each profile json
         }
 
         private List<SampleDetail> SaveProfileSamplesDetail()
@@ -217,9 +211,12 @@ namespace JobAutomation
                 for (int i = 1; i <= Convert.ToInt32(noOfSampleCB.Text); i++)
                 {
                     SampleDetail sampleDetail = new SampleDetail();
-                    if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
+                    if (GlobalFunc.toggleProfileDetail != null)
                     {
-                        sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                        if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
+                        {
+                            sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                        }
                     }
                     sampleDetail.index = i;
                     sampleDetail.sampleDescription = "";
@@ -300,6 +297,30 @@ namespace JobAutomation
 
         private void editSampleBtn_Click(object sender, EventArgs e)
         {
+            if (SaveCurrent())
+            {
+                GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
+                LoadProfileDetail();
+
+                if (GlobalFunc.editSampleForm == null || GlobalFunc.editSampleForm.IsDisposed)
+                {
+                    GlobalFunc.editSampleForm = new EditSampleForm();
+                }
+                GlobalFunc.editSampleForm.Show();
+            }
+        }
+
+        private void doneBtn_Click(object sender, EventArgs e)
+        {
+            if (SaveCurrent())
+            {
+                this.Close();
+            }
+        }
+
+        private bool SaveCurrent()
+        {
+            bool saveOk = false;
             if (string.IsNullOrEmpty(noOfSampleCB.Text))
             {
                 ShowMessage("Please select no. of sample first");
@@ -312,22 +333,14 @@ namespace JobAutomation
             {
                 SaveProfile();
                 SaveProfileMasterDetail();
-                if (GlobalFunc.editSampleForm == null || GlobalFunc.editSampleForm.IsDisposed)
-                {
-                    GlobalFunc.editSampleForm = new EditSampleForm();
-                }
-                GlobalFunc.editSampleForm.Show();
-            }
-        }
 
-        private void doneBtn_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(profileCB.Text) && profileCB.Text != "")
-            {
-                SaveProfile();
-                SaveProfileMasterDetail();
-                this.Close();
+               
+
+                //GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
+                //LoadProfileDetail();
+                saveOk = true;
             }
+            return saveOk;
         }
 
         private void removeBtn_Click(object sender, EventArgs e)
@@ -398,7 +411,10 @@ namespace JobAutomation
 
         private void noOfSampleCB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GlobalFunc.toggleTotalSample = Convert.ToInt32(noOfSampleCB.Text);
+            if (noOfSampleCB.Text != "")
+            {
+                GlobalFunc.toggleTotalSample = Convert.ToInt32(noOfSampleCB.Text);
+            }
         }
 
         #endregion

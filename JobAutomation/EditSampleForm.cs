@@ -232,7 +232,7 @@ namespace JobAutomation
             string json = js.Serialize(GlobalFunc.toggleProfileDetail);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName + ".json", json);
             MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
-            GlobalFunc.mainForm.SetProfileDetail();
+            GlobalFunc.LoadProfileDetail();
             GlobalFunc.measurementSetupForm.EnableDoneBtn();
             this.Close();
         }
