@@ -38,11 +38,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.sampleNoCB = new System.Windows.Forms.ComboBox();
             this.quitBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.profileCB = new System.Windows.Forms.ComboBox();
+            this.selDataFileBtn = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.versionLabel = new System.Windows.Forms.Label();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // scsBtn
@@ -82,7 +87,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(71, 9);
+            this.label1.Location = new System.Drawing.Point(70, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(375, 25);
             this.label1.TabIndex = 3;
@@ -139,24 +144,17 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(118, 114);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(363, 20);
+            this.textBox2.Size = new System.Drawing.Size(327, 20);
             this.textBox2.TabIndex = 9;
             // 
-            // comboBox1
+            // sampleNoCB
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(118, 141);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(136, 21);
-            this.comboBox1.TabIndex = 10;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(118, 168);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(363, 20);
-            this.textBox3.TabIndex = 11;
+            this.sampleNoCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sampleNoCB.FormattingEnabled = true;
+            this.sampleNoCB.Location = new System.Drawing.Point(118, 141);
+            this.sampleNoCB.Name = "sampleNoCB";
+            this.sampleNoCB.Size = new System.Drawing.Size(136, 21);
+            this.sampleNoCB.TabIndex = 10;
             // 
             // quitBtn
             // 
@@ -188,16 +186,60 @@
             this.profileCB.TabIndex = 14;
             this.profileCB.SelectedIndexChanged += new System.EventHandler(this.profileCB_SelectedIndexChanged);
             // 
+            // selDataFileBtn
+            // 
+            this.selDataFileBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selDataFileBtn.Location = new System.Drawing.Point(451, 112);
+            this.selDataFileBtn.Name = "selDataFileBtn";
+            this.selDataFileBtn.Size = new System.Drawing.Size(30, 23);
+            this.selDataFileBtn.TabIndex = 16;
+            this.selDataFileBtn.Text = "...";
+            this.selDataFileBtn.UseVisualStyleBackColor = true;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(118, 168);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(363, 23);
+            this.progressBar.TabIndex = 17;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 336);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(508, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(461, 313);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(0, 13);
+            this.versionLabel.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 338);
+            this.ClientSize = new System.Drawing.Size(508, 358);
+            this.Controls.Add(this.versionLabel);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.selDataFileBtn);
             this.Controls.Add(this.profileCB);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.quitBtn);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.sampleNoCB);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
@@ -211,6 +253,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Automatic Sample Charger Control";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,10 +272,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox sampleNoCB;
         private System.Windows.Forms.Button quitBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox profileCB;
+        private System.Windows.Forms.Button selDataFileBtn;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

@@ -56,5 +56,19 @@ namespace JobAutomation
         public string activityUnits { set; get; }
 
         public int countingTime { set; get; }
+
+        //public string jobTemplatePath { set; get; }
+        //CollectionStart
+        //CollectionEnd
+        //Weight
+        //LiveTime
+        //RealTime
+        //Multiplier
+        //Divisor
+        //SpectrumFilePath
+        //ABSLength
+        //RandomError
+        //SystematicError
+        //RandomSummingFactor
     }
 }

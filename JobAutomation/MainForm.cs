@@ -14,12 +14,24 @@ namespace JobAutomation
     public partial class MainForm : Form
     {
         JavaScriptSerializer js = new JavaScriptSerializer();
+        BackgroundWorker myBGWorker = new BackgroundWorker();
         public MainForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150, GlobalFunc.h / 2 - 330);
             this.FormClosing += Form1_Closing;
+
+            versionLabel.Text = Application.ProductVersion;
+
+            toolStripStatusLabel1.Text = "";
+
+            myBGWorker.DoWork += myBGWorker_DoWork;
+            myBGWorker.ProgressChanged += myBGWorker_ProgressChanged;
+            myBGWorker.RunWorkerCompleted += myBGWorker_RunWorkerCompleted;
+            myBGWorker.WorkerReportsProgress = true;
+
             GlobalFunc.mainFormHeight = GlobalFunc.h / 2 - 330;
             scsBtn.Enabled = false;
             quitBtn.Enabled = false;
@@ -75,8 +87,15 @@ namespace JobAutomation
             }
         }
 
+        int thisNoOfSample = 0;
         private void scsBtn_Click(object sender, EventArgs e)
         {
+            thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
+            progressBar.Minimum = 0;
+            progressBar.Maximum = thisNoOfSample;
+
+            myBGWorker.RunWorkerAsync();
+
             //GlobalFunc.passwordFormToggle = "StartCountingSequence";
 
             //if (GlobalFunc.startCountingSequenceForm == null || GlobalFunc.startCountingSequenceForm.IsDisposed)
@@ -92,6 +111,29 @@ namespace JobAutomation
             //    GlobalFunc.parameterSetupForm.Dispose();
             //}
 
+        }
+
+        private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Start Generate Scripts";
+            Operation.PrepareDirectory();
+            myBGWorker.ReportProgress(1);
+            for (int i = 0; i < thisNoOfSample; i++)
+            {
+                Operation.GenerateJoFile(i);
+                int percentage = (i + 1);
+                myBGWorker.ReportProgress(percentage);
+            }
+        }
+
+        void myBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Generate Script finished";
         }
 
         private bool CheckLoginStatus()
@@ -127,10 +169,13 @@ namespace JobAutomation
                 GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileCB.Text);
                 scsBtn.Enabled = true;
                 quitBtn.Enabled = true;
+                SelectionProfile(profileCB.Text);
                 if (GlobalFunc.measurementSetupForm != null && !GlobalFunc.measurementSetupForm.IsDisposed)
                 {
                     GlobalFunc.measurementSetupForm.SelectionProfile(profileCB.Text);
+                    
                 }
+             
             }            
         }
 
@@ -149,8 +194,13 @@ namespace JobAutomation
             profileCB.SelectedIndex = selectIndex;
 
             GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileName);
+
+            #region set sampleNo
+            for (int i = 1; i <= GlobalFunc.toggleProfileDetail.sampleNo; i++)
+            {
+                sampleNoCB.Items.Add(i);
+            }
+            #endregion
         }
-
-
     }
 }

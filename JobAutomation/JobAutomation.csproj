@@ -52,6 +52,7 @@
     <Compile Include="EditSampleForm.Designer.cs">
       <DependentUpon>EditSampleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operation.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="MeasurementSetupForm.cs">
       <SubType>Form</SubType>
