@@ -90,26 +90,33 @@ namespace JobAutomation
         int thisNoOfSample = 0;
         private void scsBtn_Click(object sender, EventArgs e)
         {
-            thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
-            progressBar.Minimum = 0;
-            progressBar.Maximum = thisNoOfSample;
+            if (string.IsNullOrEmpty(sampleNoCB.Text))
+            {
+                MessageBox.Show("Please select sample no.");
+            }
+            else
+            {
+                thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
+                progressBar.Minimum = 0;
+                progressBar.Maximum = thisNoOfSample;
 
-            myBGWorker.RunWorkerAsync();
+                myBGWorker.RunWorkerAsync();
 
-            //GlobalFunc.passwordFormToggle = "StartCountingSequence";
+                //GlobalFunc.passwordFormToggle = "StartCountingSequence";
 
-            //if (GlobalFunc.startCountingSequenceForm == null || GlobalFunc.startCountingSequenceForm.IsDisposed)
-            //{
-            //    GlobalFunc.startCountingSequenceForm = new StartCountingSequenceForm();
-            //}
-            //GlobalFunc.startCountingSequenceForm.Show();
+                //if (GlobalFunc.startCountingSequenceForm == null || GlobalFunc.startCountingSequenceForm.IsDisposed)
+                //{
+                //    GlobalFunc.startCountingSequenceForm = new StartCountingSequenceForm();
+                //}
+                //GlobalFunc.startCountingSequenceForm.Show();
 
 
-            //if (GlobalFunc.parameterSetupForm != null)
-            //{
-            //    GlobalFunc.parameterSetupForm.Hide();
-            //    GlobalFunc.parameterSetupForm.Dispose();
-            //}
+                //if (GlobalFunc.parameterSetupForm != null)
+                //{
+                //    GlobalFunc.parameterSetupForm.Hide();
+                //    GlobalFunc.parameterSetupForm.Dispose();
+                //}
+            }
 
         }
 
@@ -120,7 +127,7 @@ namespace JobAutomation
             myBGWorker.ReportProgress(1);
             for (int i = 0; i < thisNoOfSample; i++)
             {
-                Operation.GenerateJoFile(i);
+                Operation.GenerateToFile(i);
                 int percentage = (i + 1);
                 myBGWorker.ReportProgress(percentage);
             }

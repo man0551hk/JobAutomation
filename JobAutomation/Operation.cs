@@ -13,29 +13,42 @@ namespace JobAutomation
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt"))
             {
                 StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Wait 2");
                 sb.AppendLine("Set_Detector 1");
                 sb.AppendLine("Stop");
                 sb.AppendLine("Clear");
-                sb.AppendLine("REM Send_Message \"set_output_high\"");
-                sb.AppendLine("Wait 5");
-                sb.AppendLine("REM Send_Message \"set_output_low\"");
-                sb.AppendLine("REM Wait 60");
-                sb.AppendLine("");
-                sb.AppendLine("REM Wait_Changer");
-                sb.AppendLine("");
-                sb.AppendLine("Run \"{updateSDFExeFilePath} {sampleDefaultFilePath}, {sampleDetailFile}\"");
-                sb.AppendLine("Wait \"{updateSDFExeFilePath}\"");
-                sb.AppendLine("Recall_Options \"{sampleDefaultFilePath}\"");
-                sb.AppendLine("Describe_Sample \"{description}\"");
-                sb.AppendLine("");
+                sb.AppendLine("send_message \"set_output_high\"");
+                sb.AppendLine("wait 60");
+                sb.AppendLine("send_message \"set_output_low\"");
+                sb.AppendLine("wait_changer");
+                sb.AppendLine("SET_DETECTOR 0");
+                
+                sb.AppendLine("SET_PRESET_CLEAR");
+                sb.AppendLine("SET_PRESET_REAL {counting}");
+                sb.AppendLine("SET_PRESET_LIVE {counting}");
+
+                //C:\User\ASC2\ASC2_DEF.Sdf
+                sb.AppendLine("Recall_Options \"{sourceSDF}\"");
+
+                sb.AppendLine("SET_OPTIONS \"{jobTextFile}\", \"{targetFile}\"");
+
+                sb.AppendLine("Recall_Options \"{targetFile}\"");
+
                 sb.AppendLine("Start");
                 sb.AppendLine("Wait 2");
                 sb.AppendLine("Wait");
-                sb.AppendLine("");
-                sb.AppendLine("Save \"{spectrumFilePath}\"");
+
+                sb.AppendLine("Save \"$(AutoFile)\"");
                 sb.AppendLine("Wait 2");
                 sb.AppendLine("Analyze");
-                sb.AppendLine("Wait 5");
+
+                sb.AppendLine("Wait 15");
+
+                sb.AppendLine("Wait \"C:\\Program Files\\GammaVision\\Npp32.Exe\"");
+                sb.AppendLine("Wait 2");
+
+                sb.AppendLine("Wait \"C:\\Program Files\\ORTEC\\GammaVision Report Writer\\gvrpt32.exe\"");
+
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt", sb.ToString());
             }
         }
@@ -53,52 +66,48 @@ namespace JobAutomation
         }
 
 
-        public static void GenerateJoFile(int sampleNo)
+        public static void GenerateToFile(int sampleNo)
         { 
             string path = AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName;
 
             try
             {
                 SampleDetail thisDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo];
-                string fileName = GlobalFunc.toggleProfileDetail.operationName + "_sample_" + thisDetail.index.ToString("000") + ".jtp";
-                
-                #region GenerateSampleDetailFile
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("SampleDescription: " + thisDetail.sampleDescription);
-                sb.AppendLine("JobTemplatePath: " + "");
-                sb.AppendLine("SDFPath: " + thisDetail.sampleDefinationFilePath);
-                sb.AppendLine("CollectionStart: " + "");
-                sb.AppendLine("CollectionEnd: " + "");
-                sb.AppendLine("DecayDateTime:" + thisDetail.decayCorrectionDate);
-                sb.AppendLine("Weight: " + "0");
-                sb.AppendLine("QuantityUnits: " + thisDetail.units);
-                sb.AppendLine("ActivityUnits: " + thisDetail.activityUnits);
-                sb.AppendLine("LiveTime: " + "15");
-                sb.AppendLine("RealTime: " + "15");
-                sb.AppendLine("Multiplier: " + "");
-                sb.AppendLine("Divisor:  " + "");
-                sb.AppendLine("SpectrumFilePath: " + "");
-                sb.AppendLine("CalFileName: " + thisDetail.calibrationFilePath);
-                sb.AppendLine("LibFileName: " + GlobalFunc.toggleProfileDetail.libraryFile);
-                sb.AppendLine("ABSConfigID: -1");
-                sb.AppendLine("ABSTypeID: -1");
-                sb.AppendLine("ABSMaterialID: -1");
-                sb.AppendLine("ABSLength: " + "");
-                sb.AppendLine("RandomError: " + "");
-                sb.AppendLine("SystematicError: " + "");
-                sb.AppendLine("RandomSummingFactor: " + "");
-                File.WriteAllText(path + @"\JobTemplateFiles\" + fileName, sb.ToString());
-                #endregion
+                string fileName = GlobalFunc.toggleProfileDetail.operationName + "_sample_" + thisDetail.index.ToString("000") + ".txt";
 
                 #region Generate Job File
-                GenerateDefaultJobTemplate();
-                string jobFile = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt");
-                jobFile = jobFile.Replace("{updateSDFExeFilePath}", GlobalFunc.setup.sdfFilePath);
-                jobFile = jobFile.Replace("{sampleDefaultFilePath}", thisDetail.sampleDefinationFilePath);
-                jobFile = jobFile.Replace("{sampleDetailFile}", fileName);
-                jobFile = jobFile.Replace("{description}", thisDetail.sampleDescription);
-                File.WriteAllText(path + @"\JobFiles\" + fileName.Replace(".jtp", ".job"), jobFile);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("CalibrationFilePath, \"" + thisDetail.calibrationFilePath + "\"");
+                sb.AppendLine("LibraryFilePath, \"" + GlobalFunc.toggleProfileDetail.libraryFile + "\"");
+                if (GlobalFunc.toggleProfileDetail.decayCorrection)
+                {
+                    sb.AppendLine("DecayToCollectionEnabled, 1");
+                    sb.AppendLine("DecayToDate, \"" + thisDetail.decayCorrectionDate + "\"");
+                }
+                else 
+                {
+                    sb.AppendLine("DecayToCollectionEnabled, 0");
+                }
+                sb.AppendLine("SampleQuantity, " + thisDetail.sampleQuantity + "");
+                sb.AppendLine("SampleQuantityUnits,  " + thisDetail.units + "");
+                if (thisDetail.activityUnits == "uCi")
+                {
+                    sb.AppendLine("ActivityuCi, 1");
+                }
+                else
+                {
+                    sb.AppendLine("ActivityuCi, 0");
+                }
                 #endregion
+                File.WriteAllText(path + @"\JobTemplateFiles\" + fileName, sb.ToString());
+
+                string jobFileStr = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt");
+                jobFileStr = jobFileStr.Replace("{sourceSDF}", GlobalFunc.setup.sdfFilePath);
+                jobFileStr = jobFileStr.Replace("{jobTextFile}", path + @"\JobTemplateFiles\" + fileName);
+                jobFileStr = jobFileStr.Replace("{targetFile}", path + @"\JobTemplateFiles\" +  fileName.Replace(".txt", ".sdf"));
+                jobFileStr = jobFileStr.Replace("{counting}", thisDetail.countingTime.ToString());
+
+                File.WriteAllText(path + @"\JobFiles\" + fileName.Replace(".txt", ".job"), jobFileStr);
             }
             catch
             { 
