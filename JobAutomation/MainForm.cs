@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,8 +25,6 @@ namespace JobAutomation
             this.FormClosing += Form1_Closing;
 
             versionLabel.Text = Application.ProductVersion;
-
-            toolStripStatusLabel1.Text = "";
 
             myBGWorker.DoWork += myBGWorker_DoWork;
             myBGWorker.ProgressChanged += myBGWorker_ProgressChanged;
@@ -92,37 +91,23 @@ namespace JobAutomation
         {
             if (string.IsNullOrEmpty(sampleNoCB.Text))
             {
-                MessageBox.Show("Please select sample no.");
+                SetStatusLabel("Please select sample no.", 3);
             }
             else
             {
                 thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
                 progressBar.Minimum = 0;
-                progressBar.Maximum = thisNoOfSample;
+                progressBar.Maximum = thisNoOfSample + 1;
 
                 myBGWorker.RunWorkerAsync();
-
-                //GlobalFunc.passwordFormToggle = "StartCountingSequence";
-
-                //if (GlobalFunc.startCountingSequenceForm == null || GlobalFunc.startCountingSequenceForm.IsDisposed)
-                //{
-                //    GlobalFunc.startCountingSequenceForm = new StartCountingSequenceForm();
-                //}
-                //GlobalFunc.startCountingSequenceForm.Show();
-
-
-                //if (GlobalFunc.parameterSetupForm != null)
-                //{
-                //    GlobalFunc.parameterSetupForm.Hide();
-                //    GlobalFunc.parameterSetupForm.Dispose();
-                //}
             }
 
         }
 
         private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Start Generate Scripts";
+            SetStatusLabel("Start Generate Scripts", 2);
+            Operation.jobFileList = new List<string>();
             Operation.PrepareDirectory();
             myBGWorker.ReportProgress(1);
             for (int i = 0; i < thisNoOfSample; i++)
@@ -130,6 +115,19 @@ namespace JobAutomation
                 Operation.GenerateToFile(i);
                 int percentage = (i + 1);
                 myBGWorker.ReportProgress(percentage);
+            }
+            
+            Operation.GenerateMasterFile();
+            SetStatusLabel("Generate Script finished", 1);
+            myBGWorker.ReportProgress(thisNoOfSample + 1);
+            SetStatusLabel("Running Scripts...", 2);
+            try
+            {
+                Operation.RunScript();
+            }
+            catch (Exception ex)
+            {
+                SetStatusLabel("Error on running scripts", 3);
             }
         }
 
@@ -140,7 +138,7 @@ namespace JobAutomation
 
         void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Generate Script finished";
+            
         }
 
         private bool CheckLoginStatus()
@@ -209,5 +207,42 @@ namespace JobAutomation
             }
             #endregion
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SetStatusLabel(string text, int type)
+        {
+            if (InvokeRequired)
+            {
+                // after we've done all the processing, 
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    statusLabel.Text = text;
+                    switch (type)
+                    {
+                        case 1: statusLabel.BackColor = Color.Yellow; break; // ready
+                        case 2: statusLabel.BackColor = Color.Green; break; // running
+                        case 3: statusLabel.BackColor = Color.Red; break; // error
+                    }
+                }));
+                return;
+            }
+            else
+            {
+                statusLabel.Text = text;
+                switch (type)
+                {
+                    case 1: statusLabel.BackColor = Color.Yellow; break; // ready
+                    case 2: statusLabel.BackColor = Color.Green; break; // running
+                    case 3: statusLabel.BackColor = Color.Red; break; // error
+                }
+            }
+        }
+
+
+
     }
 }
