@@ -127,7 +127,7 @@ namespace JobAutomation
             }
             catch (Exception ex)
             {
-                SetStatusLabel("Error on running scripts", 3);
+                SetStatusLabel("Error on running scripts" + ex.Message, 3);
             }
         }
 

@@ -78,7 +78,7 @@ namespace JobAutomation
             try
             {
                 SampleDetail thisDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo];
-                string fileName = GlobalFunc.toggleProfileDetail.operationName + "_sample_" + thisDetail.index.ToString("000") + ".txt";
+                string fileName = GlobalFunc.toggleProfileDetail.operationName + "_options_" + thisDetail.index.ToString("000") + ".txt";
 
                 #region Generate Job File
                 StringBuilder sb = new StringBuilder();
