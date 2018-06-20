@@ -7,7 +7,6 @@ namespace JobAutomation
 {
     public class Setup
     {
-        public string sdfFilePath { set; get; }
         public string gammamVisionPath { set; get; }
         public string password { set; get; }
     }

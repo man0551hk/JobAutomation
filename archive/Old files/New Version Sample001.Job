@@ -1,0 +1,64 @@
+'
+'Gemini ASC 
+'
+'Job Template File ( .jtp ) for Sample Measurement
+'
+'File : SAMPLE_XXX.JTP
+'
+'16 June 2018
+'
+'Version 1.0
+'
+'Run on GammaVision 7 or above to support SET_OPTIONS command
+'
+'
+'-----------------------------------------------------
+'Close all buffers if opened
+CLOSEBUFFERS
+SET_DETECTOR 1
+STOP
+CLEAR
+
+'-----------------------------------------------------
+'Set Change Sample Output to HIGH for 5 sec then LOW 
+
+REM Below commands are commented out for testing - BEGINNIG
+
+REM SEND_MESSAGE "SET_OUTPUT_HIGH"
+REM WAIT 5
+REM SEND_MESSAGE "SET_OUTPUT_LOW"
+
+'---------------------------------------------------
+'Begins change sample cycle and add 20 sec. delay
+'to let ASC changes Sample Ready Output to HIGH 
+'ORTEC MCB Sample Ready Input is Active LOW
+
+REM WAIT 20
+
+'----------------------------------------------------
+'Wait max of 2 min. for Sample Ready Input to go LOW 
+'Typical Cycle time is 60 secons
+
+REM Wait_Changer
+
+'---------------------------------------------------
+REM Above commands are commented out for testing - ENDING
+
+'Generate Sample Definition ( SDF ) File 
+'
+Run "C:\User\GVAP\UpdateSDF.exe C:\User\Sample Types\GV-ASC.Sdf, C:\User\GVAP\Normal_Operation_Sample001.txt"
+Wait "C:\User\GVAP\UpdateSDF.exe"
+Recall_Options "C:\User\Sample Types\GV-ASC.Sdf"
+Describe_Sample "Sample_1"
+
+START
+WAIT 2
+WAIT
+
+Save "C:\USER\SPECTRA\SAMPLE_001.SPC"
+WAIT 5
+
+ANALYZE
+WAIT 5
+
+'End of Job file

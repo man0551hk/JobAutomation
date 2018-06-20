@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
-            this.updateSDFFilePathBtn = new System.Windows.Forms.Button();
             this.saveSetupBtn = new System.Windows.Forms.Button();
             this.verifyPassword = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
@@ -37,8 +36,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.updateSDFFilePath = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.udpatePasswordBtn = new System.Windows.Forms.Button();
@@ -48,7 +45,7 @@
             // 
             // gammaVisionPathBtn
             // 
-            this.gammaVisionPathBtn.Location = new System.Drawing.Point(477, 46);
+            this.gammaVisionPathBtn.Location = new System.Drawing.Point(477, 21);
             this.gammaVisionPathBtn.Name = "gammaVisionPathBtn";
             this.gammaVisionPathBtn.Size = new System.Drawing.Size(31, 23);
             this.gammaVisionPathBtn.TabIndex = 12;
@@ -56,20 +53,10 @@
             this.gammaVisionPathBtn.UseVisualStyleBackColor = true;
             this.gammaVisionPathBtn.Click += new System.EventHandler(this.gammaVisionPathBtn_Click);
             // 
-            // updateSDFFilePathBtn
-            // 
-            this.updateSDFFilePathBtn.Location = new System.Drawing.Point(477, 18);
-            this.updateSDFFilePathBtn.Name = "updateSDFFilePathBtn";
-            this.updateSDFFilePathBtn.Size = new System.Drawing.Size(31, 23);
-            this.updateSDFFilePathBtn.TabIndex = 11;
-            this.updateSDFFilePathBtn.Text = "...";
-            this.updateSDFFilePathBtn.UseVisualStyleBackColor = true;
-            this.updateSDFFilePathBtn.Click += new System.EventHandler(this.updateSDFFilePathBtn_Click);
-            // 
             // saveSetupBtn
             // 
             this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveSetupBtn.Location = new System.Drawing.Point(11, 74);
+            this.saveSetupBtn.Location = new System.Drawing.Point(11, 47);
             this.saveSetupBtn.Name = "saveSetupBtn";
             this.saveSetupBtn.Size = new System.Drawing.Size(261, 23);
             this.saveSetupBtn.TabIndex = 10;
@@ -98,7 +85,7 @@
             // gammaVisionPath
             // 
             this.gammaVisionPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gammaVisionPath.Location = new System.Drawing.Point(127, 48);
+            this.gammaVisionPath.Location = new System.Drawing.Point(127, 21);
             this.gammaVisionPath.Name = "gammaVisionPath";
             this.gammaVisionPath.Size = new System.Drawing.Size(344, 20);
             this.gammaVisionPath.TabIndex = 6;
@@ -127,43 +114,22 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 51);
+            this.label2.Location = new System.Drawing.Point(11, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "GammaVision Path:";
             // 
-            // updateSDFFilePath
-            // 
-            this.updateSDFFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateSDFFilePath.Location = new System.Drawing.Point(127, 21);
-            this.updateSDFFilePath.Name = "updateSDFFilePath";
-            this.updateSDFFilePath.Size = new System.Drawing.Size(344, 20);
-            this.updateSDFFilePath.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Root SDF File Path:";
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.saveSetupBtn);
             this.groupBox1.Controls.Add(this.gammaVisionPath);
             this.groupBox1.Controls.Add(this.gammaVisionPathBtn);
-            this.groupBox1.Controls.Add(this.updateSDFFilePathBtn);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.updateSDFFilePath);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(520, 111);
+            this.groupBox1.Size = new System.Drawing.Size(520, 86);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Setup";
@@ -214,7 +180,6 @@
         #endregion
 
         private System.Windows.Forms.Button gammaVisionPathBtn;
-        private System.Windows.Forms.Button updateSDFFilePathBtn;
         private System.Windows.Forms.Button saveSetupBtn;
         private System.Windows.Forms.TextBox verifyPassword;
         private System.Windows.Forms.TextBox password;
@@ -222,8 +187,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox updateSDFFilePath;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button udpatePasswordBtn;

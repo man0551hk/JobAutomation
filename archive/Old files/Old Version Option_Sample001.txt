@@ -1,0 +1,23 @@
+SampleDescription: S1
+JobTemplatePath: C:\User\GVAP\ChangeSample.jtp
+SDFPath: C:\User\Sample Types\FICOM.Sdf
+CalFileName: C:\User\Calibrations\GvDemo.Clb
+LibFileName: C:\User\Libraries\GvDemo.Lib
+CollectionStart: 
+CollectionEnd: 
+DecayDateTime: 
+Weight: 1
+QuantityUnits: kg
+ActivityUnits: Bq
+LiveTime: 10
+RealTime: 
+Multiplier: 1
+Divisor: 1
+ABSLength: 
+RandomError: 1
+SystematicError: 1
+RandomSummingFactor: 1
+SpectrumFilePath: C:\User\Spectra\spec1Spc
+ABSConfigID: -1
+ABSTypeID: -1
+ABSMaterialID: -1

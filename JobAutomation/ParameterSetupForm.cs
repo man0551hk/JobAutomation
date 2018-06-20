@@ -25,7 +25,6 @@ namespace JobAutomation
             this.FormClosing += ParameterSetupForm_FormClosing;
             if (GlobalFunc.setup != null)
             {
-                updateSDFFilePath.Text = GlobalFunc.setup.sdfFilePath;
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
                 password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
             }
@@ -40,7 +39,6 @@ namespace JobAutomation
         private void saveSetupBtn_Click(object sender, EventArgs e)
         {
             Setup setup = new Setup();
-            setup.sdfFilePath = updateSDFFilePath.Text;
             setup.gammamVisionPath = gammaVisionPath.Text;
             setup.password = GlobalFunc.Encrypt(password.Text);
             string json = js.Serialize(setup);
@@ -54,7 +52,6 @@ namespace JobAutomation
             if (password.Text == verifyPassword.Text)
             {
                 Setup setup = new Setup();
-                setup.sdfFilePath = updateSDFFilePath.Text;
                 setup.gammamVisionPath = gammaVisionPath.Text;
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 string json = js.Serialize(setup);
@@ -68,14 +65,6 @@ namespace JobAutomation
             }
         }
 
-        private void updateSDFFilePathBtn_Click(object sender, EventArgs e)
-        {
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                updateSDFFilePath.Text = ofd.FileName;
-            }
-        }
-
 
         private void gammaVisionPathBtn_Click(object sender, EventArgs e)
         {
@@ -84,5 +73,7 @@ namespace JobAutomation
                 gammaVisionPath.Text = ofd.FileName;
             }
         }
+
+
     }
 }

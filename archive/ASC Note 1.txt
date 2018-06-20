@@ -1,0 +1,30 @@
+Project : ASC Control SW 
+
+16 June 2018
+====================
+
+Notes : 
+(a) XXX has value of 001 to 020
+(b) JTF : Job Template File
+(c) SDF : Sample Definition File
+
+========================================
+(1) SampleList.Job is the Master Measurement Job file
+It is the job file which calls sample job files one by one.
+
+(2) SampleDef.Job is Measurement Job Template File ( JTF ).
+It is the job template file to generate sample job file ( SAMPLEXXX.JOB)
+
+(3) Each SAMPLEXXX.JOB has sample analysis parameters stored in SDF
+
+(4) Within SAMPLEXXX.JOB file, there are commands to generate SDF
+
+(5) ASCXXX.SDF is the generated sample SDF file in C:\User\Sample Types
+
+(6) OptionsXXX.TXT is the sample options ( parameters ) file
+
+(7) ASCDEF.SDF is default SDF in C:\User\Samples Type
+It is used to generate new SDF file with options file by using SET_OPTIONS command
+
+
+END 

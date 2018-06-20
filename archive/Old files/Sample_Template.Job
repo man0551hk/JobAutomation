@@ -1,0 +1,103 @@
+'Date	: 15 June 2018
+'
+'File	: SAMPLE_TEMP.JOB
+'
+'Subject	: ASC2 Sample Job Template File
+'
+'Desc.	: This Job Template File is used to generate target Job file for all samples
+'
+'	This job file could only run in GammaVisions V7 or later to support SET_OPTIONS Job Command
+'
+'	Default Sample Definition File ( SDF ) is used to generate the Target SDF for all samples
+'
+'	Default Filename is ASC2_DEF.SDF
+'
+'	New SDF is generated for each sample according to their setup
+'
+'
+'Below commands are commented out for sw testing
+'-----------------------------------------------
+'Wait 2
+'Set_Detector 1
+'Stop
+'Clear
+'send_message "set_output_high"
+'wait 60
+'send_message "set_output_low"
+'wait_changer
+
+
+'===================================================
+'Generate Sample_1.sdf by modifying ASC2_DEF.SDF
+'===================================================
+'1. Recall ASC2_DEF.SDF in buffer
+'
+'2. Using ASC2 Sample Configuration program to generate OptionsFile ( eg. Sample1.Txt ) for each sample
+'
+'3. Assume Sample1 target sdf is "Sample1.sdf"
+'
+'4. Using Job command SET_OPTIONS “OptionsFile”, “SdfFile” to generate sample sdf file
+'
+'	OptionsFile is "Sample1.txt" and sdfFile is Sample1.sdf"
+'
+'
+'Below codes are replaced by new codes and listed here as ref.
+'====================================================
+'Set to buffer for SW Testing
+
+SET_DETECTOR 0
+
+'Recall default ASC2_DEF.SDF file on C:\USER\SAMPLE TYPES\
+'------------------------------------------------
+RECALL_OPTIONS "ASC2_DEF.SDF"
+ASK_CONFIRM "Recall SDF ok !"
+
+
+'Generate Target SDF for sample using "OptionsFile.txt"
+'OptionsFile.txt listed all changed options and stored on same directory as SDF file
+'new ASC2-NEW.SDF created
+'------------------------------------------------
+SET_OPTIONS "C:\USER\SAMPLE TYPES\Optionsfile.txt","ASC2_NEW.SDF"
+
+REM Check if options changed in SDF file by recalling it from GammaVision 
+REM Analyze --> Settings --> Sample Type --> ASC2_NEW.SDF
+
+ASK_CONFIRM "Update SDF ok !"
+
+
+'Below commands are commented out for sw testing
+'------------------------------------------------
+
+'Start
+'Wait 2
+'Wait
+
+'ENSURE AUTO INCREMENT IS TURNED ON FROM "ACQUIRE\ACQUISTIION SETTINGS" MENU
+'SO THAT THE SAME FILE IS NOT OVERWRITTEN WHEN SAVED.
+'-----------------------------------------------------------------------------
+'Save "$(AutoFile)"
+'Wait 2
+'Analyze
+
+'ALLOW SUFFICIENT TIME FOR THE ANALYSIS AND REPORT GENERATION TO COMPLETE.
+'-------------------------------------------------------------------------
+'Wait 15
+
+
+
+'INSTEAD OF SETTING A SPECIFIC TIME TO ALLOW THE ANALYSIS TO COMPLETE THE
+'FOLLOWING COMMANDS MAY BE USED TO WAIT FOR SPECIFIC FUNCTIONS TO COMPLETE
+'BEFORE MOVING ON TO THE NEXT COMMAND.
+'-------------------------------------------------------------------------
+
+'ENSURE THAT THE ANALYSIS ENGINE USED IN THE SAMPLE DEFAULTS FILE (SDF) IS
+'LISTED HERE.
+'-------------------------------------------------------------------------
+'Wait "C:\Program Files\GammaVision\Npp32.Exe"
+'Wait 2
+
+'THIS COMMAND IS ONLY APPLICABLE IF THE REPORT WRITER IS SELECTED IN
+'THE OUTPUT SECTION OF THE REPORT TAB IN THE SAMPLE DEFAULTS FILE (SDF)
+'-------------------------------------------------------------------------
+
+'Wait "C:\Program Files\ORTEC\GammaVision Report Writer\gvrpt32.exe"

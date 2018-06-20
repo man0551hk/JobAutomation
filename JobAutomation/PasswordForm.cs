@@ -16,10 +16,10 @@ namespace JobAutomation
         {
             InitializeComponent();
             
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.txt"))
-            {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.txt", GlobalFunc.Encrypt("admin"));
-            }
+            //if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
+            //{
+            //    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", GlobalFunc.Encrypt("admin"));
+            //}
         }
 
         private void loginBtn_Click(object sender, EventArgs e)

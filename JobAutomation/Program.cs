@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace JobAutomation
 {
@@ -26,7 +27,14 @@ namespace JobAutomation
            
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
             {
-                GlobalFunc.mainForm.ShowMessage("setup.json not existed");
+                GlobalFunc.mainForm.ShowMessage("setup.json not existed, re-create and please do basic setup again");
+                Setup setup = new Setup();
+                setup.gammamVisionPath = "";
+                setup.password = GlobalFunc.Encrypt("admin");
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                string json = js.Serialize(setup);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
+                GlobalFunc.LoadSetup();
             }
             else
             {

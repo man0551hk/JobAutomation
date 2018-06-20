@@ -196,7 +196,7 @@ namespace JobAutomation
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.decayCorrection = decayCorrectionCB.Checked;
             thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-            thisPD.sampleDetailList = SaveProfileSamplesDetail();
+            thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
             string json = js.Serialize(thisPD);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + thisPD.operationName + ".json", json);
             MessageBox.Show("Save " + profileCB.Text + " successful");
@@ -221,7 +221,7 @@ namespace JobAutomation
                     sampleDetail.index = i;
                     sampleDetail.sampleDescription = "";
                     sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
-                    if (calibrarionCommonCB.Checked && sampleDetail.calibrationFilePath == "")
+                    if (calibrarionCommonCB.Checked || sampleDetail.calibrationFilePath == "")
                     {
                         sampleDetail.calibrationFilePath = calibrationFileTxt.Text;
                     }
@@ -230,14 +230,14 @@ namespace JobAutomation
                         sampleDetail.calibrationFilePath = "";
                     }
                     sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-                    if (sampleQtyCommonCB.Checked && sampleDetail.sampleQuantity == 0)
+                    if (sampleQtyCommonCB.Checked || sampleDetail.sampleQuantity == 0)
                     {
                         sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
                     }
                     else if (sampleDetail.sampleQuantity == 0) {
                         sampleDetail.sampleQuantity = 0;
                     }
-                    if (sampleQtyUnitCommonCB.Checked && sampleDetail.units == "")
+                    if (sampleQtyUnitCommonCB.Checked || sampleDetail.units == "")
                     {
                         sampleDetail.units = sampleQtyUnitCB.Text;
                     }
@@ -245,7 +245,7 @@ namespace JobAutomation
                     {
                         sampleDetail.units = "";
                     }
-                    if (activityUnitCommonCB.Checked && sampleDetail.activityUnits == "")
+                    if (activityUnitCommonCB.Checked || sampleDetail.activityUnits == "")
                     {
                         sampleDetail.activityUnits = activityUnitCB.Text;
                     }
@@ -253,7 +253,7 @@ namespace JobAutomation
                     {
                         sampleDetail.activityUnits = "";
                     }
-                    if (countingTimeCommonCB.Checked && sampleDetail.countingTime == 0)
+                    if (countingTimeCommonCB.Checked || sampleDetail.countingTime == 0)
                     {
                         sampleDetail.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
                     }

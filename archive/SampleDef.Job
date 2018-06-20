@@ -1,0 +1,83 @@
+'
+'Gemini ASC 
+'
+'Job Template File for Sample Measurement
+'
+'File : SAMPLEDEF.JOB
+'
+'16 June 2018
+'
+'Version 1.0
+'
+'Run on GammaVision 7 or above to support SET_OPTIONS command
+'
+'
+'-----------------------------------------------------
+'Close all buffers if opened
+CLOSEBUFFERS
+SET_DETECTOR 1
+STOP
+CLEAR
+
+'-----------------------------------------------------
+'Set Change Sample Output to HIGH for 5 sec then LOW 
+
+REM Below commands are commented out for testing - BEGINNIG
+
+REM SEND_MESSAGE "SET_OUTPUT_HIGH"
+REM WAIT 5
+REM SEND_MESSAGE "SET_OUTPUT_LOW"
+
+'---------------------------------------------------
+'Begins change sample cycle and add 20 sec. delay
+'to let ASC changes Sample Ready Output to HIGH 
+'ORTEC MCB Sample Ready Input is Active LOW
+
+REM WAIT 20
+
+'----------------------------------------------------
+'Wait max of 2 min. for Sample Ready Input to go LOW 
+'Typical Cycle time is 60 secons
+
+REM Wait_Changer
+
+'---------------------------------------------------
+REM Above commands are commented out for testing - ENDING
+
+'Generate Sample Definition ( SDF ) File 
+'
+
+'Generate Target SDF for sample using "OPTIONSXXX.TXT", where XXX is sample no. of 001 to 019
+'OPTIONSXXX.TXT listed all changed options and stored on same directory as SDF file
+'new ASCXXX.SDF will create, where XXX is sample no.
+'------------------------------------------------
+
+REM RECALL_OPTIONS "C:\USER\SAMPLE TYPES\ASCDEF.SDF"
+
+SET_OPTIONS "C:\USER\SAMPLE TYPES\OPTIONSXXX.TXT","ASCXXX.SDF"
+
+REM Check if options changed in SDF file by recalling it from GammaVision 
+REM Analyze --> Settings --> Sample Type --> ASCXXX.SDF
+
+'ASK_CONFIRM "Update SDF ok !"
+
+RECALL_OPTIONS "C:\USER\SAMPLE TYPES\ASCXXX.SDF"
+DESCRIBE_SAMPLE "SAMPLEXXX"
+
+SET_PRESET_LIVE 10
+
+'ASK_CONFIRM "Check Preset Live of 10 sec & sample desc"
+
+START
+WAIT 2
+WAIT
+
+SAVE "C:\USER\SPECTRA\SAMPLEXXX.SPC"
+WAIT 5
+
+ANALYZE
+WAIT 5
+
+
+'End of Job file
+'Return to Calling Job File

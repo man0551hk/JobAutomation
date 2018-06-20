@@ -1,0 +1,57 @@
+'
+'Government Lab. Gemini ASC 
+'
+'Job Template File ( .jtp ) for Sample Measurement
+'Version 1.0
+'3 April 2013
+
+
+Set_Detector 1
+Stop
+Clear
+
+'-----------------------------------------------------
+'Set Change Sample Output to HIGH for 5 sec then LOW 
+ 
+Send_Message "set_output_high"
+Wait 5
+Send_Message "set_output_low"
+
+
+'---------------------------------------------------
+'Begins change sample cycle and add 20 sec. delay
+'to let ASC changes Sample Ready Output to HIGH 
+'ORTEC MCB Sample Ready Input is Active LOW
+
+Wait 2
+'Wait 20
+
+
+'----------------------------------------------------
+'Wait max of 2 min. for Sample Ready Input to go LOW 
+'Typical Cycle time is 60 secons
+
+Wait_Changer
+
+
+'---------------------------------------------------
+
+Run "C:\User\GVAP\UpdateSDF.exe C:\User\Sample Types\GV-ASC.Sdf, C:\User\GVAP\Normal_Operation_Sample001.txt"
+Wait "C:\User\GVAP\UpdateSDF.exe"
+Recall_Options "C:\User\Sample Types\GV-ASC.Sdf"
+Describe_Sample "Sample_1"
+
+Start
+Wait 2
+Wait
+
+Save "C:\User\Spectra\Sample_1.Spc"
+Wait 5
+
+Analyze
+Wait 5
+
+'End of Job file
+
+
+

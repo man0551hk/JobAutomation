@@ -201,6 +201,7 @@ namespace JobAutomation
             GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileName);
 
             #region set sampleNo
+            sampleNoCB.Items.Clear();
             for (int i = 1; i <= GlobalFunc.toggleProfileDetail.sampleNo; i++)
             {
                 sampleNoCB.Items.Add(i);
