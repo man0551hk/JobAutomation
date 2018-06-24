@@ -129,7 +129,7 @@ namespace JobAutomation
                     activityUnitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                     activityUnitComboBox.Width = 75;
                     activityUnitComboBox.Items.Add("Bq");
-                    activityUnitComboBox.Items.Add("mCi");
+                    activityUnitComboBox.Items.Add("μCi");
                     activityUnitComboBox.Name = "activityUnitComboBox@" + i;
                     activityUnitComboBox.SelectedIndex = activityUnitComboBox.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].activityUnits);
                     Point activityUnitLocation = new Point(425, textBoxY);

@@ -1,0 +1,71 @@
+'
+'Gemini ASC 
+'
+'Job Template File for Sample Measurement
+'
+'File : DefSample.Job
+'
+'23 June 2018
+'
+'Version 1.1
+'
+'Run on GammaVision 7 or above to support SET_OPTIONS command
+'
+'
+'-----------------------------------------------------
+'Close all buffers if opened
+CLOSEBUFFERS
+SET_DETECTOR 1
+STOP
+CLEAR
+
+'-----------------------------------------------------
+'Set Change Sample Output to HIGH for 5 sec then LOW 
+
+REM Below commands are commented out for testing - BEGINNIG
+
+REM SEND_MESSAGE "SET_OUTPUT_HIGH"
+REM WAIT 5
+REM SEND_MESSAGE "SET_OUTPUT_LOW"
+
+'---------------------------------------------------
+'Begins change sample cycle and add 20 sec. delay
+'to let ASC changes Sample Ready Output to HIGH 
+'ORTEC MCB Sample Ready Input is Active LOW
+
+REM WAIT 20
+
+'----------------------------------------------------
+'Wait max of 2 min. for Sample Ready Input to go LOW 
+'Typical Cycle time is 60 secons
+
+REM Wait_Changer
+
+'---------------------------------------------------
+REM Above commands are commented out for testing - ENDING
+
+'Generate Sample Definition ( SDF ) File using DefOptions.Txt
+'new ASCXXX.SDF will create, where XXX is sample no. from 001 to 020
+'------------------------------------------------
+RECALL_OPTIONS "C:\USER\SAMPLE TYPES\DefAscSdf.SDF"
+SET_OPTIONS "C:\USER\SAMPLE TYPES\DefOptions.Txt","ASCXXX.SDF"
+RECALL_OPTIONS "C:\USER\SAMPLE TYPES\ASCXXX.SDF"
+
+DESCRIBE_SAMPLE "SAMPLEXXX"
+
+SET_PRESET_LIVE 10
+
+'ASK_CONFIRM "Check Preset Live of 10 sec & sample desc"
+
+START
+WAIT 2
+WAIT
+
+SAVE "C:\USER\SPECTRA\SAMPLEXXX.SPC"
+WAIT 5
+
+ANALYZE
+WAIT 5
+
+'No QUIT command is needed; return to the calling job file 
+'End of Job file

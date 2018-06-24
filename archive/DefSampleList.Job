@@ -1,0 +1,43 @@
+'========================================
+'Filename : SampleList.Job File
+
+'Default Directory : C\User\ASC
+ 
+'23 June 2018
+
+'Version 1.1
+
+'Description : This file contains listing of Sample Job files in 
+'Ascending order for max. of 20 samples per List
+
+'Add SET_SETTING commands for Laboratory and Operator
+'===========================================
+SET_SETTING "Laboratory","IACM"
+SET_SETTING "Operator","IACM"
+
+'Insert Quit command to appropriate postion to quit job file 
+'===========================================
+Call "C:\User\ASC\Sample001.JOB"
+QUIT
+Call "C:\User\ASC\Sample002.JOB"
+Call "C:\User\ASC\Sample003.JOB"
+Call "C:\User\ASC\Sample004.JOB"
+Call "C:\User\ASC\Sample005.JOB"
+Call "C:\User\ASC\Sample006.JOB"
+Call "C:\User\ASC\Sample007.JOB"
+Call "C:\User\ASC\Sample008.JOB"
+Call "C:\User\ASC\Sample008.JOB"
+Call "C:\User\ASC\Sample010.JOB"
+Call "C:\User\ASC\Sample011.JOB"
+Call "C:\User\ASC\Sample012.JOB"
+Call "C:\User\ASC\Sample013.JOB"
+Call "C:\User\ASC\Sample014.JOB"
+Call "C:\User\ASC\Sample015.JOB"
+Call "C:\User\ASC\Sample016.JOB"
+Call "C:\User\ASC\Sample017.JOB"
+Call "C:\User\ASC\Sample018.JOB"
+Call "C:\User\ASC\Sample019.JOB"
+Call "C:\User\ASC\Sample020.JOB"
+Quit
+
+'END

@@ -40,6 +40,18 @@ namespace JobAutomation
             {
                 GlobalFunc.LoadSetup();
             }
+
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job"))
+            {
+                GlobalFunc.mainForm.ShowMessage("DefSample.Job file not found");
+            }
+
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job"))
+            {
+                GlobalFunc.mainForm.ShowMessage("DefOptions.Txt file not found");
+            }
+                
+
             Application.Run(GlobalFunc.mainForm);
         }
     }

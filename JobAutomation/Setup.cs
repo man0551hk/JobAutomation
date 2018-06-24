@@ -8,6 +8,8 @@ namespace JobAutomation
     public class Setup
     {
         public string gammamVisionPath { set; get; }
+        public string laboratory { set; get; }
+        public string _operator { set; get; }
         public string password { set; get; }
     }
 }

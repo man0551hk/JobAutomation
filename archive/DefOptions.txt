@@ -1,0 +1,80 @@
+'Default OptionsFile for ASC Software
+'
+'File : DefOptions.Txt
+'
+'23 June 2018
+'
+'Ver 1.1
+'
+'***** BLANK LINE WILL TERMINATE THE PARSING PROCESS *******
+'
+'========================
+'SAMPLE
+'========================
+AnalysisStartChannel, 20
+AnalysisEndChannel, 900
+RandomSummingFactor, 0
+BackgroundTypeOption, 0
+InternalLibraryEnabled, 0
+LibraryFilePath, "C:\User\Libraries\GvDemo.Lib"
+InternalCalibrationEnabled, 0
+CalibrationFilePath, "C:\User\Calibrations\GvDemo.Clb"
+'
+'========================
+'SYSTEM 
+'========================
+'Using SET_SETTING commands in SampleList.Job to set Laboratory and Operator
+'Laboratory, "IACM"
+'Operator, "IACM"
+MDAMethod, 12
+PeakSearchSensitivityOption, 3
+MatchWidth, 0.5
+FractionLimit, 0
+SuspectedNuclideLibraryPath, "C:\User\Libraries\Suspect.Lib"
+ActivityuCi, 0
+ActivityUnits, Bq
+ActivityMultiplier, 1
+ActivityDivisor, 1
+SampleQuantity, 1.0
+SampleQuantityUnits, kg
+SampleQuantityUncertainty, 0
+'
+'========================
+'DECAY
+'========================
+DecayToCollectionEnabled, 0
+DecayDuringAcquisitionEnabled, 0
+DecayToDate, "2017-12-31 12:00:00"
+DecayDuringCollectionEnabled, 0
+CollectionStartDate, "2018-02-01 00:00:00"
+CollectionEndDate, "2018-02-02 00:00:00"
+'
+'========================
+'REPORT 
+'========================
+ReportUnknownPeaksEnabled, 0
+ReportLibraryPeakListEnabled, 1
+ReportLibraryPeakMatrixEnabled, 1
+ReportNuclideAbundanceEnabled, 0
+ReportIsoNormEnabled, 0
+'
+UncertaintyPercentOption, 1
+UncertaintyCountingOption, 0
+UncertaintyConfidenceLevelOption, 3
+'
+DisplayAnalysisResultsEnabled, 0
+ReportOutputOption, 2
+ReportFilePath, "C:\User\Reports\*"
+'Below commands are not used
+'ReportWriterTemplatePath
+
+'========================
+'ANALYSIS 
+'========================
+AnalysisEngine, "WAN32"
+AdditionalRandomError, 1.0
+AdditionalSystemicError, 1.0
+'
+'
+'END
+

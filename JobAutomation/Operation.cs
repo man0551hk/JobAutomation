@@ -138,7 +138,8 @@ namespace JobAutomation
                 #endregion
                 File.WriteAllText(path + @"\JobOptionFiles\" + optionsfileName, sb.ToString());
 
-                GenerateDefaultJobTemplate();
+                //GenerateDefaultJobTemplate();
+                //GenerateDefaultOptionsTemplate();
                 string jobFileStr = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt");
                 jobFileStr = jobFileStr.Replace("{sourceSDF}",  GlobalFunc.toggleProfileDetail.sampleDefinitionFile);
                 jobFileStr = jobFileStr.Replace("{jobOptionFile}", path + @"\JobOptionFiles\" + optionsfileName);

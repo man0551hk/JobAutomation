@@ -24,6 +24,14 @@ namespace JobAutomation
             sampleQtyTxt.KeyPress += CheckISNumber_KeyPress;
             countingTime.KeyPress += CheckISNumber_KeyPress;
             SetProfile();
+
+            if (GlobalFunc.setup != null)
+            {
+                gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
+                password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
+                laboratory.Text = GlobalFunc.setup.laboratory;
+                _operator.Text = GlobalFunc.setup._operator;
+            }
         }
 
         public void ShowMessage(string msg)
@@ -183,6 +191,7 @@ namespace JobAutomation
             thisPD.prefix = prefixTxt.Text;
             thisPD.sampleNo = noOfSampleCB.Text != "" ? Convert.ToInt32(noOfSampleCB.Text) : 0;
             thisPD.sampleDefinitionFile = sampleDefinitionFileTxt.Text;
+            thisPD.commonSDF = sdfCommonCB.Checked;
             thisPD.calibrationFile = calibrationFileTxt.Text;
             thisPD.commonCalibrationFile = calibrarionCommonCB.Checked;
             thisPD.qtyUnit = sampleQtyUnitCB.Text;
@@ -194,8 +203,11 @@ namespace JobAutomation
             thisPD.activityUnit = activityUnitCB.Text;
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
+            thisPD.commonLibrary = libraryCommonCB.Checked;
             thisPD.decayCorrection = decayCorrectionCB.Checked;
+            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
             thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+            thisPD.commonDecayDate = decayDateCommonCB.Checked;
             thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
             string json = js.Serialize(thisPD);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + thisPD.operationName + ".json", json);
@@ -272,27 +284,6 @@ namespace JobAutomation
         private void CheckISNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
-        private void commonAllCB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (commonAllCB.Checked || GlobalFunc.finishEditSample)
-            {
-                doneBtn.Enabled = true;
-                editSampleBtn.Enabled = false;
-            }
-            else 
-            {
-                doneBtn.Enabled = false;
-            }
-            if (commonAllCB.Checked)
-            {
-                calibrarionCommonCB.Checked = true;
-                sampleQtyUnitCommonCB.Checked = true;
-                sampleQtyCommonCB.Checked = true;
-                countingTimeCommonCB.Checked = true;
-                activityUnitCommonCB.Checked = true;
-            }
         }
 
         private void editSampleBtn_Click(object sender, EventArgs e)
@@ -394,13 +385,38 @@ namespace JobAutomation
             CheckboxControl();
         }
 
+        private void sdfCommonCB_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxControl();
+        }
+
+        private void libraryCommonCb_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxControl();
+        }
+
+        private void decayCorrectionCommon_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxControl();
+        }
+
+        private void decayDateCommon_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxControl();
+        }
+
         private void CheckboxControl()
         {
-            commonAllCB.Checked = false;
-            if (calibrarionCommonCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked)
+            //commonAllCB.Checked = false;
+            if (sdfCommonCB.Checked &&
+                calibrarionCommonCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked
+                && libraryCommonCB.Checked
+                && decayCorrectionCommonCB.Checked
+                && decayDateCommonCB.Checked
+                )
             {
                 editSampleBtn.Enabled = false;
-                commonAllCB.Checked = true;
+                //commonAllCB.Checked = true;
                 doneBtn.Enabled = true;
             }
             else
@@ -423,5 +439,67 @@ namespace JobAutomation
         {
             doneBtn.Enabled = true;
         }
+
+        private void saveMasterSetupBtn_Click(object sender, EventArgs e)
+        {
+            if (laboratory.Text != "" && _operator.Text != "")
+            {
+                Setup setup = new Setup();
+                setup.gammamVisionPath = gammaVisionPath.Text;
+                setup.password = GlobalFunc.Encrypt(password.Text);
+                setup.laboratory = laboratory.Text;
+                setup._operator = _operator.Text;
+                string json = js.Serialize(setup);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
+                GlobalFunc.LoadSetup();
+                MessageBox.Show("Save master file parameter successful");
+            }
+        }
+
+        private void saveSetupBtn_Click(object sender, EventArgs e)
+        {
+            Setup setup = new Setup();
+            setup.gammamVisionPath = gammaVisionPath.Text;
+            setup.password = GlobalFunc.Encrypt(password.Text);
+            setup.laboratory = laboratory.Text;
+            setup._operator = _operator.Text;
+            string json = js.Serialize(setup);
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
+            GlobalFunc.LoadSetup();
+            MessageBox.Show("Save system setup parameter successful");
+        }
+
+        private void udpatePasswordBtn_Click(object sender, EventArgs e)
+        {
+            if (password.Text == verifyPassword.Text)
+            {
+                Setup setup = new Setup();
+                setup.gammamVisionPath = gammaVisionPath.Text;
+                setup.password = GlobalFunc.Encrypt(password.Text);
+                setup.laboratory = laboratory.Text;
+                setup._operator = _operator.Text;
+                string json = js.Serialize(setup);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
+                GlobalFunc.LoadSetup();
+                MessageBox.Show("update Password successful");
+            }
+            else
+            {
+                MessageBox.Show("Verify Password not matched");
+            }
+        }
+
+        private void gammaVisionPathBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                gammaVisionPath.Text = ofd.FileName;
+            }
+        }
+
+
+
+
+
     }
 }

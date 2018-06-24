@@ -89,19 +89,17 @@ namespace JobAutomation
         int thisNoOfSample = 0;
         private void scsBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(sampleNoCB.Text))
-            {
-                SetStatusLabel("Please select sample no.", 3);
-            }
-            else
-            {
-                thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
-                progressBar.Minimum = 0;
-                progressBar.Maximum = thisNoOfSample + 1;
-
-                myBGWorker.RunWorkerAsync();
-            }
-
+            thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
+            //if (string.IsNullOrEmpty(sampleNoCB.Text))
+            //{
+            //    SetStatusLabel("Please select sample no.", 3);
+            //}
+            //else
+            //{
+            //    thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
+            ///   myBGWorker.RunWorkerAsync();
+            //}
+            myBGWorker.RunWorkerAsync();
         }
 
         private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -133,7 +131,7 @@ namespace JobAutomation
 
         void myBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar.Value = e.ProgressPercentage;
+         
         }
 
         void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -201,11 +199,11 @@ namespace JobAutomation
             GlobalFunc.toggleProfileDetail = GlobalFunc.profileDetailList.Find(pd => pd.operationName == profileName);
 
             #region set sampleNo
-            sampleNoCB.Items.Clear();
-            for (int i = 1; i <= GlobalFunc.toggleProfileDetail.sampleNo; i++)
-            {
-                sampleNoCB.Items.Add(i);
-            }
+            //sampleNoCB.Items.Clear();
+            //for (int i = 1; i <= GlobalFunc.toggleProfileDetail.sampleNo; i++)
+            //{
+            //    sampleNoCB.Items.Add(i);
+            //}
             #endregion
         }
 

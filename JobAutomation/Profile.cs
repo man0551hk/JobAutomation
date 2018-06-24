@@ -18,6 +18,7 @@ namespace JobAutomation
         public string prefix { set; get; }
         public int sampleNo { set; get; }
         public string sampleDefinitionFile { set; get; }
+        public bool commonSDF { set; get; }
         public string calibrationFile { set; get; }
         public bool commonCalibrationFile { set; get; }
         public string qtyUnit { set; get; }
@@ -29,8 +30,11 @@ namespace JobAutomation
         public string activityUnit { set; get; }
         public bool commonActivityUnit { set; get; }
         public string libraryFile { set; get; }
+        public bool commonLibrary { set; get; }
         public bool decayCorrection { set; get; }
+        public bool commonDecayCorrection { set; get; }
         public string decayCorrectionDate { set; get; }
+        public bool commonDecayDate { set; get; }
 
         public List<SampleDetail> sampleDetailList { set; get; }
     }
