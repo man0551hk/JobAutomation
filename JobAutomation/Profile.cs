@@ -50,6 +50,7 @@ namespace JobAutomation
 
         public string calibrationFilePath { set; get; }
 
+        public bool decayCorrection { set; get; }
 
         public string decayCorrectionDate { set; get; }
 

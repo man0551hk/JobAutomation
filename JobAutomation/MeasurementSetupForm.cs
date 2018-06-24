@@ -164,7 +164,10 @@ namespace JobAutomation
                     prefixTxt.Text = GlobalFunc.profileDetailList[i].prefix;
                     noOfSampleCB.SelectedIndex = noOfSampleCB.FindString(GlobalFunc.profileDetailList[i].sampleNo.ToString());
                     GlobalFunc.toggleTotalSample = GlobalFunc.profileDetailList[i].sampleNo;
+                    
+                    sdfCommonCB.Checked = GlobalFunc.profileDetailList[i].commonSDF;
                     sampleDefinitionFileTxt.Text = GlobalFunc.profileDetailList[i].sampleDefinitionFile;
+
                     calibrationFileTxt.Text = GlobalFunc.profileDetailList[i].calibrationFile;
                     calibrarionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonCalibrationFile;
                     sampleQtyUnitCB.SelectedIndex = sampleQtyUnitCB.FindString(GlobalFunc.profileDetailList[i].qtyUnit);
@@ -175,9 +178,16 @@ namespace JobAutomation
                     countingTimeCommonCB.Checked = GlobalFunc.profileDetailList[i].commonCountingTime;
                     activityUnitCB.SelectedIndex = activityUnitCB.FindString(GlobalFunc.profileDetailList[i].activityUnit);
                     activityUnitCommonCB.Checked = GlobalFunc.profileDetailList[i].commonActivityUnit;
+                    
                     libraryFileTxt.Text = GlobalFunc.profileDetailList[i].libraryFile;
+                    libraryCommonCB.Checked = GlobalFunc.profileDetailList[i].commonLibrary;
+
+
+                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
                     decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
+
                     decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
+                    decayDateCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayDate;
                     break;
                 }
             }
@@ -324,9 +334,6 @@ namespace JobAutomation
             {
                 SaveProfile();
                 SaveProfileMasterDetail();
-
-               
-
                 //GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
                 //LoadProfileDetail();
                 saveOk = true;

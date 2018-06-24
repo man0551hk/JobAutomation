@@ -62,11 +62,18 @@
             this.countTimeDoneBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.sampleDecayCorrectionCB = new System.Windows.Forms.CheckBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.sampleTab.SuspendLayout();
             this.calibrationTab.SuspendLayout();
             this.quantityUnitTab.SuspendLayout();
             this.countTimeTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -75,6 +82,7 @@
             this.tabControl1.Controls.Add(this.calibrationTab);
             this.tabControl1.Controls.Add(this.quantityUnitTab);
             this.tabControl1.Controls.Add(this.countTimeTab);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -84,6 +92,8 @@
             // 
             // sampleTab
             // 
+            this.sampleTab.Controls.Add(this.sampleDecayCorrectionCB);
+            this.sampleTab.Controls.Add(this.label16);
             this.sampleTab.Controls.Add(this.sampleDefinationFileBtn);
             this.sampleTab.Controls.Add(this.sampleCalibrationFileBtn);
             this.sampleTab.Controls.Add(this.sampleCorrectionDate);
@@ -137,7 +147,7 @@
             // 
             this.sampleCorrectionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleCorrectionDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.sampleCorrectionDate.Location = new System.Drawing.Point(177, 213);
+            this.sampleCorrectionDate.Location = new System.Drawing.Point(177, 233);
             this.sampleCorrectionDate.Name = "sampleCorrectionDate";
             this.sampleCorrectionDate.Size = new System.Drawing.Size(200, 20);
             this.sampleCorrectionDate.TabIndex = 17;
@@ -200,7 +210,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 217);
+            this.label15.Location = new System.Drawing.Point(6, 237);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(165, 16);
             this.label15.TabIndex = 10;
@@ -437,6 +447,66 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "Sample";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 211);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 16);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "Decay Correction";
+            // 
+            // sampleDecayCorrectionCB
+            // 
+            this.sampleDecayCorrectionCB.AutoSize = true;
+            this.sampleDecayCorrectionCB.Location = new System.Drawing.Point(177, 213);
+            this.sampleDecayCorrectionCB.Name = "sampleDecayCorrectionCB";
+            this.sampleDecayCorrectionCB.Size = new System.Drawing.Size(15, 14);
+            this.sampleDecayCorrectionCB.TabIndex = 21;
+            this.sampleDecayCorrectionCB.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(751, 621);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "Decay Correction";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(195, 3);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(128, 16);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Decay Correction";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(43, 3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(61, 16);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Sample";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(382, 3);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(165, 16);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Decay Correction Date";
+            // 
             // EditSampleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,6 +524,8 @@
             this.quantityUnitTab.PerformLayout();
             this.countTimeTab.ResumeLayout(false);
             this.countTimeTab.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -494,5 +566,11 @@
         private System.Windows.Forms.TextBox sampleQty;
         private System.Windows.Forms.ComboBox sampleQtyUnitCB;
         private System.Windows.Forms.TextBox sampleCalibrationFile;
+        private System.Windows.Forms.CheckBox sampleDecayCorrectionCB;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

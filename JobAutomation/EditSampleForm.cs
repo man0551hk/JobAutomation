@@ -24,12 +24,51 @@ namespace JobAutomation
             sampleQty.KeyPress += CheckISNumber_KeyPress;
             sampleCountTime.KeyPress += CheckISNumber_KeyPress;
             sampleCB.MouseDown += sampleCB__MouseDown;
-            
+
+
+            ConstructLayout();
+
             Construct();
             ConstructCalibrationTab();
             ConstructQuantityUnitTab();
             ConstructCountTimeTab();
         }
+
+        #region construct layout
+        public void ConstructLayout()
+        {
+            if (GlobalFunc.toggleProfileDetail.commonCalibrationFile == true)
+            {
+                sampleCalibrationFile.Enabled = false;
+                sampleCalibrationFileBtn.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonQtyUnit == true)
+            {
+                sampleQtyUnitCB.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonQty == true)
+            {
+                sampleQty.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonCountingTime == true)
+            {
+                sampleCountTime.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
+            {
+                sampleDecayCorrectionCB.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonDecayDate == true)
+            {
+                sampleCorrectionDate.Enabled = false;
+            }
+            if (GlobalFunc.toggleProfileDetail.commonSDF == true)
+            {
+                sampleDefinationFile.Enabled = false;
+                sampleDefinationFileBtn.Enabled = false;
+            }
+        }
+        #endregion
 
         #region construct control
         public void Construct()
@@ -286,6 +325,7 @@ namespace JobAutomation
                     sampleCountTime.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime.ToString();
                     sampleDescription.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription;
                     sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
+                    sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrection;
                     sampleCorrectionDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate;
                     break;
                 }

@@ -60,6 +60,10 @@
             this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.decayDateCommonCB = new System.Windows.Forms.CheckBox();
+            this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
+            this.libraryCommonCB = new System.Windows.Forms.CheckBox();
+            this.sdfCommonCB = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -79,10 +83,6 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.sdfCommonCB = new System.Windows.Forms.CheckBox();
-            this.libraryCommonCB = new System.Windows.Forms.CheckBox();
-            this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
-            this.decayDateCommonCB = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -214,6 +214,7 @@
             // 
             this.sampleQtyTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleQtyTxt.Location = new System.Drawing.Point(201, 243);
+            this.sampleQtyTxt.MaxLength = 10;
             this.sampleQtyTxt.Name = "sampleQtyTxt";
             this.sampleQtyTxt.Size = new System.Drawing.Size(78, 20);
             this.sampleQtyTxt.TabIndex = 19;
@@ -222,6 +223,7 @@
             // 
             this.countingTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countingTime.Location = new System.Drawing.Point(201, 269);
+            this.countingTime.MaxLength = 6;
             this.countingTime.Name = "countingTime";
             this.countingTime.Size = new System.Drawing.Size(78, 20);
             this.countingTime.TabIndex = 20;
@@ -477,6 +479,58 @@
             this.tabPage1.Text = "Measurement Setup";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // decayDateCommonCB
+            // 
+            this.decayDateCommonCB.AutoSize = true;
+            this.decayDateCommonCB.Checked = true;
+            this.decayDateCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.decayDateCommonCB.Location = new System.Drawing.Point(18, 372);
+            this.decayDateCommonCB.Name = "decayDateCommonCB";
+            this.decayDateCommonCB.Size = new System.Drawing.Size(155, 17);
+            this.decayDateCommonCB.TabIndex = 46;
+            this.decayDateCommonCB.Text = "Decay Correction Date";
+            this.decayDateCommonCB.UseVisualStyleBackColor = true;
+            this.decayDateCommonCB.CheckedChanged += new System.EventHandler(this.decayDateCommon_CheckedChanged);
+            // 
+            // decayCorrectionCommonCB
+            // 
+            this.decayCorrectionCommonCB.AutoSize = true;
+            this.decayCorrectionCommonCB.Checked = true;
+            this.decayCorrectionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.decayCorrectionCommonCB.Location = new System.Drawing.Point(19, 349);
+            this.decayCorrectionCommonCB.Name = "decayCorrectionCommonCB";
+            this.decayCorrectionCommonCB.Size = new System.Drawing.Size(124, 17);
+            this.decayCorrectionCommonCB.TabIndex = 45;
+            this.decayCorrectionCommonCB.Text = "Decay Correction";
+            this.decayCorrectionCommonCB.UseVisualStyleBackColor = true;
+            this.decayCorrectionCommonCB.CheckedChanged += new System.EventHandler(this.decayCorrectionCommon_CheckedChanged);
+            // 
+            // libraryCommonCB
+            // 
+            this.libraryCommonCB.AutoSize = true;
+            this.libraryCommonCB.Checked = true;
+            this.libraryCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.libraryCommonCB.Location = new System.Drawing.Point(19, 325);
+            this.libraryCommonCB.Name = "libraryCommonCB";
+            this.libraryCommonCB.Size = new System.Drawing.Size(88, 17);
+            this.libraryCommonCB.TabIndex = 44;
+            this.libraryCommonCB.Text = "Library File";
+            this.libraryCommonCB.UseVisualStyleBackColor = true;
+            this.libraryCommonCB.CheckedChanged += new System.EventHandler(this.libraryCommonCb_CheckedChanged);
+            // 
+            // sdfCommonCB
+            // 
+            this.sdfCommonCB.AutoSize = true;
+            this.sdfCommonCB.Checked = true;
+            this.sdfCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.sdfCommonCB.Location = new System.Drawing.Point(19, 166);
+            this.sdfCommonCB.Name = "sdfCommonCB";
+            this.sdfCommonCB.Size = new System.Drawing.Size(149, 17);
+            this.sdfCommonCB.TabIndex = 43;
+            this.sdfCommonCB.Text = "Sample Definition File";
+            this.sdfCommonCB.UseVisualStyleBackColor = true;
+            this.sdfCommonCB.CheckedChanged += new System.EventHandler(this.sdfCommonCB_CheckedChanged);
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -678,50 +732,6 @@
             this.label7.Size = new System.Drawing.Size(99, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
-            // 
-            // sdfCommonCB
-            // 
-            this.sdfCommonCB.AutoSize = true;
-            this.sdfCommonCB.Location = new System.Drawing.Point(19, 166);
-            this.sdfCommonCB.Name = "sdfCommonCB";
-            this.sdfCommonCB.Size = new System.Drawing.Size(149, 17);
-            this.sdfCommonCB.TabIndex = 43;
-            this.sdfCommonCB.Text = "Sample Definition File";
-            this.sdfCommonCB.UseVisualStyleBackColor = true;
-            this.sdfCommonCB.CheckedChanged += new System.EventHandler(this.sdfCommonCB_CheckedChanged);
-            // 
-            // libraryCommonCB
-            // 
-            this.libraryCommonCB.AutoSize = true;
-            this.libraryCommonCB.Location = new System.Drawing.Point(19, 325);
-            this.libraryCommonCB.Name = "libraryCommonCB";
-            this.libraryCommonCB.Size = new System.Drawing.Size(88, 17);
-            this.libraryCommonCB.TabIndex = 44;
-            this.libraryCommonCB.Text = "Library File";
-            this.libraryCommonCB.UseVisualStyleBackColor = true;
-            this.libraryCommonCB.CheckedChanged += new System.EventHandler(this.libraryCommonCb_CheckedChanged);
-            // 
-            // decayCorrectionCommonCB
-            // 
-            this.decayCorrectionCommonCB.AutoSize = true;
-            this.decayCorrectionCommonCB.Location = new System.Drawing.Point(19, 349);
-            this.decayCorrectionCommonCB.Name = "decayCorrectionCommonCB";
-            this.decayCorrectionCommonCB.Size = new System.Drawing.Size(124, 17);
-            this.decayCorrectionCommonCB.TabIndex = 45;
-            this.decayCorrectionCommonCB.Text = "Decay Correction";
-            this.decayCorrectionCommonCB.UseVisualStyleBackColor = true;
-            this.decayCorrectionCommonCB.CheckedChanged += new System.EventHandler(this.decayCorrectionCommon_CheckedChanged);
-            // 
-            // decayDateCommonCB
-            // 
-            this.decayDateCommonCB.AutoSize = true;
-            this.decayDateCommonCB.Location = new System.Drawing.Point(18, 372);
-            this.decayDateCommonCB.Name = "decayDateCommonCB";
-            this.decayDateCommonCB.Size = new System.Drawing.Size(155, 17);
-            this.decayDateCommonCB.TabIndex = 46;
-            this.decayDateCommonCB.Text = "Decay Correction Date";
-            this.decayDateCommonCB.UseVisualStyleBackColor = true;
-            this.decayDateCommonCB.CheckedChanged += new System.EventHandler(this.decayDateCommon_CheckedChanged);
             // 
             // MeasurementSetupForm
             // 
