@@ -591,6 +591,11 @@ namespace JobAutomation
             }
         }
 
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            SaveCurrent();
+        }
+
 
 
 

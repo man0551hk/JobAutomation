@@ -13,7 +13,7 @@ namespace JobAutomation
 
         public static void GenerateDefaultJobTemplate()
         {
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt"))
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job".ToLower()))
             {
                 StringBuilder sb = new StringBuilder();
 
@@ -52,36 +52,7 @@ namespace JobAutomation
                 sb.AppendLine("ANALYZE");
                 sb.AppendLine();
                 sb.AppendLine("WAIT 5");
-
-
-
-                
-
-                //C:\User\ASC2\ASC2_DEF.Sdf
-                //sb.AppendLine("Recall_Options \"{sourceSDF}\"");
-
-                //sb.AppendLine("SET_OPTIONS \"{jobOptionFile}\", \"{targetFile}\"");
-
-                //sb.AppendLine("Recall_Options \"{targetFile}\"");
-
-                //sb.AppendLine("Describe_Sample \"{description}\"");
-
-                //sb.AppendLine("Start");
-                //sb.AppendLine("Wait 2");
-                //sb.AppendLine("Wait");
-
-                //sb.AppendLine("Save \"$(AutoFile)\"");
-                //sb.AppendLine("Wait 2");
-                //sb.AppendLine("Analyze");
-
-                //sb.AppendLine("Wait 15");
-
-                //sb.AppendLine("Wait \"C:\\Program Files\\GammaVision\\Npp32.Exe\"");
-                //sb.AppendLine("Wait 2");
-
-                //sb.AppendLine("Wait \"C:\\Program Files\\ORTEC\\GammaVision Report Writer\\gvrpt32.exe\"");
-
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "JobSample.txt", sb.ToString());
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job", sb.ToString());
             }
         }
 

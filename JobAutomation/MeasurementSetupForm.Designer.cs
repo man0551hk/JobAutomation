@@ -85,6 +85,7 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.addBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -392,7 +393,7 @@
             this.profileCB.FormattingEnabled = true;
             this.profileCB.Location = new System.Drawing.Point(201, 10);
             this.profileCB.Name = "profileCB";
-            this.profileCB.Size = new System.Drawing.Size(306, 21);
+            this.profileCB.Size = new System.Drawing.Size(239, 21);
             this.profileCB.TabIndex = 37;
             this.profileCB.SelectedIndexChanged += new System.EventHandler(this.profileCB_SelectedIndexChanged);
             // 
@@ -413,7 +414,7 @@
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(61, 23);
             this.removeBtn.TabIndex = 39;
-            this.removeBtn.Text = "Remove";
+            this.removeBtn.Text = "Delete";
             this.removeBtn.UseVisualStyleBackColor = true;
             this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
@@ -439,6 +440,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.addBtn);
             this.tabPage1.Controls.Add(this.decayDateCommonCB);
             this.tabPage1.Controls.Add(this.decayCorrectionCommonCB);
             this.tabPage1.Controls.Add(this.libraryCommonCB);
@@ -761,6 +763,17 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
             // 
+            // addBtn
+            // 
+            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Location = new System.Drawing.Point(446, 10);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(61, 23);
+            this.addBtn.TabIndex = 47;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            // 
             // MeasurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -843,5 +856,6 @@
         private System.Windows.Forms.CheckBox sdfCommonCB;
         private System.Windows.Forms.ComboBox hardwareCB;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button addBtn;
     }
 }
