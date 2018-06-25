@@ -53,12 +53,6 @@ namespace JobAutomation
             GlobalFunc.passwordFormToggle = "ParameterSetup";
             if (CheckLoginStatus())
             {
-                if (GlobalFunc.parameterSetupForm == null || GlobalFunc.parameterSetupForm.IsDisposed)
-                {
-                    GlobalFunc.parameterSetupForm = new ParameterSetupForm();
-                }
-                GlobalFunc.parameterSetupForm.Show();
-
                 if (GlobalFunc.measurementSetupForm != null)
                 {
                     GlobalFunc.measurementSetupForm.Hide();
@@ -78,11 +72,6 @@ namespace JobAutomation
                 }
                 GlobalFunc.measurementSetupForm.Show();
 
-                if (GlobalFunc.parameterSetupForm != null)
-                {
-                    GlobalFunc.parameterSetupForm.Hide();
-                    GlobalFunc.parameterSetupForm.Dispose();
-                }
             }
         }
 

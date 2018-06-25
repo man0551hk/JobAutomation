@@ -23,7 +23,7 @@ namespace JobAutomation
         public bool commonCalibrationFile { set; get; }
         public string qtyUnit { set; get; }
         public bool commonQtyUnit { set; get; }
-        public int qty { set; get; }
+        public double qty { set; get; }
         public bool commonQty { set; get; }
         public int countingTime { set; get; }
         public bool commonCountingTime { set; get; }
@@ -54,13 +54,15 @@ namespace JobAutomation
 
         public string decayCorrectionDate { set; get; }
 
-        public int sampleQuantity { set; get; }
+        public double sampleQuantity { set; get; }
 
         public string units { set; get; }
 
         public string activityUnits { set; get; }
 
         public int countingTime { set; get; }
+        
+        public string libraryFile { set; get; }
 
         //public string jobTemplatePath { set; get; }
         //CollectionStart

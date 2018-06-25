@@ -79,12 +79,12 @@
             this.verifyPassword = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.hardwareCB = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.saveSetupBtn = new System.Windows.Forms.Button();
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.hardwareCB = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -220,6 +220,7 @@
             this.sampleQtyTxt.Name = "sampleQtyTxt";
             this.sampleQtyTxt.Size = new System.Drawing.Size(78, 20);
             this.sampleQtyTxt.TabIndex = 19;
+            this.sampleQtyTxt.Text = "1.000";
             // 
             // countingTime
             // 
@@ -698,6 +699,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Setup";
             // 
+            // hardwareCB
+            // 
+            this.hardwareCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hardwareCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hardwareCB.FormattingEnabled = true;
+            this.hardwareCB.Items.AddRange(new object[] {
+            "DSPec50",
+            "DigiBASE"});
+            this.hardwareCB.Location = new System.Drawing.Point(127, 47);
+            this.hardwareCB.Name = "hardwareCB";
+            this.hardwareCB.Size = new System.Drawing.Size(121, 21);
+            this.hardwareCB.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(11, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Hardware";
+            // 
             // saveSetupBtn
             // 
             this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -736,29 +760,6 @@
             this.label7.Size = new System.Drawing.Size(99, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(11, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Hardware";
-            // 
-            // hardwareCB
-            // 
-            this.hardwareCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hardwareCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hardwareCB.FormattingEnabled = true;
-            this.hardwareCB.Items.AddRange(new object[] {
-            "DSPec50",
-            "DigiBASE"});
-            this.hardwareCB.Location = new System.Drawing.Point(127, 47);
-            this.hardwareCB.Name = "hardwareCB";
-            this.hardwareCB.Size = new System.Drawing.Size(121, 21);
-            this.hardwareCB.TabIndex = 14;
             // 
             // MeasurementSetupForm
             // 

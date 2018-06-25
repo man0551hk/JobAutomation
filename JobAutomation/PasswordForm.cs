@@ -34,15 +34,7 @@ namespace JobAutomation
             if (originText == encrypt)
             {
                 GlobalFunc.loginStatus = 1;
-                if (GlobalFunc.passwordFormToggle == "ParameterSetup")
-                {
-                    if (GlobalFunc.parameterSetupForm == null || GlobalFunc.parameterSetupForm.IsDisposed)
-                    {
-                        GlobalFunc.parameterSetupForm = new ParameterSetupForm();
-                    }
-                    GlobalFunc.parameterSetupForm.Show();
-                }
-                else if(GlobalFunc.passwordFormToggle == "MeasurementSetupForm")
+                if(GlobalFunc.passwordFormToggle == "MeasurementSetupForm")
                 {
                     if (GlobalFunc.measurementSetupForm == null || GlobalFunc.measurementSetupForm.IsDisposed)
                     {

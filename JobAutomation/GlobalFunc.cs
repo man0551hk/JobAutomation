@@ -14,7 +14,6 @@ namespace JobAutomation
         public static int loginStatus;
         public static MainForm mainForm;
         public static PasswordForm passwordForm;
-        public static ParameterSetupForm parameterSetupForm;
         public static MeasurementSetupForm measurementSetupForm;
         public static EditSampleForm editSampleForm;
 

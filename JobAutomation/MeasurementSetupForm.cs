@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -21,7 +22,7 @@ namespace JobAutomation
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
             editSampleBtn.Enabled = false;
-            sampleQtyTxt.KeyPress += CheckISNumber_KeyPress;
+            sampleQtyTxt.KeyPress += CheckISDecimal_KeyPress;
             countingTime.KeyPress += CheckISNumber_KeyPress;
             SetProfile();
 
@@ -207,7 +208,7 @@ namespace JobAutomation
             thisPD.commonCalibrationFile = calibrarionCommonCB.Checked;
             thisPD.qtyUnit = sampleQtyUnitCB.Text;
             thisPD.commonQtyUnit = sampleQtyUnitCommonCB.Checked;
-            thisPD.qty = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
+            thisPD.qty = sampleQtyTxt.Text != "" ? Convert.ToDouble(sampleQtyTxt.Text) : 0;
             thisPD.commonQty = sampleQtyCommonCB.Checked;
             thisPD.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
             thisPD.commonCountingTime = countingTimeCommonCB.Checked;
@@ -297,6 +298,59 @@ namespace JobAutomation
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private void CheckISDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == 46)
+            {
+                if ((sender as TextBox).Text.Count(x => x == '.') == 1)
+                {
+                    e.Handled = true;
+                }
+            }
+
+
+            //else if (Regex.IsMatch((sender as TextBox).Text, @"\.\d\d\d"))
+            //{
+            //    e.Handled = true;
+            //}
+
+
+            //if (e.KeyChar == 46)
+            //{
+            //    if ((sender as TextBox).Text.Count(x => x == '.') == 1)
+            //    {
+            //        e.Handled = true;
+            //        return;
+            //    }
+            //}
+            //else if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
+            //{
+            //    e.Handled = true;
+            //    return;
+            //}
+            //else if (char.IsDigit(e.KeyChar))
+            //{
+            //    TextBox thisTextBox = sender as TextBox;
+            //    string thisText = thisTextBox.Text;
+            //    if (thisText.IndexOf(".") > 0)
+            //    {
+            //        if (thisText.Substring(thisText.IndexOf(".") + 1, thisText.Length - (thisText.IndexOf(".") + 1)).Length > 3)
+            //        {
+            //            e.Handled = true;
+            //            return;
+            //        }
+            //    }
+
+            //    return;
+            //}
+
+        }
+
         private void editSampleBtn_Click(object sender, EventArgs e)
         {
             if (SaveCurrent())
@@ -330,6 +384,34 @@ namespace JobAutomation
             else if (string.IsNullOrEmpty(profileCB.Text) || profileCB.Text == "")
             {
                 ShowMessage("Please input or select Profile Name first");
+            }
+            else if (sdfCommonCB.Checked && string.IsNullOrEmpty(sampleDefinitionFileTxt.Text))
+            {
+                ShowMessage("Please input or select Sample Definition File");
+            }
+            else if (calibrarionCommonCB.Checked && string.IsNullOrEmpty(calibrationFileTxt.Text))
+            {
+                ShowMessage("Please input or select Calibration File");
+            }
+            else if (sampleQtyUnitCommonCB.Checked && string.IsNullOrEmpty(sampleQtyUnitCB.Text))
+            {
+                ShowMessage("Please select Sample Quantity Unit");
+            }
+            else if (sampleQtyCommonCB.Checked && string.IsNullOrEmpty(sampleQtyTxt.Text))
+            {
+                ShowMessage("Please input Sample Quantity");
+            }
+            else if (countingTimeCommonCB.Checked && string.IsNullOrEmpty(countingTime.Text))
+            {
+                ShowMessage("Please input Counting Time");
+            }
+            else if (activityUnitCommonCB.Checked && string.IsNullOrEmpty(activityUnitCB.Text))
+            {
+                ShowMessage("Please select Activity Unit");
+            }
+            else if (libraryCommonCB.Checked && string.IsNullOrEmpty(libraryFileTxt.Text))
+            {
+                ShowMessage("Please input or Library File");
             }
             else
             {
