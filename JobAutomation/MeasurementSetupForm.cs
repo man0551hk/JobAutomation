@@ -29,6 +29,7 @@ namespace JobAutomation
             {
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
                 password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
+                hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
             }
@@ -453,6 +454,7 @@ namespace JobAutomation
             {
                 Setup setup = new Setup();
                 setup.gammamVisionPath = gammaVisionPath.Text;
+                setup.hardware = hardwareCB.Text;
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 setup.laboratory = laboratory.Text;
                 setup._operator = _operator.Text;
@@ -467,9 +469,11 @@ namespace JobAutomation
         {
             Setup setup = new Setup();
             setup.gammamVisionPath = gammaVisionPath.Text;
+            setup.hardware = hardwareCB.Text;
             setup.password = GlobalFunc.Encrypt(password.Text);
             setup.laboratory = laboratory.Text;
             setup._operator = _operator.Text;
+            
             string json = js.Serialize(setup);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
             GlobalFunc.LoadSetup();
@@ -482,6 +486,7 @@ namespace JobAutomation
             {
                 Setup setup = new Setup();
                 setup.gammamVisionPath = gammaVisionPath.Text;
+                setup.hardware = hardwareCB.Text;
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 setup.laboratory = laboratory.Text;
                 setup._operator = _operator.Text;

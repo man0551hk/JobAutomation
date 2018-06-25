@@ -83,6 +83,8 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.hardwareCB = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -560,7 +562,7 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this._operator);
             this.groupBox3.Controls.Add(this.laboratory);
-            this.groupBox3.Location = new System.Drawing.Point(6, 98);
+            this.groupBox3.Location = new System.Drawing.Point(6, 123);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(577, 109);
             this.groupBox3.TabIndex = 17;
@@ -624,7 +626,7 @@
             this.groupBox2.Controls.Add(this.verifyPassword);
             this.groupBox2.Controls.Add(this.password);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(5, 213);
+            this.groupBox2.Location = new System.Drawing.Point(5, 238);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(578, 126);
             this.groupBox2.TabIndex = 16;
@@ -682,6 +684,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.hardwareCB);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.saveSetupBtn);
             this.groupBox1.Controls.Add(this.gammaVisionPath);
             this.groupBox1.Controls.Add(this.gammaVisionPathBtn);
@@ -689,7 +693,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(577, 86);
+            this.groupBox1.Size = new System.Drawing.Size(577, 111);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Setup";
@@ -697,7 +701,7 @@
             // saveSetupBtn
             // 
             this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveSetupBtn.Location = new System.Drawing.Point(11, 47);
+            this.saveSetupBtn.Location = new System.Drawing.Point(6, 77);
             this.saveSetupBtn.Name = "saveSetupBtn";
             this.saveSetupBtn.Size = new System.Drawing.Size(261, 23);
             this.saveSetupBtn.TabIndex = 10;
@@ -732,6 +736,29 @@
             this.label7.Size = new System.Drawing.Size(99, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(11, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Hardware";
+            // 
+            // hardwareCB
+            // 
+            this.hardwareCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hardwareCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hardwareCB.FormattingEnabled = true;
+            this.hardwareCB.Items.AddRange(new object[] {
+            "DSPec50",
+            "DigiBASE"});
+            this.hardwareCB.Location = new System.Drawing.Point(127, 47);
+            this.hardwareCB.Name = "hardwareCB";
+            this.hardwareCB.Size = new System.Drawing.Size(121, 21);
+            this.hardwareCB.TabIndex = 14;
             // 
             // MeasurementSetupForm
             // 
@@ -813,5 +840,7 @@
         private System.Windows.Forms.CheckBox decayCorrectionCommonCB;
         private System.Windows.Forms.CheckBox libraryCommonCB;
         private System.Windows.Forms.CheckBox sdfCommonCB;
+        private System.Windows.Forms.ComboBox hardwareCB;
+        private System.Windows.Forms.Label label4;
     }
 }
