@@ -23,7 +23,7 @@ namespace JobAutomation
             GlobalFunc.passwordForm = new PasswordForm();
             GlobalFunc.mainForm = new MainForm();
 
-            Operation.GenerateDefaultJobTemplate();
+        
            
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
             {
@@ -43,8 +43,7 @@ namespace JobAutomation
 
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job".ToLower()))
             {
-                GlobalFunc.mainForm.ShowMessage("DefSample.Job file not found, re-create...");
-                Operation.GenerateDefaultJobTemplate();
+                GlobalFunc.mainForm.ShowMessage("DefSample.Job file not found");
             }
 
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.Txt".ToLower()))
