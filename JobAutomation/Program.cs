@@ -23,7 +23,7 @@ namespace JobAutomation
             GlobalFunc.passwordForm = new PasswordForm();
             GlobalFunc.mainForm = new MainForm();
 
-        
+            GlobalFunc.tc = new TestConnection();
            
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
             {
@@ -50,7 +50,8 @@ namespace JobAutomation
             {
                 GlobalFunc.mainForm.ShowMessage("DefOptions.Txt file not found");
             }
-                
+
+            GlobalFunc.axUCONN21 = new AxUMCBILib.AxUCONN2();
 
             Application.Run(GlobalFunc.mainForm);
         }

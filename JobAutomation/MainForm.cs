@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -111,10 +112,14 @@ namespace JobAutomation
             try
             {
                 Operation.RunScript();
+
+                Thread t = new Thread(GetStatus);
+                t.Start();
             }
             catch (Exception ex)
             {
                 SetStatusLabel("Error on running scripts" + ex.Message, 3);
+                LogManager.WriteLog("Error on running scripts" + ex.Message);
             }
         }
 
@@ -127,6 +132,30 @@ namespace JobAutomation
         {
             
         }
+
+        public void GetStatus()
+        {
+            // first send 
+            while (true)
+            {
+                string returnValue = "";
+                if (GlobalFunc.setup.hardware == "DSPec50")
+                {
+                    returnValue = Operation.SendCommand("SHOW_ID");
+                }
+                else if (GlobalFunc.setup.hardware == "DigiBASE")
+                {
+                    returnValue = Operation.SendCommand("SHOW_LLD");
+                }
+                returnValue = returnValue.Replace("$C", "");
+                returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                int intReturnValue = Convert.ToInt32(returnValue);
+                SetSampleLabel(intReturnValue.ToString());
+                SetStatusLabel(returnValue, 2);
+            }
+
+        }
+
 
         private bool CheckLoginStatus()
         {
@@ -230,7 +259,18 @@ namespace JobAutomation
             }
         }
 
-
+        private void SetSampleLabel(string text)
+        {
+            if (InvokeRequired)
+            {
+                // after we've done all the processing, 
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    currentSampleNo.Text = text;
+                }));
+                return;
+            }
+        }
 
     }
 }

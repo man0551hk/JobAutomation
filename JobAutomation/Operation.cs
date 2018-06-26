@@ -186,15 +186,8 @@ namespace JobAutomation
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job"))
             {
                 string line;
-              
-                if (GlobalFunc.setup.hardware == "DSPec50")
-                {
-                    sb.AppendLine("SET_ID " + index.ToString());
-                }
-                else if (GlobalFunc.setup.hardware == "DigiBASE")
-                {
-                    sb.AppendLine("SET_LLD " + index.ToString());
-                }
+
+
                 StreamReader file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job");
                 while ((line = file.ReadLine()) != null)
                 {
@@ -213,6 +206,14 @@ namespace JobAutomation
                     else if (line.Contains("DESCRIBE_SAMPLE \"SAMPLEXXX\""))
                     {
                         sb.AppendLine("DESCRIBE_SAMPLE \"" + description + "\"");
+                        if (GlobalFunc.setup.hardware == "DSPec50")
+                        {
+                            sb.AppendLine("Send_Message \"SET_ID " + index.ToString() + "\"");
+                        }
+                        else if (GlobalFunc.setup.hardware == "DigiBASE")
+                        {
+                            sb.AppendLine("Send_Message \"SET_LLD " + index.ToString() + "\"");
+                        }
                     }
                     else if (line.Contains("SET_PRESET_LIVE 10"))
                     {
@@ -256,5 +257,30 @@ namespace JobAutomation
             startInfo.Arguments = masterPath;
             Process.Start(startInfo);
         }
+
+        public static string SendCommand(string command)
+        {
+            string returnVal = "";
+            try
+            {
+                if (!GlobalFunc.tc.axUCONN21.IsOpen)
+                {
+                    GlobalFunc.tc.axUCONN21.Open();
+                }
+                returnVal = GlobalFunc.tc.axUCONN21.Comm(command);
+
+                if (GlobalFunc.tc.axUCONN21.IsOpen)
+                {
+                    GlobalFunc.tc.axUCONN21.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+               LogManager.WriteLog(ex.Message);
+            }
+            //CloseConnection(detectorIndex);
+            return returnVal;
+        }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using AxUMCBILib;
 namespace JobAutomation
 {
     public static class GlobalFunc
@@ -16,12 +17,14 @@ namespace JobAutomation
         public static PasswordForm passwordForm;
         public static MeasurementSetupForm measurementSetupForm;
         public static EditSampleForm editSampleForm;
+        public static TestConnection tc; 
 
         public static int w = Screen.PrimaryScreen.Bounds.Width;
         public static int h = Screen.PrimaryScreen.Bounds.Height;
         public static int mainFormHeight;
 
         public static Setup setup;
+        
         static bool useHashing = true;
         static string securityKey = "ficom2018";
         public static string passwordFormToggle = "";
@@ -31,6 +34,8 @@ namespace JobAutomation
         public static ProfileDetail toggleProfileDetail;
         public static bool finishEditSample = false;
         public static int toggleTotalSample = 0;
+
+        public static AxUCONN2 axUCONN21 ;
 
         public static void LoadSetup()
         {
