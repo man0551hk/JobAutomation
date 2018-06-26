@@ -100,7 +100,7 @@ namespace JobAutomation
 
 
                 #region Generate Job File
-                string jobFileStr = ReplaceJobFile(sampleNo + 1, GlobalFunc.toggleProfileDetail.sampleDefinitionFile, path + @"\JobOptionFiles\" + optionsfileName,
+                string jobFileStr = ReplaceJobFile(sampleNo + 1, GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo].sampleDefinationFilePath, path + @"\JobOptionFiles\" + optionsfileName,
                                             path + @"\Spectra\" + spcFileName, sdfFileName, thisDetail.countingTime.ToString(), 
                                             thisDetail.sampleDescription == "" ? GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") : thisDetail.sampleDescription);
                 File.WriteAllText(path + @"\JobFiles\" + jobFileName, jobFileStr);
@@ -186,18 +186,18 @@ namespace JobAutomation
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job"))
             {
                 string line;
-                StreamReader file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.txt");
+              
+                if (GlobalFunc.setup.hardware == "DSPec50")
+                {
+                    sb.AppendLine("SET_ID " + index.ToString());
+                }
+                else if (GlobalFunc.setup.hardware == "DigiBASE")
+                {
+                    sb.AppendLine("SET_LLD " + index.ToString());
+                }
+                StreamReader file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DefSample.Job");
                 while ((line = file.ReadLine()) != null)
                 {
-                    if (GlobalFunc.setup.hardware == "DSPec50")
-                    {
-                        sb.AppendLine("SET_ID " + index.ToString());
-                    }
-                    else if(GlobalFunc.setup.hardware == "DigiBASE")
-                    {
-                        sb.AppendLine("SET_LLD " + index.ToString());
-                    }
-
                     if (line.Contains("RECALL_OPTIONS \"C:\\USER\\SAMPLE TYPES\\DefAscSdf.SDF\""))
                     {
                         sb.AppendLine("RECALL_OPTIONS \"" + sourceSDF  + "\"");

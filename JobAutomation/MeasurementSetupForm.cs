@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -174,7 +175,7 @@ namespace JobAutomation
                     calibrarionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonCalibrationFile;
                     sampleQtyUnitCB.SelectedIndex = sampleQtyUnitCB.FindString(GlobalFunc.profileDetailList[i].qtyUnit);
                     sampleQtyUnitCommonCB.Checked = GlobalFunc.profileDetailList[i].commonQtyUnit;
-                    sampleQtyTxt.Text = GlobalFunc.profileDetailList[i].qty.ToString() != "0" ? GlobalFunc.profileDetailList[i].qty.ToString() : "";
+                    sampleQtyTxt.Text = GlobalFunc.profileDetailList[i].qty.ToString() != "0" ? GlobalFunc.profileDetailList[i].qty.ToString("#.###") : "";
                     sampleQtyCommonCB.Checked = GlobalFunc.profileDetailList[i].commonQty;
                     countingTime.Text = GlobalFunc.profileDetailList[i].countingTime.ToString() != "0" ? GlobalFunc.profileDetailList[i].countingTime.ToString() : "";
                     countingTimeCommonCB.Checked = GlobalFunc.profileDetailList[i].commonCountingTime;
@@ -208,7 +209,7 @@ namespace JobAutomation
             thisPD.commonCalibrationFile = calibrarionCommonCB.Checked;
             thisPD.qtyUnit = sampleQtyUnitCB.Text;
             thisPD.commonQtyUnit = sampleQtyUnitCommonCB.Checked;
-            thisPD.qty = sampleQtyTxt.Text != "" ? Convert.ToDouble(sampleQtyTxt.Text) : 0;
+            thisPD.qty = sampleQtyTxt.Text != "" ? Convert.ToDouble(sampleQtyTxt.Text) : 0.000;
             thisPD.commonQty = sampleQtyCommonCB.Checked;
             thisPD.countingTime = countingTime.Text != "" ? Convert.ToInt32(countingTime.Text) : 0;
             thisPD.commonCountingTime = countingTimeCommonCB.Checked;
@@ -298,20 +299,64 @@ namespace JobAutomation
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        public bool isNumber(char ch, string text, TextBox tb)
+        {
+            bool res = true;
+            char decimalChar = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            //check if it´s a decimal separator and if doesn´t already have one in the text string
+            if (ch == decimalChar && text.IndexOf(decimalChar) != -1)
+            {
+                res = false;
+                return res;
+            }
+            //check if it´s a digit, decimal separator and backspace
+            if (!Char.IsDigit(ch) && ch != decimalChar && ch != (char)Keys.Back)
+                res = false;
+
+
+            string currentDecimal = text.Substring(text.IndexOf(".") + 1, text.Length - (text.IndexOf(".") + 1));
+            if (currentDecimal.Length > 3)
+            {
+                res = false;
+                tb.Text = text.Substring(0, text.Length - 1);
+            }
+            return res;
+        }
+
+
         private void CheckISDecimal_KeyPress(object sender, KeyPressEventArgs e)
         {
-             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.')
             {
                 e.Handled = true;
             }
 
-            if (e.KeyChar == 46)
+            // only allow one decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
             {
-                if ((sender as TextBox).Text.Count(x => x == '.') == 1)
-                {
-                    e.Handled = true;
-                }
+                e.Handled = true;
             }
+
+
+            //if (!isNumber(e.KeyChar, (sender as TextBox).Text, sender as TextBox))
+            //    e.Handled = true;
+
+            // if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
+            //{
+            //    e.Handled = true;
+            //}
+
+            //if (e.KeyChar == 46)
+            //{
+            //    if ((sender as TextBox).Text.Count(x => x == '.') == 1)
+            //    {
+            //        e.Handled = true;
+            //    }
+            //}
 
 
             //else if (Regex.IsMatch((sender as TextBox).Text, @"\.\d\d\d"))
