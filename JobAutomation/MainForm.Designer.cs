@@ -102,6 +102,7 @@
             this.quitBtn.TabIndex = 12;
             this.quitBtn.Text = "Quit";
             this.quitBtn.UseVisualStyleBackColor = true;
+            this.quitBtn.Click += new System.EventHandler(this.quitBtn_Click);
             // 
             // label6
             // 

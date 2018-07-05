@@ -17,6 +17,7 @@ namespace JobAutomation
     {
         JavaScriptSerializer js = new JavaScriptSerializer();
         BackgroundWorker myBGWorker = new BackgroundWorker();
+        BackgroundWorker skipBGWorker = new BackgroundWorker();
         public MainForm()
         {
             InitializeComponent();
@@ -32,9 +33,12 @@ namespace JobAutomation
             myBGWorker.RunWorkerCompleted += myBGWorker_RunWorkerCompleted;
             myBGWorker.WorkerReportsProgress = true;
 
+            skipBGWorker.DoWork += skipBGWorker_DoWork;
+            skipBGWorker.RunWorkerCompleted += skipBGWorker_RunWorkerCompleted;
+
             GlobalFunc.mainFormHeight = GlobalFunc.h / 2 - 330;
             scsBtn.Enabled = false;
-            quitBtn.Enabled = false;
+            //quitBtn.Enabled = false;
             GlobalFunc.LoadProfile();
             GlobalFunc.LoadProfileDetail();
             SetProfile();
@@ -79,17 +83,17 @@ namespace JobAutomation
         int thisNoOfSample = 0;
         private void scsBtn_Click(object sender, EventArgs e)
         {
-            thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
-            //if (string.IsNullOrEmpty(sampleNoCB.Text))
-            //{
-            //    SetStatusLabel("Please select sample no.", 3);
-            //}
-            //else
-            //{
-            //    thisNoOfSample = Convert.ToInt32(sampleNoCB.Text);
-            ///   myBGWorker.RunWorkerAsync();
-            //}
-            myBGWorker.RunWorkerAsync();
+            if (scsBtn.Text == "Run")
+            {
+                quitBtn.Enabled = false;
+                scsBtn.Text = "Skip";
+                thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
+                myBGWorker.RunWorkerAsync();
+            }
+            else if (scsBtn.Text == "Skip")
+            {
+                skipBGWorker.RunWorkerAsync();
+            }
         }
 
         private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -104,7 +108,7 @@ namespace JobAutomation
                 int percentage = (i + 1);
                 myBGWorker.ReportProgress(percentage);
             }
-            
+
             Operation.GenerateMasterFile();
             SetStatusLabel("Generate Script finished", 1);
             myBGWorker.ReportProgress(thisNoOfSample + 1);
@@ -112,9 +116,8 @@ namespace JobAutomation
             try
             {
                 Operation.RunScript();
-
-                Thread t = new Thread(GetStatus);
-                t.Start();
+                Thread.Sleep(1000);
+                string status = GetStatus();
             }
             catch (Exception ex)
             {
@@ -123,22 +126,104 @@ namespace JobAutomation
             }
         }
 
+        private void skipBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                SkipFunction();
+                //Thread t = new Thread(GetShowActive);
+                //t.Start();
+            }
+            catch (Exception ex)
+            {
+                SetStatusLabel("Error on skip" + ex.Message, 3);
+                LogManager.WriteLog("Error on skip" + ex.Message);
+            }
+        }
+
         void myBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-         
+
         }
 
         void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            if (InvokeRequired)
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+            }
+            else
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+            }
         }
 
-        public void GetStatus()
+        void skipBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // first send 
-            while (true)
+        }
+
+        public string GetStatus()
+        {
+            string activeStatus = "";
+            try
             {
-                string returnValue = "";
+                while (true)
+                {
+                    activeStatus = Operation.SendCommand("SHOW_ACTIVE");
+
+                    if (activeStatus == "$C00001088\n") // is active
+                    {
+                        activeStatus = "active";
+                    }
+                    else
+                    {
+                        activeStatus = "inactive";
+                    }
+
+                    int intReturnValue = 0;
+                    string returnValue = "";
+                    if (GlobalFunc.setup.hardware == "DSPec50")
+                    {
+                        returnValue = Operation.SendCommand("SHOW_ID");
+                    }
+                    else if (GlobalFunc.setup.hardware == "DigiBASE")
+                    {
+                        returnValue = Operation.SendCommand("SHOW_LLD");
+                    }
+                    returnValue = returnValue.Replace("$C", "");
+                    returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                    intReturnValue = Convert.ToInt32(returnValue);
+                    if (activeStatus == "active")
+                    {
+                        SetSampleLabel(intReturnValue.ToString());
+                        SetStatusLabel(returnValue, 2);
+                    }
+
+                    if (activeStatus == "inactive" && (intReturnValue == 0))
+                    {
+                        break;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog(ex.Message);
+            }
+            return activeStatus;
+        }
+
+        public string SkipFunction()
+        {
+            string returnValue = "";
+            try
+            {
+                //int i = 0;
+                //while (i < 20)
+                //{
+
                 if (GlobalFunc.setup.hardware == "DSPec50")
                 {
                     returnValue = Operation.SendCommand("SHOW_ID");
@@ -150,10 +235,23 @@ namespace JobAutomation
                 returnValue = returnValue.Replace("$C", "");
                 returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 int intReturnValue = Convert.ToInt32(returnValue);
-                SetSampleLabel(intReturnValue.ToString());
-                SetStatusLabel(returnValue, 2);
-            }
+                SetStatusLabel(returnValue + " skipping...", 2);
 
+                returnValue = Operation.SendCommand("STOP");
+                //if (returnValue == "$C00001088\n") // is active
+                //{
+                //    returnValue = "active";
+                //}
+                //string setPresetLive = Operation.SendCommand("SET_PRESET_LIVE 1");
+                //    i++;
+                //    Thread.Sleep(5000);
+                //}
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog(ex.Message);
+            }
+            return returnValue;
         }
 
 
@@ -179,6 +277,7 @@ namespace JobAutomation
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Application.ExitThread();
             Application.Exit();
         }
 
@@ -194,10 +293,10 @@ namespace JobAutomation
                 if (GlobalFunc.measurementSetupForm != null && !GlobalFunc.measurementSetupForm.IsDisposed)
                 {
                     GlobalFunc.measurementSetupForm.SelectionProfile(profileCB.Text);
-                    
+
                 }
-             
-            }            
+
+            }
         }
 
         public void SelectionProfile(string profileName)
@@ -270,6 +369,12 @@ namespace JobAutomation
                 }));
                 return;
             }
+        }
+
+        private void quitBtn_Click(object sender, EventArgs e)
+        {
+            Application.ExitThread();
+            Application.Exit();
         }
 
     }
