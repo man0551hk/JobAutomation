@@ -93,6 +93,7 @@ namespace JobAutomation
             else if (scsBtn.Text == "Skip")
             {
                 skipBGWorker.RunWorkerAsync();
+                scsBtn.Enabled = false;
             }
         }
 
@@ -152,16 +153,32 @@ namespace JobAutomation
             {
                 quitBtn.Enabled = true;
                 scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+                SetStatusLabel("Completed", 1);
             }
             else
             {
                 quitBtn.Enabled = true;
                 scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+                SetStatusLabel("Completed", 1);
             }
         }
 
         void skipBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (InvokeRequired)
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+            }
+            else
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+            }
         }
 
         public string GetStatus()
