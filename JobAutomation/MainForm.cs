@@ -390,6 +390,10 @@ namespace JobAutomation
 
         private void quitBtn_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Confirm Delete?", "Delete Sequence", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+            }
             Application.ExitThread();
             Application.Exit();
         }
