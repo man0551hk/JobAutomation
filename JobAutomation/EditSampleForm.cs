@@ -84,14 +84,10 @@ namespace JobAutomation
             {
                 sampleDecayCorrectionCB.Enabled = false;
             }
-            if (GlobalFunc.toggleProfileDetail.commonDecayDate == true)
+
+            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
             {
                 sampleCorrectionDate.Enabled = false;
-            }
-
-            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.commonDecayDate)
-            {
-                decayCorrectionDoneBtn.Enabled = false;
             }
 
         }

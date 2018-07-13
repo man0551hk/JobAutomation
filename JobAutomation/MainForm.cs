@@ -201,7 +201,7 @@ namespace JobAutomation
                         SetStatusLabel(returnValue, 2);
                     }
 
-                    if (activeStatus == "inactive" && (intReturnValue == \thisNoOfSample\))
+                    if (activeStatus == "inactive" && (intReturnValue == thisNoOfSample))
                     {
                         break;
                     }

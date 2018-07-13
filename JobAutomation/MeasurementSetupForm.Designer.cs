@@ -60,6 +60,7 @@
             this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.addBtn = new System.Windows.Forms.Button();
             this.decayDateCommonCB = new System.Windows.Forms.CheckBox();
             this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
             this.libraryCommonCB = new System.Windows.Forms.CheckBox();
@@ -85,7 +86,15 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.addBtn = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.defaultSdf = new System.Windows.Forms.TextBox();
+            this.defaultCal = new System.Windows.Forms.TextBox();
+            this.defaultLib = new System.Windows.Forms.TextBox();
+            this.defaultSdfBtn = new System.Windows.Forms.Button();
+            this.defaultCalBtn = new System.Windows.Forms.Button();
+            this.defaultLibBtn = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -155,6 +164,7 @@
             this.sampleDefinitionFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleDefinitionFileTxt.Location = new System.Drawing.Point(201, 164);
             this.sampleDefinitionFileTxt.Name = "sampleDefinitionFileTxt";
+            this.sampleDefinitionFileTxt.ReadOnly = true;
             this.sampleDefinitionFileTxt.Size = new System.Drawing.Size(331, 20);
             this.sampleDefinitionFileTxt.TabIndex = 15;
             // 
@@ -484,6 +494,17 @@
             this.tabPage1.Text = "Measurement Setup";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // addBtn
+            // 
+            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Location = new System.Drawing.Point(446, 10);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(61, 23);
+            this.addBtn.TabIndex = 47;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            // 
             // decayDateCommonCB
             // 
             this.decayDateCommonCB.AutoSize = true;
@@ -565,7 +586,7 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this._operator);
             this.groupBox3.Controls.Add(this.laboratory);
-            this.groupBox3.Location = new System.Drawing.Point(6, 123);
+            this.groupBox3.Location = new System.Drawing.Point(6, 197);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(577, 109);
             this.groupBox3.TabIndex = 17;
@@ -629,7 +650,7 @@
             this.groupBox2.Controls.Add(this.verifyPassword);
             this.groupBox2.Controls.Add(this.password);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(5, 238);
+            this.groupBox2.Location = new System.Drawing.Point(6, 312);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(578, 126);
             this.groupBox2.TabIndex = 16;
@@ -687,6 +708,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.defaultLibBtn);
+            this.groupBox1.Controls.Add(this.defaultCalBtn);
+            this.groupBox1.Controls.Add(this.defaultSdfBtn);
+            this.groupBox1.Controls.Add(this.defaultLib);
+            this.groupBox1.Controls.Add(this.defaultCal);
+            this.groupBox1.Controls.Add(this.defaultSdf);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.hardwareCB);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.saveSetupBtn);
@@ -696,7 +726,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(577, 111);
+            this.groupBox1.Size = new System.Drawing.Size(577, 185);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Setup";
@@ -727,7 +757,7 @@
             // saveSetupBtn
             // 
             this.saveSetupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveSetupBtn.Location = new System.Drawing.Point(6, 77);
+            this.saveSetupBtn.Location = new System.Drawing.Point(14, 152);
             this.saveSetupBtn.Name = "saveSetupBtn";
             this.saveSetupBtn.Size = new System.Drawing.Size(261, 23);
             this.saveSetupBtn.TabIndex = 10;
@@ -763,16 +793,89 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
             // 
-            // addBtn
+            // label10
             // 
-            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.Location = new System.Drawing.Point(446, 10);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(61, 23);
-            this.addBtn.TabIndex = 47;
-            this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(11, 77);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(66, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Default Sdf: ";
+            // 
+            // defaultSdf
+            // 
+            this.defaultSdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultSdf.Location = new System.Drawing.Point(127, 74);
+            this.defaultSdf.Name = "defaultSdf";
+            this.defaultSdf.Size = new System.Drawing.Size(344, 20);
+            this.defaultSdf.TabIndex = 16;
+            // 
+            // defaultCal
+            // 
+            this.defaultCal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultCal.Location = new System.Drawing.Point(127, 100);
+            this.defaultCal.Name = "defaultCal";
+            this.defaultCal.Size = new System.Drawing.Size(344, 20);
+            this.defaultCal.TabIndex = 17;
+            // 
+            // defaultLib
+            // 
+            this.defaultLib.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultLib.Location = new System.Drawing.Point(127, 126);
+            this.defaultLib.Name = "defaultLib";
+            this.defaultLib.Size = new System.Drawing.Size(344, 20);
+            this.defaultLib.TabIndex = 18;
+            // 
+            // defaultSdfBtn
+            // 
+            this.defaultSdfBtn.Location = new System.Drawing.Point(477, 72);
+            this.defaultSdfBtn.Name = "defaultSdfBtn";
+            this.defaultSdfBtn.Size = new System.Drawing.Size(31, 23);
+            this.defaultSdfBtn.TabIndex = 19;
+            this.defaultSdfBtn.Text = "...";
+            this.defaultSdfBtn.UseVisualStyleBackColor = true;
+            this.defaultSdfBtn.Click += new System.EventHandler(this.defaultSdfBtn_Click);
+            // 
+            // defaultCalBtn
+            // 
+            this.defaultCalBtn.Location = new System.Drawing.Point(477, 98);
+            this.defaultCalBtn.Name = "defaultCalBtn";
+            this.defaultCalBtn.Size = new System.Drawing.Size(31, 23);
+            this.defaultCalBtn.TabIndex = 20;
+            this.defaultCalBtn.Text = "...";
+            this.defaultCalBtn.UseVisualStyleBackColor = true;
+            this.defaultCalBtn.Click += new System.EventHandler(this.defaultCalBtn_Click);
+            // 
+            // defaultLibBtn
+            // 
+            this.defaultLibBtn.Location = new System.Drawing.Point(477, 124);
+            this.defaultLibBtn.Name = "defaultLibBtn";
+            this.defaultLibBtn.Size = new System.Drawing.Size(31, 23);
+            this.defaultLibBtn.TabIndex = 21;
+            this.defaultLibBtn.Text = "...";
+            this.defaultLibBtn.UseVisualStyleBackColor = true;
+            this.defaultLibBtn.Click += new System.EventHandler(this.defaultLibBtn_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(11, 103);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Default Cal: ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(11, 129);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Default Lib:";
             // 
             // MeasurementSetupForm
             // 
@@ -857,5 +960,14 @@
         private System.Windows.Forms.ComboBox hardwareCB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button defaultLibBtn;
+        private System.Windows.Forms.Button defaultCalBtn;
+        private System.Windows.Forms.Button defaultSdfBtn;
+        private System.Windows.Forms.TextBox defaultLib;
+        private System.Windows.Forms.TextBox defaultCal;
+        private System.Windows.Forms.TextBox defaultSdf;
+        private System.Windows.Forms.Label label10;
     }
 }

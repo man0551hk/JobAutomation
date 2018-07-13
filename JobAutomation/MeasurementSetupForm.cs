@@ -34,6 +34,12 @@ namespace JobAutomation
                 hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
+                defaultSdf.Text = GlobalFunc.setup.defaultSdf;
+                sampleDefinitionFileTxt.Text = GlobalFunc.setup.defaultSdf;
+                defaultCal.Text = GlobalFunc.setup.defaultCal;
+                calibrationFileTxt.Text = GlobalFunc.setup.defaultCal;
+                defaultLib.Text = GlobalFunc.setup.defaultLib;
+                libraryFileTxt.Text = GlobalFunc.setup.defaultLib;
             }
         }
 
@@ -254,10 +260,10 @@ namespace JobAutomation
                     {
                         sampleDetail.calibrationFilePath = "";
                     }
-                    sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+                   
                     if (sampleQtyCommonCB.Checked || sampleDetail.sampleQuantity == 0)
                     {
-                        sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToInt32(sampleQtyTxt.Text) : 0;
+                        sampleDetail.sampleQuantity = sampleQtyTxt.Text != "" ? Convert.ToDouble(sampleQtyTxt.Text) : 0;
                     }
                     else if (sampleDetail.sampleQuantity == 0) {
                         sampleDetail.sampleQuantity = 0;
@@ -286,6 +292,23 @@ namespace JobAutomation
                     {
                         sampleDetail.countingTime = 0;
                     }
+
+                    if (decayCorrectionCommonCB.Checked)
+                    {
+                        sampleDetail.decayCorrection = decayCorrectionCB.Checked;
+                    }
+                    else
+                    {
+                        sampleDetail.decayCorrection = false;
+                    }
+
+                    if (decayDateCommonCB.Checked)
+                    {
+                        sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+                    }
+
+                    // sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+
                     sampleDetailList.Add(sampleDetail);
                 }
             }
@@ -471,28 +494,49 @@ namespace JobAutomation
 
         private void removeBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(profileCB.Text) && profileCB.Text != "")
+            DialogResult dialogResult = MessageBox.Show("Confirm Delete?", "Delete Sequence", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                string operationName = profileCB.Text;
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + operationName + ".json"))
+                if (!string.IsNullOrEmpty(profileCB.Text) && profileCB.Text != "")
                 {
-                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"CountingSequence\" + operationName + ".json");
-                }
-
-                for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
-                {
-                    if (operationName == GlobalFunc.profile.operationName[i])
+                    string operationName = profileCB.Text;
+                    try
                     {
-                        GlobalFunc.profile.operationName.RemoveAt(i);
-                        break;
+                        if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + operationName + ".json"))
+                        {
+                            File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"CountingSequence\" + operationName + ".json");
+                        }
                     }
-                }
+                    catch (Exception ex)
+                    { }
 
-                string json = js.Serialize(GlobalFunc.profile);
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
-                SetProfile();
-                ShowMessage("Remove Profile successful");
+                    try
+                    {
+                        for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+                        {
+                            if (operationName == GlobalFunc.profile.operationName[i])
+                            {
+                                GlobalFunc.profile.operationName.RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+
+                    string json = js.Serialize(GlobalFunc.profile);
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
+                    SetProfile();
+                    ShowMessage("Remove Profile successful");
+                    profileCB.SelectedIndex = -1;
+                }
             }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+
         }
 
         private void calibrarionCommonCB_CheckedChanged(object sender, EventArgs e)
@@ -585,6 +629,9 @@ namespace JobAutomation
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 setup.laboratory = laboratory.Text;
                 setup._operator = _operator.Text;
+                setup.defaultSdf = defaultSdf.Text;
+                setup.defaultCal = defaultCal.Text;
+                setup.defaultLib = defaultLib.Text;
                 string json = js.Serialize(setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
@@ -600,7 +647,10 @@ namespace JobAutomation
             setup.password = GlobalFunc.Encrypt(password.Text);
             setup.laboratory = laboratory.Text;
             setup._operator = _operator.Text;
-            
+            setup.defaultSdf = defaultSdf.Text;
+            setup.defaultCal = defaultCal.Text;
+            setup.defaultLib = defaultLib.Text;
+
             string json = js.Serialize(setup);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
             GlobalFunc.LoadSetup();
@@ -617,6 +667,9 @@ namespace JobAutomation
                 setup.password = GlobalFunc.Encrypt(password.Text);
                 setup.laboratory = laboratory.Text;
                 setup._operator = _operator.Text;
+                setup.defaultSdf = defaultSdf.Text;
+                setup.defaultCal = defaultCal.Text;
+                setup.defaultLib = defaultLib.Text;
                 string json = js.Serialize(setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
@@ -639,6 +692,30 @@ namespace JobAutomation
         private void addBtn_Click(object sender, EventArgs e)
         {
             SaveCurrent();
+        }
+
+        private void defaultSdfBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                defaultSdf.Text = ofd.FileName;
+            }
+        }
+
+        private void defaultCalBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                defaultCal.Text = ofd.FileName;
+            }
+        }
+
+        private void defaultLibBtn_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                defaultLib.Text = ofd.FileName;
+            }
         }
 
 
