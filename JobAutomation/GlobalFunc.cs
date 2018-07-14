@@ -46,6 +46,22 @@ namespace JobAutomation
 
                 string setupText = File.ReadAllText( AppDomain.CurrentDomain.BaseDirectory + "setup.json");
                 setup = (Setup)js.Deserialize<Setup>(setupText);
+                if (setup.defaultData == "")
+                {
+                    setup.defaultData = @"C:\User\Reports";
+                }
+                if (setup.defaultSdf == "")
+                {
+                    setup.defaultSdf = @"C:\User\Sample Types";
+                }
+                if (setup.defaultLib == "")
+                {
+                    setup.defaultLib = @"C:\User\Libraries";
+                }
+                if (setup.defaultCal == "")
+                {
+                    setup.defaultCal = @"C:\User\Calibrations";
+                }
             }
         }
 

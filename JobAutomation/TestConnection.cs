@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using UMCBILib;    
+using AxUMCBILib;    
 
 namespace JobAutomation
 {
@@ -27,16 +27,16 @@ namespace JobAutomation
             {
                 try
                 {
-                    if (axUCONN21.IsOpen)
+                    if (GlobalFunc.tc.axUCONN21.IsOpen)
                     {
-                        axUCONN21.Close();
+                        GlobalFunc.tc.axUCONN21.Close();
                     }
                     axUDROP1.SelIndex = 1;
-                    axUCONN21.Address = axUDROP1.SelAddress;
-                    axUCONN21.Open();
-                    axUCONN21.Comm("SHOW_VERSION");
-                    axUCONN21.Comm("ENAB_HV");
-                    if (axUCONN21.ID == 1)
+                    GlobalFunc.tc.axUCONN21.Address = axUDROP1.SelAddress;
+                    GlobalFunc.tc.axUCONN21.Open();
+                    GlobalFunc.tc.axUCONN21.Comm("SHOW_VERSION");
+                    GlobalFunc.tc.axUCONN21.Comm("ENAB_HV");
+                    if (GlobalFunc.tc.axUCONN21.ID == 1)
                     {
                         //GlobalFunc.DetectorID1 = axUCONN21.ID;
                         //GlobalFunc.connectedToDetector1 = true;
@@ -48,7 +48,7 @@ namespace JobAutomation
                         retryCount++;
                         //GlobalFunc.connectedToDetector1 = false;
                     }
-                    axUCONN21.Close();
+                    GlobalFunc.tc.axUCONN21.Close();
                 }
                 catch (Exception ex)
                 {

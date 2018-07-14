@@ -30,6 +30,10 @@ namespace JobAutomation
                 GlobalFunc.mainForm.ShowMessage("setup.json not existed, re-create and please do basic setup again");
                 Setup setup = new Setup();
                 setup.gammamVisionPath = "";
+                setup.defaultData = @"C:\User\Reports";
+                setup.defaultSdf = @"C:\User\Sample Types";
+                setup.defaultLib = @"C:\User\Libraries";
+                setup.defaultCal = @"C:\User\Calibrations";
                 setup.password = GlobalFunc.Encrypt("admin");
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 string json = js.Serialize(setup);
@@ -51,8 +55,9 @@ namespace JobAutomation
                 GlobalFunc.mainForm.ShowMessage("DefOptions.Txt file not found");
             }
 
-            GlobalFunc.axUCONN21 = new AxUMCBILib.AxUCONN2();
-
+            //Application.Run(new TestConnection());
+            GlobalFunc.tc.checkDetector1Connection();
+            
             Application.Run(GlobalFunc.mainForm);
         }
     }

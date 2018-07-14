@@ -502,11 +502,13 @@ namespace JobAutomation
         private void Save()
         {
             string calCountError = "";
+            string calNotExistCountError = "";
             string sampleQtyError = "";
             string sampleUnitError = "";
             string activityUnitError = "";
             string countTimeError = "";
             string libraryFileError = "";
+            string libraryExistFileError = "";
             
             for (int i = 1; i <= GlobalFunc.toggleTotalSample; i++)
             {
@@ -523,6 +525,10 @@ namespace JobAutomation
                 {
                     calCountError += i + ",";
                 }
+                if (GlobalFunc.toggleProfileDetail.commonCalibrationFile == false && !File.Exists(calibrationFile.Text))
+                {
+                    calNotExistCountError += i + ",";
+                }
                 if (GlobalFunc.toggleProfileDetail.commonQtyUnit == false && string.IsNullOrEmpty(quantityTextBox.Text))
                 {
                     sampleQtyError += i + ",";
@@ -532,35 +538,32 @@ namespace JobAutomation
                 {
                     sampleUnitError += i + ",";
                 }
-                else if (GlobalFunc.toggleProfileDetail.commonCountingTime == false && string.IsNullOrEmpty(countTimeTextBox.Text))
+                if (GlobalFunc.toggleProfileDetail.commonCountingTime == false && string.IsNullOrEmpty(countTimeTextBox.Text))
                 {
                     countTimeError += i + ",";
                 }
-                else if (GlobalFunc.toggleProfileDetail.commonActivityUnit == false && string.IsNullOrEmpty(activityUnitComboBox.Text))
+                if (GlobalFunc.toggleProfileDetail.commonActivityUnit == false && string.IsNullOrEmpty(activityUnitComboBox.Text))
                 {
                     activityUnitError += i + ",";
                 }
-                else if (GlobalFunc.toggleProfileDetail.commonLibrary == false && string.IsNullOrEmpty(libraryFile.Text))
+                if (GlobalFunc.toggleProfileDetail.commonLibrary == false && string.IsNullOrEmpty(libraryFile.Text))
                 {
                     libraryFileError += i + ",";
                 }
-
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].calibrationFilePath = calibrationFile.Text;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity = quantityTextBox.Text != "" ? Convert.ToInt32(quantityTextBox.Text) : 0;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units = unitComboBox.Text;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].activityUnits = activityUnitComboBox.Text;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime = countTimeTextBox.Text != "" ? Convert.ToInt32(countTimeTextBox.Text) : 0;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].libraryFile = libraryFile.Text;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrection = decayCB.Checked;
-                GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate = decayDate.Text;
-
+                if (GlobalFunc.toggleProfileDetail.commonLibrary == false && !File.Exists(libraryFile.Text))
+                {
+                    libraryExistFileError += i + ",";
+                }
             }
 
             if (calCountError != "")
             {
                 MessageBox.Show("Please select or input Calibration File on sample " + calCountError.Substring(0, calCountError.Length - 1));
             }
-
+            if (calNotExistCountError != "")
+            {
+                MessageBox.Show("Please Calibration File on sample " + calCountError.Substring(0, calCountError.Length - 1) + " not existed");
+            }
             else if (sampleQtyError != "")
             {
                 MessageBox.Show("Please select Sample Quantity Unit on sample " + sampleQtyError.Substring(0, sampleQtyError.Length - 1));
@@ -581,9 +584,32 @@ namespace JobAutomation
             {
                 MessageBox.Show("Please select or input Library File on sample " + libraryFileError.Substring(0, libraryFileError.Length - 1));
             }
+            else if (libraryExistFileError != "")
+            {
+                MessageBox.Show("Library File on sample " + libraryFileError.Substring(0, libraryFileError.Length - 1) + " not existed");
+            }
             else
             {
+                for (int i = 1; i <= GlobalFunc.toggleTotalSample; i++)
+                {
+                    TextBox calibrationFile = calibrationTab.Controls.Find("calibrartionFilePath@" + i, true)[0] as TextBox;
+                    TextBox quantityTextBox = quantityUnitTab.Controls.Find("quantity@" + i, true)[0] as TextBox;
+                    ComboBox unitComboBox = quantityUnitTab.Controls.Find("unitComboBox@" + i, true)[0] as ComboBox;
+                    ComboBox activityUnitComboBox = quantityUnitTab.Controls.Find("activityUnitComboBox@" + i, true)[0] as ComboBox;
+                    TextBox countTimeTextBox = countTimeTab.Controls.Find("countTimeTextBox@" + i, true)[0] as TextBox;
+                    TextBox libraryFile = libraryTab.Controls.Find("libraryFilePath@" + i, true)[0] as TextBox;
+                    CheckBox decayCB = decayTab.Controls.Find("decayCorrectionCB@" + i, true)[0] as CheckBox;
+                    DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + i, true)[0] as DateTimePicker;
 
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].calibrationFilePath = calibrationFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity = quantityTextBox.Text != "" ? Convert.ToInt32(quantityTextBox.Text) : 0;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units = unitComboBox.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].activityUnits = activityUnitComboBox.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime = countTimeTextBox.Text != "" ? Convert.ToInt32(countTimeTextBox.Text) : 0;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].libraryFile = libraryFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrection = decayCB.Checked;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate = decayDate.Text;
+                }
                 string json = js.Serialize(GlobalFunc.toggleProfileDetail);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName + ".json", json);
                 MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
@@ -643,6 +669,14 @@ namespace JobAutomation
 
         private void sampleCalibrationFileBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Calibrations"))
+            {
+                ofd.InitialDirectory = @"C:\User\Calibrations";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sampleCalibrationFile.Text = ofd.FileName;
@@ -651,6 +685,14 @@ namespace JobAutomation
 
         private void sampleDefinationFileBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Sample Types"))
+            {
+                ofd.InitialDirectory = @"C:\User\Sample Types";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sampleDefinationFile.Text = ofd.FileName;
@@ -659,6 +701,14 @@ namespace JobAutomation
 
         private void sampleLibraryFileBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Libraries"))
+            {
+                ofd.InitialDirectory = @"C:\User\Libraries";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sampleLibraryFile.Text = ofd.FileName;

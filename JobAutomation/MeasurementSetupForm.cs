@@ -25,8 +25,6 @@ namespace JobAutomation
             editSampleBtn.Enabled = false;
             sampleQtyTxt.KeyPress += CheckISDecimal_KeyPress;
             countingTime.KeyPress += CheckISNumber_KeyPress;
-            SetProfile();
-
             if (GlobalFunc.setup != null)
             {
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
@@ -34,6 +32,7 @@ namespace JobAutomation
                 hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
+                defaultDataFolder.Text = GlobalFunc.setup.defaultData;
                 defaultSdf.Text = GlobalFunc.setup.defaultSdf;
                 sampleDefinitionFileTxt.Text = GlobalFunc.setup.defaultSdf;
                 defaultCal.Text = GlobalFunc.setup.defaultCal;
@@ -41,6 +40,9 @@ namespace JobAutomation
                 defaultLib.Text = GlobalFunc.setup.defaultLib;
                 libraryFileTxt.Text = GlobalFunc.setup.defaultLib;
             }
+            SetProfile();
+
+
         }
 
         public void ShowMessage(string msg)
@@ -60,6 +62,8 @@ namespace JobAutomation
             if ( GlobalFunc.toggleProfile != "")
             {
                 profileCB.SelectedIndex = profileCB.FindString(GlobalFunc.toggleProfile);
+                GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
+                LoadProfileDetail();
             }
         }
 
@@ -129,6 +133,14 @@ namespace JobAutomation
         {
             using (var folderDialog = new FolderBrowserDialog())
             {
+                if (Directory.Exists(@"C:\User\Reports"))
+                {
+                    folderDialog.SelectedPath = @"C:\User\Reports";
+                }
+                else
+                {
+                    folderDialog.SelectedPath = @"C:\";
+                } 
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
                     dataFolderTxt.Text = folderDialog.SelectedPath;
@@ -138,6 +150,14 @@ namespace JobAutomation
 
         private void sampleDefinitionFileSelBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Sample Types"))
+            {
+                ofd.InitialDirectory = @"C:\User\Sample Types";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 sampleDefinitionFileTxt.Text = ofd.FileName;
@@ -146,6 +166,14 @@ namespace JobAutomation
 
         private void calibrationFileSelBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Calibrations"))
+            {
+                ofd.InitialDirectory = @"C:\User\Calibrations";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 calibrationFileTxt.Text = ofd.FileName;
@@ -154,6 +182,14 @@ namespace JobAutomation
         
         private void libraryFileSelBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Libraries"))
+            {
+                ofd.InitialDirectory = @"C:\User\Libraries";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 libraryFileTxt.Text = ofd.FileName;
@@ -244,9 +280,12 @@ namespace JobAutomation
                     SampleDetail sampleDetail = new SampleDetail();
                     if (GlobalFunc.toggleProfileDetail != null)
                     {
-                        if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
+                        if (GlobalFunc.toggleProfileDetail.sampleDetailList.Count >= i)
                         {
-                            sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                            if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
+                            {
+                                sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                            }
                         }
                     }
                     sampleDetail.index = i;
@@ -457,9 +496,17 @@ namespace JobAutomation
             {
                 ShowMessage("Please input or select Sample Definition File");
             }
+            else if (sdfCommonCB.Checked && !File.Exists(sampleDefinitionFileTxt.Text))
+            {
+                ShowMessage("Sample Definition File not found");
+            }
             else if (calibrarionCommonCB.Checked && string.IsNullOrEmpty(calibrationFileTxt.Text))
             {
                 ShowMessage("Please input or select Calibration File");
+            }
+            else if (calibrarionCommonCB.Checked && !File.Exists(calibrationFileTxt.Text))
+            {
+                ShowMessage(" Calibration File not found");
             }
             else if (sampleQtyUnitCommonCB.Checked && string.IsNullOrEmpty(sampleQtyUnitCB.Text))
             {
@@ -480,6 +527,10 @@ namespace JobAutomation
             else if (libraryCommonCB.Checked && string.IsNullOrEmpty(libraryFileTxt.Text))
             {
                 ShowMessage("Please input or Library File");
+            }
+            else if (libraryCommonCB.Checked && !File.Exists(libraryFileTxt.Text))
+            {
+                ShowMessage("Library File not found");
             }
             else
             {
@@ -623,16 +674,9 @@ namespace JobAutomation
         {
             if (laboratory.Text != "" && _operator.Text != "")
             {
-                Setup setup = new Setup();
-                setup.gammamVisionPath = gammaVisionPath.Text;
-                setup.hardware = hardwareCB.Text;
-                setup.password = GlobalFunc.Encrypt(password.Text);
-                setup.laboratory = laboratory.Text;
-                setup._operator = _operator.Text;
-                setup.defaultSdf = defaultSdf.Text;
-                setup.defaultCal = defaultCal.Text;
-                setup.defaultLib = defaultLib.Text;
-                string json = js.Serialize(setup);
+                GlobalFunc.setup.laboratory = laboratory.Text;
+                GlobalFunc.setup.laboratory = _operator.Text;
+                string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
                 MessageBox.Show("Save master file parameter successful");
@@ -641,36 +685,54 @@ namespace JobAutomation
 
         private void saveSetupBtn_Click(object sender, EventArgs e)
         {
-            Setup setup = new Setup();
-            setup.gammamVisionPath = gammaVisionPath.Text;
-            setup.hardware = hardwareCB.Text;
-            setup.password = GlobalFunc.Encrypt(password.Text);
-            setup.laboratory = laboratory.Text;
-            setup._operator = _operator.Text;
-            setup.defaultSdf = defaultSdf.Text;
-            setup.defaultCal = defaultCal.Text;
-            setup.defaultLib = defaultLib.Text;
+            if (!File.Exists(gammaVisionPath.Text))
+            {
+                MessageBox.Show("Gamma Vision Path not existed");
+            }
+            else if (hardwareCB.Text == "")
+            {
+                MessageBox.Show("Please select hardware version");
+            }
+            else if (!Directory.Exists(defaultDataFolder.Text))
+            {
+                MessageBox.Show("Data Folder not existed");
+            }
+            else if (!File.Exists(defaultSdf.Text))
+            {
+                MessageBox.Show("SDF File not existed");
+            }
+            else if (!File.Exists(defaultCal.Text))
+            {
+                MessageBox.Show("Calibration File not existed");
+            }
+            else if (!File.Exists(defaultLib.Text))
+            {
+                MessageBox.Show("Library File not existed");
+            }
+            else
+            {
+                GlobalFunc.setup.gammamVisionPath = gammaVisionPath.Text;
+                GlobalFunc.setup.hardware = hardwareCB.Text;
+                GlobalFunc.setup.defaultData = defaultDataFolder.Text;
+                GlobalFunc.setup.defaultSdf = defaultSdf.Text;
+                GlobalFunc.setup.defaultCal = defaultCal.Text;
+                GlobalFunc.setup.defaultLib = defaultLib.Text;
 
-            string json = js.Serialize(setup);
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
-            GlobalFunc.LoadSetup();
-            MessageBox.Show("Save system setup parameter successful");
+                string json = js.Serialize(GlobalFunc.setup);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
+                GlobalFunc.LoadSetup();
+                MessageBox.Show("Save system setup parameter successful");
+
+            }
+
         }
 
         private void udpatePasswordBtn_Click(object sender, EventArgs e)
         {
             if (password.Text == verifyPassword.Text)
             {
-                Setup setup = new Setup();
-                setup.gammamVisionPath = gammaVisionPath.Text;
-                setup.hardware = hardwareCB.Text;
-                setup.password = GlobalFunc.Encrypt(password.Text);
-                setup.laboratory = laboratory.Text;
-                setup._operator = _operator.Text;
-                setup.defaultSdf = defaultSdf.Text;
-                setup.defaultCal = defaultCal.Text;
-                setup.defaultLib = defaultLib.Text;
-                string json = js.Serialize(setup);
+                GlobalFunc.setup.password = GlobalFunc.Encrypt(password.Text);
+                string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
                 MessageBox.Show("update Password successful");
@@ -696,6 +758,14 @@ namespace JobAutomation
 
         private void defaultSdfBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Sample Types"))
+            {
+                ofd.InitialDirectory = @"C:\User\Sample Types";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 defaultSdf.Text = ofd.FileName;
@@ -704,6 +774,14 @@ namespace JobAutomation
 
         private void defaultCalBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Calibrations"))
+            {
+                ofd.InitialDirectory = @"C:\User\Calibrations";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 defaultCal.Text = ofd.FileName;
@@ -712,15 +790,37 @@ namespace JobAutomation
 
         private void defaultLibBtn_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(@"C:\User\Libraries"))
+            {
+                ofd.InitialDirectory = @"C:\User\Libraries";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 defaultLib.Text = ofd.FileName;
             }
         }
 
-
-
-
-
+        private void defaultDataBtn_Click(object sender, EventArgs e)
+        {
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                if (Directory.Exists(@" C:\User\Reports"))
+                {
+                    folderDialog.SelectedPath = @"C:\User\Reports";
+                }
+                else
+                {
+                    folderDialog.SelectedPath = @"C:\";
+                } 
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    defaultDataFolder.Text = folderDialog.SelectedPath;
+                }
+            }
+        }
     }
 }

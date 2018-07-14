@@ -32,13 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.UMCBILib">
-      <HintPath>..\..\lcms_enhance\ficom\ficom\bin\Debug\AxInterop.UMCBILib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.UMCBILib, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AxInterop.UMCBILib, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\..\lcms_enhance\ficom\ficom\bin\Debug\Interop.UMCBILib.dll</HintPath>
+      <HintPath>..\..\lcms_enhance\ficom\ficom\bin\Debug\AxInterop.UMCBILib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

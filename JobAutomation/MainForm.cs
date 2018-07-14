@@ -125,6 +125,20 @@ namespace JobAutomation
                 SetStatusLabel("Error on running scripts" + ex.Message, 3);
                 LogManager.WriteLog("Error on running scripts" + ex.Message);
             }
+            if (InvokeRequired)
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+                SetStatusLabel("Completed", 1);
+            }
+            else
+            {
+                quitBtn.Enabled = true;
+                scsBtn.Text = "Run";
+                scsBtn.Enabled = true;
+                SetStatusLabel("Completed", 1);
+            }
         }
 
         private void skipBGWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -149,36 +163,23 @@ namespace JobAutomation
 
         void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (InvokeRequired)
-            {
-                quitBtn.Enabled = true;
-                scsBtn.Text = "Run";
-                scsBtn.Enabled = true;
-                SetStatusLabel("Completed", 1);
-            }
-            else
-            {
-                quitBtn.Enabled = true;
-                scsBtn.Text = "Run";
-                scsBtn.Enabled = true;
-                SetStatusLabel("Completed", 1);
-            }
+            
         }
 
         void skipBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (InvokeRequired)
-            {
-                quitBtn.Enabled = true;
-                scsBtn.Text = "Run";
-                scsBtn.Enabled = true;
-            }
-            else
-            {
-                quitBtn.Enabled = true;
-                scsBtn.Text = "Run";
-                scsBtn.Enabled = true;
-            }
+            //if (InvokeRequired)
+            //{
+            //    quitBtn.Enabled = true;
+            //    scsBtn.Text = "Run";
+            //    scsBtn.Enabled = true;
+            //}
+            //else
+            //{
+            //    quitBtn.Enabled = true;
+            //    scsBtn.Text = "Run";
+            //    scsBtn.Enabled = true;
+            //}
         }
 
         public string GetStatus()
@@ -390,12 +391,14 @@ namespace JobAutomation
 
         private void quitBtn_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Confirm Delete?", "Delete Sequence", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Confirm Quit?", "Delete Sequence", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                Application.ExitThread();
+                Application.Exit();
+
             }
-            Application.ExitThread();
-            Application.Exit();
+
         }
 
     }

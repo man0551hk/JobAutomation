@@ -167,7 +167,8 @@ namespace JobAutomation
                     }
                     else if (line.Contains("DecayToDate"))
                     {
-                        sb.AppendLine("DecayToDate, \"" + thisDetail.decayCorrectionDate + "\"");
+                        DateTime dc = DateTime.Parse(thisDetail.decayCorrectionDate);
+                        sb.AppendLine("DecayToDate, \"" + dc.Year + "-" + dc.Month.ToString("00") + "-" + dc.Day.ToString("00") + " " + dc.Hour.ToString("00") + ":" + dc.Minute.ToString("00") + ":" + dc.Second.ToString("00") + "\"");
                     }
                     else
                     {
