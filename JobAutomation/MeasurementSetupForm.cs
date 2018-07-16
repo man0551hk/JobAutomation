@@ -264,6 +264,7 @@ namespace JobAutomation
             thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             thisPD.commonDecayDate = decayDateCommonCB.Checked;
             thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
+            GlobalFunc.toggleProfileDetail = thisPD;
             string json = js.Serialize(thisPD);
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + thisPD.operationName + ".json", json);
             MessageBox.Show("Save " + profileCB.Text + " successful");
@@ -278,18 +279,18 @@ namespace JobAutomation
                 for (int i = 1; i <= Convert.ToInt32(noOfSampleCB.Text); i++)
                 {
                     SampleDetail sampleDetail = new SampleDetail();
+                    sampleDetail.index = i;
+                    sampleDetail.sampleDescription = "";
                     if (GlobalFunc.toggleProfileDetail != null)
                     {
                         if (GlobalFunc.toggleProfileDetail.sampleDetailList.Count >= i)
                         {
                             if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
                             {
-                                sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
+                                sampleDetail.sampleDescription = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDescription;
                             }
                         }
                     }
-                    sampleDetail.index = i;
-                    sampleDetail.sampleDescription = "";
                     sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
                     if (calibrarionCommonCB.Checked || sampleDetail.calibrationFilePath == "")
                     {

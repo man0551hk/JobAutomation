@@ -66,18 +66,26 @@ namespace JobAutomation
         }
 
 
-        public static void PrepareDirectory()
+        public static string PrepareDirectory()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName;
-            if (Directory.Exists(path))
+            string result = "";
+            try
             {
-                Directory.Delete(path, true);
+                string path = AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName;
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path + @"\JobOptionFiles");
+                Directory.CreateDirectory(path + @"\JobFiles");
+                Directory.CreateDirectory(path + @"\Spectra");
             }
-            Directory.CreateDirectory(path);
-            Directory.CreateDirectory(path + @"\JobOptionFiles");
-            Directory.CreateDirectory(path + @"\JobFiles");
-            Directory.CreateDirectory(path + @"\Spectra");
-            
+            catch (Exception ex)
+            {
+                result = ex.Message;
+            }
+            return result;
 
         }
 
