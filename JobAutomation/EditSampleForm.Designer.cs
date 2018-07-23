@@ -141,7 +141,7 @@
             // sampleLibraryFileBtn
             // 
             this.sampleLibraryFileBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleLibraryFileBtn.Location = new System.Drawing.Point(621, 222);
+            this.sampleLibraryFileBtn.Location = new System.Drawing.Point(642, 223);
             this.sampleLibraryFileBtn.Name = "sampleLibraryFileBtn";
             this.sampleLibraryFileBtn.Size = new System.Drawing.Size(28, 23);
             this.sampleLibraryFileBtn.TabIndex = 26;
@@ -152,10 +152,11 @@
             // sampleLibraryFile
             // 
             this.sampleLibraryFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleLibraryFile.Location = new System.Drawing.Point(174, 225);
+            this.sampleLibraryFile.Location = new System.Drawing.Point(195, 225);
             this.sampleLibraryFile.Name = "sampleLibraryFile";
             this.sampleLibraryFile.Size = new System.Drawing.Size(441, 20);
             this.sampleLibraryFile.TabIndex = 25;
+            this.sampleLibraryFile.TextChanged += new System.EventHandler(this.sampleLibraryFile_TextChanged);
             // 
             // label21
             // 
@@ -174,10 +175,11 @@
             this.sampleActivityUnit.Items.AddRange(new object[] {
             "Bq",
             "μCi"});
-            this.sampleActivityUnit.Location = new System.Drawing.Point(174, 198);
+            this.sampleActivityUnit.Location = new System.Drawing.Point(195, 198);
             this.sampleActivityUnit.Name = "sampleActivityUnit";
             this.sampleActivityUnit.Size = new System.Drawing.Size(121, 21);
             this.sampleActivityUnit.TabIndex = 23;
+            this.sampleActivityUnit.SelectedIndexChanged += new System.EventHandler(this.sampleActivityUnit_SelectedIndexChanged);
             // 
             // label20
             // 
@@ -191,25 +193,26 @@
             // sampleDecayCorrectionCB
             // 
             this.sampleDecayCorrectionCB.AutoSize = true;
-            this.sampleDecayCorrectionCB.Location = new System.Drawing.Point(174, 251);
+            this.sampleDecayCorrectionCB.Location = new System.Drawing.Point(195, 251);
             this.sampleDecayCorrectionCB.Name = "sampleDecayCorrectionCB";
             this.sampleDecayCorrectionCB.Size = new System.Drawing.Size(15, 14);
             this.sampleDecayCorrectionCB.TabIndex = 21;
             this.sampleDecayCorrectionCB.UseVisualStyleBackColor = true;
+            this.sampleDecayCorrectionCB.CheckedChanged += new System.EventHandler(this.sampleDecayCorrectionCB_CheckedChanged);
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(3, 249);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(128, 16);
+            this.label16.Size = new System.Drawing.Size(186, 16);
             this.label16.TabIndex = 20;
-            this.label16.Text = "Decay Correction";
+            this.label16.Text = "Disable Decay Correction";
             // 
             // sampleDefinationFileBtn
             // 
             this.sampleDefinationFileBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDefinationFileBtn.Location = new System.Drawing.Point(621, 64);
+            this.sampleDefinationFileBtn.Location = new System.Drawing.Point(642, 64);
             this.sampleDefinationFileBtn.Name = "sampleDefinationFileBtn";
             this.sampleDefinationFileBtn.Size = new System.Drawing.Size(28, 23);
             this.sampleDefinationFileBtn.TabIndex = 19;
@@ -220,7 +223,7 @@
             // sampleCalibrationFileBtn
             // 
             this.sampleCalibrationFileBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleCalibrationFileBtn.Location = new System.Drawing.Point(621, 90);
+            this.sampleCalibrationFileBtn.Location = new System.Drawing.Point(642, 91);
             this.sampleCalibrationFileBtn.Name = "sampleCalibrationFileBtn";
             this.sampleCalibrationFileBtn.Size = new System.Drawing.Size(28, 23);
             this.sampleCalibrationFileBtn.TabIndex = 18;
@@ -232,15 +235,16 @@
             // 
             this.sampleCorrectionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleCorrectionDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.sampleCorrectionDate.Location = new System.Drawing.Point(174, 271);
+            this.sampleCorrectionDate.Location = new System.Drawing.Point(195, 271);
             this.sampleCorrectionDate.Name = "sampleCorrectionDate";
             this.sampleCorrectionDate.Size = new System.Drawing.Size(200, 20);
             this.sampleCorrectionDate.TabIndex = 17;
+            this.sampleCorrectionDate.ValueChanged += new System.EventHandler(this.sampleCorrectionDate_ValueChanged);
             // 
             // sampleDefinationFile
             // 
             this.sampleDefinationFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDefinationFile.Location = new System.Drawing.Point(174, 67);
+            this.sampleDefinationFile.Location = new System.Drawing.Point(195, 66);
             this.sampleDefinationFile.Name = "sampleDefinationFile";
             this.sampleDefinationFile.Size = new System.Drawing.Size(441, 20);
             this.sampleDefinationFile.TabIndex = 16;
@@ -248,7 +252,7 @@
             // sampleDescription
             // 
             this.sampleDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDescription.Location = new System.Drawing.Point(174, 41);
+            this.sampleDescription.Location = new System.Drawing.Point(195, 41);
             this.sampleDescription.MaxLength = 60;
             this.sampleDescription.Name = "sampleDescription";
             this.sampleDescription.Size = new System.Drawing.Size(441, 20);
@@ -257,21 +261,23 @@
             // sampleCountTime
             // 
             this.sampleCountTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleCountTime.Location = new System.Drawing.Point(174, 172);
+            this.sampleCountTime.Location = new System.Drawing.Point(195, 172);
             this.sampleCountTime.MaxLength = 10;
             this.sampleCountTime.Name = "sampleCountTime";
             this.sampleCountTime.Size = new System.Drawing.Size(100, 20);
             this.sampleCountTime.TabIndex = 14;
+            this.sampleCountTime.TextChanged += new System.EventHandler(this.sampleCountTime_TextChanged);
             // 
             // sampleQty
             // 
             this.sampleQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleQty.Location = new System.Drawing.Point(174, 146);
+            this.sampleQty.Location = new System.Drawing.Point(195, 146);
             this.sampleQty.MaxLength = 10;
             this.sampleQty.Name = "sampleQty";
             this.sampleQty.Size = new System.Drawing.Size(100, 20);
             this.sampleQty.TabIndex = 13;
             this.sampleQty.Text = "1.000";
+            this.sampleQty.TextChanged += new System.EventHandler(this.sampleQty_TextChanged);
             // 
             // sampleQtyUnitCB
             // 
@@ -283,18 +289,20 @@
             "ml",
             "kg",
             "L"});
-            this.sampleQtyUnitCB.Location = new System.Drawing.Point(174, 119);
+            this.sampleQtyUnitCB.Location = new System.Drawing.Point(195, 119);
             this.sampleQtyUnitCB.Name = "sampleQtyUnitCB";
             this.sampleQtyUnitCB.Size = new System.Drawing.Size(121, 21);
             this.sampleQtyUnitCB.TabIndex = 12;
+            this.sampleQtyUnitCB.SelectedIndexChanged += new System.EventHandler(this.sampleQtyUnitCB_SelectedIndexChanged);
             // 
             // sampleCalibrationFile
             // 
             this.sampleCalibrationFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleCalibrationFile.Location = new System.Drawing.Point(174, 93);
+            this.sampleCalibrationFile.Location = new System.Drawing.Point(195, 93);
             this.sampleCalibrationFile.Name = "sampleCalibrationFile";
             this.sampleCalibrationFile.Size = new System.Drawing.Size(441, 20);
             this.sampleCalibrationFile.TabIndex = 11;
+            this.sampleCalibrationFile.TextChanged += new System.EventHandler(this.sampleCalibrationFile_TextChanged);
             // 
             // label15
             // 
@@ -607,7 +615,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(382, 3);
+            this.label19.Location = new System.Drawing.Point(450, 3);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(165, 16);
             this.label19.TabIndex = 5;
@@ -617,11 +625,11 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(195, 3);
+            this.label17.Location = new System.Drawing.Point(175, 3);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(128, 16);
+            this.label17.Size = new System.Drawing.Size(186, 16);
             this.label17.TabIndex = 4;
-            this.label17.Text = "Decay Correction";
+            this.label17.Text = "Disable Decay Correction";
             // 
             // label18
             // 

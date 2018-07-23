@@ -231,7 +231,7 @@ namespace JobAutomation
 
 
                     decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
-                    decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
+                    //decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
 
                     decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
                     decayDateCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayDate;
@@ -261,8 +261,8 @@ namespace JobAutomation
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.commonLibrary = libraryCommonCB.Checked;
-            thisPD.decayCorrection = decayCorrectionCB.Checked;
-            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
+            thisPD.decayCorrection = decayCorrectionCommonCB.Checked;
+            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked ? false : true;
             thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             thisPD.commonDecayDate = decayDateCommonCB.Checked;
             thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
@@ -289,11 +289,22 @@ namespace JobAutomation
                         {
                             if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
                             {
-                                sampleDetail.sampleDescription = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDescription;
+                                //sampleDetail.sampleDescription = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDescription;
+                                sampleDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1];
                             }
                         }
                     }
-                    sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+                    //sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+
+                    if (sdfCommonCB.Checked || sampleDetail.sampleDefinationFilePath == "")
+                    {
+                        sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+                    }
+                    else if (string.IsNullOrEmpty(sampleDetail.sampleDefinationFilePath))
+                    {
+                        sampleDetail.sampleDefinationFilePath = "";
+                    }
+
                     if (calibrarionCommonCB.Checked || sampleDetail.calibrationFilePath == "")
                     {
                         sampleDetail.calibrationFilePath = calibrationFileTxt.Text;
@@ -335,14 +346,24 @@ namespace JobAutomation
                         sampleDetail.countingTime = 0;
                     }
 
-                    if (decayCorrectionCommonCB.Checked)
+                    if (libraryCommonCB.Checked || sampleDetail.libraryFile == "")
                     {
-                        sampleDetail.decayCorrection = decayCorrectionCB.Checked;
+                        sampleDetail.libraryFile = libraryFileTxt.Text;
                     }
-                    else
+                    else if (string.IsNullOrEmpty(sampleDetail.libraryFile))
                     {
-                        sampleDetail.decayCorrection = false;
+                        sampleDetail.libraryFile = "";
                     }
+                    
+                    sampleDetail.decayCorrection = decayCorrectionCommonCB.Checked ? false : true;
+                    //if (decayCorrectionCommonCB.Checked)
+                    //{
+                        
+                    //}
+                    //else
+                    //{
+                    //    sampleDetail.decayCorrection = false;
+                    //}
 
                     if (decayDateCommonCB.Checked)
                     {
@@ -636,6 +657,16 @@ namespace JobAutomation
         private void decayCorrectionCommon_CheckedChanged(object sender, EventArgs e)
         {
             CheckboxControl();
+            if (decayCorrectionCommonCB.Checked)
+            {
+                decayDateCommonCB.Enabled = false;
+                decayCorrectionDTPicker.Enabled = false; 
+            }
+            else
+            {
+                decayDateCommonCB.Enabled = true;
+                decayCorrectionDTPicker.Enabled = true; 
+            }
         }
 
         private void decayDateCommon_CheckedChanged(object sender, EventArgs e)
@@ -709,37 +740,26 @@ namespace JobAutomation
             {
                 MessageBox.Show("SDF File not existed");
             }
-            else if (File.Exists(defaultSdf.Text))
+            else if (File.Exists(defaultSdf.Text) && !defaultSdf.Text.ToLower().Contains(".sdf"))
             {
-                FileInfo fi = new FileInfo(defaultSdf.Text);
-                if (fi.Extension.ToLower() != "sdf")
-                {
-                    MessageBox.Show("Not valid SDF File");
-                }
+                MessageBox.Show("Invalid sdf File");
             }
             else if (!File.Exists(defaultCal.Text))
             {
                 MessageBox.Show("Calibration File not existed");
             }
-            else if (File.Exists(defaultCal.Text))
+            else if (File.Exists(defaultCal.Text) && !defaultCal.Text.ToLower().Contains(".clb"))
             {
-                FileInfo fi = new FileInfo(defaultCal.Text);
-                if (fi.Extension.ToLower() != "clb")
-                {
-                    MessageBox.Show("Not valid Calibration File");
-                }
+                MessageBox.Show("Invalid calibration File");
             }
             else if (!File.Exists(defaultLib.Text))
             {
                 MessageBox.Show("Library File not existed");
             }
-            else if (File.Exists(defaultLib.Text))
+            else if (File.Exists(defaultLib.Text) && !defaultLib.Text.ToLower().Contains(".lib"))
             {
-                FileInfo fi = new FileInfo(defaultLib.Text);
-                if (fi.Extension.ToLower() != "lib")
-                {
-                    MessageBox.Show("Not valid Library File");
-                }
+                MessageBox.Show("Invalid library File");
+        
             }
             else
             {
@@ -802,7 +822,14 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                defaultSdf.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".sdf"))
+                {
+                    defaultSdf.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid sdf file");
+                }
             }
         }
 
@@ -818,7 +845,14 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                defaultCal.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".clb"))
+                {
+                    defaultCal.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid calibration file");
+                }
             }
         }
 
@@ -834,7 +868,14 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                defaultLib.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".lib"))
+                {
+                    defaultLib.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid library file");
+                }
             }
         }
 

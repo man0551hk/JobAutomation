@@ -83,6 +83,7 @@ namespace JobAutomation
         }
 
         int thisNoOfSample = 0;
+        List<string> skippedSample = new List<string>();
         private void scsBtn_Click(object sender, EventArgs e)
         {
             scsBtn.Enabled = false;
@@ -99,7 +100,11 @@ namespace JobAutomation
             }
             else if (scsBtn.Text == "Skip")
             {
-                skipBGWorker.RunWorkerAsync();
+                DialogResult dialogResult = MessageBox.Show("Confirm Skip?", "", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    skipBGWorker.RunWorkerAsync();
+                }
             }
         }
 

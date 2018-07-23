@@ -80,6 +80,8 @@ namespace JobAutomation
             if (GlobalFunc.toggleProfileDetail.commonLibrary == true)
             {
                 libraryDoneBtn.Enabled = false;
+                sampleLibraryFile.Enabled = false;
+                sampleLibraryFileBtn.Enabled = false;
             }
 
             if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
@@ -358,7 +360,7 @@ namespace JobAutomation
 
 
                     DateTimePicker decayDate = new DateTimePicker();
-                    Point decayDateLocation = new Point(382, textBoxY);
+                    Point decayDateLocation = new Point(430, textBoxY);
                     decayDate.Location = decayDateLocation;
                     decayDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate;
                     decayDate.Name = "decayCorrectionDate@" + i;
@@ -681,7 +683,14 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                sampleCalibrationFile.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".clb"))
+                {
+                    sampleCalibrationFile.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid calibration file");
+                }
             }
         }
 
@@ -697,7 +706,14 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                sampleDefinationFile.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".sdf"))
+                {
+                    sampleDefinationFile.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid sdf file");
+                }
             }
         }
 
@@ -713,7 +729,105 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                sampleLibraryFile.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".lib"))
+                {
+                    sampleLibraryFile.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid library file");
+                }
+            }
+        }
+
+        private void sampleCalibrationFile_TextChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            TextBox calibrationFile = calibrationTab.Controls.Find("calibrartionFilePath@" + currentSample, true)[0] as TextBox;
+            if (calibrationFile != null)
+            {
+                calibrationFile.Text = sampleCalibrationFile.Text;
+            }
+        }
+
+        private void sampleQtyUnitCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            ComboBox unitComboBox = quantityUnitTab.Controls.Find("unitComboBox@" + currentSample, true)[0] as ComboBox;
+            if (unitComboBox != null)
+            {
+                unitComboBox.Text = sampleQtyUnitCB.Text;
+            }
+        }
+
+        private void sampleQty_TextChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            TextBox quantityTextBox = quantityUnitTab.Controls.Find("quantity@" + currentSample, true)[0] as TextBox;
+            if (quantityTextBox != null)
+            {
+                quantityTextBox.Text = sampleQty.Text;
+            }
+        }
+
+        private void sampleActivityUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            ComboBox activityUnitComboBox = quantityUnitTab.Controls.Find("activityUnitComboBox@" + currentSample, true)[0] as ComboBox;
+            if (activityUnitComboBox != null)
+            {
+                activityUnitComboBox.Text = sampleActivityUnit.Text;
+            }
+        }
+
+        private void sampleLibraryFile_TextChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            TextBox libraryFile = libraryTab.Controls.Find("libraryFilePath@" + currentSample, true)[0] as TextBox;
+            if (libraryFile != null)
+            {
+                libraryFile.Text = sampleLibraryFile.Text;
+            }
+        }
+
+        private void sampleCountTime_TextChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            TextBox countTimeTextBox = countTimeTab.Controls.Find("countTimeTextBox@" + currentSample, true)[0] as TextBox;
+            if (countTimeTextBox != null)
+            {
+                countTimeTextBox.Text = sampleCountTime.Text;
+            }
+        }
+
+        private void sampleDecayCorrectionCB_CheckedChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            sampleCorrectionDate.Enabled = false;
+            CheckBox decayCB = decayTab.Controls.Find("decayCorrectionCB@" + currentSample, true)[0] as CheckBox;
+            DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + currentSample, true)[0] as DateTimePicker;
+            if(decayCB != null)
+            {
+                decayCB.Checked = sampleDecayCorrectionCB.Checked;
+            }
+
+            if (sampleDecayCorrectionCB.Checked == false && decayDate != null)
+            {
+                decayDate.Enabled = true;
+            }
+            else
+            {
+                decayDate.Enabled = false;
+            }
+        }
+
+        private void sampleCorrectionDate_ValueChanged(object sender, EventArgs e)
+        {
+            string currentSample = sampleCB.Text;
+            DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + currentSample, true)[0] as DateTimePicker;
+            if (decayDate != null)
+            {
+                decayDate.Text = sampleCorrectionDate.Text;
             }
         }
 

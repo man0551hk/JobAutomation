@@ -96,10 +96,10 @@ namespace JobAutomation
             try
             {
                 SampleDetail thisDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo];
-                string optionsfileName = GlobalFunc.toggleProfileDetail.operationName + "_options_" + thisDetail.index.ToString("000") + ".txt";
-                string sdfFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".SDF";
-                string spcFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".SPC";
-                string jobFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".JOB";
+                string optionsfileName = GlobalFunc.toggleProfileDetail.prefix + "_options_" + thisDetail.index.ToString("000") + ".txt";
+                string sdfFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SDF";
+                string spcFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SPC";
+                string jobFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".JOB";
                 string dataFolder = GlobalFunc.toggleProfileDetail.dataFolder;
 
                 if (!Directory.Exists(dataFolder))
