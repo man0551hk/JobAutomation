@@ -14,7 +14,7 @@ namespace JobAutomation
     {
         public string operationName { set; get; }
         public string CreateDate { set; get; }
-        public string dataFoleder { set; get; }
+        public string dataFolder { set; get; }
         public string prefix { set; get; }
         public int sampleNo { set; get; }
         public string sampleDefinitionFile { set; get; }

@@ -34,6 +34,8 @@ namespace JobAutomation
             ConstructCountTimeTab();
             ConstructLibraryTab();
             ConstructDecay();
+
+            sampleCB.SelectedIndex = 0;
         }
 
         #region construct layout
@@ -462,7 +464,7 @@ namespace JobAutomation
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath = sampleDefinationFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath = sampleCalibrationFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].units = sampleQtyUnitCB.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity = Convert.ToInt32(sampleQty.Text != "" ? sampleQty.Text : "0");
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity = Convert.ToDouble(sampleQty.Text != "" ? sampleQty.Text : "0");
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime = Convert.ToInt32(sampleCountTime.Text != "" ? sampleCountTime.Text : "0");
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits = sampleActivityUnit.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile = sampleLibraryFile.Text;

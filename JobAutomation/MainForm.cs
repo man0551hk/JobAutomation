@@ -22,8 +22,10 @@ namespace JobAutomation
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(150, GlobalFunc.h / 2 - 330);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            //this.StartPosition = FormStartPosition.Manual;
+            //this.Location = new Point(150, GlobalFunc.h / 2 - 330);
+            this.ControlBox = false; 
             this.FormClosing += Form1_Closing;
 
             versionLabel.Text = Application.ProductVersion;
@@ -84,6 +86,9 @@ namespace JobAutomation
         private void scsBtn_Click(object sender, EventArgs e)
         {
             scsBtn.Enabled = false;
+            cssBtn.Enabled = false;
+            profileCB.Enabled = false;
+
             if (scsBtn.Text == "Run")
             {
                 SetSampleLabel("0");
@@ -178,6 +183,8 @@ namespace JobAutomation
                 scsBtn.Enabled = true;
                 SetStatusLabel("Completed", 1);
                 SetSampleLabel("0");
+                cssBtn.Enabled = true ;
+                profileCB.Enabled = true;
             }
             else
             {
@@ -186,6 +193,8 @@ namespace JobAutomation
                 scsBtn.Enabled = true;
                 SetStatusLabel("Completed", 1);
                 SetSampleLabel("0");
+                cssBtn.Enabled = true;
+                profileCB.Enabled = true;
             }
         }
 
@@ -319,17 +328,18 @@ namespace JobAutomation
 
         private bool CheckLoginStatus()
         {
-            if (GlobalFunc.loginStatus == 1)
-            {
-                return true;
-            }
-            else
-            {
-                GlobalFunc.passwordForm.Dispose();
-                GlobalFunc.passwordForm = new PasswordForm();
-                GlobalFunc.passwordForm.Show();
-                return false;
-            }
+
+            //if (GlobalFunc.loginStatus == 1)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            GlobalFunc.passwordForm.Dispose();
+            GlobalFunc.passwordForm = new PasswordForm();
+            GlobalFunc.passwordForm.Show();
+            return false;
+            //}
         }
 
         public void ShowMessage(string text)
@@ -439,7 +449,7 @@ namespace JobAutomation
 
         private void quitBtn_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Confirm Quit?", "Delete Sequence", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Confirm Quit?", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 Application.ExitThread();

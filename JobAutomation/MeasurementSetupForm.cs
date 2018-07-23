@@ -22,6 +22,7 @@ namespace JobAutomation
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
+            this.ControlBox = false; 
             editSampleBtn.Enabled = false;
             sampleQtyTxt.KeyPress += CheckISDecimal_KeyPress;
             countingTime.KeyPress += CheckISNumber_KeyPress;
@@ -33,6 +34,7 @@ namespace JobAutomation
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
                 defaultDataFolder.Text = GlobalFunc.setup.defaultData;
+                dataFolderTxt.Text = GlobalFunc.setup.defaultData;
                 defaultSdf.Text = GlobalFunc.setup.defaultSdf;
                 sampleDefinitionFileTxt.Text = GlobalFunc.setup.defaultSdf;
                 defaultCal.Text = GlobalFunc.setup.defaultCal;
@@ -205,7 +207,7 @@ namespace JobAutomation
             {
                 if (GlobalFunc.profileDetailList[i].operationName == profileCB.Text)
                 {
-                    dataFolderTxt.Text = GlobalFunc.profileDetailList[i].dataFoleder;
+                    dataFolderTxt.Text = GlobalFunc.profileDetailList[i].dataFolder;
                     prefixTxt.Text = GlobalFunc.profileDetailList[i].prefix;
                     noOfSampleCB.SelectedIndex = noOfSampleCB.FindString(GlobalFunc.profileDetailList[i].sampleNo.ToString());
                     GlobalFunc.toggleTotalSample = GlobalFunc.profileDetailList[i].sampleNo;
@@ -242,7 +244,7 @@ namespace JobAutomation
         {
             ProfileDetail thisPD = new ProfileDetail();
             thisPD.operationName = profileCB.Text;
-            thisPD.dataFoleder = dataFolderTxt.Text;
+            thisPD.dataFolder = dataFolderTxt.Text;
             thisPD.prefix = prefixTxt.Text;
             thisPD.sampleNo = noOfSampleCB.Text != "" ? Convert.ToInt32(noOfSampleCB.Text) : 0;
             thisPD.sampleDefinitionFile = sampleDefinitionFileTxt.Text;
@@ -578,9 +580,14 @@ namespace JobAutomation
 
                     string json = js.Serialize(GlobalFunc.profile);
                     File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "profile.json", json);
-                    SetProfile();
+                   
                     ShowMessage("Remove Profile successful");
-                    profileCB.SelectedIndex = -1;
+                    profileCB.Text = "";
+                    GlobalFunc.toggleProfile = "";
+                    GlobalFunc.LoadProfile();
+                    SetProfile();
+
+                    GlobalFunc.mainForm.SetProfile();
                 }
             }
             else if (dialogResult == DialogResult.No)
@@ -702,13 +709,37 @@ namespace JobAutomation
             {
                 MessageBox.Show("SDF File not existed");
             }
+            else if (File.Exists(defaultSdf.Text))
+            {
+                FileInfo fi = new FileInfo(defaultSdf.Text);
+                if (fi.Extension.ToLower() != "sdf")
+                {
+                    MessageBox.Show("Not valid SDF File");
+                }
+            }
             else if (!File.Exists(defaultCal.Text))
             {
                 MessageBox.Show("Calibration File not existed");
             }
+            else if (File.Exists(defaultCal.Text))
+            {
+                FileInfo fi = new FileInfo(defaultCal.Text);
+                if (fi.Extension.ToLower() != "clb")
+                {
+                    MessageBox.Show("Not valid Calibration File");
+                }
+            }
             else if (!File.Exists(defaultLib.Text))
             {
                 MessageBox.Show("Library File not existed");
+            }
+            else if (File.Exists(defaultLib.Text))
+            {
+                FileInfo fi = new FileInfo(defaultLib.Text);
+                if (fi.Extension.ToLower() != "lib")
+                {
+                    MessageBox.Show("Not valid Library File");
+                }
             }
             else
             {
@@ -755,6 +786,8 @@ namespace JobAutomation
         private void addBtn_Click(object sender, EventArgs e)
         {
             SaveCurrent();
+            GlobalFunc.LoadProfile();
+            GlobalFunc.mainForm.SetProfile();
         }
 
         private void defaultSdfBtn_Click(object sender, EventArgs e)
@@ -821,6 +854,15 @@ namespace JobAutomation
                 {
                     defaultDataFolder.Text = folderDialog.SelectedPath;
                 }
+            }
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Confirm Exit Measurement Setup? Your changes will not be saved.", "", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
             }
         }
     }

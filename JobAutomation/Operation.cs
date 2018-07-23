@@ -100,6 +100,12 @@ namespace JobAutomation
                 string sdfFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".SDF";
                 string spcFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".SPC";
                 string jobFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".JOB";
+                string dataFolder = GlobalFunc.toggleProfileDetail.dataFolder;
+
+                if (!Directory.Exists(dataFolder))
+                {
+                    Directory.CreateDirectory(dataFolder);
+                }
 
                 #region Generate Options File
                 string optionFile = ReplaceOptionFile(thisDetail);
@@ -108,8 +114,10 @@ namespace JobAutomation
 
 
                 #region Generate Job File
-                string jobFileStr = ReplaceJobFile(sampleNo + 1, GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo].sampleDefinationFilePath, path + @"\JobOptionFiles\" + optionsfileName,
-                                            path + @"\Spectra\" + spcFileName, sdfFileName, thisDetail.countingTime.ToString(), 
+                string jobFileStr = ReplaceJobFile(sampleNo + 1, 
+                                                GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo].sampleDefinationFilePath, 
+                                                path + @"\JobOptionFiles\" + optionsfileName,
+                                            dataFolder + @"\" + spcFileName, sdfFileName, thisDetail.countingTime.ToString(), 
                                             thisDetail.sampleDescription == "" ? GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") : thisDetail.sampleDescription);
                 File.WriteAllText(path + @"\JobFiles\" + jobFileName, jobFileStr);
                 jobFileList.Add(path + @"\JobFiles\" + jobFileName);
@@ -172,6 +180,10 @@ namespace JobAutomation
                         {
                             sb.AppendLine("DecayToCollectionEnabled, 0");
                         }
+                    }
+                    else if (line.Contains("ReportFilePath"))
+                    {
+                        sb.AppendLine("ReportFilePath, \"" + GlobalFunc.toggleProfileDetail.dataFolder + "\"");
                     }
                     else if (line.Contains("DecayToDate"))
                     {

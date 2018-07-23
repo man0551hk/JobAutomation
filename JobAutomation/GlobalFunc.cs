@@ -159,7 +159,7 @@ namespace JobAutomation
                     profileDetail.operationName = GlobalFunc.profile.operationName[i];
                     profileDetail.CreateDate = DateTime.Now.ToString();
                     profileDetail.sampleDetailList = new List<SampleDetail>();
-                    profileDetail.dataFoleder = "";
+                    profileDetail.dataFolder = "";
                     profileDetail.prefix = "";
                     profileDetail.sampleNo = 0;
                     profileDetail.sampleDefinitionFile = "";

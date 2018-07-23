@@ -59,6 +59,7 @@
             this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.sampleDefinitionFileTxt = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.decayDateCommonCB = new System.Windows.Forms.CheckBox();
             this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
@@ -79,6 +80,9 @@
             this.verifyPassword = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.defaultDataBtn = new System.Windows.Forms.Button();
+            this.defaultDataFolder = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.defaultLibBtn = new System.Windows.Forms.Button();
@@ -94,10 +98,7 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.defaultDataFolder = new System.Windows.Forms.TextBox();
-            this.defaultDataBtn = new System.Windows.Forms.Button();
-            this.sampleDefinitionFileTxt = new System.Windows.Forms.TextBox();
+            this.exitBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -488,6 +489,14 @@
             this.tabPage1.Text = "Measurement Setup";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // sampleDefinitionFileTxt
+            // 
+            this.sampleDefinitionFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sampleDefinitionFileTxt.Location = new System.Drawing.Point(201, 164);
+            this.sampleDefinitionFileTxt.Name = "sampleDefinitionFileTxt";
+            this.sampleDefinitionFileTxt.Size = new System.Drawing.Size(331, 20);
+            this.sampleDefinitionFileTxt.TabIndex = 48;
+            // 
             // addBtn
             // 
             this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -728,6 +737,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Setup";
             // 
+            // defaultDataBtn
+            // 
+            this.defaultDataBtn.Location = new System.Drawing.Point(475, 70);
+            this.defaultDataBtn.Name = "defaultDataBtn";
+            this.defaultDataBtn.Size = new System.Drawing.Size(31, 23);
+            this.defaultDataBtn.TabIndex = 26;
+            this.defaultDataBtn.Text = "...";
+            this.defaultDataBtn.UseVisualStyleBackColor = true;
+            this.defaultDataBtn.Click += new System.EventHandler(this.defaultDataBtn_Click);
+            // 
+            // defaultDataFolder
+            // 
+            this.defaultDataFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultDataFolder.Location = new System.Drawing.Point(125, 72);
+            this.defaultDataFolder.Name = "defaultDataFolder";
+            this.defaultDataFolder.Size = new System.Drawing.Size(344, 20);
+            this.defaultDataFolder.TabIndex = 25;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(11, 75);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(102, 13);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Default Data Folder:";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -874,47 +911,24 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
             // 
-            // label15
+            // exitBtn
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(11, 75);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(102, 13);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "Default Data Folder:";
-            // 
-            // defaultDataFolder
-            // 
-            this.defaultDataFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defaultDataFolder.Location = new System.Drawing.Point(125, 72);
-            this.defaultDataFolder.Name = "defaultDataFolder";
-            this.defaultDataFolder.Size = new System.Drawing.Size(344, 20);
-            this.defaultDataFolder.TabIndex = 25;
-            // 
-            // defaultDataBtn
-            // 
-            this.defaultDataBtn.Location = new System.Drawing.Point(475, 70);
-            this.defaultDataBtn.Name = "defaultDataBtn";
-            this.defaultDataBtn.Size = new System.Drawing.Size(31, 23);
-            this.defaultDataBtn.TabIndex = 26;
-            this.defaultDataBtn.Text = "...";
-            this.defaultDataBtn.UseVisualStyleBackColor = true;
-            this.defaultDataBtn.Click += new System.EventHandler(this.defaultDataBtn_Click);
-            // 
-            // sampleDefinitionFileTxt
-            // 
-            this.sampleDefinitionFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDefinitionFileTxt.Location = new System.Drawing.Point(201, 164);
-            this.sampleDefinitionFileTxt.Name = "sampleDefinitionFileTxt";
-            this.sampleDefinitionFileTxt.Size = new System.Drawing.Size(331, 20);
-            this.sampleDefinitionFileTxt.TabIndex = 48;
+            this.exitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitBtn.ForeColor = System.Drawing.Color.Red;
+            this.exitBtn.Location = new System.Drawing.Point(531, 6);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(75, 23);
+            this.exitBtn.TabIndex = 42;
+            this.exitBtn.Text = "Exit";
+            this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // MeasurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 505);
+            this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MeasurementSetupForm";
@@ -1005,5 +1019,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button defaultDataBtn;
         private System.Windows.Forms.TextBox sampleDefinitionFileTxt;
+        private System.Windows.Forms.Button exitBtn;
     }
 }
