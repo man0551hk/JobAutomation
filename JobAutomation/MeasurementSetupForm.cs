@@ -245,7 +245,15 @@ namespace JobAutomation
             ProfileDetail thisPD = new ProfileDetail();
             thisPD.operationName = profileCB.Text;
             thisPD.dataFolder = dataFolderTxt.Text;
-            thisPD.prefix = prefixTxt.Text;
+            if (string.IsNullOrEmpty(prefixTxt.Text))
+            {
+                prefixTxt.Text = profileCB.Text;
+                thisPD.prefix = profileCB.Text;
+            }
+            else
+            {
+                thisPD.prefix = prefixTxt.Text;
+            }
             thisPD.sampleNo = noOfSampleCB.Text != "" ? Convert.ToInt32(noOfSampleCB.Text) : 0;
             thisPD.sampleDefinitionFile = sampleDefinitionFileTxt.Text;
             thisPD.commonSDF = sdfCommonCB.Checked;

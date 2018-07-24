@@ -83,7 +83,7 @@ namespace JobAutomation
         }
 
         int thisNoOfSample = 0;
-        List<string> skippedSample = new List<string>();
+        List<int> skippedSample = new List<int>();
         private void scsBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(GlobalFunc.toggleProfileDetail.dataFolder))
@@ -110,12 +110,14 @@ namespace JobAutomation
                     if (dialogResult == DialogResult.Yes)
                     {
                         skipBGWorker.RunWorkerAsync();
-                        scsBtn.Enabled = false; 
+                        scsBtn.Enabled = false;
+                        skippedSample.Add(sampleNo);
                     }
                 }
             }
         }
 
+        public int sampleNo = 0;
         private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             SetStatusLabel("Start Generate Scripts", 2);
@@ -145,7 +147,7 @@ namespace JobAutomation
                 while (true)
                 {
                     string activeStatus = GetRunningStatus();
-                    int sampleNo = GetRunningSampleNo();
+                    sampleNo = GetRunningSampleNo();
                     if (activeStatus == "active")
                     {
                         scsBtn.Invoke(new Action(() => scsBtn.Enabled = true));
@@ -208,6 +210,26 @@ namespace JobAutomation
                 SetSampleLabel("0");
                 cssBtn.Enabled = true;
                 profileCB.Enabled = true;
+            }
+            UpdateSkippedSample();
+        }
+
+        public void UpdateSkippedSample()
+        {
+            for (int i = 0; i < skippedSample.Count; i++)
+            {
+                string path = GlobalFunc.toggleProfileDetail.dataFolder;
+                string fileName = GlobalFunc.toggleProfileDetail.prefix + "_" + skippedSample[i].ToString("000") + ".RPT";
+                string skippedfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + skippedSample[i].ToString("000") + "_skipped.RPT";
+                if (File.Exists(path + @"\" + fileName))
+                {
+                    if (File.Exists(path + @"\" + skippedfileName))
+                    {
+                        File.Delete(path + @"\" + skippedfileName);
+                    }
+                    File.Move(path + @"\" + fileName, path + @"\" + skippedfileName);
+                    File.Delete(path + @"\" + fileName);
+                }
             }
         }
 

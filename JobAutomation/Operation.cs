@@ -90,7 +90,10 @@ namespace JobAutomation
             try
             {
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName;
-                DeleteDirectory(path);
+                if (Directory.Exists(path))
+                {
+                    DeleteDirectory(path);
+                }
                 //if (Directory.Exists(path))
                 //{
                 //    Directory.Delete(path, true);
