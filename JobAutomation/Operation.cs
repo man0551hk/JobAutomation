@@ -65,6 +65,24 @@ namespace JobAutomation
             }
         }
 
+        public static void DeleteDirectory(string target_dir)
+        {
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
+            }
+
+            Directory.Delete(target_dir, false);
+        }
 
         public static string PrepareDirectory()
         {
@@ -72,14 +90,15 @@ namespace JobAutomation
             try
             {
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName;
-                if (Directory.Exists(path))
-                {
-                    Directory.Delete(path, true);
-                }
+                DeleteDirectory(path);
+                //if (Directory.Exists(path))
+                //{
+                //    Directory.Delete(path, true);
+                //}
                 Directory.CreateDirectory(path);
                 Directory.CreateDirectory(path + @"\JobOptionFiles");
                 Directory.CreateDirectory(path + @"\JobFiles");
-                Directory.CreateDirectory(path + @"\Spectra");
+                //Directory.CreateDirectory(path + @"\Spectra");
             }
             catch (Exception ex)
             {
@@ -96,10 +115,10 @@ namespace JobAutomation
             try
             {
                 SampleDetail thisDetail = GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo];
-                string optionsfileName = GlobalFunc.toggleProfileDetail.prefix + "_options_" + thisDetail.index.ToString("000") + ".txt";
+                string optionsfileName = GlobalFunc.toggleProfileDetail.operationName + "_options_" + thisDetail.index.ToString("000") + ".txt";
                 string sdfFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SDF";
                 string spcFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SPC";
-                string jobFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".JOB";
+                string jobFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".JOB";
                 string dataFolder = GlobalFunc.toggleProfileDetail.dataFolder;
 
                 if (!Directory.Exists(dataFolder))
@@ -125,78 +144,87 @@ namespace JobAutomation
 
             }
             catch(Exception ex)
-            { 
-                    
+            {
+                LogManager.WriteLog(ex.Message + System.Environment.NewLine);
             }
         }
 
         public static string ReplaceOptionFile(SampleDetail thisDetail)
         {
             StringBuilder sb = new StringBuilder();
-            string line;
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.txt"))
+            try
             {
-                StreamReader file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.txt");
-                while ((line = file.ReadLine()) != null)
+                string line;
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.txt"))
                 {
-                    if (line.Contains("LibraryFilePath"))
+                    StreamReader file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DefOptions.txt");
+                    while ((line = file.ReadLine()) != null)
                     {
-                        sb.AppendLine("LibraryFilePath, \"" + GlobalFunc.toggleProfileDetail.libraryFile + "\"");
-                    }
-                    else if (line.Contains("CalibrationFilePath"))
-                    {
-                        sb.AppendLine("CalibrationFilePath, \"" + thisDetail.calibrationFilePath + "\"");
-                    }
-                    else if (line.Contains("ActivityuCi"))
-                    {
-                        if (thisDetail.activityUnits != "uCi")
+                        if (line.Contains("LibraryFilePath"))
                         {
-                            sb.AppendLine("ActivityuCi, 0");
+                            sb.AppendLine("LibraryFilePath, \"" + GlobalFunc.toggleProfileDetail.libraryFile + "\"");
+                        }
+                        else if (line.Contains("CalibrationFilePath"))
+                        {
+                            sb.AppendLine("CalibrationFilePath, \"" + thisDetail.calibrationFilePath + "\"");
+                        }
+                        else if (line.Contains("ActivityuCi"))
+                        {
+                            if (thisDetail.activityUnits != "uCi")
+                            {
+                                sb.AppendLine("ActivityuCi, 0");
+                            }
+                            else
+                            {
+                                sb.AppendLine("ActivityuCi, 1");
+                            }
+                        }
+                        else if (line.Contains("ActivityUnits"))
+                        {
+                            sb.AppendLine("ActivityUnits, " + thisDetail.activityUnits);
+                        }
+                        else if (line.Contains("SampleQuantity"))
+                        {
+                            sb.AppendLine("SampleQuantity, " + thisDetail.sampleQuantity + "");
+                        }
+                        else if (line.Contains("SampleQuantityUnits"))
+                        {
+                            sb.AppendLine("SampleQuantityUnits,  " + thisDetail.units + "");
+                        }
+                        else if (line.Contains("DecayToCollectionEnabled"))
+                        {
+                            if (GlobalFunc.toggleProfileDetail.decayCorrection)
+                            {
+                                sb.AppendLine("DecayToCollectionEnabled, 1");
+                            }
+                            else
+                            {
+                                sb.AppendLine("DecayToCollectionEnabled, 0");
+                            }
+                        }
+                        else if (line.Contains("ReportFilePath"))
+                        {
+                            //ReportFilePath, "C:\User\Reports\*"
+                            //"C:\User\Reports\*"
+                            sb.AppendLine("ReportFilePath, \"" + GlobalFunc.toggleProfileDetail.dataFolder + "\\*\"");
+                        }
+                        else if (line.Contains("DecayToDate"))
+                        {
+                            DateTime dc = DateTime.Parse(thisDetail.decayCorrectionDate);
+                            sb.AppendLine("DecayToDate, \"" + dc.Year + "-" + dc.Month.ToString("00") + "-" + dc.Day.ToString("00") + " " + dc.Hour.ToString("00") + ":" + dc.Minute.ToString("00") + ":" + dc.Second.ToString("00") + "\"");
                         }
                         else
                         {
-                            sb.AppendLine("ActivityuCi, 1");
+                            sb.AppendLine(line);
                         }
                     }
-                    else if (line.Contains("ActivityUnits"))
-                    {
-                        sb.AppendLine("ActivityUnits, " + thisDetail.activityUnits);
-                    }
-                    else if (line.Contains("SampleQuantity"))
-                    {
-                        sb.AppendLine("SampleQuantity, " + thisDetail.sampleQuantity + "");
-                    }
-                    else if (line.Contains("SampleQuantityUnits"))
-                    {
-                        sb.AppendLine("SampleQuantityUnits,  " + thisDetail.units + "");
-                    }
-                    else if (line.Contains("DecayToCollectionEnabled"))
-                    {
-                        if (GlobalFunc.toggleProfileDetail.decayCorrection)
-                        {
-                            sb.AppendLine("DecayToCollectionEnabled, 1");
-                        }
-                        else
-                        {
-                            sb.AppendLine("DecayToCollectionEnabled, 0");
-                        }
-                    }
-                    else if (line.Contains("ReportFilePath"))
-                    {
-                        sb.AppendLine("ReportFilePath, \"" + GlobalFunc.toggleProfileDetail.dataFolder + "\"");
-                    }
-                    else if (line.Contains("DecayToDate"))
-                    {
-                        DateTime dc = DateTime.Parse(thisDetail.decayCorrectionDate);
-                        sb.AppendLine("DecayToDate, \"" + dc.Year + "-" + dc.Month.ToString("00") + "-" + dc.Day.ToString("00") + " " + dc.Hour.ToString("00") + ":" + dc.Minute.ToString("00") + ":" + dc.Second.ToString("00") + "\"");
-                    }
-                    else
-                    {
-                        sb.AppendLine(line);
-                    }
-                }
 
-                file.Close();
+                    file.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteLog(ex.Message);
             }
             return sb.ToString();
         }

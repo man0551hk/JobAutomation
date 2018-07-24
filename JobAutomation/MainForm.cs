@@ -86,24 +86,32 @@ namespace JobAutomation
         List<string> skippedSample = new List<string>();
         private void scsBtn_Click(object sender, EventArgs e)
         {
-            scsBtn.Enabled = false;
-            cssBtn.Enabled = false;
-            profileCB.Enabled = false;
-
-            if (scsBtn.Text == "Run")
+            if (string.IsNullOrEmpty(GlobalFunc.toggleProfileDetail.dataFolder))
             {
-                SetSampleLabel("0");
-                quitBtn.Enabled = false;
-                scsBtn.Text = "Skip";
-                thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
-                myBGWorker.RunWorkerAsync();
+                MessageBox.Show("Please setup data folder");
             }
-            else if (scsBtn.Text == "Skip")
+            else
             {
-                DialogResult dialogResult = MessageBox.Show("Confirm Skip?", "", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                scsBtn.Enabled = false;
+                cssBtn.Enabled = false;
+                profileCB.Enabled = false;
+
+                if (scsBtn.Text == "Run")
                 {
-                    skipBGWorker.RunWorkerAsync();
+                    SetSampleLabel("0");
+                    quitBtn.Enabled = false;
+                    scsBtn.Text = "Skip";
+                    thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
+                    myBGWorker.RunWorkerAsync();
+                }
+                else if (scsBtn.Text == "Skip")
+                {
+                    DialogResult dialogResult = MessageBox.Show("Confirm Skip?", "", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        skipBGWorker.RunWorkerAsync();
+                        scsBtn.Enabled = false; 
+                    }
                 }
             }
         }
@@ -126,13 +134,13 @@ namespace JobAutomation
 
             Operation.GenerateMasterFile();
             SetStatusLabel("Generate Script finished", 1);
-            Thread.Sleep(1000); //wait the script is done.
+            //Thread.Sleep(1000); //wait the script is done.
 
             SetStatusLabel("Running Scripts...", 2);
             try
             {
                 Operation.RunScript();
-                Thread.Sleep(10000); // wait for gv32 open, and first script passed
+                Thread.Sleep(8000); // wait for gv32 open, and first script passed
 
                 while (true)
                 {
@@ -237,7 +245,7 @@ namespace JobAutomation
                 int intReturnValue = Convert.ToInt32(returnValue);
                 if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
                 {
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1500);
                     break;
                 }
             }
