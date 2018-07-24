@@ -98,6 +98,8 @@ namespace JobAutomation
 
                 if (scsBtn.Text == "Run")
                 {
+                    skippedSample = new List<int>();
+                    sampleNo = 0;
                     SetSampleLabel("0");
                     quitBtn.Enabled = false;
                     scsBtn.Text = "Skip";
