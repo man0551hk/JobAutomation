@@ -162,7 +162,15 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                sampleDefinitionFileTxt.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".sdf"))
+                {
+                    sampleDefinitionFileTxt.Text = ofd.FileName;
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Invalid sdf file");
+                }
             }
         }
 
@@ -178,7 +186,15 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                calibrationFileTxt.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".clb"))
+                {
+                    calibrationFileTxt.Text = ofd.FileName;
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Invalid calibration file");
+                }
             }
         }
         
@@ -194,7 +210,15 @@ namespace JobAutomation
             } 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                libraryFileTxt.Text = ofd.FileName;
+                if (ofd.FileName.ToLower().Contains(".lib"))
+                {
+                    libraryFileTxt.Text = ofd.FileName;
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Invalid library file");
+                }
             }
         }
         
@@ -229,12 +253,12 @@ namespace JobAutomation
                     libraryFileTxt.Text = GlobalFunc.profileDetailList[i].libraryFile;
                     libraryCommonCB.Checked = GlobalFunc.profileDetailList[i].commonLibrary;
 
-                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection ? false : true;
+                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].disableDecayCorrection;
                     //decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
                     //decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
 
-                    decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
-                    decayDateCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayDate;
+                    //decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
+                    //decayDateCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayDate;
                     break;
                 }
             }
@@ -269,10 +293,10 @@ namespace JobAutomation
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.commonLibrary = libraryCommonCB.Checked;
-            thisPD.decayCorrection = decayCorrectionCommonCB.Checked ? false : true;
-            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked ? false : true;
-            thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-            thisPD.commonDecayDate = decayDateCommonCB.Checked;
+            thisPD.disableDecayCorrection = decayCorrectionCommonCB.Checked;
+            //thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked ? false : true;
+            //thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+            //thisPD.commonDecayDate = decayDateCommonCB.Checked;
             thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
             GlobalFunc.toggleProfileDetail = thisPD;
             string json = js.Serialize(thisPD);
@@ -362,8 +386,14 @@ namespace JobAutomation
                     {
                         sampleDetail.libraryFile = "";
                     }
-                    
-                    sampleDetail.decayCorrection = decayCorrectionCommonCB.Checked ? false : true;
+
+                    sampleDetail.disableDecayCorrection = decayCorrectionCommonCB.Checked;
+
+                    if (sampleDetail.decayCorrectionDate == null || sampleDetail.decayCorrectionDate == "")
+                    {
+                        sampleDetail.decayCorrectionDate = DateTime.Now.Year + "-" + DateTime.Now.Month.ToString("00") + "-" + DateTime.Now.Day.ToString("00") + " 00:00:00";
+                    }
+
                     //if (decayCorrectionCommonCB.Checked)
                     //{
                         
@@ -373,10 +403,10 @@ namespace JobAutomation
                     //    sampleDetail.decayCorrection = false;
                     //}
 
-                    if (decayDateCommonCB.Checked)
-                    {
-                        sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
-                    }
+                    //if (decayDateCommonCB.Checked)
+                    //{
+                    //    sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
+                    //}
 
                     // sampleDetail.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
 
@@ -665,16 +695,16 @@ namespace JobAutomation
         private void decayCorrectionCommon_CheckedChanged(object sender, EventArgs e)
         {
             CheckboxControl();
-            if (decayCorrectionCommonCB.Checked)
-            {
-                decayDateCommonCB.Enabled = false;
-                decayCorrectionDTPicker.Enabled = false; 
-            }
-            else
-            {
-                decayDateCommonCB.Enabled = true;
-                decayCorrectionDTPicker.Enabled = true; 
-            }
+            //if (decayCorrectionCommonCB.Checked)
+            //{
+            //    decayDateCommonCB.Enabled = false;
+            //    decayCorrectionDTPicker.Enabled = false; 
+            //}
+            //else
+            //{
+            //    decayDateCommonCB.Enabled = true;
+            //    decayCorrectionDTPicker.Enabled = true; 
+            //}
         }
 
         private void decayDateCommon_CheckedChanged(object sender, EventArgs e)
@@ -689,7 +719,7 @@ namespace JobAutomation
                 calibrarionCommonCB.Checked && sampleQtyUnitCommonCB.Checked && sampleQtyCommonCB.Checked && countingTimeCommonCB.Checked && activityUnitCommonCB.Checked
                 && libraryCommonCB.Checked
                 && decayCorrectionCommonCB.Checked
-                && decayDateCommonCB.Checked
+                //&& decayDateCommonCB.Checked
                 )
             {
                 editSampleBtn.Enabled = false;

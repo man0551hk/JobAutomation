@@ -196,13 +196,13 @@ namespace JobAutomation
                         }
                         else if (line.Contains("DecayToCollectionEnabled"))
                         {
-                            if (GlobalFunc.toggleProfileDetail.decayCorrection)
+                            if (GlobalFunc.toggleProfileDetail.disableDecayCorrection)
                             {
-                                sb.AppendLine("DecayToCollectionEnabled, 1");
+                                sb.AppendLine("DecayToCollectionEnabled, 0");
                             }
                             else
                             {
-                                sb.AppendLine("DecayToCollectionEnabled, 0");
+                                sb.AppendLine("DecayToCollectionEnabled, 1");
                             }
                         }
                         else if (line.Contains("ReportFilePath"))

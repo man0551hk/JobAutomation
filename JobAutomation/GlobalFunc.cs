@@ -174,8 +174,8 @@ namespace JobAutomation
                     profileDetail.activityUnit = "";
                     profileDetail.commonActivityUnit = true;
                     profileDetail.libraryFile = "";
-                    profileDetail.decayCorrection = false;
-                    profileDetail.decayCorrectionDate = DateTime.Now.ToString();
+                    profileDetail.disableDecayCorrection = true;
+                    //profileDetail.decayCorrectionDate = DateTime.Now.ToString();
                     GlobalFunc.profileDetailList.Add(profileDetail);
                     #endregion
                 }

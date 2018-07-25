@@ -41,7 +41,6 @@
             this.countingTime = new System.Windows.Forms.TextBox();
             this.activityUnitCB = new System.Windows.Forms.ComboBox();
             this.libraryFileTxt = new System.Windows.Forms.TextBox();
-            this.decayCorrectionDTPicker = new System.Windows.Forms.DateTimePicker();
             this.calibrarionCommonCB = new System.Windows.Forms.CheckBox();
             this.sampleQtyUnitCommonCB = new System.Windows.Forms.CheckBox();
             this.sampleQtyCommonCB = new System.Windows.Forms.CheckBox();
@@ -60,7 +59,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.sampleDefinitionFileTxt = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
-            this.decayDateCommonCB = new System.Windows.Forms.CheckBox();
             this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
             this.libraryCommonCB = new System.Windows.Forms.CheckBox();
             this.sdfCommonCB = new System.Windows.Forms.CheckBox();
@@ -257,17 +255,6 @@
             this.libraryFileTxt.Size = new System.Drawing.Size(331, 20);
             this.libraryFileTxt.TabIndex = 22;
             // 
-            // decayCorrectionDTPicker
-            // 
-            this.decayCorrectionDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectionDTPicker.Enabled = false;
-            this.decayCorrectionDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectionDTPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.decayCorrectionDTPicker.Location = new System.Drawing.Point(201, 369);
-            this.decayCorrectionDTPicker.Name = "decayCorrectionDTPicker";
-            this.decayCorrectionDTPicker.Size = new System.Drawing.Size(233, 20);
-            this.decayCorrectionDTPicker.TabIndex = 25;
-            // 
             // calibrarionCommonCB
             // 
             this.calibrarionCommonCB.AutoSize = true;
@@ -438,7 +425,6 @@
             // 
             this.tabPage1.Controls.Add(this.sampleDefinitionFileTxt);
             this.tabPage1.Controls.Add(this.addBtn);
-            this.tabPage1.Controls.Add(this.decayDateCommonCB);
             this.tabPage1.Controls.Add(this.decayCorrectionCommonCB);
             this.tabPage1.Controls.Add(this.libraryCommonCB);
             this.tabPage1.Controls.Add(this.sdfCommonCB);
@@ -467,7 +453,6 @@
             this.tabPage1.Controls.Add(this.sampleQtyUnitCB);
             this.tabPage1.Controls.Add(this.calibrarionCommonCB);
             this.tabPage1.Controls.Add(this.sampleQtyTxt);
-            this.tabPage1.Controls.Add(this.decayCorrectionDTPicker);
             this.tabPage1.Controls.Add(this.countingTime);
             this.tabPage1.Controls.Add(this.activityUnitCB);
             this.tabPage1.Controls.Add(this.libraryFileTxt);
@@ -497,20 +482,6 @@
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
-            // decayDateCommonCB
-            // 
-            this.decayDateCommonCB.AutoSize = true;
-            this.decayDateCommonCB.Checked = true;
-            this.decayDateCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.decayDateCommonCB.Enabled = false;
-            this.decayDateCommonCB.Location = new System.Drawing.Point(18, 372);
-            this.decayDateCommonCB.Name = "decayDateCommonCB";
-            this.decayDateCommonCB.Size = new System.Drawing.Size(155, 17);
-            this.decayDateCommonCB.TabIndex = 46;
-            this.decayDateCommonCB.Text = "Decay Correction Date";
-            this.decayDateCommonCB.UseVisualStyleBackColor = true;
-            this.decayDateCommonCB.CheckedChanged += new System.EventHandler(this.decayDateCommon_CheckedChanged);
             // 
             // decayCorrectionCommonCB
             // 
@@ -953,7 +924,6 @@
         private System.Windows.Forms.TextBox countingTime;
         private System.Windows.Forms.ComboBox activityUnitCB;
         private System.Windows.Forms.TextBox libraryFileTxt;
-        private System.Windows.Forms.DateTimePicker decayCorrectionDTPicker;
         private System.Windows.Forms.CheckBox calibrarionCommonCB;
         private System.Windows.Forms.CheckBox sampleQtyUnitCommonCB;
         private System.Windows.Forms.CheckBox sampleQtyCommonCB;
@@ -989,7 +959,6 @@
         private System.Windows.Forms.TextBox _operator;
         private System.Windows.Forms.TextBox laboratory;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckBox decayDateCommonCB;
         private System.Windows.Forms.CheckBox decayCorrectionCommonCB;
         private System.Windows.Forms.CheckBox libraryCommonCB;
         private System.Windows.Forms.CheckBox sdfCommonCB;

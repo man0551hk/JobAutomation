@@ -31,10 +31,10 @@ namespace JobAutomation
         public bool commonActivityUnit { set; get; }
         public string libraryFile { set; get; }
         public bool commonLibrary { set; get; }
-        public bool decayCorrection { set; get; }
-        public bool commonDecayCorrection { set; get; }
-        public string decayCorrectionDate { set; get; }
-        public bool commonDecayDate { set; get; }
+        public bool disableDecayCorrection { set; get; }
+        //public bool commonDecayCorrection { set; get; }
+        //public string decayCorrectionDate { set; get; }
+        //public bool commonDecayDate { set; get; }
 
         public List<SampleDetail> sampleDetailList { set; get; }
     }
@@ -50,7 +50,7 @@ namespace JobAutomation
 
         public string calibrationFilePath { set; get; }
 
-        public bool decayCorrection { set; get; }
+        public bool disableDecayCorrection { set; get; }
 
         public string decayCorrectionDate { set; get; }
 

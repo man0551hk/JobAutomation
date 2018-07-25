@@ -24,8 +24,8 @@ namespace JobAutomation
             sampleQty.KeyPress += CheckISDecimal_KeyPress;
             sampleCountTime.KeyPress += CheckISNumber_KeyPress;
             sampleCB.MouseDown += sampleCB__MouseDown;
-        
-
+            sampleCorrectionDate.Format = DateTimePickerFormat.Custom;
+            sampleCorrectionDate.CustomFormat = "yyyy-MM-dd hh:mm tt";
             ConstructLayout();
 
             Construct();
@@ -36,6 +36,20 @@ namespace JobAutomation
             ConstructDecay();
 
             sampleCB.SelectedIndex = 0;
+
+            this.FormClosing += Form_Closing;
+
+            //string currentSample = sampleCB.Text;
+            //DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@1", true)[0] as DateTimePicker;
+            //if (decayDate != null)
+            //{
+            //    decayDate.Value = sampleCorrectionDate.Value;
+            //}
+        }
+
+        private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Dispose();
         }
 
         #region construct layout
@@ -84,16 +98,11 @@ namespace JobAutomation
                 sampleLibraryFileBtn.Enabled = false;
             }
 
-            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
+            if (GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
             {
                 sampleDecayCorrectionCB.Enabled = false;
-            }
-
-            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
-            {
                 sampleCorrectionDate.Enabled = false;
             }
-
         }
         #endregion
 
@@ -312,7 +321,7 @@ namespace JobAutomation
                     selFileBtn.Location = selFileLocation;
                     selFileBtn.Name = "openLibraryCB@" + i;
                     selFileBtn.Text = "...";
-                    selFileBtn.Click += OpenCalibrationFileBtnClick;
+                    selFileBtn.Click += OpenLibraryFileBtnClick;
                     selFileBtn.Width = 28;
                     if (GlobalFunc.toggleProfileDetail.commonLibrary == true)
                     {
@@ -346,29 +355,39 @@ namespace JobAutomation
                     sampleLabel.Location = sampleLocation;
                     decayTab.Controls.Add(sampleLabel);
 
+                    DateTimePicker decayDate = new DateTimePicker();
+                    decayDate.Format = DateTimePickerFormat.Custom;
+                    decayDate.CustomFormat = "yyyy-MM-dd hh:mm tt";
+                    decayDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate;
+                    Point decayDateLocation = new Point(430, textBoxY);
+                    decayDate.Location = decayDateLocation;
+                    decayDate.Name = "decayCorrectionDate@" + i;
+                    if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection)
+                    {
+                        decayDate.Enabled = false;
+                    }
+
+                    decayTab.Controls.Add(decayDate);
+
                     CheckBox decayCB = new CheckBox();
                     Point decayCBLocation = new Point(250, textBoxY);
                     decayCB.Location = decayCBLocation;
                     decayCB.Name = "decayCorrectionCB@" + i;
-                    decayCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrection;
+                    decayCB.CheckedChanged +=decayCB_CheckedChanged;
+                    decayCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection;
                     decayCB.Text = "";
-                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
+                    if (GlobalFunc.toggleProfileDetail.disableDecayCorrection)
                     {
                         decayCB.Enabled = false;
+                    }
+                    else
+                    {
+                        decayCB.Enabled = true;
                     }
                     decayTab.Controls.Add(decayCB);
 
 
-                    DateTimePicker decayDate = new DateTimePicker();
-                    Point decayDateLocation = new Point(430, textBoxY);
-                    decayDate.Location = decayDateLocation;
-                    decayDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate;
-                    decayDate.Name = "decayCorrectionDate@" + i;
-                    if (GlobalFunc.toggleProfileDetail.commonDecayDate)
-                    {
-                        decayDate.Enabled = false;
-                    }
-                    decayTab.Controls.Add(decayDate);
+
 
                     labelY += 30;
                     textBoxY += 30;
@@ -381,21 +400,25 @@ namespace JobAutomation
         #endregion
 
         #region
-        private void OpenCalibrationFileBtnClick(object sender, EventArgs e)
+        private void decayCB_CheckedChanged(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            string name = btn.Name.Replace("openLibraryCB@", "libraryFilePath@");
-            if (libraryTab.Controls.Find(name, true)[0] != null)
+            CheckBox btn = sender as CheckBox;
+            string name = btn.Name.Replace("decayCorrectionCB@", "decayCorrectionDate@");
+            if (decayTab.Controls.Find(name, true) != null)
             {
-                TextBox libraryFilePath = libraryTab.Controls.Find(name, true)[0] as TextBox;
-                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                DateTimePicker thisDT = decayTab.Controls.Find(name, true)[0] as DateTimePicker;
+                if (btn.Checked)
                 {
-                    libraryFilePath.Text = ofd.FileName;
+                    thisDT.Enabled = false;
+                }
+                else
+                {
+                    thisDT.Enabled = true;
                 }
             }
         }
 
-        private void OpenLibraryFileBtnClick(object sender, EventArgs e)
+        private void OpenCalibrationFileBtnClick(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             string name = btn.Name.Replace("openCB@", "calibrartionFilePath@");
@@ -404,7 +427,37 @@ namespace JobAutomation
                 TextBox calibrartionFilePath = calibrationTab.Controls.Find(name, true)[0] as TextBox;
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    calibrartionFilePath.Text = ofd.FileName;
+                    if (ofd.FileName.ToLower().Contains(".clb"))
+                    {
+                        calibrartionFilePath.Text = ofd.FileName;
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Invalid calibration file");
+                    }
+                    
+                }
+            }
+
+        }
+
+        private void OpenLibraryFileBtnClick(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            string name = btn.Name.Replace("openLibraryCB@", "libraryFilePath@");
+            if (libraryTab.Controls.Find(name, true)[0] != null)
+            {
+                TextBox libraryFilePath = libraryTab.Controls.Find(name, true)[0] as TextBox;
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (ofd.FileName.ToLower().Contains(".lib"))
+                    {
+                        libraryFilePath.Text = ofd.FileName;
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Invalid library file");
+                    }
                 }
             }
         }
@@ -470,7 +523,7 @@ namespace JobAutomation
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime = Convert.ToInt32(sampleCountTime.Text != "" ? sampleCountTime.Text : "0");
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits = sampleActivityUnit.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile = sampleLibraryFile.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrection = sampleDecayCorrectionCB.Checked;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection = sampleDecayCorrectionCB.Checked;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate = sampleCorrectionDate.Text;
                     break;
                 }
@@ -606,12 +659,12 @@ namespace JobAutomation
                     DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + i, true)[0] as DateTimePicker;
 
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].calibrationFilePath = calibrationFile.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity = quantityTextBox.Text != "" ? Convert.ToInt32(quantityTextBox.Text) : 0;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity = quantityTextBox.Text != "" ? Convert.ToDouble(quantityTextBox.Text) : 0;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units = unitComboBox.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].activityUnits = activityUnitComboBox.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime = countTimeTextBox.Text != "" ? Convert.ToInt32(countTimeTextBox.Text) : 0;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].libraryFile = libraryFile.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrection = decayCB.Checked;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection = decayCB.Checked;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate = decayDate.Text;
                 }
                 string json = js.Serialize(GlobalFunc.toggleProfileDetail);
@@ -662,11 +715,35 @@ namespace JobAutomation
                     sampleCountTime.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime.ToString();
                     sampleDescription.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription;
                     sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
-                    sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrection;
-                    sampleCorrectionDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate;
+                    sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection;
+                    sampleCorrectionDate.Value = Convert.ToDateTime(GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate);
                     sampleActivityUnit.SelectedIndex = sampleActivityUnit.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits);
                     sampleLibraryFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile;
                     break;
+                }
+            }
+
+        }
+
+        private void sampleDefinationFileBtn_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(@"C:\User\Sample Types"))
+            {
+                ofd.InitialDirectory = @"C:\User\Sample Types";
+            }
+            else
+            {
+                ofd.InitialDirectory = @"C:\";
+            }
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (ofd.FileName.ToLower().Contains(".sdf"))
+                {
+                    sampleDefinationFile.Text = ofd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid sdf file");
                 }
             }
         }
@@ -694,28 +771,7 @@ namespace JobAutomation
             }
         }
 
-        private void sampleDefinationFileBtn_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(@"C:\User\Sample Types"))
-            {
-                ofd.InitialDirectory = @"C:\User\Sample Types";
-            }
-            else
-            {
-                ofd.InitialDirectory = @"C:\";
-            } 
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (ofd.FileName.ToLower().Contains(".sdf"))
-                {
-                    sampleDefinationFile.Text = ofd.FileName;
-                }
-                else
-                {
-                    MessageBox.Show("Invalid sdf file");
-                }
-            }
-        }
+
 
         private void sampleLibraryFileBtn_Click(object sender, EventArgs e)
         {
@@ -803,7 +859,14 @@ namespace JobAutomation
         private void sampleDecayCorrectionCB_CheckedChanged(object sender, EventArgs e)
         {
             string currentSample = sampleCB.Text;
-            sampleCorrectionDate.Enabled = false;
+            if (sampleDecayCorrectionCB.Checked)
+            {
+                sampleCorrectionDate.Enabled = false;
+            }
+            else
+            {
+                sampleCorrectionDate.Enabled = true;
+            }
             CheckBox decayCB = decayTab.Controls.Find("decayCorrectionCB@" + currentSample, true)[0] as CheckBox;
             DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + currentSample, true)[0] as DateTimePicker;
             if(decayCB != null)
@@ -827,7 +890,7 @@ namespace JobAutomation
             DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + currentSample, true)[0] as DateTimePicker;
             if (decayDate != null)
             {
-                decayDate.Text = sampleCorrectionDate.Text;
+                decayDate.Value = sampleCorrectionDate.Value;
             }
         }
 
