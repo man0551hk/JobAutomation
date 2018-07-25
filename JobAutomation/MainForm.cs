@@ -104,6 +104,7 @@ namespace JobAutomation
                     quitBtn.Enabled = false;
                     scsBtn.Text = "Skip";
                     thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
+                    runTime = DateTime.Now;
                     myBGWorker.RunWorkerAsync();
                 }
                 else if (scsBtn.Text == "Skip")
@@ -120,6 +121,7 @@ namespace JobAutomation
         }
 
         public int sampleNo = 0;
+        public DateTime runTime = DateTime.Now;
         private void myBGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             SetStatusLabel("Start Generate Scripts", 2);
@@ -193,6 +195,7 @@ namespace JobAutomation
         void myBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //while (GetStatus() == "")
+            UpdateSkippedSample();
             if (InvokeRequired)
             {
                 quitBtn.Enabled = true;
@@ -213,24 +216,41 @@ namespace JobAutomation
                 cssBtn.Enabled = true;
                 profileCB.Enabled = true;
             }
-            UpdateSkippedSample();
+            
         }
 
         public void UpdateSkippedSample()
         {
-            for (int i = 0; i < skippedSample.Count; i++)
+            Thread.Sleep(5000);//wait the report file complete
+            for (int i = 1; i <= thisNoOfSample; i++)
             {
                 string path = GlobalFunc.toggleProfileDetail.dataFolder;
-                string fileName = GlobalFunc.toggleProfileDetail.prefix + "_" + skippedSample[i].ToString("000") + ".RPT";
-                string skippedfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + skippedSample[i].ToString("000") + "_skipped.RPT";
+                string fileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".RPT";
+                string datefileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00")+runTime.Hour.ToString("00")+runTime.Minute.ToString("00")+runTime.Second.ToString("00") + ".RPT";
+                string skippedfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + "_skipped.RPT";
+
+                bool isSkipped = skippedSample.Exists(x => x == i);
                 if (File.Exists(path + @"\" + fileName))
                 {
-                    if (File.Exists(path + @"\" + skippedfileName))
+                    if (isSkipped)
                     {
-                        File.Delete(path + @"\" + skippedfileName);
+                        if (File.Exists(path + @"\" + skippedfileName))
+                        {
+                            File.Delete(path + @"\" + skippedfileName);
+                        }
+                        File.Move(path + @"\" + fileName, path + @"\" + skippedfileName);
+                        File.Delete(path + @"\" + fileName);
                     }
-                    File.Move(path + @"\" + fileName, path + @"\" + skippedfileName);
-                    File.Delete(path + @"\" + fileName);
+                    else
+                    {
+                        if (File.Exists(path + @"\" + datefileName))
+                        {
+                            File.Delete(path + @"\" + datefileName);
+                        }
+                        File.Move(path + @"\" + fileName, path + @"\" + datefileName);
+                        File.Delete(path + @"\" + fileName);
+                    }
+
                 }
             }
         }

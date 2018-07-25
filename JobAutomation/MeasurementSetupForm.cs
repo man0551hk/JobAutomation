@@ -229,8 +229,8 @@ namespace JobAutomation
                     libraryFileTxt.Text = GlobalFunc.profileDetailList[i].libraryFile;
                     libraryCommonCB.Checked = GlobalFunc.profileDetailList[i].commonLibrary;
 
-
-                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
+                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection ? false : true;
+                    //decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
                     //decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
 
                     decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
@@ -269,7 +269,7 @@ namespace JobAutomation
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.commonLibrary = libraryCommonCB.Checked;
-            thisPD.decayCorrection = decayCorrectionCommonCB.Checked;
+            thisPD.decayCorrection = decayCorrectionCommonCB.Checked ? false : true;
             thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked ? false : true;
             thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             thisPD.commonDecayDate = decayDateCommonCB.Checked;
