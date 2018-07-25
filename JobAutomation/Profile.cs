@@ -32,7 +32,7 @@ namespace JobAutomation
         public string libraryFile { set; get; }
         public bool commonLibrary { set; get; }
         public bool disableDecayCorrection { set; get; }
-        //public bool commonDecayCorrection { set; get; }
+        public bool commonDecayCorrection { set; get; }
         //public string decayCorrectionDate { set; get; }
         //public bool commonDecayDate { set; get; }
 

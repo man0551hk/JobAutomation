@@ -253,9 +253,9 @@ namespace JobAutomation
                     libraryFileTxt.Text = GlobalFunc.profileDetailList[i].libraryFile;
                     libraryCommonCB.Checked = GlobalFunc.profileDetailList[i].commonLibrary;
 
-                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].disableDecayCorrection;
+                    decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
                     //decayCorrectionCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayCorrection;
-                    //decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].decayCorrection;
+                    decayCorrectionCB.Checked = GlobalFunc.profileDetailList[i].disableDecayCorrection;
 
                     //decayCorrectionDTPicker.Value = DateTime.Parse( GlobalFunc.profileDetailList[i].decayCorrectionDate.ToString());
                     //decayDateCommonCB.Checked = GlobalFunc.profileDetailList[i].commonDecayDate;
@@ -293,8 +293,9 @@ namespace JobAutomation
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.commonLibrary = libraryCommonCB.Checked;
-            thisPD.disableDecayCorrection = decayCorrectionCommonCB.Checked;
-            //thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked ? false : true;
+            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
+            thisPD.disableDecayCorrection = decayCorrectionCB.Checked;
+            //
             //thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             //thisPD.commonDecayDate = decayDateCommonCB.Checked;
             thisPD.sampleDetailList = SaveProfileSamplesDetail(); //each sample
@@ -387,8 +388,12 @@ namespace JobAutomation
                         sampleDetail.libraryFile = "";
                     }
 
-                    sampleDetail.disableDecayCorrection = decayCorrectionCommonCB.Checked;
-
+                    //sampleDetail.disableDecayCorrection = decayCorrectionCommonCB.Checked;
+                    if (decayCorrectionCommonCB.Checked)
+                    {
+                        sampleDetail.disableDecayCorrection = decayCorrectionCB.Checked;
+                    }
+                    
                     if (sampleDetail.decayCorrectionDate == null || sampleDetail.decayCorrectionDate == "")
                     {
                         sampleDetail.decayCorrectionDate = DateTime.Now.Year + "-" + DateTime.Now.Month.ToString("00") + "-" + DateTime.Now.Day.ToString("00") + " 00:00:00";
@@ -529,6 +534,12 @@ namespace JobAutomation
 
                 if (GlobalFunc.editSampleForm == null || GlobalFunc.editSampleForm.IsDisposed)
                 {
+                    GlobalFunc.editSampleForm = new EditSampleForm();
+                }
+                else
+                {
+                    GlobalFunc.editSampleForm.Dispose();
+                    GlobalFunc.editSampleForm.Close();
                     GlobalFunc.editSampleForm = new EditSampleForm();
                 }
                 GlobalFunc.editSampleForm.Show();

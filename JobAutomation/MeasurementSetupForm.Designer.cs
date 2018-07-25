@@ -96,6 +96,7 @@
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.exitBtn = new System.Windows.Forms.Button();
+            this.decayCorrectionCB = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -423,6 +424,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.decayCorrectionCB);
             this.tabPage1.Controls.Add(this.sampleDefinitionFileTxt);
             this.tabPage1.Controls.Add(this.addBtn);
             this.tabPage1.Controls.Add(this.decayCorrectionCommonCB);
@@ -885,6 +887,17 @@
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
+            // decayCorrectionCB
+            // 
+            this.decayCorrectionCB.AutoSize = true;
+            this.decayCorrectionCB.Checked = true;
+            this.decayCorrectionCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.decayCorrectionCB.Location = new System.Drawing.Point(201, 349);
+            this.decayCorrectionCB.Name = "decayCorrectionCB";
+            this.decayCorrectionCB.Size = new System.Drawing.Size(15, 14);
+            this.decayCorrectionCB.TabIndex = 49;
+            this.decayCorrectionCB.UseVisualStyleBackColor = true;
+            // 
             // MeasurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -979,5 +992,6 @@
         private System.Windows.Forms.Button defaultDataBtn;
         private System.Windows.Forms.TextBox sampleDefinitionFileTxt;
         private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.CheckBox decayCorrectionCB;
     }
 }

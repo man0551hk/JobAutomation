@@ -26,8 +26,8 @@ namespace JobAutomation
             sampleCB.MouseDown += sampleCB__MouseDown;
             sampleCorrectionDate.Format = DateTimePickerFormat.Custom;
             sampleCorrectionDate.CustomFormat = "yyyy-MM-dd hh:mm tt";
+            
             ConstructLayout();
-
             Construct();
             ConstructCalibrationTab();
             ConstructQuantityUnitTab();
@@ -98,7 +98,7 @@ namespace JobAutomation
                 sampleLibraryFileBtn.Enabled = false;
             }
 
-            if (GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
+            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
             {
                 sampleDecayCorrectionCB.Enabled = false;
                 sampleCorrectionDate.Enabled = false;
@@ -362,7 +362,7 @@ namespace JobAutomation
                     Point decayDateLocation = new Point(430, textBoxY);
                     decayDate.Location = decayDateLocation;
                     decayDate.Name = "decayCorrectionDate@" + i;
-                    if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection)
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
                     {
                         decayDate.Enabled = false;
                     }
@@ -376,7 +376,7 @@ namespace JobAutomation
                     decayCB.CheckedChanged +=decayCB_CheckedChanged;
                     decayCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection;
                     decayCB.Text = "";
-                    if (GlobalFunc.toggleProfileDetail.disableDecayCorrection)
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
                     {
                         decayCB.Enabled = false;
                     }
