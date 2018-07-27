@@ -376,13 +376,14 @@ namespace JobAutomation
                     decayCB.CheckedChanged +=decayCB_CheckedChanged;
                     decayCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection;
                     decayCB.Text = "";
-                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection == false)
                     {
-                        decayCB.Enabled = false;
+                        decayCB.Enabled = true;
+                        decayDate.Enabled = true;
                     }
                     else
                     {
-                        decayCB.Enabled = true;
+                        decayCB.Enabled = false;
                     }
                     decayTab.Controls.Add(decayCB);
 
@@ -715,6 +716,12 @@ namespace JobAutomation
                     sampleCountTime.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime.ToString();
                     sampleDescription.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription;
                     sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection == false)
+                    {
+                        sampleCorrectionDate.Enabled = true;
+                        sampleDecayCorrectionCB.Enabled = true;
+                    }
+
                     sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection;
                     sampleCorrectionDate.Value = Convert.ToDateTime(GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate);
                     sampleActivityUnit.SelectedIndex = sampleActivityUnit.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits);

@@ -57,6 +57,7 @@
             this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.decayCorrectionCB = new System.Windows.Forms.CheckBox();
             this.sampleDefinitionFileTxt = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.decayCorrectionCommonCB = new System.Windows.Forms.CheckBox();
@@ -96,7 +97,6 @@
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.exitBtn = new System.Windows.Forms.Button();
-            this.decayCorrectionCB = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -466,6 +466,19 @@
             this.tabPage1.Text = "Measurement Setup";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // decayCorrectionCB
+            // 
+            this.decayCorrectionCB.AutoSize = true;
+            this.decayCorrectionCB.Checked = true;
+            this.decayCorrectionCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.decayCorrectionCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.decayCorrectionCB.Location = new System.Drawing.Point(201, 349);
+            this.decayCorrectionCB.Name = "decayCorrectionCB";
+            this.decayCorrectionCB.Size = new System.Drawing.Size(61, 17);
+            this.decayCorrectionCB.TabIndex = 49;
+            this.decayCorrectionCB.Text = "Disable";
+            this.decayCorrectionCB.UseVisualStyleBackColor = true;
+            // 
             // sampleDefinitionFileTxt
             // 
             this.sampleDefinitionFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -492,9 +505,9 @@
             this.decayCorrectionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.decayCorrectionCommonCB.Location = new System.Drawing.Point(19, 349);
             this.decayCorrectionCommonCB.Name = "decayCorrectionCommonCB";
-            this.decayCorrectionCommonCB.Size = new System.Drawing.Size(170, 17);
+            this.decayCorrectionCommonCB.Size = new System.Drawing.Size(124, 17);
             this.decayCorrectionCommonCB.TabIndex = 45;
-            this.decayCorrectionCommonCB.Text = "Disable Decay Correction";
+            this.decayCorrectionCommonCB.Text = "Decay Correction";
             this.decayCorrectionCommonCB.UseVisualStyleBackColor = true;
             this.decayCorrectionCommonCB.CheckedChanged += new System.EventHandler(this.decayCorrectionCommon_CheckedChanged);
             // 
@@ -886,17 +899,6 @@
             this.exitBtn.Text = "Exit";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
-            // 
-            // decayCorrectionCB
-            // 
-            this.decayCorrectionCB.AutoSize = true;
-            this.decayCorrectionCB.Checked = true;
-            this.decayCorrectionCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.decayCorrectionCB.Location = new System.Drawing.Point(201, 349);
-            this.decayCorrectionCB.Name = "decayCorrectionCB";
-            this.decayCorrectionCB.Size = new System.Drawing.Size(15, 14);
-            this.decayCorrectionCB.TabIndex = 49;
-            this.decayCorrectionCB.UseVisualStyleBackColor = true;
             // 
             // MeasurementSetupForm
             // 

@@ -293,8 +293,9 @@ namespace JobAutomation
             thisPD.commonActivityUnit = activityUnitCommonCB.Checked;
             thisPD.libraryFile = libraryFileTxt.Text;
             thisPD.commonLibrary = libraryCommonCB.Checked;
-            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
+          
             thisPD.disableDecayCorrection = decayCorrectionCB.Checked;
+            thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
             //
             //thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             //thisPD.commonDecayDate = decayDateCommonCB.Checked;
