@@ -56,25 +56,20 @@
             this.sampleDoneBtn = new System.Windows.Forms.Button();
             this.sampleCB = new System.Windows.Forms.ComboBox();
             this.calibrationTab = new System.Windows.Forms.TabPage();
-            this.calibrationDoneBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.quantityUnitTab = new System.Windows.Forms.TabPage();
-            this.quantityDoneBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.countTimeTab = new System.Windows.Forms.TabPage();
-            this.countTimeDoneBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.libraryTab = new System.Windows.Forms.TabPage();
-            this.libraryDoneBtn = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.decayTab = new System.Windows.Forms.TabPage();
-            this.decayCorrectionDoneBtn = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -193,10 +188,12 @@
             // sampleDecayCorrectionCB
             // 
             this.sampleDecayCorrectionCB.AutoSize = true;
+            this.sampleDecayCorrectionCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleDecayCorrectionCB.Location = new System.Drawing.Point(195, 251);
             this.sampleDecayCorrectionCB.Name = "sampleDecayCorrectionCB";
-            this.sampleDecayCorrectionCB.Size = new System.Drawing.Size(15, 14);
+            this.sampleDecayCorrectionCB.Size = new System.Drawing.Size(61, 17);
             this.sampleDecayCorrectionCB.TabIndex = 21;
+            this.sampleDecayCorrectionCB.Text = "Disable";
             this.sampleDecayCorrectionCB.UseVisualStyleBackColor = true;
             this.sampleDecayCorrectionCB.CheckedChanged += new System.EventHandler(this.sampleDecayCorrectionCB_CheckedChanged);
             // 
@@ -205,9 +202,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(3, 249);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(186, 16);
+            this.label16.Size = new System.Drawing.Size(128, 16);
             this.label16.TabIndex = 20;
-            this.label16.Text = "Disable Decay Correction";
+            this.label16.Text = "Decay Correction";
             // 
             // sampleDefinationFileBtn
             // 
@@ -370,11 +367,11 @@
             // sampleDoneBtn
             // 
             this.sampleDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleDoneBtn.Location = new System.Drawing.Point(657, 587);
+            this.sampleDoneBtn.Location = new System.Drawing.Point(610, 587);
             this.sampleDoneBtn.Name = "sampleDoneBtn";
-            this.sampleDoneBtn.Size = new System.Drawing.Size(88, 28);
+            this.sampleDoneBtn.Size = new System.Drawing.Size(135, 28);
             this.sampleDoneBtn.TabIndex = 3;
-            this.sampleDoneBtn.Text = "Done";
+            this.sampleDoneBtn.Text = "Save and Exit";
             this.sampleDoneBtn.UseVisualStyleBackColor = true;
             this.sampleDoneBtn.Click += new System.EventHandler(this.sampleDoneBtn_Click);
             // 
@@ -391,7 +388,6 @@
             // 
             // calibrationTab
             // 
-            this.calibrationTab.Controls.Add(this.calibrationDoneBtn);
             this.calibrationTab.Controls.Add(this.label2);
             this.calibrationTab.Controls.Add(this.label1);
             this.calibrationTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -402,17 +398,6 @@
             this.calibrationTab.TabIndex = 1;
             this.calibrationTab.Text = "Calibration";
             this.calibrationTab.UseVisualStyleBackColor = true;
-            // 
-            // calibrationDoneBtn
-            // 
-            this.calibrationDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrationDoneBtn.Location = new System.Drawing.Point(657, 587);
-            this.calibrationDoneBtn.Name = "calibrationDoneBtn";
-            this.calibrationDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.calibrationDoneBtn.TabIndex = 2;
-            this.calibrationDoneBtn.Text = "Done";
-            this.calibrationDoneBtn.UseVisualStyleBackColor = true;
-            this.calibrationDoneBtn.Click += new System.EventHandler(this.calibrationDoneBtn_Click);
             // 
             // label2
             // 
@@ -436,7 +421,6 @@
             // 
             // quantityUnitTab
             // 
-            this.quantityUnitTab.Controls.Add(this.quantityDoneBtn);
             this.quantityUnitTab.Controls.Add(this.label6);
             this.quantityUnitTab.Controls.Add(this.label5);
             this.quantityUnitTab.Controls.Add(this.label4);
@@ -448,17 +432,6 @@
             this.quantityUnitTab.TabIndex = 2;
             this.quantityUnitTab.Text = "Quantity / Unit";
             this.quantityUnitTab.UseVisualStyleBackColor = true;
-            // 
-            // quantityDoneBtn
-            // 
-            this.quantityDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantityDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.quantityDoneBtn.Name = "quantityDoneBtn";
-            this.quantityDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.quantityDoneBtn.TabIndex = 5;
-            this.quantityDoneBtn.Text = "Done";
-            this.quantityDoneBtn.UseVisualStyleBackColor = true;
-            this.quantityDoneBtn.Click += new System.EventHandler(this.quantityDoneBtn_Click);
             // 
             // label6
             // 
@@ -502,7 +475,6 @@
             // 
             // countTimeTab
             // 
-            this.countTimeTab.Controls.Add(this.countTimeDoneBtn);
             this.countTimeTab.Controls.Add(this.label8);
             this.countTimeTab.Controls.Add(this.label7);
             this.countTimeTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -512,17 +484,6 @@
             this.countTimeTab.TabIndex = 3;
             this.countTimeTab.Text = "Count Time";
             this.countTimeTab.UseVisualStyleBackColor = true;
-            // 
-            // countTimeDoneBtn
-            // 
-            this.countTimeDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countTimeDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.countTimeDoneBtn.Name = "countTimeDoneBtn";
-            this.countTimeDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.countTimeDoneBtn.TabIndex = 3;
-            this.countTimeDoneBtn.Text = "Done";
-            this.countTimeDoneBtn.UseVisualStyleBackColor = true;
-            this.countTimeDoneBtn.Click += new System.EventHandler(this.countTimeDoneBtn_Click);
             // 
             // label8
             // 
@@ -546,7 +507,6 @@
             // 
             // libraryTab
             // 
-            this.libraryTab.Controls.Add(this.libraryDoneBtn);
             this.libraryTab.Controls.Add(this.label22);
             this.libraryTab.Controls.Add(this.label23);
             this.libraryTab.Location = new System.Drawing.Point(4, 22);
@@ -555,17 +515,6 @@
             this.libraryTab.TabIndex = 5;
             this.libraryTab.Text = "Library File";
             this.libraryTab.UseVisualStyleBackColor = true;
-            // 
-            // libraryDoneBtn
-            // 
-            this.libraryDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.libraryDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.libraryDoneBtn.Name = "libraryDoneBtn";
-            this.libraryDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.libraryDoneBtn.TabIndex = 4;
-            this.libraryDoneBtn.Text = "Done";
-            this.libraryDoneBtn.UseVisualStyleBackColor = true;
-            this.libraryDoneBtn.Click += new System.EventHandler(this.libraryDoneBtn_Click);
             // 
             // label22
             // 
@@ -589,7 +538,6 @@
             // 
             // decayTab
             // 
-            this.decayTab.Controls.Add(this.decayCorrectionDoneBtn);
             this.decayTab.Controls.Add(this.label19);
             this.decayTab.Controls.Add(this.label17);
             this.decayTab.Controls.Add(this.label18);
@@ -599,17 +547,6 @@
             this.decayTab.TabIndex = 4;
             this.decayTab.Text = "Decay Correction";
             this.decayTab.UseVisualStyleBackColor = true;
-            // 
-            // decayCorrectionDoneBtn
-            // 
-            this.decayCorrectionDoneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectionDoneBtn.Location = new System.Drawing.Point(660, 590);
-            this.decayCorrectionDoneBtn.Name = "decayCorrectionDoneBtn";
-            this.decayCorrectionDoneBtn.Size = new System.Drawing.Size(88, 28);
-            this.decayCorrectionDoneBtn.TabIndex = 6;
-            this.decayCorrectionDoneBtn.Text = "Done";
-            this.decayCorrectionDoneBtn.UseVisualStyleBackColor = true;
-            this.decayCorrectionDoneBtn.Click += new System.EventHandler(this.decayCorrectionDoneBtn_Click);
             // 
             // label19
             // 
@@ -676,7 +613,6 @@
         private System.Windows.Forms.ComboBox sampleCB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button calibrationDoneBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -684,8 +620,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button sampleDoneBtn;
-        private System.Windows.Forms.Button quantityDoneBtn;
-        private System.Windows.Forms.Button countTimeDoneBtn;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -708,7 +642,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Button decayCorrectionDoneBtn;
         private System.Windows.Forms.ComboBox sampleActivityUnit;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button sampleLibraryFileBtn;
@@ -717,6 +650,5 @@
         private System.Windows.Forms.TabPage libraryTab;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button libraryDoneBtn;
     }
 }

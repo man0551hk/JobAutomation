@@ -21,6 +21,7 @@ namespace JobAutomation
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
+            this.ControlBox = false; 
             sampleQty.KeyPress += CheckISDecimal_KeyPress;
             sampleCountTime.KeyPress += CheckISNumber_KeyPress;
             sampleCB.MouseDown += sampleCB__MouseDown;
@@ -36,7 +37,7 @@ namespace JobAutomation
             ConstructDecay();
 
             sampleCB.SelectedIndex = 0;
-
+            this.tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             this.FormClosing += Form_Closing;
 
             //string currentSample = sampleCB.Text;
@@ -45,6 +46,15 @@ namespace JobAutomation
             //{
             //    decayDate.Value = sampleCorrectionDate.Value;
             //}
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Save();
+            if (tabControl1.SelectedIndex == 0)
+            {
+                SampleCBSelect();
+            }
         }
 
         private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -65,7 +75,7 @@ namespace JobAutomation
             {
                 sampleCalibrationFile.Enabled = false;
                 sampleCalibrationFileBtn.Enabled = false;
-                calibrationDoneBtn.Enabled = false;
+                //calibrationDoneBtn.Enabled = false;
             }
             if (GlobalFunc.toggleProfileDetail.commonQtyUnit == true)
             {
@@ -82,27 +92,29 @@ namespace JobAutomation
 
             if (GlobalFunc.toggleProfileDetail.commonQtyUnit && GlobalFunc.toggleProfileDetail.commonQty && GlobalFunc.toggleProfileDetail.commonActivityUnit)
             {
-                quantityDoneBtn.Enabled = false;
+                //quantityDoneBtn.Enabled = false;
             }
 
             if (GlobalFunc.toggleProfileDetail.commonCountingTime == true)
             {
                 sampleCountTime.Enabled = false;
-                countTimeDoneBtn.Enabled = false;
+                //countTimeDoneBtn.Enabled = false;
             }
 
             if (GlobalFunc.toggleProfileDetail.commonLibrary == true)
             {
-                libraryDoneBtn.Enabled = false;
+                //libraryDoneBtn.Enabled = false;
                 sampleLibraryFile.Enabled = false;
                 sampleLibraryFileBtn.Enabled = false;
             }
 
-            if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
-            {
-                sampleDecayCorrectionCB.Enabled = false;
-                sampleCorrectionDate.Enabled = false;
-            }
+            
+            //if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true)
+            //{
+            //    sampleDecayCorrectionCB.Enabled = false;
+            //    sampleCorrectionDate.Enabled = false;
+            //}
+            
         }
         #endregion
 
@@ -362,10 +374,10 @@ namespace JobAutomation
                     Point decayDateLocation = new Point(430, textBoxY);
                     decayDate.Location = decayDateLocation;
                     decayDate.Name = "decayCorrectionDate@" + i;
-                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
-                    {
-                        decayDate.Enabled = false;
-                    }
+                    //if (GlobalFunc.toggleProfileDetail.commonDecayCorrection)
+                    //{
+                    //    decayDate.Enabled = false;
+                    //}
 
                     decayTab.Controls.Add(decayDate);
 
@@ -376,15 +388,52 @@ namespace JobAutomation
                     decayCB.CheckedChanged +=decayCB_CheckedChanged;
                     decayCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection;
                     decayCB.Text = "";
-                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection == false)
+
+
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false &&
+                         GlobalFunc.toggleProfileDetail.disableDecayCorrection == false)
                     {
                         decayCB.Enabled = true;
-                        decayDate.Enabled = true;
                     }
-                    else
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false &&
+                       GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
+                    {
+                        decayCB.Enabled = true;
+                    }
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true &&
+                            GlobalFunc.toggleProfileDetail.disableDecayCorrection == false)
                     {
                         decayCB.Enabled = false;
                     }
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true &&
+                        GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
+                    {
+                        decayCB.Enabled = false;
+                    }
+
+                    if (!decayCB.Checked)
+                    {
+                        decayDate.Enabled = true;
+                    }
+                    else {
+                        decayDate.Enabled = false;
+                    }
+
+                    //if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].disableDecayCorrection == false)
+                    //{
+                    //    decayCB.Enabled = true;
+                    //    decayDate.Enabled = true;
+
+                    //}
+                    //else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false)
+                    //{
+                    //    decayCB.Enabled = true;
+                    //    decayDate.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    decayCB.Enabled = false;
+                    //}
                     decayTab.Controls.Add(decayCB);
 
 
@@ -670,10 +719,10 @@ namespace JobAutomation
                 }
                 string json = js.Serialize(GlobalFunc.toggleProfileDetail);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"ProfileDetail\" + GlobalFunc.toggleProfileDetail.operationName + ".json", json);
-                MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
+                //MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
                 GlobalFunc.LoadProfileDetail();
                 GlobalFunc.measurementSetupForm.EnableDoneBtn();
-                this.Close();
+                //this.Close();
             }
         }
 
@@ -704,7 +753,8 @@ namespace JobAutomation
             UpdateSampleDataOnTemp();
         }
 
-        private void sampleCB_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void SampleCBSelect()
         {
             for (int i = 0; i < GlobalFunc.toggleProfileDetail.sampleDetailList.Count; i++)
             {
@@ -716,10 +766,27 @@ namespace JobAutomation
                     sampleCountTime.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime.ToString();
                     sampleDescription.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription;
                     sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
-                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection && GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection == false)
+
+                    if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false &&
+                        GlobalFunc.toggleProfileDetail.disableDecayCorrection == false)
                     {
-                        sampleCorrectionDate.Enabled = true;
                         sampleDecayCorrectionCB.Enabled = true;
+                    }
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false &&
+                       GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
+                    {
+                        sampleDecayCorrectionCB.Enabled = true;
+                    }
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true &&
+                            GlobalFunc.toggleProfileDetail.disableDecayCorrection == false)
+                    {
+                        sampleDecayCorrectionCB.Enabled = false;
+                        sampleCorrectionDate.Enabled = true;
+                    }
+                    else if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == true &&
+                        GlobalFunc.toggleProfileDetail.disableDecayCorrection == true)
+                    {
+                        sampleDecayCorrectionCB.Enabled = false;
                     }
 
                     sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection;
@@ -729,6 +796,11 @@ namespace JobAutomation
                     break;
                 }
             }
+        }
+
+        private void sampleCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SampleCBSelect();
 
         }
 

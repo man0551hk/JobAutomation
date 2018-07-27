@@ -478,6 +478,7 @@
             this.decayCorrectionCB.TabIndex = 49;
             this.decayCorrectionCB.Text = "Disable";
             this.decayCorrectionCB.UseVisualStyleBackColor = true;
+            this.decayCorrectionCB.CheckedChanged += new System.EventHandler(this.decayCorrectionCB_CheckedChanged);
             // 
             // sampleDefinitionFileTxt
             // 

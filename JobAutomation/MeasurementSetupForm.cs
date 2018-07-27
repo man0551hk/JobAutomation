@@ -296,6 +296,13 @@ namespace JobAutomation
           
             thisPD.disableDecayCorrection = decayCorrectionCB.Checked;
             thisPD.commonDecayCorrection = decayCorrectionCommonCB.Checked;
+
+            //if (decayCorrectionCommonCB.Checked && !decayCorrectionCB.Checked)
+            //{
+            //    thisPD.commonDecayCorrection = false;
+            //    decayCorrectionCommonCB.Checked = false;
+            //}
+
             //
             //thisPD.decayCorrectionDate = decayCorrectionDTPicker.Value.ToString();
             //thisPD.commonDecayDate = decayDateCommonCB.Checked;
@@ -707,6 +714,7 @@ namespace JobAutomation
         private void decayCorrectionCommon_CheckedChanged(object sender, EventArgs e)
         {
             CheckboxControl();
+
             //if (decayCorrectionCommonCB.Checked)
             //{
             //    decayDateCommonCB.Enabled = false;
@@ -739,6 +747,10 @@ namespace JobAutomation
                 doneBtn.Enabled = true;
             }
             else
+            {
+                editSampleBtn.Enabled = true;
+            }
+            if (decayCorrectionCommonCB.Checked && decayCorrectionCB.Checked == false)
             {
                 editSampleBtn.Enabled = true;
             }
@@ -955,6 +967,11 @@ namespace JobAutomation
             {
                 this.Close();
             }
+        }
+
+        private void decayCorrectionCB_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxControl();
         }
     }
 }
