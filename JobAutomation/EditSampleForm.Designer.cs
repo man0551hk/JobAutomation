@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditSampleForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.sampleTab = new System.Windows.Forms.TabPage();
             this.sampleLibraryFileBtn = new System.Windows.Forms.Button();
@@ -584,6 +585,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 672);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditSampleForm";
             this.Text = "Sample Setup";
             this.tabControl1.ResumeLayout(false);

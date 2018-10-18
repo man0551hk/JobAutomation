@@ -169,7 +169,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cssBtn);
             this.Controls.Add(this.scsBtn);
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Automatic Sample Charger Control";

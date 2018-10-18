@@ -226,31 +226,65 @@ namespace JobAutomation
             {
                 string path = GlobalFunc.toggleProfileDetail.dataFolder;
                 string fileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".RPT";
+                string AN1FileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".AN1";
+                string UFOFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".UFO";
+                string SPCFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".SPC";
+                
                 string datefileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00")+runTime.Hour.ToString("00")+runTime.Minute.ToString("00")+runTime.Second.ToString("00") + ".RPT";
+                string dateAN1FileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".AN1";
+                string dateUFOFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".UFO";
+                string dateSPCFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".SPC";
+
                 string skippedfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + "_skipped.RPT";
+                string skippedAN1fileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + "_skipped.AN1";
+                string skippedUFOfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + "_skipped.UFO";
+                string skippedSPCfileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + "_skipped.SPC";
+
+
+                fileName = fileName.Replace("__", "_");
+                AN1FileName = AN1FileName.Replace("__", "_");
+                UFOFileName = UFOFileName.Replace("__", "_");
+                SPCFileName = SPCFileName.Replace("__", "_");
+
+                datefileName = datefileName.Replace("__", "_");
+                dateAN1FileName = dateAN1FileName.Replace("__", "_");
+                dateUFOFileName = dateUFOFileName.Replace("__", "_");
+                dateSPCFileName = dateSPCFileName.Replace("__", "_");
+
+                skippedfileName = skippedfileName.Replace("__", "_");
+                skippedAN1fileName = skippedAN1fileName.Replace("__", "_");
+                skippedUFOfileName = skippedUFOfileName.Replace("__", "_");
+                skippedSPCfileName = skippedSPCfileName.Replace("__", "_");
 
                 bool isSkipped = skippedSample.Exists(x => x == i);
-                if (File.Exists(path + @"\" + fileName))
-                {
-                    if (isSkipped)
-                    {
-                        if (File.Exists(path + @"\" + skippedfileName))
-                        {
-                            File.Delete(path + @"\" + skippedfileName);
-                        }
-                        File.Move(path + @"\" + fileName, path + @"\" + skippedfileName);
-                        File.Delete(path + @"\" + fileName);
-                    }
-                    else
-                    {
-                        if (File.Exists(path + @"\" + datefileName))
-                        {
-                            File.Delete(path + @"\" + datefileName);
-                        }
-                        File.Move(path + @"\" + fileName, path + @"\" + datefileName);
-                        File.Delete(path + @"\" + fileName);
-                    }
+                deleteMove(path, isSkipped, fileName, skippedfileName, datefileName);
+                deleteMove(path, isSkipped, AN1FileName, skippedAN1fileName, dateAN1FileName);
+                deleteMove(path, isSkipped, UFOFileName, skippedUFOfileName, dateUFOFileName);
+                deleteMove(path, isSkipped, SPCFileName, skippedSPCfileName, dateSPCFileName);
+            }
+        }
 
+        void deleteMove(string path, bool isSkipped, string source, string skipDesitnation, string destination)
+        {
+            if (File.Exists(path + @"\" + source))
+            {
+                if (isSkipped)
+                {
+                    if (File.Exists(path + @"\" + skipDesitnation))
+                    {
+                        File.Delete(path + @"\" + skipDesitnation);
+                    }
+                    File.Move(path + @"\" + source, path + @"\" + skipDesitnation);
+                    File.Delete(path + @"\" + source);
+                }
+                else
+                {
+                    if (File.Exists(path + @"\" + destination))
+                    {
+                        File.Delete(path + @"\" + destination);
+                    }
+                    File.Move(path + @"\" + source, path + @"\" + destination);
+                    File.Delete(path + @"\" + source);
                 }
             }
         }

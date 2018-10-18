@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MeasurementSetupForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -139,7 +140,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(36, 298);
+            this.label9.Location = new System.Drawing.Point(34, 340);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 9;
@@ -196,7 +197,7 @@
             // calibrationFileTxt
             // 
             this.calibrationFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrationFileTxt.Location = new System.Drawing.Point(201, 190);
+            this.calibrationFileTxt.Location = new System.Drawing.Point(201, 195);
             this.calibrationFileTxt.Name = "calibrationFileTxt";
             this.calibrationFileTxt.Size = new System.Drawing.Size(331, 20);
             this.calibrationFileTxt.TabIndex = 17;
@@ -211,7 +212,7 @@
             "kg",
             "ml",
             "L"});
-            this.sampleQtyUnitCB.Location = new System.Drawing.Point(201, 216);
+            this.sampleQtyUnitCB.Location = new System.Drawing.Point(199, 250);
             this.sampleQtyUnitCB.Name = "sampleQtyUnitCB";
             this.sampleQtyUnitCB.Size = new System.Drawing.Size(140, 21);
             this.sampleQtyUnitCB.TabIndex = 18;
@@ -219,7 +220,7 @@
             // sampleQtyTxt
             // 
             this.sampleQtyTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sampleQtyTxt.Location = new System.Drawing.Point(201, 243);
+            this.sampleQtyTxt.Location = new System.Drawing.Point(199, 277);
             this.sampleQtyTxt.MaxLength = 10;
             this.sampleQtyTxt.Name = "sampleQtyTxt";
             this.sampleQtyTxt.Size = new System.Drawing.Size(78, 20);
@@ -229,7 +230,7 @@
             // countingTime
             // 
             this.countingTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countingTime.Location = new System.Drawing.Point(201, 269);
+            this.countingTime.Location = new System.Drawing.Point(199, 303);
             this.countingTime.MaxLength = 6;
             this.countingTime.Name = "countingTime";
             this.countingTime.Size = new System.Drawing.Size(78, 20);
@@ -243,7 +244,7 @@
             this.activityUnitCB.Items.AddRange(new object[] {
             "Bq",
             "μCi"});
-            this.activityUnitCB.Location = new System.Drawing.Point(201, 295);
+            this.activityUnitCB.Location = new System.Drawing.Point(199, 329);
             this.activityUnitCB.Name = "activityUnitCB";
             this.activityUnitCB.Size = new System.Drawing.Size(140, 21);
             this.activityUnitCB.TabIndex = 21;
@@ -251,7 +252,7 @@
             // libraryFileTxt
             // 
             this.libraryFileTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.libraryFileTxt.Location = new System.Drawing.Point(201, 322);
+            this.libraryFileTxt.Location = new System.Drawing.Point(201, 224);
             this.libraryFileTxt.Name = "libraryFileTxt";
             this.libraryFileTxt.Size = new System.Drawing.Size(331, 20);
             this.libraryFileTxt.TabIndex = 22;
@@ -261,7 +262,7 @@
             this.calibrarionCommonCB.AutoSize = true;
             this.calibrarionCommonCB.Checked = true;
             this.calibrarionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.calibrarionCommonCB.Location = new System.Drawing.Point(19, 193);
+            this.calibrarionCommonCB.Location = new System.Drawing.Point(17, 197);
             this.calibrarionCommonCB.Name = "calibrarionCommonCB";
             this.calibrarionCommonCB.Size = new System.Drawing.Size(110, 17);
             this.calibrarionCommonCB.TabIndex = 26;
@@ -274,7 +275,7 @@
             this.sampleQtyUnitCommonCB.AutoSize = true;
             this.sampleQtyUnitCommonCB.Checked = true;
             this.sampleQtyUnitCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sampleQtyUnitCommonCB.Location = new System.Drawing.Point(19, 218);
+            this.sampleQtyUnitCommonCB.Location = new System.Drawing.Point(16, 252);
             this.sampleQtyUnitCommonCB.Name = "sampleQtyUnitCommonCB";
             this.sampleQtyUnitCommonCB.Size = new System.Drawing.Size(145, 17);
             this.sampleQtyUnitCommonCB.TabIndex = 27;
@@ -287,7 +288,7 @@
             this.sampleQtyCommonCB.AutoSize = true;
             this.sampleQtyCommonCB.Checked = true;
             this.sampleQtyCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sampleQtyCommonCB.Location = new System.Drawing.Point(19, 245);
+            this.sampleQtyCommonCB.Location = new System.Drawing.Point(17, 279);
             this.sampleQtyCommonCB.Name = "sampleQtyCommonCB";
             this.sampleQtyCommonCB.Size = new System.Drawing.Size(118, 17);
             this.sampleQtyCommonCB.TabIndex = 28;
@@ -300,7 +301,7 @@
             this.countingTimeCommonCB.AutoSize = true;
             this.countingTimeCommonCB.Checked = true;
             this.countingTimeCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.countingTimeCommonCB.Location = new System.Drawing.Point(19, 271);
+            this.countingTimeCommonCB.Location = new System.Drawing.Point(17, 305);
             this.countingTimeCommonCB.Name = "countingTimeCommonCB";
             this.countingTimeCommonCB.Size = new System.Drawing.Size(143, 17);
             this.countingTimeCommonCB.TabIndex = 29;
@@ -313,7 +314,7 @@
             this.activityUnitCommonCB.AutoSize = true;
             this.activityUnitCommonCB.Checked = true;
             this.activityUnitCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.activityUnitCommonCB.Location = new System.Drawing.Point(19, 298);
+            this.activityUnitCommonCB.Location = new System.Drawing.Point(18, 331);
             this.activityUnitCommonCB.Name = "activityUnitCommonCB";
             this.activityUnitCommonCB.Size = new System.Drawing.Size(95, 17);
             this.activityUnitCommonCB.TabIndex = 30;
@@ -363,7 +364,7 @@
             // 
             // calibrationFileSelBtn
             // 
-            this.calibrationFileSelBtn.Location = new System.Drawing.Point(539, 190);
+            this.calibrationFileSelBtn.Location = new System.Drawing.Point(538, 193);
             this.calibrationFileSelBtn.Name = "calibrationFileSelBtn";
             this.calibrationFileSelBtn.Size = new System.Drawing.Size(35, 23);
             this.calibrationFileSelBtn.TabIndex = 36;
@@ -404,7 +405,7 @@
             // 
             // libraryFileSelBtn
             // 
-            this.libraryFileSelBtn.Location = new System.Drawing.Point(538, 319);
+            this.libraryFileSelBtn.Location = new System.Drawing.Point(538, 222);
             this.libraryFileSelBtn.Name = "libraryFileSelBtn";
             this.libraryFileSelBtn.Size = new System.Drawing.Size(35, 23);
             this.libraryFileSelBtn.TabIndex = 40;
@@ -472,7 +473,7 @@
             this.decayCorrectionCB.Checked = true;
             this.decayCorrectionCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.decayCorrectionCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decayCorrectionCB.Location = new System.Drawing.Point(201, 349);
+            this.decayCorrectionCB.Location = new System.Drawing.Point(199, 356);
             this.decayCorrectionCB.Name = "decayCorrectionCB";
             this.decayCorrectionCB.Size = new System.Drawing.Size(61, 17);
             this.decayCorrectionCB.TabIndex = 49;
@@ -504,7 +505,7 @@
             this.decayCorrectionCommonCB.AutoSize = true;
             this.decayCorrectionCommonCB.Checked = true;
             this.decayCorrectionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.decayCorrectionCommonCB.Location = new System.Drawing.Point(19, 349);
+            this.decayCorrectionCommonCB.Location = new System.Drawing.Point(16, 356);
             this.decayCorrectionCommonCB.Name = "decayCorrectionCommonCB";
             this.decayCorrectionCommonCB.Size = new System.Drawing.Size(124, 17);
             this.decayCorrectionCommonCB.TabIndex = 45;
@@ -517,7 +518,7 @@
             this.libraryCommonCB.AutoSize = true;
             this.libraryCommonCB.Checked = true;
             this.libraryCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.libraryCommonCB.Location = new System.Drawing.Point(19, 325);
+            this.libraryCommonCB.Location = new System.Drawing.Point(19, 223);
             this.libraryCommonCB.Name = "libraryCommonCB";
             this.libraryCommonCB.Size = new System.Drawing.Size(88, 17);
             this.libraryCommonCB.TabIndex = 44;
@@ -909,6 +910,7 @@
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MeasurementSetupForm";
             this.Text = "Measurement Setup";
             this.tabControl1.ResumeLayout(false);

@@ -122,6 +122,13 @@ namespace JobAutomation
                 string sdfFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SDF";
                 string spcFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + thisDetail.index.ToString("000") + ".SPC";
                 string jobFileName = GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") + ".JOB";
+
+                optionsfileName = optionsfileName.Replace("__", "_");
+                sdfFileName = sdfFileName.Replace("__", "_");
+                spcFileName = spcFileName.Replace("__", "_");
+                jobFileName = jobFileName.Replace("__", "_");
+
+
                 string dataFolder = GlobalFunc.toggleProfileDetail.dataFolder;
 
                 if (!Directory.Exists(dataFolder))
@@ -186,7 +193,7 @@ namespace JobAutomation
                         {
                             sb.AppendLine("ActivityUnits, " + thisDetail.activityUnits);
                         }
-                        else if (line.Contains("SampleQuantity"))
+                        else if (line.Contains("SampleQuantity") && !line.Contains("SampleQuantityUnits") && !line.Contains("SampleQuantityUncertainty"))
                         {
                             sb.AppendLine("SampleQuantity, " + thisDetail.sampleQuantity + "");
                         }

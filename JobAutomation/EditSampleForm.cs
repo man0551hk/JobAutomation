@@ -26,7 +26,7 @@ namespace JobAutomation
             sampleCountTime.KeyPress += CheckISNumber_KeyPress;
             sampleCB.MouseDown += sampleCB__MouseDown;
             sampleCorrectionDate.Format = DateTimePickerFormat.Custom;
-            sampleCorrectionDate.CustomFormat = "yyyy-MM-dd hh:mm tt";
+            sampleCorrectionDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             
             ConstructLayout();
             Construct();
@@ -369,7 +369,7 @@ namespace JobAutomation
 
                     DateTimePicker decayDate = new DateTimePicker();
                     decayDate.Format = DateTimePickerFormat.Custom;
-                    decayDate.CustomFormat = "yyyy-MM-dd hh:mm tt";
+                    decayDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
                     decayDate.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].decayCorrectionDate;
                     Point decayDateLocation = new Point(430, textBoxY);
                     decayDate.Location = decayDateLocation;
@@ -557,6 +557,7 @@ namespace JobAutomation
                     this.Close();
                 }
             }
+            //
         }
 
         private void UpdateSampleDataOnTemp()
@@ -575,6 +576,7 @@ namespace JobAutomation
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile = sampleLibraryFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection = sampleDecayCorrectionCB.Checked;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate = sampleCorrectionDate.Text;
+                    Operation.GenerateToFile(i);
                     break;
                 }
             }

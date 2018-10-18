@@ -776,7 +776,7 @@ namespace JobAutomation
             if (laboratory.Text != "" && _operator.Text != "")
             {
                 GlobalFunc.setup.laboratory = laboratory.Text;
-                GlobalFunc.setup.laboratory = _operator.Text;
+                GlobalFunc.setup._operator = _operator.Text;
                 string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
