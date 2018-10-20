@@ -554,6 +554,10 @@ namespace JobAutomation
                     MessageBox.Show("Save " + GlobalFunc.toggleProfileDetail.operationName + " successful");
                     GlobalFunc.LoadProfileDetail();
                     GlobalFunc.measurementSetupForm.EnableDoneBtn();
+
+
+                    //Operation.GenerateToFile(Convert.ToInt32(sampleCB.Text));
+                    //Operation.GenerateMasterFile();
                     this.Close();
                 }
             }

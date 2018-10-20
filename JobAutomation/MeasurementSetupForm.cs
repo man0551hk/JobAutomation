@@ -558,6 +558,20 @@ namespace JobAutomation
         {
             if (SaveCurrent())
             {
+                Operation.jobFileList = new List<string>();
+                string prepareResult = Operation.PrepareDirectory();
+
+                if (prepareResult != "")
+                {
+                    MessageBox.Show(prepareResult);
+                }
+
+                for (int i = 0; i < Convert.ToInt32(noOfSampleCB.Text); i++)
+                {
+                    Operation.GenerateToFile(i);
+                }
+
+                Operation.GenerateMasterFile();
                 this.Close();
             }
         }

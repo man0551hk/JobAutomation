@@ -67,21 +67,34 @@ namespace JobAutomation
 
         public static void DeleteDirectory(string target_dir)
         {
-            string[] files = Directory.GetFiles(target_dir);
-            string[] dirs = Directory.GetDirectories(target_dir);
+            //string[] files = Directory.GetFiles(target_dir);
+            //string[] dirs = Directory.GetDirectories(target_dir);
 
-            foreach (string file in files)
+            //foreach (string file in files)
+            //{
+            //    File.SetAttributes(file, FileAttributes.Normal);
+            //    File.Delete(file);
+            //}
+
+            //foreach (string dir in dirs)
+            //{
+            //    DeleteDirectory(dir);
+            //}
+
+            //Directory.Delete(target_dir, true);
+
+            foreach (string file in Directory.GetFiles(target_dir))
             {
-                File.SetAttributes(file, FileAttributes.Normal);
                 File.Delete(file);
             }
 
-            foreach (string dir in dirs)
+            foreach (string subDir in Directory.GetDirectories(target_dir))
             {
-                DeleteDirectory(dir);
+                DeleteDirectory(subDir);
             }
-
-            Directory.Delete(target_dir, false);
+            System.Threading.Thread.Sleep(1);
+            //System.Thread.Sleep(1); // This makes the difference between whether it works or not. Sleep(0) is not enough.
+            Directory.Delete(target_dir);
         }
 
         public static string PrepareDirectory()
@@ -98,6 +111,7 @@ namespace JobAutomation
                 //{
                 //    Directory.Delete(path, true);
                 //}
+
                 Directory.CreateDirectory(path);
                 Directory.CreateDirectory(path + @"\JobOptionFiles");
                 Directory.CreateDirectory(path + @"\JobFiles");

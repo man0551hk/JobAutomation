@@ -198,9 +198,11 @@ namespace JobAutomation
             UpdateSkippedSample();
             if (InvokeRequired)
             {
+                Thread.Sleep(2000);
                 quitBtn.Enabled = true;
                 scsBtn.Text = "Run";
                 scsBtn.Enabled = true;
+               
                 SetStatusLabel("Completed", 1);
                 SetSampleLabel("0");
                 cssBtn.Enabled = true ;
@@ -208,6 +210,7 @@ namespace JobAutomation
             }
             else
             {
+                Thread.Sleep(2000);
                 quitBtn.Enabled = true;
                 scsBtn.Text = "Run";
                 scsBtn.Enabled = true;
