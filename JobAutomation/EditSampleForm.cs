@@ -796,7 +796,13 @@ namespace JobAutomation
                     }
 
                     sampleDecayCorrectionCB.Checked = GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection;
-                    sampleCorrectionDate.Value = Convert.ToDateTime(GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate);
+                    try
+                    {
+                        sampleCorrectionDate.Value = Convert.ToDateTime(GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate);
+                    }
+                    catch (Exception ex)
+                    { 
+                    }
                     sampleActivityUnit.SelectedIndex = sampleActivityUnit.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits);
                     sampleLibraryFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile;
                     break;

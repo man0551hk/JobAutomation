@@ -71,6 +71,10 @@ namespace JobAutomation
         private void cssBtn_Click(object sender, EventArgs e)
         {
             GlobalFunc.passwordFormToggle = "MeasurementSetupForm";
+            //if (GlobalFunc.measurementSetupForm != null)
+            //{
+            //    GlobalFunc.measurementSetupForm.Dispose();
+            //}
             if (CheckLoginStatus())
             {
                 if (GlobalFunc.measurementSetupForm == null || GlobalFunc.measurementSetupForm.IsDisposed)
@@ -221,6 +225,8 @@ namespace JobAutomation
             }
             
         }
+
+
 
         public void UpdateSkippedSample()
         {
@@ -423,17 +429,17 @@ namespace JobAutomation
         private bool CheckLoginStatus()
         {
 
-            //if (GlobalFunc.loginStatus == 1)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            GlobalFunc.passwordForm.Dispose();
-            GlobalFunc.passwordForm = new PasswordForm();
-            GlobalFunc.passwordForm.Show();
-            return false;
-            //}
+            if (GlobalFunc.loginStatus == 1)
+            {
+                return true;
+            }
+            else
+            {
+                GlobalFunc.passwordForm.Dispose();
+                GlobalFunc.passwordForm = new PasswordForm();
+                GlobalFunc.passwordForm.Show();
+                return false;
+            }
         }
 
         public void ShowMessage(string text)

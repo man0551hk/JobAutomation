@@ -572,6 +572,7 @@ namespace JobAutomation
                 }
 
                 Operation.GenerateMasterFile();
+                GlobalFunc.loginStatus = 0;
                 this.Close();
             }
         }
@@ -979,6 +980,7 @@ namespace JobAutomation
             DialogResult dialogResult = MessageBox.Show("Confirm Exit Measurement Setup? Your changes will not be saved.", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                GlobalFunc.loginStatus = 0;
                 this.Close();
             }
         }
