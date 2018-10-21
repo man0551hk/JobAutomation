@@ -186,7 +186,7 @@ namespace JobAutomation
                     {
                         if (line.Contains("LibraryFilePath"))
                         {
-                            sb.AppendLine("LibraryFilePath, \"" + GlobalFunc.toggleProfileDetail.libraryFile + "\"");
+                            sb.AppendLine("LibraryFilePath, \"" + thisDetail.libraryFile + "\"");
                         }
                         else if (line.Contains("CalibrationFilePath"))
                         {
@@ -217,7 +217,7 @@ namespace JobAutomation
                         }
                         else if (line.Contains("DecayToCollectionEnabled"))
                         {
-                            if (GlobalFunc.toggleProfileDetail.disableDecayCorrection)
+                            if (thisDetail.disableDecayCorrection)
                             {
                                 sb.AppendLine("DecayToCollectionEnabled, 0");
                             }
