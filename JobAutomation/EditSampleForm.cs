@@ -475,6 +475,14 @@ namespace JobAutomation
             if (calibrationTab.Controls.Find(name, true)[0] != null)
             {
                 TextBox calibrartionFilePath = calibrationTab.Controls.Find(name, true)[0] as TextBox;
+                if (Directory.Exists(@"C:\User\Calibrations"))
+                {
+                    ofd.InitialDirectory = @"C:\User\Calibrations";
+                }
+                else
+                {
+                    ofd.InitialDirectory = @"C:\";
+                } 
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     if (ofd.FileName.ToLower().Contains(".clb"))
@@ -498,8 +506,17 @@ namespace JobAutomation
             if (libraryTab.Controls.Find(name, true)[0] != null)
             {
                 TextBox libraryFilePath = libraryTab.Controls.Find(name, true)[0] as TextBox;
+                if (Directory.Exists(@"C:\User\Libraries"))
+                {
+                    ofd.InitialDirectory = @"C:\User\Libraries";
+                }
+                else
+                {
+                    ofd.InitialDirectory = @"C:\";
+                } 
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+     
                     if (ofd.FileName.ToLower().Contains(".lib"))
                     {
                         libraryFilePath.Text = ofd.FileName;
