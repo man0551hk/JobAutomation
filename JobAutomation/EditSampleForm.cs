@@ -660,6 +660,7 @@ namespace JobAutomation
 
                     //Operation.GenerateToFile(Convert.ToInt32(sampleCB.Text));
                     //Operation.GenerateMasterFile();
+                    GlobalFunc.editSampleForm.Dispose();
                     this.Close();
                 }
             }
@@ -724,7 +725,7 @@ namespace JobAutomation
             string activityUnitError = "";
             string countTimeError = "";
             string libraryFileError = "";
-            string libraryExistFileError = "";
+            string libraryNotExistFileError = "";
             
             for (int i = 1; i <= GlobalFunc.toggleTotalSample; i++)
             {
@@ -774,7 +775,7 @@ namespace JobAutomation
                 }
                 if (GlobalFunc.toggleProfileDetail.commonLibrary == false && !File.Exists(libraryFile.Text))
                 {
-                    libraryExistFileError += i + ",";
+                    libraryNotExistFileError += i + ",";
                 }
             }
 
@@ -811,9 +812,9 @@ namespace JobAutomation
             {
                 MessageBox.Show("Please select or input Library File on sample " + libraryFileError.Substring(0, libraryFileError.Length - 1));
             }
-            else if (libraryExistFileError != "")
+            else if (libraryNotExistFileError != "")
             {
-                MessageBox.Show("Library File on sample " + libraryFileError.Substring(0, libraryFileError.Length - 1) + " not existed");
+                MessageBox.Show("Library File on sample " + libraryNotExistFileError.Substring(0, libraryNotExistFileError.Length - 1) + " not existed");
             }
             else
             {

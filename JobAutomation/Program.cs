@@ -57,7 +57,7 @@ namespace JobAutomation
 
             //Application.Run(new TestConnection());
             GlobalFunc.tc.checkDetector1Connection();
-            
+            LogManager.WriteLog("Start");
             Application.Run(GlobalFunc.mainForm);
         }
     }

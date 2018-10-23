@@ -20,7 +20,9 @@ namespace JobAutomation
             //{
             //    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", GlobalFunc.Encrypt("admin"));
             //}
+            password.KeyDown += password_KeyDown;
         }
+
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
@@ -42,6 +44,7 @@ namespace JobAutomation
                     }
                     GlobalFunc.measurementSetupForm.Show();
                 }
+                LogManager.WriteLog("admin login");
                 this.Close();
             }
             else {

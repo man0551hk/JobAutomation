@@ -556,6 +556,17 @@ namespace JobAutomation
 
         private void doneBtn_Click(object sender, EventArgs e)
         {
+            if (GlobalFunc.editSampleForm != null)
+            {
+                try
+                {
+                    GlobalFunc.editSampleForm.Close();
+                    GlobalFunc.editSampleForm.Dispose();
+                }
+                catch (Exception ex)
+                { }
+            }
+            
             if (SaveCurrent())
             {
                 Operation.jobFileList = new List<string>();
@@ -573,8 +584,11 @@ namespace JobAutomation
 
                 Operation.GenerateMasterFile();
                 GlobalFunc.loginStatus = 0;
+
+
                 this.Close();
             }
+            
         }
 
         private bool SaveCurrent()

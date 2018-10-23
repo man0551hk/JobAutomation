@@ -169,7 +169,7 @@ namespace JobAutomation
             }
             catch(Exception ex)
             {
-                LogManager.WriteLog(ex.Message + System.Environment.NewLine);
+                LogManager.WriteLog(ex.Message);
             }
         }
 

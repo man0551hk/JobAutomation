@@ -262,7 +262,7 @@
             this.calibrarionCommonCB.AutoSize = true;
             this.calibrarionCommonCB.Checked = true;
             this.calibrarionCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.calibrarionCommonCB.Location = new System.Drawing.Point(17, 197);
+            this.calibrarionCommonCB.Location = new System.Drawing.Point(16, 197);
             this.calibrarionCommonCB.Name = "calibrarionCommonCB";
             this.calibrarionCommonCB.Size = new System.Drawing.Size(110, 17);
             this.calibrarionCommonCB.TabIndex = 26;
@@ -288,7 +288,7 @@
             this.sampleQtyCommonCB.AutoSize = true;
             this.sampleQtyCommonCB.Checked = true;
             this.sampleQtyCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sampleQtyCommonCB.Location = new System.Drawing.Point(17, 279);
+            this.sampleQtyCommonCB.Location = new System.Drawing.Point(16, 279);
             this.sampleQtyCommonCB.Name = "sampleQtyCommonCB";
             this.sampleQtyCommonCB.Size = new System.Drawing.Size(118, 17);
             this.sampleQtyCommonCB.TabIndex = 28;
@@ -301,7 +301,7 @@
             this.countingTimeCommonCB.AutoSize = true;
             this.countingTimeCommonCB.Checked = true;
             this.countingTimeCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.countingTimeCommonCB.Location = new System.Drawing.Point(17, 305);
+            this.countingTimeCommonCB.Location = new System.Drawing.Point(16, 305);
             this.countingTimeCommonCB.Name = "countingTimeCommonCB";
             this.countingTimeCommonCB.Size = new System.Drawing.Size(143, 17);
             this.countingTimeCommonCB.TabIndex = 29;
@@ -314,7 +314,7 @@
             this.activityUnitCommonCB.AutoSize = true;
             this.activityUnitCommonCB.Checked = true;
             this.activityUnitCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.activityUnitCommonCB.Location = new System.Drawing.Point(18, 331);
+            this.activityUnitCommonCB.Location = new System.Drawing.Point(16, 331);
             this.activityUnitCommonCB.Name = "activityUnitCommonCB";
             this.activityUnitCommonCB.Size = new System.Drawing.Size(95, 17);
             this.activityUnitCommonCB.TabIndex = 30;
@@ -518,7 +518,7 @@
             this.libraryCommonCB.AutoSize = true;
             this.libraryCommonCB.Checked = true;
             this.libraryCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.libraryCommonCB.Location = new System.Drawing.Point(19, 223);
+            this.libraryCommonCB.Location = new System.Drawing.Point(16, 226);
             this.libraryCommonCB.Name = "libraryCommonCB";
             this.libraryCommonCB.Size = new System.Drawing.Size(88, 17);
             this.libraryCommonCB.TabIndex = 44;
@@ -531,7 +531,7 @@
             this.sdfCommonCB.AutoSize = true;
             this.sdfCommonCB.Checked = true;
             this.sdfCommonCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sdfCommonCB.Location = new System.Drawing.Point(19, 166);
+            this.sdfCommonCB.Location = new System.Drawing.Point(16, 166);
             this.sdfCommonCB.Name = "sdfCommonCB";
             this.sdfCommonCB.Size = new System.Drawing.Size(149, 17);
             this.sdfCommonCB.TabIndex = 43;

@@ -109,6 +109,7 @@ namespace JobAutomation
                     scsBtn.Text = "Skip";
                     thisNoOfSample = GlobalFunc.toggleProfileDetail.sampleNo;
                     runTime = DateTime.Now;
+                    LogManager.WriteLog("Start running sequence: " + profileCB.Text);
                     myBGWorker.RunWorkerAsync();
                 }
                 else if (scsBtn.Text == "Skip")
@@ -116,6 +117,7 @@ namespace JobAutomation
                     DialogResult dialogResult = MessageBox.Show("Confirm Skip?", "", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
+                        LogManager.WriteLog("Skip sequence " + profileCB.Text + " sample: " + sampleNo);
                         skipBGWorker.RunWorkerAsync();
                         scsBtn.Enabled = false;
                         skippedSample.Add(sampleNo);
@@ -206,7 +208,7 @@ namespace JobAutomation
                 quitBtn.Enabled = true;
                 scsBtn.Text = "Run";
                 scsBtn.Enabled = true;
-               
+                LogManager.WriteLog("Completed sequence: " + profileCB.Text);
                 SetStatusLabel("Completed", 1);
                 SetSampleLabel("0");
                 cssBtn.Enabled = true ;
@@ -312,7 +314,7 @@ namespace JobAutomation
                 {
                     activeStatus = "inactive";
                 }
-                Thread.Sleep(500);
+                Thread.Sleep(400);
                 if (activeStatus == "active")
                 {
                     break;
@@ -332,7 +334,7 @@ namespace JobAutomation
                 int intReturnValue = Convert.ToInt32(returnValue);
                 if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
                 {
-                    Thread.Sleep(1500);
+                    Thread.Sleep(1200);
                     break;
                 }
             }
@@ -399,9 +401,7 @@ namespace JobAutomation
             string returnValue = "";
             try
             {
-                //int i = 0;
-                //while (i < 20)
-                //{
+
 
                 if (GlobalFunc.setup.hardware == "DSPec50")
                 {
@@ -417,6 +417,7 @@ namespace JobAutomation
                 SetStatusLabel(returnValue + " skipping...", 2);
 
                 returnValue = Operation.SendCommand("STOP");
+               
             }
             catch (Exception ex)
             {
@@ -552,6 +553,7 @@ namespace JobAutomation
             DialogResult dialogResult = MessageBox.Show("Confirm Quit?", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                LogManager.WriteLog("Quit");
                 Application.ExitThread();
                 Application.Exit();
 

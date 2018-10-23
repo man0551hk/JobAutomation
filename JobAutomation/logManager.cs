@@ -11,7 +11,7 @@ namespace JobAutomation
         public static void WriteLog(string text)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + "log.txt";
-            File.AppendAllText(path, DateTime.Now + ": " + text);
+            File.AppendAllText(path, DateTime.Now + ": " + text + System.Environment.NewLine);
         }
     }
 }
