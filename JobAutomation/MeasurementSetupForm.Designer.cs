@@ -334,11 +334,11 @@
             // 
             // doneBtn
             // 
-            this.doneBtn.Location = new System.Drawing.Point(442, 414);
+            this.doneBtn.Location = new System.Drawing.Point(358, 414);
             this.doneBtn.Name = "doneBtn";
             this.doneBtn.Size = new System.Drawing.Size(132, 37);
             this.doneBtn.TabIndex = 33;
-            this.doneBtn.Text = "Save and Done";
+            this.doneBtn.Text = "Save Parameters";
             this.doneBtn.UseVisualStyleBackColor = true;
             this.doneBtn.Click += new System.EventHandler(this.doneBtn_Click);
             // 
@@ -425,6 +425,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.exitBtn);
             this.tabPage1.Controls.Add(this.decayCorrectionCB);
             this.tabPage1.Controls.Add(this.sampleDefinitionFileTxt);
             this.tabPage1.Controls.Add(this.addBtn);
@@ -892,11 +893,11 @@
             // 
             // exitBtn
             // 
-            this.exitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitBtn.ForeColor = System.Drawing.Color.Red;
-            this.exitBtn.Location = new System.Drawing.Point(531, 6);
+            this.exitBtn.Location = new System.Drawing.Point(496, 414);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(75, 23);
+            this.exitBtn.Size = new System.Drawing.Size(78, 37);
             this.exitBtn.TabIndex = 42;
             this.exitBtn.Text = "Exit";
             this.exitBtn.UseVisualStyleBackColor = true;
@@ -907,7 +908,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 505);
-            this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

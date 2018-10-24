@@ -585,8 +585,8 @@ namespace JobAutomation
                 Operation.GenerateMasterFile();
                 GlobalFunc.loginStatus = 0;
 
-
-                this.Close();
+                MessageBox.Show("Save successful");
+                //this.Close();
             }
             
         }

@@ -56,6 +56,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.sampleDoneBtn = new System.Windows.Forms.Button();
             this.sampleCB = new System.Windows.Forms.ComboBox();
+            this.sampleDefinationTab = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.calibrationTab = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,22 +77,24 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.sampleDefinationTab = new System.Windows.Forms.TabPage();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.descriptionTab = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.sampleTab.SuspendLayout();
+            this.sampleDefinationTab.SuspendLayout();
             this.calibrationTab.SuspendLayout();
             this.quantityUnitTab.SuspendLayout();
             this.countTimeTab.SuspendLayout();
             this.libraryTab.SuspendLayout();
             this.decayTab.SuspendLayout();
-            this.sampleDefinationTab.SuspendLayout();
+            this.descriptionTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.sampleTab);
+            this.tabControl1.Controls.Add(this.descriptionTab);
             this.tabControl1.Controls.Add(this.sampleDefinationTab);
             this.tabControl1.Controls.Add(this.calibrationTab);
             this.tabControl1.Controls.Add(this.quantityUnitTab);
@@ -99,7 +104,7 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(759, 647);
+            this.tabControl1.Size = new System.Drawing.Size(774, 647);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -134,7 +139,7 @@
             this.sampleTab.Location = new System.Drawing.Point(4, 22);
             this.sampleTab.Name = "sampleTab";
             this.sampleTab.Padding = new System.Windows.Forms.Padding(3);
-            this.sampleTab.Size = new System.Drawing.Size(751, 621);
+            this.sampleTab.Size = new System.Drawing.Size(766, 621);
             this.sampleTab.TabIndex = 0;
             this.sampleTab.Text = "Sample";
             this.sampleTab.UseVisualStyleBackColor = true;
@@ -261,6 +266,7 @@
             this.sampleDescription.Name = "sampleDescription";
             this.sampleDescription.Size = new System.Drawing.Size(441, 20);
             this.sampleDescription.TabIndex = 15;
+            this.sampleDescription.TextChanged += new System.EventHandler(this.sampleDescription_TextChanged);
             // 
             // sampleCountTime
             // 
@@ -393,6 +399,37 @@
             this.sampleCB.TabIndex = 0;
             this.sampleCB.SelectedIndexChanged += new System.EventHandler(this.sampleCB_SelectedIndexChanged);
             // 
+            // sampleDefinationTab
+            // 
+            this.sampleDefinationTab.Controls.Add(this.label24);
+            this.sampleDefinationTab.Controls.Add(this.label25);
+            this.sampleDefinationTab.Location = new System.Drawing.Point(4, 22);
+            this.sampleDefinationTab.Name = "sampleDefinationTab";
+            this.sampleDefinationTab.Size = new System.Drawing.Size(766, 621);
+            this.sampleDefinationTab.TabIndex = 6;
+            this.sampleDefinationTab.Text = "Sample Defination";
+            this.sampleDefinationTab.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(326, 3);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(165, 16);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "Sample Defination File";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(82, 3);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(61, 16);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "Sample";
+            // 
             // calibrationTab
             // 
             this.calibrationTab.Controls.Add(this.label2);
@@ -401,7 +438,7 @@
             this.calibrationTab.Location = new System.Drawing.Point(4, 22);
             this.calibrationTab.Name = "calibrationTab";
             this.calibrationTab.Padding = new System.Windows.Forms.Padding(3);
-            this.calibrationTab.Size = new System.Drawing.Size(751, 621);
+            this.calibrationTab.Size = new System.Drawing.Size(766, 621);
             this.calibrationTab.TabIndex = 1;
             this.calibrationTab.Text = "Calibration";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -435,7 +472,7 @@
             this.quantityUnitTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quantityUnitTab.Location = new System.Drawing.Point(4, 22);
             this.quantityUnitTab.Name = "quantityUnitTab";
-            this.quantityUnitTab.Size = new System.Drawing.Size(751, 621);
+            this.quantityUnitTab.Size = new System.Drawing.Size(766, 621);
             this.quantityUnitTab.TabIndex = 2;
             this.quantityUnitTab.Text = "Quantity / Unit";
             this.quantityUnitTab.UseVisualStyleBackColor = true;
@@ -487,7 +524,7 @@
             this.countTimeTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countTimeTab.Location = new System.Drawing.Point(4, 22);
             this.countTimeTab.Name = "countTimeTab";
-            this.countTimeTab.Size = new System.Drawing.Size(751, 621);
+            this.countTimeTab.Size = new System.Drawing.Size(766, 621);
             this.countTimeTab.TabIndex = 3;
             this.countTimeTab.Text = "Count Time";
             this.countTimeTab.UseVisualStyleBackColor = true;
@@ -518,7 +555,7 @@
             this.libraryTab.Controls.Add(this.label23);
             this.libraryTab.Location = new System.Drawing.Point(4, 22);
             this.libraryTab.Name = "libraryTab";
-            this.libraryTab.Size = new System.Drawing.Size(751, 621);
+            this.libraryTab.Size = new System.Drawing.Size(766, 621);
             this.libraryTab.TabIndex = 5;
             this.libraryTab.Text = "Library File";
             this.libraryTab.UseVisualStyleBackColor = true;
@@ -550,7 +587,7 @@
             this.decayTab.Controls.Add(this.label18);
             this.decayTab.Location = new System.Drawing.Point(4, 22);
             this.decayTab.Name = "decayTab";
-            this.decayTab.Size = new System.Drawing.Size(751, 621);
+            this.decayTab.Size = new System.Drawing.Size(766, 621);
             this.decayTab.TabIndex = 4;
             this.decayTab.Text = "Decay Correction";
             this.decayTab.UseVisualStyleBackColor = true;
@@ -585,42 +622,42 @@
             this.label18.TabIndex = 3;
             this.label18.Text = "Sample";
             // 
-            // sampleDefinationTab
+            // descriptionTab
             // 
-            this.sampleDefinationTab.Controls.Add(this.label24);
-            this.sampleDefinationTab.Controls.Add(this.label25);
-            this.sampleDefinationTab.Location = new System.Drawing.Point(4, 22);
-            this.sampleDefinationTab.Name = "sampleDefinationTab";
-            this.sampleDefinationTab.Size = new System.Drawing.Size(751, 621);
-            this.sampleDefinationTab.TabIndex = 6;
-            this.sampleDefinationTab.Text = "Sample Defination";
-            this.sampleDefinationTab.UseVisualStyleBackColor = true;
+            this.descriptionTab.Controls.Add(this.label26);
+            this.descriptionTab.Controls.Add(this.label27);
+            this.descriptionTab.Location = new System.Drawing.Point(4, 22);
+            this.descriptionTab.Name = "descriptionTab";
+            this.descriptionTab.Size = new System.Drawing.Size(766, 621);
+            this.descriptionTab.TabIndex = 7;
+            this.descriptionTab.Text = "Description";
+            this.descriptionTab.UseVisualStyleBackColor = true;
             // 
-            // label24
+            // label26
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(326, 3);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(165, 16);
-            this.label24.TabIndex = 3;
-            this.label24.Text = "Sample Defination File";
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(326, 3);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(87, 16);
+            this.label26.TabIndex = 5;
+            this.label26.Text = "Description";
             // 
-            // label25
+            // label27
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(82, 3);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(61, 16);
-            this.label25.TabIndex = 2;
-            this.label25.Text = "Sample";
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(82, 3);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(61, 16);
+            this.label27.TabIndex = 4;
+            this.label27.Text = "Sample";
             // 
             // EditSampleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 672);
+            this.ClientSize = new System.Drawing.Size(798, 672);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditSampleForm";
@@ -628,6 +665,8 @@
             this.tabControl1.ResumeLayout(false);
             this.sampleTab.ResumeLayout(false);
             this.sampleTab.PerformLayout();
+            this.sampleDefinationTab.ResumeLayout(false);
+            this.sampleDefinationTab.PerformLayout();
             this.calibrationTab.ResumeLayout(false);
             this.calibrationTab.PerformLayout();
             this.quantityUnitTab.ResumeLayout(false);
@@ -638,8 +677,8 @@
             this.libraryTab.PerformLayout();
             this.decayTab.ResumeLayout(false);
             this.decayTab.PerformLayout();
-            this.sampleDefinationTab.ResumeLayout(false);
-            this.sampleDefinationTab.PerformLayout();
+            this.descriptionTab.ResumeLayout(false);
+            this.descriptionTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -694,5 +733,8 @@
         private System.Windows.Forms.TabPage sampleDefinationTab;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TabPage descriptionTab;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
     }
 }
