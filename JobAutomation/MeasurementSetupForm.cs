@@ -61,11 +61,17 @@ namespace JobAutomation
                 profileCB.Items.Add(GlobalFunc.profile.operationName[i]);
             }
 
-            if ( GlobalFunc.toggleProfile != "")
+            if (GlobalFunc.toggleProfile != "")
             {
                 profileCB.SelectedIndex = profileCB.FindString(GlobalFunc.toggleProfile);
                 GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
                 LoadProfileDetail();
+            }
+            else 
+            {
+                noOfSampleCB.Text = "20";
+                sampleQtyUnitCB.Text = "kg";
+                activityUnitCB.Text = "Bq";
             }
         }
 
@@ -335,15 +341,15 @@ namespace JobAutomation
                             }
                         }
                     }
-                    //sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+                    //sampleDetail.sampleDefinitionFilePath = sampleDefinitionFileTxt.Text;
 
-                    if (sdfCommonCB.Checked || sampleDetail.sampleDefinationFilePath == "")
+                    if (sdfCommonCB.Checked || sampleDetail.sampleDefinitionFilePath == "")
                     {
-                        sampleDetail.sampleDefinationFilePath = sampleDefinitionFileTxt.Text;
+                        sampleDetail.sampleDefinitionFilePath = sampleDefinitionFileTxt.Text;
                     }
-                    else if (string.IsNullOrEmpty(sampleDetail.sampleDefinationFilePath))
+                    else if (string.IsNullOrEmpty(sampleDetail.sampleDefinitionFilePath))
                     {
-                        sampleDetail.sampleDefinationFilePath = "";
+                        sampleDetail.sampleDefinitionFilePath = "";
                     }
 
                     if (calibrarionCommonCB.Checked || sampleDetail.calibrationFilePath == "")
@@ -809,7 +815,7 @@ namespace JobAutomation
                 string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
-                MessageBox.Show("Save master file parameter successful");
+                MessageBox.Show("Laboratory Details Updated");
             }
         }
 
@@ -817,11 +823,11 @@ namespace JobAutomation
         {
             if (!File.Exists(gammaVisionPath.Text))
             {
-                MessageBox.Show("Gamma Vision Path not existed");
+                MessageBox.Show("GammaVision Path not existed");
             }
             else if (hardwareCB.Text == "")
             {
-                MessageBox.Show("Please select hardware version");
+                MessageBox.Show("Select MCA Hardware");
             }
             else if (!Directory.Exists(defaultDataFolder.Text))
             {
@@ -833,7 +839,7 @@ namespace JobAutomation
             }
             else if (File.Exists(defaultSdf.Text) && !defaultSdf.Text.ToLower().Contains(".sdf"))
             {
-                MessageBox.Show("Invalid sdf File");
+                MessageBox.Show("Invalid SDF File");
             }
             else if (!File.Exists(defaultCal.Text))
             {
@@ -841,7 +847,7 @@ namespace JobAutomation
             }
             else if (File.Exists(defaultCal.Text) && !defaultCal.Text.ToLower().Contains(".clb"))
             {
-                MessageBox.Show("Invalid calibration File");
+                MessageBox.Show("Invalid Calibration File");
             }
             else if (!File.Exists(defaultLib.Text))
             {
@@ -849,7 +855,7 @@ namespace JobAutomation
             }
             else if (File.Exists(defaultLib.Text) && !defaultLib.Text.ToLower().Contains(".lib"))
             {
-                MessageBox.Show("Invalid library File");
+                MessageBox.Show("Invalid Library File");
         
             }
             else
@@ -864,7 +870,7 @@ namespace JobAutomation
                 string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
-                MessageBox.Show("Save system setup parameter successful");
+                MessageBox.Show("System Parameters Updated");
 
             }
 
@@ -878,11 +884,11 @@ namespace JobAutomation
                 string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
-                MessageBox.Show("update Password successful");
+                MessageBox.Show("Password Updated");
             }
             else
             {
-                MessageBox.Show("Verify Password not matched");
+                MessageBox.Show("Verify Password Fail");
             }
         }
 
@@ -919,7 +925,7 @@ namespace JobAutomation
                 }
                 else
                 {
-                    MessageBox.Show("Invalid sdf file");
+                    MessageBox.Show("Invalid SDF File");
                 }
             }
         }
@@ -942,7 +948,7 @@ namespace JobAutomation
                 }
                 else
                 {
-                    MessageBox.Show("Invalid calibration file");
+                    MessageBox.Show("Invalid Calibration File");
                 }
             }
         }
@@ -965,7 +971,7 @@ namespace JobAutomation
                 }
                 else
                 {
-                    MessageBox.Show("Invalid library file");
+                    MessageBox.Show("Invalid Library File");
                 }
             }
         }
@@ -995,6 +1001,7 @@ namespace JobAutomation
             if (dialogResult == DialogResult.Yes)
             {
                 GlobalFunc.loginStatus = 0;
+                GlobalFunc.mainForm.EnablenSetupBtn();
                 this.Close();
             }
         }
@@ -1002,6 +1009,11 @@ namespace JobAutomation
         private void decayCorrectionCB_CheckedChanged(object sender, EventArgs e)
         {
             CheckboxControl();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

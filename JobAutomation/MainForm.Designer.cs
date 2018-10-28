@@ -40,14 +40,16 @@
             this.versionLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.currentSampleNo = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // scsBtn
             // 
             this.scsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scsBtn.ForeColor = System.Drawing.Color.Black;
             this.scsBtn.Location = new System.Drawing.Point(176, 159);
             this.scsBtn.Name = "scsBtn";
-            this.scsBtn.Size = new System.Drawing.Size(138, 57);
+            this.scsBtn.Size = new System.Drawing.Size(120, 35);
             this.scsBtn.TabIndex = 0;
             this.scsBtn.Text = "Run";
             this.scsBtn.UseVisualStyleBackColor = true;
@@ -56,9 +58,10 @@
             // cssBtn
             // 
             this.cssBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cssBtn.Location = new System.Drawing.Point(12, 159);
+            this.cssBtn.ForeColor = System.Drawing.Color.Blue;
+            this.cssBtn.Location = new System.Drawing.Point(16, 159);
             this.cssBtn.Name = "cssBtn";
-            this.cssBtn.Size = new System.Drawing.Size(138, 57);
+            this.cssBtn.Size = new System.Drawing.Size(120, 35);
             this.cssBtn.TabIndex = 1;
             this.cssBtn.Text = "Setup";
             this.cssBtn.UseVisualStyleBackColor = true;
@@ -68,7 +71,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(57, 9);
+            this.label1.Location = new System.Drawing.Point(52, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(375, 25);
             this.label1.TabIndex = 3;
@@ -97,9 +100,10 @@
             // quitBtn
             // 
             this.quitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitBtn.Location = new System.Drawing.Point(343, 159);
+            this.quitBtn.ForeColor = System.Drawing.Color.Red;
+            this.quitBtn.Location = new System.Drawing.Point(338, 159);
             this.quitBtn.Name = "quitBtn";
-            this.quitBtn.Size = new System.Drawing.Size(138, 57);
+            this.quitBtn.Size = new System.Drawing.Size(120, 35);
             this.quitBtn.TabIndex = 12;
             this.quitBtn.Text = "Quit";
             this.quitBtn.UseVisualStyleBackColor = true;
@@ -121,14 +125,14 @@
             this.profileCB.FormattingEnabled = true;
             this.profileCB.Location = new System.Drawing.Point(108, 61);
             this.profileCB.Name = "profileCB";
-            this.profileCB.Size = new System.Drawing.Size(373, 21);
+            this.profileCB.Size = new System.Drawing.Size(350, 21);
             this.profileCB.TabIndex = 14;
             this.profileCB.SelectedIndexChanged += new System.EventHandler(this.profileCB_SelectedIndexChanged);
             // 
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(451, 18);
+            this.versionLabel.Location = new System.Drawing.Point(421, 212);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(0, 13);
             this.versionLabel.TabIndex = 19;
@@ -153,11 +157,24 @@
             this.currentSampleNo.TabIndex = 21;
             this.currentSampleNo.Text = "0";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(292, 212);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Ficom Systems Ltd 2018";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 224);
+            this.ClientSize = new System.Drawing.Size(475, 224);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.currentSampleNo);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.versionLabel);
@@ -192,5 +209,6 @@
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label currentSampleNo;
+        private System.Windows.Forms.Label label3;
     }
 }

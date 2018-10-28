@@ -31,7 +31,7 @@ namespace JobAutomation
             ConstructLayout();
             Construct();
             ConstructDescriptionTab();
-            ConstructSampleDefinationTab();
+            ConstructSampleDefinitionTab();
             ConstructCalibrationTab();
             ConstructQuantityUnitTab();
             ConstructCountTimeTab();
@@ -41,21 +41,25 @@ namespace JobAutomation
             sampleCB.SelectedIndex = 0;
             this.tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             this.FormClosing += Form_Closing;
+            
 
-            //string currentSample = sampleCB.Text;
-            //DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@1", true)[0] as DateTimePicker;
-            //if (decayDate != null)
-            //{
-            //    decayDate.Value = sampleCorrectionDate.Value;
-            //}
         }
-
+        int toggleTabControlIndex = 0;
+        bool allowShowError = true;
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Save();
-            if (tabControl1.SelectedIndex == 0)
+            if (Save())
             {
-                SampleCBSelect();
+                allowShowError = true;
+                toggleTabControlIndex = tabControl1.SelectedIndex;
+                if (tabControl1.SelectedIndex == 0)
+                {
+                    SampleCBSelect();
+                }
+            } 
+            else {
+                allowShowError = false;
+                tabControl1.SelectedIndex = toggleTabControlIndex;
             }
         }
 
@@ -69,8 +73,8 @@ namespace JobAutomation
         {
             if (GlobalFunc.toggleProfileDetail.commonSDF == true)
             {
-                sampleDefinationFile.Enabled = false;
-                sampleDefinationFileBtn.Enabled = false;
+                sampleDefinitionFile.Enabled = false;
+                sampleDefinitionFileBtn.Enabled = false;
             }
 
             if (GlobalFunc.toggleProfileDetail.commonCalibrationFile == true)
@@ -175,7 +179,7 @@ namespace JobAutomation
         }
 
 
-        public void ConstructSampleDefinationTab()
+        public void ConstructSampleDefinitionTab()
         {
 
             if (GlobalFunc.toggleTotalSample > 0)
@@ -190,39 +194,39 @@ namespace JobAutomation
                     Point sampleLocation = new Point(103, labelY);
                     sampleLabel.Text = i.ToString();
                     sampleLabel.Location = sampleLocation;
-                    sampleDefinationTab.Controls.Add(sampleLabel);
+                    sampleDefinitionTab.Controls.Add(sampleLabel);
 
-                    TextBox sampleDefinationFile = new TextBox();
-                    Point sampleDefinationFileLocation = new Point(220, textBoxY);
-                    sampleDefinationFile.Location = sampleDefinationFileLocation;
-                    sampleDefinationFile.Width = 311;
-                    sampleDefinationFile.Name = "sampleDefinationFilePath@" + i;
+                    TextBox sampleDefinitionFile = new TextBox();
+                    Point sampleDefinitionFileLocation = new Point(220, textBoxY);
+                    sampleDefinitionFile.Location = sampleDefinitionFileLocation;
+                    sampleDefinitionFile.Width = 311;
+                    sampleDefinitionFile.Name = "sampleDefinitionFilePath@" + i;
                     if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1] != null)
                     {
-                        sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinationFilePath;
-                        if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinationFilePath == "")
+                        sampleDefinitionFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinitionFilePath;
+                        if (GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinitionFilePath == "")
                         {
-                            sampleDefinationFile.Text = GlobalFunc.setup.defaultSdf;
+                            sampleDefinitionFile.Text = GlobalFunc.setup.defaultSdf;
                         }
                     }
                     if (GlobalFunc.toggleProfileDetail.commonSDF == true)
                     {
-                        sampleDefinationFile.Enabled = false;
+                        sampleDefinitionFile.Enabled = false;
                     }
-                    sampleDefinationTab.Controls.Add(sampleDefinationFile);
+                    sampleDefinitionTab.Controls.Add(sampleDefinitionFile);
 
                     Button selFileBtn = new Button();
                     Point selFileLocation = new Point(537, buttonY);
                     selFileBtn.Location = selFileLocation;
                     selFileBtn.Name = "openSF@" + i;
                     selFileBtn.Text = "...";
-                    selFileBtn.Click += OpenSampleDefinationFileBtnClick;
+                    selFileBtn.Click += OpenSampleDefinitionFileBtnClick;
                     selFileBtn.Width = 28;
                     if (GlobalFunc.toggleProfileDetail.commonSDF == true)
                     {
                         selFileBtn.Enabled = false;
                     }
-                    sampleDefinationTab.Controls.Add(selFileBtn);
+                    sampleDefinitionTab.Controls.Add(selFileBtn);
 
                     labelY += 30;
                     textBoxY += 30;
@@ -325,9 +329,11 @@ namespace JobAutomation
                     ComboBox unitComboBox = new ComboBox();
                     unitComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                     unitComboBox.Width = 75;
+                    unitComboBox.Items.Add("kg");
+                    unitComboBox.Items.Add("L");
                     unitComboBox.Items.Add("g");
                     unitComboBox.Items.Add("ml");
-                    unitComboBox.Items.Add("kg");
+                    
                     unitComboBox.Items.Add("L");
                     unitComboBox.Name = "unitComboBox@" + i;
                     unitComboBox.SelectedIndex = unitComboBox.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units);
@@ -578,13 +584,13 @@ namespace JobAutomation
             }
         }
 
-        private void OpenSampleDefinationFileBtnClick(object sender, EventArgs e)
+        private void OpenSampleDefinitionFileBtnClick(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            string name = btn.Name.Replace("openSF@", "sampleDefinationFilePath@");
-            if (sampleDefinationTab.Controls.Find(name, true)[0] != null)
+            string name = btn.Name.Replace("openSF@", "sampleDefinitionFilePath@");
+            if (sampleDefinitionTab.Controls.Find(name, true)[0] != null)
             {
-                TextBox sampleDefinationFilePath = sampleDefinationTab.Controls.Find(name, true)[0] as TextBox;
+                TextBox sampleDefinitionFilePath = sampleDefinitionTab.Controls.Find(name, true)[0] as TextBox;
                 if (Directory.Exists(@"C:\User\Sample Types"))
                 {
                     ofd.InitialDirectory = @"C:\User\Sample Types";
@@ -597,11 +603,11 @@ namespace JobAutomation
                 {
                     if (ofd.FileName.ToLower().Contains(".sdf"))
                     {
-                        sampleDefinationFilePath.Text = ofd.FileName;
+                        sampleDefinitionFilePath.Text = ofd.FileName;
                     }
                     else 
                     {
-                        MessageBox.Show("Invalid sample defination file");
+                        MessageBox.Show("Invalid sample Definition file");
                     }
                     
                 }
@@ -678,13 +684,13 @@ namespace JobAutomation
             bool saveCurrent = false;
             if (sampleCB.Text != "")
             {
-                if (GlobalFunc.toggleProfileDetail.commonSDF == false && string.IsNullOrEmpty(sampleDefinationFile.Text))
+                if (GlobalFunc.toggleProfileDetail.commonSDF == false && string.IsNullOrEmpty(sampleDefinitionFile.Text))
                 {
-                    MessageBox.Show("Please select or input Sample Defination File");
+                    MessageBox.Show("Please select or input Sample Definition File");
                 }
-                if (GlobalFunc.toggleProfileDetail.commonSDF == false && !File.Exists(sampleDefinationFile.Text))
+                if (GlobalFunc.toggleProfileDetail.commonSDF == false && !File.Exists(sampleDefinitionFile.Text))
                 {
-                    MessageBox.Show("Sample Defination File not existed");
+                    MessageBox.Show("Sample Definition File not existed");
                 }
                 else if (GlobalFunc.toggleProfileDetail.commonCalibrationFile == false && string.IsNullOrEmpty(sampleCalibrationFile.Text))
                 {
@@ -751,7 +757,7 @@ namespace JobAutomation
                 if (GlobalFunc.toggleProfileDetail.sampleDetailList[i].index.ToString() == sampleCB.Text)
                 {
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription = sampleDescription.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath = sampleDefinationFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinitionFilePath = sampleDefinitionFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath = sampleCalibrationFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].units = sampleQtyUnitCB.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity = Convert.ToDouble(sampleQty.Text != "" ? sampleQty.Text : "0");
@@ -810,7 +816,7 @@ namespace JobAutomation
             for (int i = 1; i <= GlobalFunc.toggleTotalSample; i++)
             {
                 TextBox description = descriptionTab.Controls.Find("description@" + i, true)[0] as TextBox;
-                TextBox sampleDefinationFile = sampleDefinationTab.Controls.Find("sampleDefinationFilePath@" + i, true)[0] as TextBox;
+                TextBox sampleDefinitionFile = sampleDefinitionTab.Controls.Find("sampleDefinitionFilePath@" + i, true)[0] as TextBox;
                 TextBox calibrationFile = calibrationTab.Controls.Find("calibrartionFilePath@" + i, true)[0] as TextBox;
                 TextBox quantityTextBox = quantityUnitTab.Controls.Find("quantity@" + i, true)[0] as TextBox;
                 ComboBox unitComboBox = quantityUnitTab.Controls.Find("unitComboBox@" + i, true)[0] as ComboBox ;
@@ -825,12 +831,12 @@ namespace JobAutomation
                     descriptionError += i + ",";
                 }
 
-                if (GlobalFunc.toggleProfileDetail.commonSDF == false && string.IsNullOrEmpty(sampleDefinationFile.Text))
+                if (GlobalFunc.toggleProfileDetail.commonSDF == false && string.IsNullOrEmpty(sampleDefinitionFile.Text))
                 {
                     sampleDFError += i + ",";
                 }
 
-                if (GlobalFunc.toggleProfileDetail.commonSDF == false && !File.Exists(sampleDefinationFile.Text))
+                if (GlobalFunc.toggleProfileDetail.commonSDF == false && !File.Exists(sampleDefinitionFile.Text))
                 {
                     sampleDFNoteExistCountError += i + ",";
                 }
@@ -870,58 +876,59 @@ namespace JobAutomation
                 }
             }
 
-            if (descriptionError != "")
+            
+            if (descriptionError != "" && allowShowError)
             {
-                MessageBox.Show("Please input Description on sample " + descriptionError.Substring(0, descriptionError.Length - 1));
+                MessageBox.Show("Please Input Description for Sample " + descriptionError.Substring(0, descriptionError.Length - 1));
             }
-            else if (sampleDFError != "")
+            else if (sampleDFError != "" && allowShowError)
             {
-                MessageBox.Show("Please select or input Sample Defination File on sample " + sampleDFError.Substring(0, sampleDFError.Length - 1));
-            }
-
-            else if (sampleDFNoteExistCountError != "")
-            {
-                MessageBox.Show(" Sample Defination File not existed on sample " + sampleDFNoteExistCountError.Substring(0, sampleDFNoteExistCountError.Length - 1));
+                MessageBox.Show("Select Sample Definition File for Sample " + sampleDFError.Substring(0, sampleDFError.Length - 1));
             }
 
-            else  if (calCountError != "")
+            else if (sampleDFNoteExistCountError != "" && allowShowError)
             {
-                MessageBox.Show("Please select or input Calibration File on sample " + calCountError.Substring(0, calCountError.Length - 1));
+                MessageBox.Show("Sample Definition File not existed on sample " + sampleDFNoteExistCountError.Substring(0, sampleDFNoteExistCountError.Length - 1));
             }
-            else if (calNotExistCountError != "")
+
+            else if (calCountError != "" && allowShowError)
             {
-                MessageBox.Show("Calibration File on sample " + calCountError.Substring(0, calCountError.Length - 1) + " not existed");
+                MessageBox.Show("Select Calibration File for Sample " + calCountError.Substring(0, calCountError.Length - 1));
             }
-            else if (sampleQtyError != "")
+            else if (calNotExistCountError != "" && allowShowError)
             {
-                MessageBox.Show("Please select Sample Quantity Unit on sample " + sampleQtyError.Substring(0, sampleQtyError.Length - 1));
+                MessageBox.Show("Calibration File for Sample " + calCountError.Substring(0, calCountError.Length - 1) + " not existed");
             }
-            else if (sampleUnitError != "")
+            else if (sampleQtyError != "" && allowShowError)
             {
-                MessageBox.Show("Please input Sample Quantity on sample " + sampleUnitError.Substring(0, sampleUnitError.Length - 1));
+                MessageBox.Show("Select Sample Quantity Unit for Sample " + sampleQtyError.Substring(0, sampleQtyError.Length - 1));
             }
-            else if (countTimeError != "")
+            else if (sampleUnitError != "" && allowShowError)
             {
-                MessageBox.Show("Please input Counting Time on sample " + countTimeError.Substring(0, countTimeError.Length - 1));
+                MessageBox.Show("Select Sample Quantity for Sample " + sampleUnitError.Substring(0, sampleUnitError.Length - 1));
             }
-            else if (activityUnitError != "")
+            else if (countTimeError != "" && allowShowError)
             {
-                MessageBox.Show("Please select Activity Unit on sample " + activityUnitError.Substring(0, activityUnitError.Length - 1));
+                MessageBox.Show("Input Counting Time for Sample " + countTimeError.Substring(0, countTimeError.Length - 1));
             }
-            else if (libraryFileError != "")
+            else if (activityUnitError != "" && allowShowError)
             {
-                MessageBox.Show("Please select or input Library File on sample " + libraryFileError.Substring(0, libraryFileError.Length - 1));
+                MessageBox.Show("Select Activity Unit for Sample " + activityUnitError.Substring(0, activityUnitError.Length - 1));
             }
-            else if (libraryNotExistFileError != "")
+            else if (libraryFileError != "" && allowShowError)
             {
-                MessageBox.Show("Library File on sample " + libraryNotExistFileError.Substring(0, libraryNotExistFileError.Length - 1) + " not existed");
+                MessageBox.Show("Select Library File for Sample " + libraryFileError.Substring(0, libraryFileError.Length - 1));
+            }
+            else if (libraryNotExistFileError != "" && allowShowError)
+            {
+                MessageBox.Show("Library File for Sample " + libraryNotExistFileError.Substring(0, libraryNotExistFileError.Length - 1) + " not existed");
             }
             else
             {
                 for (int i = 1; i <= GlobalFunc.toggleTotalSample; i++)
                 {
                     TextBox description = descriptionTab.Controls.Find("description@" + i, true)[0] as TextBox;
-                    TextBox sampleDefinationFile = sampleDefinationTab.Controls.Find("sampleDefinationFilePath@" + i, true)[0] as TextBox;
+                    TextBox sampleDefinitionFile = sampleDefinitionTab.Controls.Find("sampleDefinitionFilePath@" + i, true)[0] as TextBox;
                     TextBox calibrationFile = calibrationTab.Controls.Find("calibrartionFilePath@" + i, true)[0] as TextBox;
                     TextBox quantityTextBox = quantityUnitTab.Controls.Find("quantity@" + i, true)[0] as TextBox;
                     ComboBox unitComboBox = quantityUnitTab.Controls.Find("unitComboBox@" + i, true)[0] as ComboBox;
@@ -932,7 +939,7 @@ namespace JobAutomation
                     DateTimePicker decayDate = decayTab.Controls.Find("decayCorrectionDate@" + i, true)[0] as DateTimePicker;
 
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDescription = description.Text;
-                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinationFilePath = sampleDefinationFile.Text;
+                    GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleDefinitionFilePath = sampleDefinitionFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].calibrationFilePath = calibrationFile.Text;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].sampleQuantity = quantityTextBox.Text != "" ? Convert.ToDouble(quantityTextBox.Text) : 0;
                     GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units = unitComboBox.Text;
@@ -987,10 +994,10 @@ namespace JobAutomation
             {
                 if (GlobalFunc.toggleProfileDetail.sampleDetailList[i].index.ToString() == sampleCB.Text)
                 {
-                    sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath != null ? GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath : "";
-                    if (sampleDefinationFile.Text == "")
+                    sampleDefinitionFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinitionFilePath != null ? GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinitionFilePath : "";
+                    if (sampleDefinitionFile.Text == "")
                     {
-                        sampleDefinationFile.Text = GlobalFunc.setup.defaultSdf;
+                        sampleDefinitionFile.Text = GlobalFunc.setup.defaultSdf;
                     }
                     sampleCalibrationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath != null ? GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath : "";
                     if (sampleCalibrationFile.Text == "")
@@ -1005,7 +1012,7 @@ namespace JobAutomation
                     {
                         sampleDescription.Text = (i + 1).ToString();
                     }
-                    //sampleDefinationFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinationFilePath;
+                    //sampleDefinitionFile.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinitionFilePath;
 
                     if (GlobalFunc.toggleProfileDetail.commonDecayCorrection == false &&
                         GlobalFunc.toggleProfileDetail.disableDecayCorrection == false)
@@ -1055,7 +1062,7 @@ namespace JobAutomation
 
         }
 
-        private void sampleDefinationFileBtn_Click(object sender, EventArgs e)
+        private void sampleDefinitionFileBtn_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(@"C:\User\Sample Types"))
             {
@@ -1069,7 +1076,7 @@ namespace JobAutomation
             {
                 if (ofd.FileName.ToLower().Contains(".sdf"))
                 {
-                    sampleDefinationFile.Text = ofd.FileName;
+                    sampleDefinitionFile.Text = ofd.FileName;
                 }
                 else
                 {
@@ -1224,13 +1231,13 @@ namespace JobAutomation
             }
         }
 
-        private void sampleDefinationFile_TextChanged(object sender, EventArgs e)
+        private void sampleDefinitionFile_TextChanged(object sender, EventArgs e)
         {
             string currentSample = sampleCB.Text;
-            TextBox tabSampleDefinationFile = sampleDefinationTab.Controls.Find("sampleDefinationFilePath@" + currentSample, true)[0] as TextBox;
-            if (tabSampleDefinationFile != null)
+            TextBox tabSampleDefinitionFile = sampleDefinitionTab.Controls.Find("sampleDefinitionFilePath@" + currentSample, true)[0] as TextBox;
+            if (tabSampleDefinitionFile != null)
             {
-                tabSampleDefinationFile.Text = sampleDefinationFile.Text;
+                tabSampleDefinitionFile.Text = sampleDefinitionFile.Text;
             }
         }
 

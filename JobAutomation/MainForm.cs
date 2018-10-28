@@ -77,13 +77,27 @@ namespace JobAutomation
             //}
             if (CheckLoginStatus())
             {
+                DisableRunSetupBtn();
                 if (GlobalFunc.measurementSetupForm == null || GlobalFunc.measurementSetupForm.IsDisposed)
                 {
                     GlobalFunc.measurementSetupForm = new MeasurementSetupForm();
                 }
-                GlobalFunc.measurementSetupForm.Show();
 
+                
+                GlobalFunc.measurementSetupForm.Show();
             }
+        }
+
+        public void DisableRunSetupBtn()
+        {
+            cssBtn.Enabled = false;
+            scsBtn.Enabled = false;
+        }
+
+        public void EnablenSetupBtn()
+        {
+            cssBtn.Enabled = true;
+            scsBtn.Enabled = true;
         }
 
         int thisNoOfSample = 0;

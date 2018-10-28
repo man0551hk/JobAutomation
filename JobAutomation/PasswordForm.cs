@@ -45,6 +45,7 @@ namespace JobAutomation
                     GlobalFunc.measurementSetupForm.Show();
                 }
                 LogManager.WriteLog("admin login");
+                GlobalFunc.mainForm.DisableRunSetupBtn();
                 this.Close();
             }
             else {
@@ -58,6 +59,11 @@ namespace JobAutomation
             {
                 CheckLogin();
             }
+        }
+
+        private void PasswordForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

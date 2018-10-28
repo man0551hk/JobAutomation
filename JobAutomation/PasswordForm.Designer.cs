@@ -48,16 +48,17 @@
             // password
             // 
             this.password.Location = new System.Drawing.Point(105, 15);
+            this.password.MaxLength = 80;
             this.password.Name = "password";
             this.password.PasswordChar = '*';
-            this.password.Size = new System.Drawing.Size(363, 20);
+            this.password.Size = new System.Drawing.Size(210, 20);
             this.password.TabIndex = 1;
             // 
             // loginBtn
             // 
-            this.loginBtn.Location = new System.Drawing.Point(17, 46);
+            this.loginBtn.Location = new System.Drawing.Point(325, 7);
             this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(451, 23);
+            this.loginBtn.Size = new System.Drawing.Size(120, 35);
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
@@ -67,7 +68,7 @@
             // 
             this.errorMsg.AutoSize = true;
             this.errorMsg.ForeColor = System.Drawing.Color.Red;
-            this.errorMsg.Location = new System.Drawing.Point(14, 72);
+            this.errorMsg.Location = new System.Drawing.Point(14, 43);
             this.errorMsg.Name = "errorMsg";
             this.errorMsg.Size = new System.Drawing.Size(0, 13);
             this.errorMsg.TabIndex = 3;
@@ -76,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 94);
+            this.ClientSize = new System.Drawing.Size(447, 75);
             this.Controls.Add(this.errorMsg);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.password);
@@ -84,6 +85,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PasswordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.PasswordForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

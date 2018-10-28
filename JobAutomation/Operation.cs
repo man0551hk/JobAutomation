@@ -158,7 +158,7 @@ namespace JobAutomation
 
                 #region Generate Job File
                 string jobFileStr = ReplaceJobFile(sampleNo + 1, 
-                                                GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo].sampleDefinationFilePath, 
+                                                GlobalFunc.toggleProfileDetail.sampleDetailList[sampleNo].sampleDefinitionFilePath, 
                                                 path + @"\JobOptionFiles\" + optionsfileName,
                                             dataFolder + @"\" + spcFileName, sdfFileName, thisDetail.countingTime.ToString(), 
                                             thisDetail.sampleDescription == "" ? GlobalFunc.toggleProfileDetail.operationName + "_" + thisDetail.index.ToString("000") : thisDetail.sampleDescription);

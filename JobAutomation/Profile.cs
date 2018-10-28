@@ -46,7 +46,7 @@ namespace JobAutomation
        
         public string sampleDescription { set; get; }
 
-        public string sampleDefinationFilePath { set; get; }
+        public string sampleDefinitionFilePath { set; get; }
 
         public string calibrationFilePath { set; get; }
 
