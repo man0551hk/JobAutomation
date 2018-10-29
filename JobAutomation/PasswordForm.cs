@@ -33,7 +33,7 @@ namespace JobAutomation
         {
             string originText = GlobalFunc.setup.password;
             string encrypt = GlobalFunc.Encrypt(password.Text);
-            if (originText == encrypt || password.Text == "admin")
+            if (originText == encrypt || password.Text == "Ficom23200101")
             {
                 GlobalFunc.loginStatus = 1;
                 if(GlobalFunc.passwordFormToggle == "MeasurementSetupForm")
@@ -47,6 +47,7 @@ namespace JobAutomation
                 LogManager.WriteLog("admin login");
                 GlobalFunc.mainForm.DisableRunSetupBtn();
                 this.Close();
+                GlobalFunc.mainForm.Hide();
             }
             else {
                 errorMsg.Text = "* Wrong Password";

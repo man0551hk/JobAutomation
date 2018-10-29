@@ -332,9 +332,8 @@ namespace JobAutomation
                     unitComboBox.Items.Add("kg");
                     unitComboBox.Items.Add("L");
                     unitComboBox.Items.Add("g");
-                    unitComboBox.Items.Add("ml");
-                    
-                    unitComboBox.Items.Add("L");
+                    unitComboBox.Items.Add("mL");
+
                     unitComboBox.Name = "unitComboBox@" + i;
                     unitComboBox.SelectedIndex = unitComboBox.FindString(GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].units);
                     Point unitLocation = new Point(282, textBoxY);
@@ -747,6 +746,7 @@ namespace JobAutomation
 
                 GlobalFunc.editSampleForm.Dispose();
                 this.Close();
+                GlobalFunc.measurementSetupForm.Show();
             }
         }
 
@@ -897,7 +897,7 @@ namespace JobAutomation
             }
             else if (calNotExistCountError != "" && allowShowError)
             {
-                MessageBox.Show("Calibration File for Sample " + calCountError.Substring(0, calCountError.Length - 1) + " not existed");
+                MessageBox.Show("Calibration File for Sample " + calNotExistCountError.Substring(0, calNotExistCountError.Length - 1) + " not existed");
             }
             else if (sampleQtyError != "" && allowShowError)
             {

@@ -58,6 +58,7 @@
             this.libraryFileSelBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
             this.exitBtn = new System.Windows.Forms.Button();
             this.decayCorrectionCB = new System.Windows.Forms.CheckBox();
             this.sampleDefinitionFileTxt = new System.Windows.Forms.TextBox();
@@ -98,7 +99,6 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -213,7 +213,7 @@
             "kg",
             "L",
             "g",
-            "ml"});
+            "mL"});
             this.sampleQtyUnitCB.Location = new System.Drawing.Point(201, 250);
             this.sampleQtyUnitCB.Name = "sampleQtyUnitCB";
             this.sampleQtyUnitCB.Size = new System.Drawing.Size(80, 21);
@@ -471,6 +471,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Measurement Setup";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.ForeColor = System.Drawing.Color.Blue;
+            this.label17.Location = new System.Drawing.Point(8, 147);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(72, 13);
+            this.label17.TabIndex = 50;
+            this.label17.Text = "All Samples";
             // 
             // exitBtn
             // 
@@ -908,16 +918,6 @@
             this.label7.Size = new System.Drawing.Size(99, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.ForeColor = System.Drawing.Color.Blue;
-            this.label17.Location = new System.Drawing.Point(8, 147);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(72, 13);
-            this.label17.TabIndex = 50;
-            this.label17.Text = "All Samples";
             // 
             // MeasurementSetupForm
             // 

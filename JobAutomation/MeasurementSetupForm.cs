@@ -41,6 +41,8 @@ namespace JobAutomation
                 calibrationFileTxt.Text = GlobalFunc.setup.defaultCal;
                 defaultLib.Text = GlobalFunc.setup.defaultLib;
                 libraryFileTxt.Text = GlobalFunc.setup.defaultLib;
+
+                GlobalFunc.mainForm.DisableRunSetupBtn();
             }
             SetProfile();
 
@@ -557,6 +559,7 @@ namespace JobAutomation
                     GlobalFunc.editSampleForm = new EditSampleForm();
                 }
                 GlobalFunc.editSampleForm.Show();
+                this.Hide();
             }
         }
 
@@ -1003,6 +1006,7 @@ namespace JobAutomation
                 GlobalFunc.loginStatus = 0;
                 GlobalFunc.mainForm.EnablenSetupBtn();
                 this.Close();
+                GlobalFunc.mainForm.Show();
             }
         }
 

@@ -83,8 +83,9 @@ namespace JobAutomation
                     GlobalFunc.measurementSetupForm = new MeasurementSetupForm();
                 }
 
-                
+                GlobalFunc.mainForm.Hide();
                 GlobalFunc.measurementSetupForm.Show();
+                
             }
         }
 
