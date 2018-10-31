@@ -19,6 +19,7 @@ namespace JobAutomation
         public EditSampleForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
             this.ControlBox = false; 

@@ -136,7 +136,6 @@
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Total Samples";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label9
             // 

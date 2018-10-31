@@ -97,8 +97,12 @@ namespace JobAutomation
 
         public void EnablenSetupBtn()
         {
+
             cssBtn.Enabled = true;
-            scsBtn.Enabled = true;
+            if (profileCB.Text != "")
+            {
+                scsBtn.Enabled = true;
+            }
         }
 
         int thisNoOfSample = 0;

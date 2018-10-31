@@ -21,6 +21,7 @@ namespace JobAutomation
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Location = new Point(150 + 524, GlobalFunc.mainFormHeight);
             this.ControlBox = false; 
             editSampleBtn.Enabled = false;
@@ -603,7 +604,24 @@ namespace JobAutomation
         private bool SaveCurrent()
         {
             bool saveOk = false;
-            if (string.IsNullOrEmpty(noOfSampleCB.Text))
+
+            //check existed
+
+            //Over-written Sequence !
+            bool existed = false;
+            for (int i = 0; i < GlobalFunc.profile.operationName.Count; i++)
+            {
+                if (profileCB.Text == GlobalFunc.profile.operationName[i])
+                {
+                    existed = true;
+                    break;
+                }
+            }
+            if (existed && GlobalFunc.toggleProfile != profileCB.Text)
+            { 
+                ShowMessage("Sequence existed");
+            }
+            else if (string.IsNullOrEmpty(noOfSampleCB.Text))
             {
                 ShowMessage("Please select no. of sample first");
             }
@@ -653,11 +671,13 @@ namespace JobAutomation
             }
             else
             {
+
                 SaveProfile();
                 SaveProfileMasterDetail();
                 //GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
                 //LoadProfileDetail();
                 saveOk = true;
+   
             }
             return saveOk;
         }
@@ -1015,9 +1035,5 @@ namespace JobAutomation
             CheckboxControl();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

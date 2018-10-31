@@ -15,7 +15,7 @@ namespace JobAutomation
         public PasswordForm()
         {
             InitializeComponent();
-            
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "setup.json"))
             //{
             //    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", GlobalFunc.Encrypt("admin"));
