@@ -621,6 +621,10 @@ namespace JobAutomation
             { 
                 ShowMessage("Sequence existed");
             }
+            else if (profileCB.Text.Length > 10)
+            {
+                ShowMessage("Sequence name should be less then 10 chars");
+            }
             else if (string.IsNullOrEmpty(noOfSampleCB.Text))
             {
                 ShowMessage("Please select no. of sample first");
@@ -643,7 +647,7 @@ namespace JobAutomation
             }
             else if (calibrarionCommonCB.Checked && !File.Exists(calibrationFileTxt.Text))
             {
-                ShowMessage(" Calibration File not found");
+                ShowMessage("Calibration File not found");
             }
             else if (sampleQtyUnitCommonCB.Checked && string.IsNullOrEmpty(sampleQtyUnitCB.Text))
             {
@@ -657,6 +661,10 @@ namespace JobAutomation
             {
                 ShowMessage("Please input Counting Time");
             }
+            else if (Convert.ToInt32(countingTime.Text) > 1000000)
+            {
+                ShowMessage("Counting Time should be less than 1000000");
+            }
             else if (activityUnitCommonCB.Checked && string.IsNullOrEmpty(activityUnitCB.Text))
             {
                 ShowMessage("Please select Activity Unit");
@@ -669,6 +677,7 @@ namespace JobAutomation
             {
                 ShowMessage("Library File not found");
             }
+
             else
             {
 
@@ -677,7 +686,7 @@ namespace JobAutomation
                 //GlobalFunc.mainForm.SelectionProfile(profileCB.Text);
                 //LoadProfileDetail();
                 saveOk = true;
-   
+                
             }
             return saveOk;
         }
@@ -928,6 +937,7 @@ namespace JobAutomation
             SaveCurrent();
             GlobalFunc.LoadProfile();
             GlobalFunc.mainForm.SetProfile();
+            profileCB.SelectedIndex = profileCB.FindString(profileCB.Text);
         }
 
         private void defaultSdfBtn_Click(object sender, EventArgs e)

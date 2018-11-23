@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditSampleForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.sampleTab = new System.Windows.Forms.TabPage();
+            this.label28 = new System.Windows.Forms.Label();
             this.sampleLibraryFileBtn = new System.Windows.Forms.Button();
             this.sampleLibraryFile = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.sampleTab.SuspendLayout();
             this.descriptionTab.SuspendLayout();
@@ -145,6 +145,16 @@
             this.sampleTab.TabIndex = 0;
             this.sampleTab.Text = "Sample";
             this.sampleTab.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.Blue;
+            this.label28.Location = new System.Drawing.Point(23, 23);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(185, 16);
+            this.label28.TabIndex = 27;
+            this.label28.Text = "Selected Sample Number";
             // 
             // sampleLibraryFileBtn
             // 
@@ -274,7 +284,7 @@
             // 
             this.sampleCountTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleCountTime.Location = new System.Drawing.Point(215, 209);
-            this.sampleCountTime.MaxLength = 10;
+            this.sampleCountTime.MaxLength = 6;
             this.sampleCountTime.Name = "sampleCountTime";
             this.sampleCountTime.Size = new System.Drawing.Size(80, 20);
             this.sampleCountTime.TabIndex = 14;
@@ -656,16 +666,6 @@
             this.label18.Size = new System.Drawing.Size(61, 16);
             this.label18.TabIndex = 3;
             this.label18.Text = "Sample";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.ForeColor = System.Drawing.Color.Blue;
-            this.label28.Location = new System.Drawing.Point(23, 23);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(185, 16);
-            this.label28.TabIndex = 27;
-            this.label28.Text = "Selected Sample Number";
             // 
             // EditSampleForm
             // 

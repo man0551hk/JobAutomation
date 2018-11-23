@@ -391,6 +391,7 @@ namespace JobAutomation
                     Point countTimeLocation = new Point(290, textBoxY);
                     countTimeTextBox.Location = countTimeLocation;
                     countTimeTextBox.Width = 70;
+                    countTimeTextBox.MaxLength = 6;
                     countTimeTextBox.Name = "countTimeTextBox@" + i;
                     countTimeTextBox.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime.ToString();
                     countTimeTextBox.KeyPress += CheckISNumber_KeyPress;
@@ -712,6 +713,10 @@ namespace JobAutomation
                 {
                     MessageBox.Show("Please input Counting Time");
                 }
+                else if (Convert.ToInt32(sampleCountTime.Text) > 1000000)
+                {
+                    MessageBox.Show("Counting Time should be less than 1000000");
+                }
                 else if (GlobalFunc.toggleProfileDetail.commonActivityUnit == false && string.IsNullOrEmpty(sampleActivityUnit.Text))
                 {
                     MessageBox.Show("Please select Activity Unit");
@@ -811,6 +816,7 @@ namespace JobAutomation
             string sampleUnitError = "";
             string activityUnitError = "";
             string countTimeError = "";
+            string countTimeLargeError = "";
             string libraryFileError = "";
             string libraryNotExistFileError = "";
             
@@ -863,6 +869,9 @@ namespace JobAutomation
                 {
                     countTimeError += i + ",";
                 }
+                else if ( Convert.ToInt32(countTimeTextBox.Text) > 1000000 ) {
+                    countTimeLargeError += i + ",";
+                }
                 if (GlobalFunc.toggleProfileDetail.commonActivityUnit == false && string.IsNullOrEmpty(activityUnitComboBox.Text))
                 {
                     activityUnitError += i + ",";
@@ -911,6 +920,10 @@ namespace JobAutomation
             else if (countTimeError != "" && allowShowError)
             {
                 MessageBox.Show("Input Counting Time for Sample " + countTimeError.Substring(0, countTimeError.Length - 1));
+            }
+            else if (countTimeLargeError != "" && allowShowError)
+            {
+                MessageBox.Show("Counting Time for Sample " + countTimeError.Substring(0, countTimeError.Length - 1) + " should be less than 1000000");
             }
             else if (activityUnitError != "" && allowShowError)
             {
