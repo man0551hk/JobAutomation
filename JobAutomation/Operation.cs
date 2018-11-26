@@ -327,7 +327,7 @@ namespace JobAutomation
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = GlobalFunc.setup.gammamVisionPath;
             //startInfo.Arguments = "-P DetL " + scriptFilePath + " -B";
-            startInfo.Arguments = masterPath;
+            startInfo.Arguments = "\"" + masterPath + "\"";
             Process.Start(startInfo);
         }
 
