@@ -391,7 +391,7 @@ namespace JobAutomation
                     Point countTimeLocation = new Point(290, textBoxY);
                     countTimeTextBox.Location = countTimeLocation;
                     countTimeTextBox.Width = 70;
-                    countTimeTextBox.MaxLength = 6;
+                    countTimeTextBox.MaxLength = 7;
                     countTimeTextBox.Name = "countTimeTextBox@" + i;
                     countTimeTextBox.Text = GlobalFunc.toggleProfileDetail.sampleDetailList[i - 1].countingTime.ToString();
                     countTimeTextBox.KeyPress += CheckISNumber_KeyPress;

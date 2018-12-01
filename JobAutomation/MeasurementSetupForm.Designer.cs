@@ -232,7 +232,7 @@
             // 
             this.countingTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countingTime.Location = new System.Drawing.Point(201, 303);
-            this.countingTime.MaxLength = 6;
+            this.countingTime.MaxLength = 7;
             this.countingTime.Name = "countingTime";
             this.countingTime.Size = new System.Drawing.Size(80, 20);
             this.countingTime.TabIndex = 20;

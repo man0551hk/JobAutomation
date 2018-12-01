@@ -284,7 +284,7 @@
             // 
             this.sampleCountTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleCountTime.Location = new System.Drawing.Point(215, 209);
-            this.sampleCountTime.MaxLength = 6;
+            this.sampleCountTime.MaxLength = 7;
             this.sampleCountTime.Name = "sampleCountTime";
             this.sampleCountTime.Size = new System.Drawing.Size(80, 20);
             this.sampleCountTime.TabIndex = 14;
