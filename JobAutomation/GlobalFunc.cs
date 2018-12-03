@@ -12,6 +12,7 @@ namespace JobAutomation
 {
     public static class GlobalFunc
     {
+        public static int lockHardware = 2; // 0 = allow select , //1 = only DSPec50, //2 = only DigiBASE
         public static int loginStatus;
         public static MainForm mainForm;
         public static PasswordForm passwordForm;

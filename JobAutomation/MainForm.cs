@@ -26,7 +26,7 @@ namespace JobAutomation
             this.StartPosition = FormStartPosition.CenterScreen;
             //this.StartPosition = FormStartPosition.Manual;
             //this.Location = new Point(150, GlobalFunc.h / 2 - 330);
-            //this.ControlBox = false; 
+            this.ControlBox = false; 
             this.FormClosing += Form1_Closing;
 
             versionLabel.Text = Application.ProductVersion;

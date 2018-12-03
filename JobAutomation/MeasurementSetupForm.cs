@@ -32,6 +32,7 @@ namespace JobAutomation
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
                 password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
                 hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
+
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
                 defaultDataFolder.Text = GlobalFunc.setup.defaultData;
@@ -43,7 +44,23 @@ namespace JobAutomation
                 defaultLib.Text = GlobalFunc.setup.defaultLib;
                 libraryFileTxt.Text = GlobalFunc.setup.defaultLib;
 
+                if (GlobalFunc.lockHardware == 2)
+                {
+                    hardwareCB.Items.RemoveAt(0);
+                    hardwareCB.SelectedIndex = 0;
+                    GlobalFunc.setup.hardware = "DSPec50";
+                    SaveSetup(true);
+                }
+                else if (GlobalFunc.lockHardware == 1)
+                {
+                    hardwareCB.Items.RemoveAt(1);
+                    hardwareCB.SelectedIndex = 0;
+                    GlobalFunc.setup.hardware = "DigiBASE";
+                    SaveSetup(true);
+                }
+
                 GlobalFunc.mainForm.DisableRunSetupBtn();
+
             }
             SetProfile();
 
@@ -851,7 +868,7 @@ namespace JobAutomation
             }
         }
 
-        private void saveSetupBtn_Click(object sender, EventArgs e)
+        private void SaveSetup(bool hideMsg)
         {
             if (!File.Exists(gammaVisionPath.Text))
             {
@@ -888,7 +905,7 @@ namespace JobAutomation
             else if (File.Exists(defaultLib.Text) && !defaultLib.Text.ToLower().Contains(".lib"))
             {
                 MessageBox.Show("Invalid Library File");
-        
+
             }
             else
             {
@@ -902,9 +919,17 @@ namespace JobAutomation
                 string json = js.Serialize(GlobalFunc.setup);
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "setup.json", json);
                 GlobalFunc.LoadSetup();
-                MessageBox.Show("System Parameters Updated");
+                if (!hideMsg)
+                {
+                    MessageBox.Show("System Parameters Updated");
+                }
 
             }
+        }
+
+        private void saveSetupBtn_Click(object sender, EventArgs e)
+        {
+            SaveSetup(false);
 
         }
 
