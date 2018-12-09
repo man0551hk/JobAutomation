@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -1068,6 +1069,115 @@ namespace JobAutomation
         private void decayCorrectionCB_CheckedChanged(object sender, EventArgs e)
         {
             CheckboxControl();
+        }
+
+        private void printBtn_Click(object sender, EventArgs e)
+        {
+            if (profileCB.Text != "" &&  GlobalFunc.toggleProfileDetail != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Operation: " +  GlobalFunc.toggleProfileDetail.operationName);
+                sb.AppendLine("Create Date: " +   GlobalFunc.toggleProfileDetail.CreateDate);
+                sb.AppendLine("Data Folder: " +   GlobalFunc.toggleProfileDetail.dataFolder);
+                sb.AppendLine("Prefix: " +   GlobalFunc.toggleProfileDetail.prefix);
+                sb.AppendLine("Sample No: " +   GlobalFunc.toggleProfileDetail.sampleNo);
+                sb.AppendLine(System.Environment.NewLine);
+
+                sb.AppendLine("Sample Definition File: " +   GlobalFunc.toggleProfileDetail.sampleDefinitionFile);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonSDF.ToString());
+
+                sb.AppendLine("Calibration File: " + GlobalFunc.toggleProfileDetail.calibrationFile);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonCalibrationFile.ToString());
+
+                sb.AppendLine("Quantity Unit: " +  GlobalFunc.toggleProfileDetail.qtyUnit);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonQtyUnit.ToString());
+        
+                sb.AppendLine("Quantity: " +  GlobalFunc.toggleProfileDetail.qty);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonQty.ToString());
+
+                sb.AppendLine("Counting Time: " +  GlobalFunc.toggleProfileDetail.countingTime);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonCountingTime.ToString());
+
+                sb.AppendLine("Activity Unit: " +  GlobalFunc.toggleProfileDetail.activityUnit);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonActivityUnit.ToString());
+
+                sb.AppendLine("Library File: " +  GlobalFunc.toggleProfileDetail.libraryFile);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonLibrary.ToString());
+
+                sb.AppendLine("Disable Decay Correction: " +  GlobalFunc.toggleProfileDetail.disableDecayCorrection);
+                sb.AppendLine("Common To All: " + GlobalFunc.toggleProfileDetail.commonDecayCorrection.ToString());
+                sb.AppendLine(System.Environment.NewLine);
+
+                for (int i = 0; i < GlobalFunc.toggleProfileDetail.sampleDetailList.Count; i++)
+                {
+                    sb.AppendLine("Index: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].index);
+                    sb.AppendLine("Sample Description: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDescription);
+                    sb.AppendLine("Sample Definition File: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleDefinitionFilePath);
+                    sb.AppendLine("Calibration File: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].calibrationFilePath);
+                    sb.AppendLine("Quantity Unit: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].units);
+                    sb.AppendLine("Quantity: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].sampleQuantity);
+                    sb.AppendLine("Counting Time: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].countingTime);
+                    sb.AppendLine("Activity Unit: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].activityUnits);
+                    sb.AppendLine("Library File: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].libraryFile);
+                    sb.AppendLine("Disable Decay Correction: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].disableDecayCorrection);
+                    sb.AppendLine("Decay Correction Date: " + GlobalFunc.toggleProfileDetail.sampleDetailList[i].decayCorrectionDate);
+                    sb.AppendLine(System.Environment.NewLine);
+                }
+
+                PrintDocument p = new PrintDocument();
+                var font = new Font("Times New Roman", 12);
+                var margins = p.DefaultPageSettings.Margins;
+                var layoutArea = new RectangleF(
+                    margins.Left,
+                    margins.Top,
+                    p.DefaultPageSettings.PrintableArea.Width - (margins.Left + margins.Right),
+                    p.DefaultPageSettings.PrintableArea.Height - (margins.Top + margins.Bottom));
+                var layoutSize = layoutArea.Size;
+                layoutSize.Height = layoutSize.Height - font.GetHeight(); // keep lastline visible
+                var brush = new SolidBrush(Color.Black);
+
+                // what still needs to be printed
+                var remainingText = sb.ToString();
+
+                p.PrintPage += delegate(object sender1, PrintPageEventArgs e1)
+                {
+                    int charsFitted, linesFilled;
+
+                    // measure how many characters will fit of the remaining text
+                    var realsize = e1.Graphics.MeasureString(
+                        remainingText,
+                        font,
+                        layoutSize,
+                        StringFormat.GenericDefault,
+                        out charsFitted,  // this will return what we need
+                        out linesFilled);
+
+                    // take from the remainingText what we're going to print on this page
+                    var fitsOnPage = remainingText.Substring(0, charsFitted);
+                    // keep what is not printed on this page 
+                    remainingText = remainingText.Substring(charsFitted).Trim();
+
+                    // print what fits on the page
+                    e1.Graphics.DrawString(
+                        fitsOnPage,
+                        font,
+                        brush,
+                        layoutArea);
+
+                    // if there is still text left, tell the PrintDocument it needs to call 
+                    // PrintPage again.
+                    e1.HasMorePages = remainingText.Length > 0;
+                };
+                try
+                {
+                    p.Print();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Exception Occured While Printing", ex);
+                }
+
+            }
         }
 
     }

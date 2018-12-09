@@ -99,6 +99,7 @@
             this.gammaVisionPath = new System.Windows.Forms.TextBox();
             this.gammaVisionPathBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.printBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -336,7 +337,7 @@
             // 
             // doneBtn
             // 
-            this.doneBtn.Location = new System.Drawing.Point(241, 413);
+            this.doneBtn.Location = new System.Drawing.Point(161, 414);
             this.doneBtn.Name = "doneBtn";
             this.doneBtn.Size = new System.Drawing.Size(120, 35);
             this.doneBtn.TabIndex = 33;
@@ -427,6 +428,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.printBtn);
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.exitBtn);
             this.tabPage1.Controls.Add(this.decayCorrectionCB);
@@ -918,6 +920,16 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "GammaVision Path:";
             // 
+            // printBtn
+            // 
+            this.printBtn.Location = new System.Drawing.Point(308, 414);
+            this.printBtn.Name = "printBtn";
+            this.printBtn.Size = new System.Drawing.Size(120, 35);
+            this.printBtn.TabIndex = 51;
+            this.printBtn.Text = "Print";
+            this.printBtn.UseVisualStyleBackColor = true;
+            this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
+            // 
             // MeasurementSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -1014,5 +1026,6 @@
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.CheckBox decayCorrectionCB;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button printBtn;
     }
 }
