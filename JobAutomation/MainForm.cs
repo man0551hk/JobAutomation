@@ -26,7 +26,7 @@ namespace JobAutomation
             this.StartPosition = FormStartPosition.CenterScreen;
             //this.StartPosition = FormStartPosition.Manual;
             //this.Location = new Point(150, GlobalFunc.h / 2 - 330);
-            this.ControlBox = false; 
+            this.ControlBox = false;
             this.FormClosing += Form1_Closing;
 
             versionLabel.Text = Application.ProductVersion;
@@ -86,7 +86,7 @@ namespace JobAutomation
 
                 GlobalFunc.mainForm.Hide();
                 GlobalFunc.measurementSetupForm.Show();
-                
+
             }
         }
 
@@ -172,7 +172,7 @@ namespace JobAutomation
             try
             {
                 Operation.RunScript();
-                Thread.Sleep(8000); // wait for gv32 open, and first script passed
+                Thread.Sleep(5000); // wait for gv32 open, and first script passed
 
                 while (true)
                 {
@@ -184,10 +184,14 @@ namespace JobAutomation
                         SetSampleLabel(sampleNo.ToString() + " / " + thisNoOfSample);
                         SetStatusLabel("Running Script...", 2);
                     }
-                    Thread.Sleep(500);
+                    Thread.Sleep(100);
                     if (activeStatus == "inactive" && sampleNo == thisNoOfSample)
                     {
-                        break;
+                        Thread.Sleep(2000);
+                        if (GetRunningStatus() == "inactive")
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -231,7 +235,7 @@ namespace JobAutomation
                 LogManager.WriteLog("Completed sequence: " + profileCB.Text);
                 SetStatusLabel("Completed", 1);
                 SetSampleLabel("0");
-                cssBtn.Enabled = true ;
+                cssBtn.Enabled = true;
                 profileCB.Enabled = true;
             }
             else
@@ -245,7 +249,7 @@ namespace JobAutomation
                 cssBtn.Enabled = true;
                 profileCB.Enabled = true;
             }
-            
+
         }
 
 
@@ -260,8 +264,8 @@ namespace JobAutomation
                 string AN1FileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".AN1";
                 string UFOFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".UFO";
                 string SPCFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + ".SPC";
-                
-                string datefileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00")+runTime.Hour.ToString("00")+runTime.Minute.ToString("00")+runTime.Second.ToString("00") + ".RPT";
+
+                string datefileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".RPT";
                 string dateAN1FileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".AN1";
                 string dateUFOFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".UFO";
                 string dateSPCFileName = GlobalFunc.toggleProfileDetail.prefix + "_" + i.ToString("000") + "_" + runTime.Year.ToString() + runTime.Month.ToString("00") + runTime.Day.ToString("00") + runTime.Hour.ToString("00") + runTime.Minute.ToString("00") + runTime.Second.ToString("00") + ".SPC";
@@ -344,13 +348,19 @@ namespace JobAutomation
                 if (GlobalFunc.setup.hardware == "DSPec50")
                 {
                     returnValue = Operation.SendCommand("SHOW_ID");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$F", "");
+
                 }
                 else if (GlobalFunc.setup.hardware == "DigiBASE")
                 {
                     returnValue = Operation.SendCommand("SHOW_LLD");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$C", "");
+                    returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 }
-                returnValue = returnValue.Replace("$C", "");
-                returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                //returnValue = returnValue.Replace("$C", "");
+                //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 int intReturnValue = Convert.ToInt32(returnValue);
                 if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
                 {
@@ -377,13 +387,19 @@ namespace JobAutomation
                 if (GlobalFunc.setup.hardware == "DSPec50")
                 {
                     returnValue = Operation.SendCommand("SHOW_ID");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
                 }
+
                 else if (GlobalFunc.setup.hardware == "DigiBASE")
                 {
                     returnValue = Operation.SendCommand("SHOW_LLD");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
+                    returnValue = returnValue.Substring(0, returnValue.Length - 3);
                 }
-                returnValue = returnValue.Replace("$C", "");
-                returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                //returnValue = returnValue.Replace("$C", "");
+                //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 intReturnValue = Convert.ToInt32(returnValue);
             }
             catch (Exception ex)
@@ -421,23 +437,27 @@ namespace JobAutomation
             string returnValue = "";
             try
             {
-
-
                 if (GlobalFunc.setup.hardware == "DSPec50")
                 {
                     returnValue = Operation.SendCommand("SHOW_ID");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
+
                 }
                 else if (GlobalFunc.setup.hardware == "DigiBASE")
                 {
                     returnValue = Operation.SendCommand("SHOW_LLD");
+                    // added by Ron
+                    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
+                    returnValue = returnValue.Substring(0, returnValue.Length - 3);
                 }
-                returnValue = returnValue.Replace("$C", "");
-                returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                //returnValue = returnValue.Replace("$C", "");
+                //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 int intReturnValue = Convert.ToInt32(returnValue);
                 SetStatusLabel(returnValue + " skipping...", 2);
 
                 returnValue = Operation.SendCommand("STOP");
-               
+
             }
             catch (Exception ex)
             {
