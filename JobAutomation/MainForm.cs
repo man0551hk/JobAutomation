@@ -362,7 +362,9 @@ namespace JobAutomation
                 //returnValue = returnValue.Replace("$C", "");
                 //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 int intReturnValue = Convert.ToInt32(returnValue);
-                if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
+
+                //if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
+                if (activeStatus == "inactive" && (intReturnValue - 50) == thisNoOfSample)
                 {
                     Thread.Sleep(1200);
                     break;
@@ -400,7 +402,10 @@ namespace JobAutomation
                 }
                 //returnValue = returnValue.Replace("$C", "");
                 //returnValue = returnValue.Substring(0, returnValue.Length - 4);
-                intReturnValue = Convert.ToInt32(returnValue);
+                
+                //intReturnValue = Convert.ToInt32(returnValue);
+
+                intReturnValue = Convert.ToInt32(returnValue) - 50;
             }
             catch (Exception ex)
             {
@@ -453,7 +458,8 @@ namespace JobAutomation
                 }
                 //returnValue = returnValue.Replace("$C", "");
                 //returnValue = returnValue.Substring(0, returnValue.Length - 4);
-                int intReturnValue = Convert.ToInt32(returnValue);
+                //int intReturnValue = Convert.ToInt32(returnValue);
+                int intReturnValue = Convert.ToInt32(returnValue) - 50;
                 SetStatusLabel(returnValue + " skipping...", 2);
 
                 returnValue = Operation.SendCommand("STOP");

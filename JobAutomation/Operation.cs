@@ -281,11 +281,12 @@ namespace JobAutomation
                         sb.AppendLine("DESCRIBE_SAMPLE \"" + description + "\"");
                         if (GlobalFunc.setup.hardware == "DSPec50")
                         {
-                            sb.AppendLine("Send_Message \"SET_ID " + index.ToString() + "\"");
+                            //sb.AppendLine("Send_Message \"SET_ID " + index.ToString() + "\"");
+                            sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
                         }
                         else if (GlobalFunc.setup.hardware == "DigiBASE")
                         {
-                            sb.AppendLine("Send_Message \"SET_LLD " + index.ToString() + "\"");
+                            sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
                         }
                     }
                     else if (line.Contains("SET_PRESET_LIVE 10"))
