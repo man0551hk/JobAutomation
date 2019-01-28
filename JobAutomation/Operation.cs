@@ -279,15 +279,17 @@ namespace JobAutomation
                     else if (line.Contains("DESCRIBE_SAMPLE \"SAMPLEXXX\""))
                     {
                         sb.AppendLine("DESCRIBE_SAMPLE \"" + description + "\"");
-                        if (GlobalFunc.setup.hardware == "DSPec50")
-                        {
-                            //sb.AppendLine("Send_Message \"SET_ID " + index.ToString() + "\"");
-                            sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
-                        }
-                        else if (GlobalFunc.setup.hardware == "DigiBASE")
-                        {
-                            sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
-                        }
+                        sb.AppendLine("RUN \"" + AppDomain.CurrentDomain.BaseDirectory + "sampleNoChecking.exe " + index + "\"");
+                        sb.AppendLine("WAIT \"" + AppDomain.CurrentDomain.BaseDirectory + "sampleNoChecking.exe " + index + "\"");
+                        //if (GlobalFunc.setup.hardware == "DSPec50")
+                        //{
+                        //    //sb.AppendLine("Send_Message \"SET_ID " + index.ToString() + "\"");
+                        //    sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
+                        //}
+                        //else if (GlobalFunc.setup.hardware == "DigiBASE")
+                        //{
+                        //    sb.AppendLine("Send_Message \"SET_LLD " + (index + 50).ToString() + "\"");
+                        //}
                     }
                     else if (line.Contains("SET_PRESET_LIVE 10"))
                     {

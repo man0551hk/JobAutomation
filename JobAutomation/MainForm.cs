@@ -345,26 +345,27 @@ namespace JobAutomation
                 }
 
                 string returnValue = "";
-                if (GlobalFunc.setup.hardware == "DSPec50")
-                {
-                    returnValue = Operation.SendCommand("SHOW_ID");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$F", "");
+                //if (GlobalFunc.setup.hardware == "DSPec50")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_ID");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$F", "");
 
-                }
-                else if (GlobalFunc.setup.hardware == "DigiBASE")
-                {
-                    returnValue = Operation.SendCommand("SHOW_LLD");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$C", "");
-                    returnValue = returnValue.Substring(0, returnValue.Length - 4);
-                }
+                //}
+                //else if (GlobalFunc.setup.hardware == "DigiBASE")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_LLD");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$C", "");
+                //    returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                //}
+                returnValue = GetRunningSampleNo().ToString();
                 //returnValue = returnValue.Replace("$C", "");
                 //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 int intReturnValue = Convert.ToInt32(returnValue);
 
                 //if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
-                if (activeStatus == "inactive" && (intReturnValue - 50) == thisNoOfSample)
+                if (activeStatus == "inactive" && intReturnValue == thisNoOfSample)
                 {
                     Thread.Sleep(1200);
                     break;
@@ -386,26 +387,27 @@ namespace JobAutomation
             try
             {
                 string returnValue = "";
-                if (GlobalFunc.setup.hardware == "DSPec50")
-                {
-                    returnValue = Operation.SendCommand("SHOW_ID");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
-                }
+                //if (GlobalFunc.setup.hardware == "DSPec50")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_ID");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
+                //}
 
-                else if (GlobalFunc.setup.hardware == "DigiBASE")
-                {
-                    returnValue = Operation.SendCommand("SHOW_LLD");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
-                    returnValue = returnValue.Substring(0, returnValue.Length - 3);
-                }
-                //returnValue = returnValue.Replace("$C", "");
-                //returnValue = returnValue.Substring(0, returnValue.Length - 4);
+                //else if (GlobalFunc.setup.hardware == "DigiBASE")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_LLD");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
+                //    returnValue = returnValue.Substring(0, returnValue.Length - 3);
+                //}
+                ////returnValue = returnValue.Replace("$C", "");
+                ////returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 
-                //intReturnValue = Convert.ToInt32(returnValue);
-
-                intReturnValue = Convert.ToInt32(returnValue) - 50;
+                ////intReturnValue = Convert.ToInt32(returnValue);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "currentSample.txt";
+                returnValue = File.ReadAllText(path);
+                intReturnValue = Convert.ToInt32(returnValue);
             }
             catch (Exception ex)
             {
@@ -442,24 +444,25 @@ namespace JobAutomation
             string returnValue = "";
             try
             {
-                if (GlobalFunc.setup.hardware == "DSPec50")
-                {
-                    returnValue = Operation.SendCommand("SHOW_ID");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
+                //if (GlobalFunc.setup.hardware == "DSPec50")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_ID");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$F", "").Replace("\n", "");
 
-                }
-                else if (GlobalFunc.setup.hardware == "DigiBASE")
-                {
-                    returnValue = Operation.SendCommand("SHOW_LLD");
-                    // added by Ron
-                    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
-                    returnValue = returnValue.Substring(0, returnValue.Length - 3);
-                }
+                //}
+                //else if (GlobalFunc.setup.hardware == "DigiBASE")
+                //{
+                //    returnValue = Operation.SendCommand("SHOW_LLD");
+                //    // added by Ron
+                //    returnValue = returnValue.Replace("$C", "").Replace("\n", "");
+                //    returnValue = returnValue.Substring(0, returnValue.Length - 3);
+                //}
+                returnValue = GetRunningSampleNo().ToString();
                 //returnValue = returnValue.Replace("$C", "");
                 //returnValue = returnValue.Substring(0, returnValue.Length - 4);
                 //int intReturnValue = Convert.ToInt32(returnValue);
-                int intReturnValue = Convert.ToInt32(returnValue) - 50;
+                int intReturnValue = Convert.ToInt32(returnValue);
                 SetStatusLabel(returnValue + " skipping...", 2);
 
                 returnValue = Operation.SendCommand("STOP");

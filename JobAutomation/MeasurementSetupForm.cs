@@ -32,7 +32,7 @@ namespace JobAutomation
             {
                 gammaVisionPath.Text = GlobalFunc.setup.gammamVisionPath;
                 password.Text = GlobalFunc.Decrypt(GlobalFunc.setup.password);
-                hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
+                //hardwareCB.SelectedIndex = hardwareCB.FindString(GlobalFunc.setup.hardware);
 
                 laboratory.Text = GlobalFunc.setup.laboratory;
                 _operator.Text = GlobalFunc.setup._operator;
@@ -47,15 +47,15 @@ namespace JobAutomation
 
                 if (GlobalFunc.lockHardware == 2)
                 {
-                    hardwareCB.Items.RemoveAt(0);
-                    hardwareCB.SelectedIndex = 0;
+                    //hardwareCB.Items.RemoveAt(0);
+                    //hardwareCB.SelectedIndex = 0;
                     GlobalFunc.setup.hardware = "DSPec50";
                     SaveSetup(true);
                 }
                 else if (GlobalFunc.lockHardware == 1)
                 {
-                    hardwareCB.Items.RemoveAt(1);
-                    hardwareCB.SelectedIndex = 0;
+                    //hardwareCB.Items.RemoveAt(1);
+                    //hardwareCB.SelectedIndex = 0;
                     GlobalFunc.setup.hardware = "DigiBASE";
                     SaveSetup(true);
                 }
@@ -875,10 +875,10 @@ namespace JobAutomation
             {
                 MessageBox.Show("GammaVision Path not existed");
             }
-            else if (hardwareCB.Text == "")
-            {
-                MessageBox.Show("Select MCA Hardware");
-            }
+            //else if (hardwareCB.Text == "")
+            //{
+            //    MessageBox.Show("Select MCA Hardware");
+            //}
             else if (!Directory.Exists(defaultDataFolder.Text))
             {
                 MessageBox.Show("Data Folder not existed");
@@ -911,7 +911,7 @@ namespace JobAutomation
             else
             {
                 GlobalFunc.setup.gammamVisionPath = gammaVisionPath.Text;
-                GlobalFunc.setup.hardware = hardwareCB.Text;
+                //GlobalFunc.setup.hardware = hardwareCB.Text;
                 GlobalFunc.setup.defaultData = defaultDataFolder.Text;
                 GlobalFunc.setup.defaultSdf = defaultSdf.Text;
                 GlobalFunc.setup.defaultCal = defaultCal.Text;
