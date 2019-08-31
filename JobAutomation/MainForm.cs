@@ -173,7 +173,23 @@ namespace JobAutomation
             {
                 Operation.RunScript();
                 Thread.Sleep(5000); // wait for gv32 open, and first script passed
-
+                int countWaiting = 0;
+                while (true)
+                {
+                    if (GetRunningStatus() == "inactive")
+                    {
+                        Thread.Sleep(1000);
+                        countWaiting++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    if (countWaiting == 120)
+                    { //when waiting too long, skipped
+                        break;
+                    }
+                }
                 while (true)
                 {
                     string activeStatus = GetRunningStatus();
